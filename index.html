@@ -4064,8 +4064,31 @@ html, body {
           </div>
         </div>
         <div class="gallery-actions">
-          <button class="gallery-btn">查看 Demo [待填写]</button>
+          <button class="gallery-btn" onclick="window.open('https://www.bilibili.com/video/BV11TXPBUEtK/','_blank')">▶ 查看演示视频</button>
           <button class="gallery-btn">外部链接 [待填写] ↗</button>
+        </div>
+      </div>
+
+      <!-- Agent 数字分身卡片 -->
+      <div class="gallery-item">
+        <div class="gallery-meta">
+          <span class="gallery-type">Agent Design</span>
+          <span class="gallery-year">2025</span>
+        </div>
+        <div class="gallery-visual"><span style="font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:rgba(201,168,76,0.7);text-shadow:0 0 18px rgba(201,168,76,0.5);line-height:1;">◎</span></div>
+        <div class="gallery-body">
+          <div class="gallery-title">个人数字分身 Agent · 从 0 到 1 搭建全流程</div>
+          <div class="gallery-desc">基于 Coze 平台搭建的个人 AI 面试助理——完整涵盖数据层语料工程、模型层四重护栏设计、前端 Web SDK 接入与性能调优，实现可对话的数字分身产品。</div>
+          <div class="gallery-stack">工具流：Coze · Notion · Doubao-pro-32k · RAG · Web SDK</div>
+          <div class="gallery-feature-tags">
+            <span class="forge-tag">RAG 工程化</span>
+            <span class="forge-tag">Prompt 设计</span>
+            <span class="forge-tag">Agent 落地</span>
+          </div>
+        </div>
+        <div class="gallery-actions">
+          <button class="gallery-btn" onclick="Agent.open()">◎ 唤醒数字分身</button>
+          <button class="gallery-btn" onclick="window.open('https://www.notion.so/Agent-32ff9432042e811cb110dde47c15e4a5','_blank')">架构文档 ↗</button>
         </div>
       </div>
 
@@ -4254,28 +4277,6 @@ html, body {
         <div class="construct-actions">
           <button class="construct-btn" onclick="DocReader.open('proto')">🖼️ 查看原型</button>
           <button class="construct-btn" onclick="window.open('#','_blank')">Figma ↗ [待填写]</button>
-        </div>
-      </div>
-
-      <!-- 卡片 05：Agent 架构 -->
-      <div class="construct-item">
-        <div class="construct-meta">
-          <span class="construct-type">Agent Design</span>
-          <span class="construct-year">2025</span>
-        </div>
-        <div class="construct-visual">◎</div>
-        <div class="construct-body">
-          <div class="construct-title">个人数字分身 Agent 架构设计与落地指南</div>
-          <div class="construct-desc">从数据层语料工程到模型层智能体构建，再到前端工程集成，完整记录数字分身 Agent 从 0 到 1 的搭建全流程。</div>
-          <div class="construct-method-tags">
-            <span class="construct-tag">RAG 工程</span>
-            <span class="construct-tag">Prompt 设计</span>
-            <span class="construct-tag">Agent 落地</span>
-          </div>
-        </div>
-        <div class="construct-actions">
-          <button class="construct-btn" onclick="DocReader.open('agent')">📖 阅读文档</button>
-          <button class="construct-btn" onclick="window.open('https://www.notion.so/Agent-32ff9432042e811cb110dde47c15e4a5','_blank')">Notion 原文 ↗</button>
         </div>
       </div>
 
@@ -5324,7 +5325,7 @@ const FeedReader = (() => {
   function open(idx) {
     cur = idx;
     render(cur);
-    ay.classList.add('open');
+    overlay.classList.add('open');
     drawer.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
