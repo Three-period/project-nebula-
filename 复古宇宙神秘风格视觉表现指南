@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>复古宇宙神秘风 · 配色方案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600;700&family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════
+     COSMIC VINTAGE · COLOR SYSTEM
+     复古宇宙神秘风 · 完整配色方案
+  ═══════════════════════════════════════════════ */
+
+  :root {
+    /* ── 背景色族 Background Family ─────────────── */
+    --bg-void:     #080604;   /* 虚空黑 · 最深底色 */
+    --bg-base:     #0F0B07;   /* 宇宙黑 · 主背景 */
+    --bg-surface:  #171108;   /* 星云黑 · 卡片底色 */
+    --bg-raised:   #201A0F;   /* 晨曦黑 · 悬浮层 */
+    --bg-hover:    #2C2315;   /* 环形暗 · 交互态 */
+
+    /* ── 白金主色族 Whitish Gold · Primary ──────── */
+    --gold-whisper: #F8F0D0;  /* 月光白金 · 顶级强调 */
+    --gold-ivory:   #F2E8B4;  /* 象牙白金 · 主标题 */
+    --gold-light:   #E4D080;  /* 浅金 · 次标题 */
+    --gold-main:    #D0B84A;  /* 正金 · 主UI元素 */
+    --gold-medium:  #B09430;  /* 中金 · 边框分割 */
+    --gold-deep:    #7A6418;  /* 深金 · 纹理细节 */
+    --gold-shadow:  #3C3008;  /* 暗金影 · 阴影底 */
+
+    /* ── 铜橙点缀色 Copper Accent · Eye-catching ─ */
+    --copper-blaze:  #E86A28;  /* 灼铜 · 最亮点缀 CTA */
+    --copper-warm:   #C85820;  /* 暖铜 · 深一档点缀 */
+    --copper-amber:  #A04010;  /* 琥珀铜 · 暗部点缀 */
+
+    /* ── 玫瑰金辅助色 Rose Gold · Secondary ─────── */
+    --rose-blush:  #E8A080;   /* 玫瑰浅金 · 轻柔高亮 */
+    --rose-main:   #C87858;   /* 玫瑰主金 · 辅助强调 */
+    --rose-deep:   #9A5840;   /* 玫瑰深金 · 低调辅助 */
+
+    /* ── 文字色 Text Colors ───────────────────── */
+    --text-star:      #F8F0D0;  /* 星光白 · 主标题文字 */
+    --text-primary:   #E8D8B0;  /* 暖白 · 正文文字 */
+    --text-secondary: #B89868;  /* 暖金灰 · 次要文字 */
+    --text-muted:     #785C30;  /* 暗金棕 · 说明文字 */
+    --text-ghost:     #3A2C14;  /* 幽灵棕 · 极淡文字 */
+
+    /* ── 功能色 Functional ───────────────────── */
+    --border-glow:   rgba(208, 184, 74, 0.35);
+    --border-subtle: rgba(176, 148, 48, 0.2);
+    --glow-gold:     rgba(242, 232, 180, 0.12);
+    --glow-copper:   rgba(232, 106, 40, 0.18);
+    --shadow-warm:   rgba(12, 8, 4, 0.85);
+  }
+
+  /* ─────────────────────────────────────────────
+     RESET & BASE
+  ───────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─────────────────────────────────────────────
+     STAR FIELD BACKGROUND
+  ───────────────────────────────────────────── */
+  .star-field {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .star-field canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Warm radial gradient overlay */
+  .cosmic-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(100, 60, 8, 0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 100% 50%, rgba(80, 40, 4, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 0% 80%, rgba(60, 30, 4, 0.1) 0%, transparent 60%);
+  }
+
+  /* ─────────────────────────────────────────────
+     LAYOUT
+  ───────────────────────────────────────────── */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  /* ─────────────────────────────────────────────
+     HEADER
+  ───────────────────────────────────────────── */
+  .page-header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  .page-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+  }
+
+  .header-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    color: var(--copper-warm);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+
+  .page-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--gold-ivory);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    text-shadow: 0 0 40px rgba(242, 232, 180, 0.3);
+  }
+
+  .page-subtitle {
+    font-family: 'Cormorant', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+
+  /* Ornament */
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 28px 0;
+    color: var(--gold-main);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+
+  .ornament::before, .ornament::after {
+    content: '';
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, var(--gold-medium));
+  }
+
+  .ornament::after {
+    background: linear-gradient(90deg, var(--gold-medium), transparent);
+  }
+
+  /* ─────────────────────────────────────────────
+     SECTION TITLES
+  ───────────────────────────────────────────── */
+  .section {
+    margin-bottom: 72px;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--copper-warm);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--copper-warm);
+    opacity: 0.7;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gold-ivory);
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 1px;
+    background: var(--gold-main);
+  }
+
+  /* ─────────────────────────────────────────────
+     COLOR PALETTE GRID
+  ───────────────────────────────────────────── */
+  .palette-group {
+    margin-bottom: 48px;
+  }
+
+  .palette-group-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .palette-row {
+    display: flex;
+    gap: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 80px;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 24px var(--shadow-warm);
+  }
+
+  .swatch {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    transition: flex 0.3s ease;
+  }
+
+  .swatch:hover {
+    flex: 2;
+  }
+
+  .swatch-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 6px 8px;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+
+  .swatch:hover .swatch-info {
+    opacity: 1;
+  }
+
+  .swatch-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .swatch-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 2px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    transition: all 0.2s;
+  }
+
+  .swatch-tag:hover {
+    border-color: var(--border-glow);
+    background: var(--bg-raised);
+  }
+
+  .swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .swatch-name {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+  }
+
+  .swatch-hex {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-left: 4px;
+  }
+
+  /* ─────────────────────────────────────────────
+     TYPOGRAPHY SHOWCASE
+  ───────────────────────────────────────────── */
+  .type-showcase {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .type-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-medium), transparent);
+  }
+
+  .type-h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold-ivory);
+    line-height: 1.15;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 30px rgba(242, 232, 180, 0.25);
+    margin-bottom: 6px;
+  }
+
+  .type-tagline {
+    font-family: 'Cormorant', serif;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--copper-warm);
+    letter-spacing: 0.15em;
+    margin-bottom: 28px;
+  }
+
+  .type-h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .type-date {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .type-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.75;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+
+  .type-body em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .type-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  .type-divider {
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 28px 0;
+    position: relative;
+  }
+
+  .type-divider::after {
+    content: '✦';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-surface);
+    padding: 0 12px;
+    color: var(--gold-deep);
+    font-size: 10px;
+  }
+
+  /* ─────────────────────────────────────────────
+     COMPONENT SHOWCASE
+  ───────────────────────────────────────────── */
+  .component-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 640px) {
+    .component-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Buttons */
+  .btn-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+  }
+
+  .btn-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .btn:hover::before { opacity: 1; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold-main) 0%, var(--gold-light) 100%);
+    color: var(--bg-void);
+  }
+
+  .btn-primary::before {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-whisper) 100%);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(208, 184, 74, 0.3);
+  }
+
+  .btn-accent {
+    background: linear-gradient(135deg, var(--copper-warm) 0%, var(--copper-blaze) 100%);
+    color: #F8F0D0;
+  }
+
+  .btn-accent::before {
+    background: linear-gradient(135deg, var(--copper-blaze) 0%, #F08040 100%);
+  }
+
+  .btn-accent:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(232, 106, 40, 0.3);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--gold-light);
+    border: 1px solid var(--gold-medium);
+  }
+
+  .btn-ghost::before {
+    background: var(--glow-gold);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold-light);
+    color: var(--gold-ivory);
+    box-shadow: 0 0 16px var(--glow-gold);
+  }
+
+  .btn-rose {
+    background: transparent;
+    color: var(--rose-blush);
+    border: 1px solid var(--rose-main);
+  }
+
+  .btn-rose:hover {
+    background: rgba(200, 120, 88, 0.1);
+    border-color: var(--rose-blush);
+    color: #F0D0C0;
+  }
+
+  /* Tags */
+  .tags-showcase {
+    padding: 32px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+  }
+
+  .tags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .tag {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 1px;
+    transition: all 0.2s;
+  }
+
+  .tag-gold {
+    background: rgba(208, 184, 74, 0.1);
+    color: var(--gold-light);
+    border: 1px solid rgba(208, 184, 74, 0.25);
+  }
+
+  .tag-copper {
+    background: rgba(232, 106, 40, 0.1);
+    color: var(--copper-blaze);
+    border: 1px solid rgba(232, 106, 40, 0.25);
+  }
+
+  .tag-rose {
+    background: rgba(200, 120, 88, 0.1);
+    color: var(--rose-blush);
+    border: 1px solid rgba(200, 120, 88, 0.25);
+  }
+
+  .tag-muted {
+    background: var(--bg-raised);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+  }
+
+  /* Cards */
+  .card-showcase {
+    grid-column: 1 / -1;
+  }
+
+  .resume-card {
+    padding: 36px 40px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .resume-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--gold-main), var(--copper-warm));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .resume-card:hover {
+    border-color: var(--border-glow);
+    background: var(--bg-raised);
+    transform: translateX(3px);
+    box-shadow: -4px 0 24px rgba(208, 184, 74, 0.08);
+  }
+
+  .resume-card:hover::before {
+    opacity: 1;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .card-role {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+  }
+
+  .card-period {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 1px;
+  }
+
+  .card-company {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--copper-warm);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .card-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  /* Progress / Skills */
+  .skills-showcase {
+    padding: 32px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+  }
+
+  .skill-item {
+    margin-bottom: 16px;
+  }
+
+  .skill-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .skill-name {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+  }
+
+  .skill-level {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  .skill-bar {
+    height: 2px;
+    background: var(--bg-hover);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    height: 100%;
+    border-radius: 1px;
+    position: relative;
+  }
+
+  .skill-fill::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+
+  .fill-gold {
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold-main));
+  }
+
+  .fill-gold::after { background: var(--gold-ivory); box-shadow: 0 0 6px var(--gold-ivory); }
+
+  .fill-copper {
+    background: linear-gradient(90deg, var(--copper-amber), var(--copper-blaze));
+  }
+
+  .fill-copper::after { background: var(--copper-blaze); box-shadow: 0 0 6px var(--copper-blaze); }
+
+  .fill-rose {
+    background: linear-gradient(90deg, var(--rose-deep), var(--rose-main));
+  }
+
+  .fill-rose::after { background: var(--rose-blush); box-shadow: 0 0 6px var(--rose-blush); }
+
+  /* ─────────────────────────────────────────────
+     COLOR PHILOSOPHY SECTION
+  ───────────────────────────────────────────── */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .philosophy-grid { grid-template-columns: 1fr; }
+  }
+
+  .philosophy-card {
+    padding: 28px 24px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    text-align: center;
+    transition: all 0.25s;
+  }
+
+  .philosophy-card:hover {
+    border-color: var(--border-glow);
+    background: var(--bg-raised);
+  }
+
+  .philosophy-icon {
+    font-size: 22px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .philosophy-name {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .philosophy-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ─────────────────────────────────────────────
+     USAGE RULES
+  ───────────────────────────────────────────── */
+  .rules-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .rule-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 18px 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    transition: border-color 0.2s;
+  }
+
+  .rule-item:hover {
+    border-color: var(--border-glow);
+  }
+
+  .rule-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 13px;
+    color: var(--gold-main);
+    min-width: 28px;
+    margin-top: 1px;
+  }
+
+  .rule-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .rule-text strong {
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  .rule-text em {
+    color: var(--copper-warm);
+    font-style: italic;
+  }
+
+  /* ─────────────────────────────────────────────
+     CSS VARS REFERENCE
+  ───────────────────────────────────────────── */
+  .code-block {
+    background: var(--bg-void);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 28px 32px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--text-secondary);
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .code-block::before {
+    content: 'CSS Variables';
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--text-ghost);
+    text-transform: uppercase;
+  }
+
+  .code-comment { color: var(--text-ghost); }
+  .code-var { color: var(--gold-main); }
+  .code-val { color: var(--rose-blush); }
+
+  /* ─────────────────────────────────────────────
+     FOOTER ORNAMENT
+  ───────────────────────────────────────────── */
+  .page-footer {
+    text-align: center;
+    padding-top: 60px;
+    border-top: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  .page-footer::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--text-ghost);
+    text-transform: uppercase;
+  }
+
+  .footer-glyph {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    color: var(--gold-deep);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  /* ─────────────────────────────────────────────
+     ANIMATIONS
+  ───────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-header { animation: fadeUp 0.8s ease both; }
+  .section:nth-child(1) { animation: fadeUp 0.8s 0.1s ease both; }
+  .section:nth-child(2) { animation: fadeUp 0.8s 0.2s ease both; }
+  .section:nth-child(3) { animation: fadeUp 0.8s 0.3s ease both; }
+  .section:nth-child(4) { animation: fadeUp 0.8s 0.4s ease both; }
+  .section:nth-child(5) { animation: fadeUp 0.8s 0.5s ease both; }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg-void); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gold-deep);
+    border-radius: 2px;
+  }
+
+  /* ─────────────────────────────────────────────
+     PROPORTION BAR (新增)
+  ───────────────────────────────────────────── */
+  .proportion-bar {
+    display: flex;
+    height: 56px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 4px 20px var(--shadow-warm);
+  }
+
+  .prop-seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    transition: flex 0.35s ease;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .prop-seg:hover { flex-grow: 2 !important; }
+
+  .proportion-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 44px;
+  }
+
+  .prop-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .prop-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .prop-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+  }
+
+  .prop-pct {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--text-primary);
+    margin-left: 4px;
+  }
+
+  /* ─────────────────────────────────────────────
+     GRADIENT & GLOW SHOWCASE (新增)
+  ───────────────────────────────────────────── */
+  .gradient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+    margin-bottom: 44px;
+  }
+
+  .gradient-item {
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  }
+
+  .gradient-item:hover {
+    border-color: var(--border-glow);
+    box-shadow: 0 4px 20px rgba(208, 184, 74, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .gradient-swatch-lg {
+    height: 96px;
+    width: 100%;
+  }
+
+  .gradient-meta {
+    padding: 14px 16px;
+    background: var(--bg-surface);
+  }
+
+  .gradient-name {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .gradient-code {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    word-break: break-all;
+  }
+
+  .glow-demos {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .glow-demo-card {
+    flex: 1;
+    min-width: 150px;
+    padding: 28px 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    text-align: center;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .glow-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .glow-orb {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin: 0 auto;
+    transition: box-shadow 0.3s;
+  }
+
+  .section:nth-child(6) { animation: fadeUp 0.8s 0.55s ease both; }
+  .section:nth-child(7) { animation: fadeUp 0.8s 0.65s ease both; }
+</style>
+</head>
+<body>
+
+<!-- Star Field -->
+<div class="star-field">
+  <canvas id="starCanvas"></canvas>
+</div>
+<div class="cosmic-overlay"></div>
+
+<!-- Page Content -->
+<div class="page-wrap">
+
+  <!-- Header -->
+  <header class="page-header">
+    <p class="header-eyebrow">Color System · 配色方案</p>
+    <h1 class="page-title">复古宇宙神秘风</h1>
+    <div class="ornament">✦ ✦ ✦</div>
+    <p class="page-subtitle">Vintage Cosmic Mystery · 数字简历专属配色</p>
+  </header>
+
+  <!-- Section 1: Full Palette -->
+  <section class="section">
+    <p class="section-label">01</p>
+    <h2 class="section-title">完整配色体系</h2>
+
+    <!-- 色彩比例分配（新增） -->
+    <div style="margin-bottom: 8px;">
+      <p class="palette-group-title" style="margin-bottom: 14px;">色彩比例分配 · Color Ratio</p>
+      <div class="proportion-bar">
+        <div class="prop-seg" style="flex:55; background:#080604; color:rgba(208,184,74,0.55);">55%</div>
+        <div class="prop-seg" style="flex:20; background:#0F0B07; color:rgba(208,184,74,0.65);">20%</div>
+        <div class="prop-seg" style="flex:10; background:#171108; color:rgba(208,184,74,0.75);">10%</div>
+        <div class="prop-seg" style="flex:8;  background:#D0B84A; color:#080604;">8%</div>
+        <div class="prop-seg" style="flex:4;  background:#F2E8B4; color:#080604;">4%</div>
+        <div class="prop-seg" style="flex:2;  background:#E86A28; color:#F2E8B4;">2%</div>
+        <div class="prop-seg" style="flex:1;  background:#C85820; color:#F2E8B4;">1%</div>
+      </div>
+      <div class="proportion-legend">
+        <div class="prop-legend-item"><div class="prop-dot" style="background:#080604;border:1px solid #333"></div><span class="prop-label">虚空黑</span><span class="prop-pct">55%</span></div>
+        <div class="prop-legend-item"><div class="prop-dot" style="background:#0F0B07;border:1px solid #333"></div><span class="prop-label">宇宙黑</span><span class="prop-pct">20%</span></div>
+        <div class="prop-legend-item"><div class="prop-dot" style="background:#171108;border:1px solid #444"></div><span class="prop-label">星云黑</span><span class="prop-pct">10%</span></div>
+        <div class="prop-legend-item"><div class="prop-dot" style="background:#D0B84A"></div><span class="prop-label">正金主色</span><span class="prop-pct">8%</span></div>
+        <div class="prop-legend-item"><div class="prop-dot" style="background:#F2E8B4"></div><span class="prop-label">象牙白金</span><span class="prop-pct">4%</span></div>
+        <div class="prop-legend-item"><div class="prop-dot" style="background:#E86A28"></div><span class="prop-label">灼铜点缀</span><span class="prop-pct">2%</span></div>
+        <div class="prop-legend-item"><div class="prop-dot" style="background:#C85820"></div><span class="prop-label">铜橙强调</span><span class="prop-pct">1%</span></div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <p class="palette-group-title">背景色族 · Background</p>
+      <div class="palette-row">
+        <div class="swatch" style="background:#080604"><div class="swatch-info" style="color:#888">虚空黑 #080604</div></div>
+        <div class="swatch" style="background:#0F0B07"><div class="swatch-info" style="color:#888">宇宙黑 #0F0B07</div></div>
+        <div class="swatch" style="background:#171108"><div class="swatch-info" style="color:#888">星云黑 #171108</div></div>
+        <div class="swatch" style="background:#201A0F"><div class="swatch-info" style="color:#999">晨曦黑 #201A0F</div></div>
+        <div class="swatch" style="background:#2C2315"><div class="swatch-info" style="color:#aaa">环形暗 #2C2315</div></div>
+      </div>
+      <div class="swatch-tags">
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#080604;border:1px solid #333"></div>
+          <span class="swatch-name">BG-VOID</span><span class="swatch-hex">#080604</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#0F0B07;border:1px solid #333"></div>
+          <span class="swatch-name">BG-BASE</span><span class="swatch-hex">#0F0B07</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#171108;border:1px solid #333"></div>
+          <span class="swatch-name">BG-SURFACE</span><span class="swatch-hex">#171108</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#201A0F;border:1px solid #333"></div>
+          <span class="swatch-name">BG-RAISED</span><span class="swatch-hex">#201A0F</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#2C2315;border:1px solid #333"></div>
+          <span class="swatch-name">BG-HOVER</span><span class="swatch-hex">#2C2315</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <p class="palette-group-title">白金主色族 · Whitish Gold · PRIMARY</p>
+      <div class="palette-row">
+        <div class="swatch" style="background:#F8F0D0"><div class="swatch-info" style="color:#333">月光白金 #F8F0D0</div></div>
+        <div class="swatch" style="background:#F2E8B4"><div class="swatch-info" style="color:#333">象牙白金 #F2E8B4</div></div>
+        <div class="swatch" style="background:#E4D080"><div class="swatch-info" style="color:#444">浅金 #E4D080</div></div>
+        <div class="swatch" style="background:#D0B84A"><div class="swatch-info" style="color:#555">正金 #D0B84A</div></div>
+        <div class="swatch" style="background:#B09430"><div class="swatch-info" style="color:#666">中金 #B09430</div></div>
+        <div class="swatch" style="background:#7A6418"><div class="swatch-info" style="color:#999">深金 #7A6418</div></div>
+        <div class="swatch" style="background:#3C3008"><div class="swatch-info" style="color:#bbb">暗金影 #3C3008</div></div>
+      </div>
+      <div class="swatch-tags">
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#F8F0D0"></div>
+          <span class="swatch-name">GOLD-WHISPER</span><span class="swatch-hex">#F8F0D0</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#F2E8B4"></div>
+          <span class="swatch-name">GOLD-IVORY</span><span class="swatch-hex">#F2E8B4</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#E4D080"></div>
+          <span class="swatch-name">GOLD-LIGHT</span><span class="swatch-hex">#E4D080</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#D0B84A"></div>
+          <span class="swatch-name">GOLD-MAIN</span><span class="swatch-hex">#D0B84A</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#B09430"></div>
+          <span class="swatch-name">GOLD-MEDIUM</span><span class="swatch-hex">#B09430</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#7A6418"></div>
+          <span class="swatch-name">GOLD-DEEP</span><span class="swatch-hex">#7A6418</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <p class="palette-group-title">铜橙点缀色 · Copper Accent · EYE-CATCHING</p>
+      <div class="palette-row" style="height:60px">
+        <div class="swatch" style="background:#E86A28"><div class="swatch-info" style="color:#eee">灼铜 #E86A28</div></div>
+        <div class="swatch" style="background:#C85820"><div class="swatch-info" style="color:#eee">暖铜 #C85820</div></div>
+        <div class="swatch" style="background:#A04010"><div class="swatch-info" style="color:#ccc">琥珀铜 #A04010</div></div>
+      </div>
+      <div class="swatch-tags">
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#E86A28"></div>
+          <span class="swatch-name">COPPER-BLAZE</span><span class="swatch-hex">#E86A28</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#C85820"></div>
+          <span class="swatch-name">COPPER-WARM</span><span class="swatch-hex">#C85820</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#A04010"></div>
+          <span class="swatch-name">COPPER-AMBER</span><span class="swatch-hex">#A04010</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <p class="palette-group-title">玫瑰金辅助色 · Rose Gold · SECONDARY</p>
+      <div class="palette-row" style="height:60px">
+        <div class="swatch" style="background:#E8A080"><div class="swatch-info" style="color:#444">玫瑰浅金 #E8A080</div></div>
+        <div class="swatch" style="background:#C87858"><div class="swatch-info" style="color:#555">玫瑰主金 #C87858</div></div>
+        <div class="swatch" style="background:#9A5840"><div class="swatch-info" style="color:#ddd">玫瑰深金 #9A5840</div></div>
+      </div>
+      <div class="swatch-tags">
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#E8A080"></div>
+          <span class="swatch-name">ROSE-BLUSH</span><span class="swatch-hex">#E8A080</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#C87858"></div>
+          <span class="swatch-name">ROSE-MAIN</span><span class="swatch-hex">#C87858</span>
+        </div>
+        <div class="swatch-tag">
+          <div class="swatch-dot" style="background:#9A5840"></div>
+          <span class="swatch-name">ROSE-DEEP</span><span class="swatch-hex">#9A5840</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <p class="palette-group-title">文字色阶 · Text Scale</p>
+      <div class="palette-row" style="height:50px">
+        <div class="swatch" style="background:#F8F0D0"><div class="swatch-info" style="color:#333">星光白 #F8F0D0</div></div>
+        <div class="swatch" style="background:#E8D8B0"><div class="swatch-info" style="color:#333">暖白 #E8D8B0</div></div>
+        <div class="swatch" style="background:#B89868"><div class="swatch-info" style="color:#555">暖金灰 #B89868</div></div>
+        <div class="swatch" style="background:#785C30"><div class="swatch-info" style="color:#bbb">暗金棕 #785C30</div></div>
+        <div class="swatch" style="background:#3A2C14"><div class="swatch-info" style="color:#ddd">幽灵棕 #3A2C14</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Typography -->
+  <section class="section">
+    <p class="section-label">02</p>
+    <h2 class="section-title">字体排版体系</h2>
+
+    <div class="type-showcase">
+      <h1 class="type-h1">Chen Yiming</h1>
+      <p class="type-tagline">· Product Designer & Creative Technologist ·</p>
+
+      <div class="type-divider"></div>
+
+      <h2 class="type-h2">Senior Product Designer</h2>
+      <p class="type-date">2022.03 — 2024.09 · XX Technology Co., Ltd.</p>
+      <p class="type-body">
+        主导公司核心产品的 <em>视觉体系重构</em>，从用户研究到视觉落地全流程负责。
+        带领 3 人设计团队完成设计语言统一，产品 NPS 提升 <em>38%</em>，
+        月活用户突破 <em>200万</em>。
+      </p>
+      <p class="type-caption">Cinzel Decorative · Cinzel · Cormorant Garamond · 三字体组合</p>
+    </div>
+  </section>
+
+  <!-- Section 3: Components -->
+  <section class="section">
+    <p class="section-label">03</p>
+    <h2 class="section-title">UI 组件示例</h2>
+
+    <div class="component-grid">
+
+      <!-- Buttons -->
+      <div class="btn-showcase">
+        <span class="btn-label">按钮 · Buttons</span>
+        <button class="btn btn-primary">Download Resume</button>
+        <button class="btn btn-accent">Contact Me · 联系我</button>
+        <button class="btn btn-ghost">View Projects</button>
+        <button class="btn btn-rose">Learn More</button>
+      </div>
+
+      <!-- Tags & Skills -->
+      <div class="tags-showcase">
+        <span class="btn-label">技能标签 · Tags</span>
+        <div class="tags-wrap">
+          <span class="tag tag-gold">Product Design</span>
+          <span class="tag tag-copper">UX Research</span>
+          <span class="tag tag-gold">Figma</span>
+          <span class="tag tag-rose">Motion Design</span>
+          <span class="tag tag-muted">Prototyping</span>
+          <span class="tag tag-copper">Brand System</span>
+          <span class="tag tag-gold">Design System</span>
+          <span class="tag tag-muted">Agile</span>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <span class="btn-label" style="margin-bottom: 16px; display:block;">技能掌握度 · Skills</span>
+
+          <div class="skill-item">
+            <div class="skill-row">
+              <span class="skill-name">Product Design</span>
+              <span class="skill-level">Expert</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-fill fill-gold" style="width: 92%"></div>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-row">
+              <span class="skill-name">Motion & Animation</span>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-fill fill-copper" style="width: 78%"></div>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-row">
+              <span class="skill-name">Front-End Dev</span>
+              <span class="skill-level">Intermediate</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-fill fill-rose" style="width: 62%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resume Card -->
+      <div class="card-showcase">
+        <div class="resume-card" style="margin-bottom: 12px;">
+          <div class="card-header">
+            <span class="card-role">Senior Product Designer</span>
+            <span class="card-period">2022.03 — 2024.09</span>
+          </div>
+          <p class="card-company">XX 科技有限公司 · 设计中心</p>
+          <p class="card-body">
+            主导核心产品视觉体系重构，带领 3 人设计团队完成设计语言统一，
+            产品 NPS 提升 38%，月活用户突破 200 万。
+          </p>
+          <div class="tags-wrap">
+            <span class="tag tag-gold">Design System</span>
+            <span class="tag tag-muted">User Research</span>
+            <span class="tag tag-muted">Figma</span>
+          </div>
+        </div>
+        <div class="resume-card">
+          <div class="card-header">
+            <span class="card-role">UI/UX Designer</span>
+            <span class="card-period">2019.07 — 2022.02</span>
+          </div>
+          <p class="card-company">YY 互联网公司 · 用户体验部</p>
+          <p class="card-body">
+            负责 B 端 SaaS 产品的交互设计与视觉优化，独立完成从需求到交付的全流程设计，
+            连续两年获得公司设计优秀奖。
+          </p>
+          <div class="tags-wrap">
+            <span class="tag tag-copper">B2B SaaS</span>
+            <span class="tag tag-muted">Interaction</span>
+            <span class="tag tag-rose">Visual Design</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 4: Color Philosophy -->
+  <section class="section">
+    <p class="section-label">04</p>
+    <h2 class="section-title">配色三原则</h2>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <span class="philosophy-icon" style="color: var(--gold-ivory);">◎</span>
+        <p class="philosophy-name" style="color: var(--gold-light);">底色透气</p>
+        <p class="philosophy-desc">
+          背景采用带微暖调的极深黑（非纯黑），让大面积黑色不显沉闷，
+          有呼吸感与层次感。
+        </p>
+      </div>
+      <div class="philosophy-card">
+        <span class="philosophy-icon" style="color: var(--copper-blaze);">✦</span>
+        <p class="philosophy-name" style="color: var(--copper-warm);">主色克制</p>
+        <p class="philosophy-desc">
+          白金主色贯穿全局，从最亮的月光白金到深金形成渐变层级，
+          保持整体调性统一而不单调。
+        </p>
+      </div>
+      <div class="philosophy-card">
+        <span class="philosophy-icon" style="color: var(--rose-blush);">☽</span>
+        <p class="philosophy-name" style="color: var(--rose-main);">点缀亮眼</p>
+        <p class="philosophy-desc">
+          铜橙色作为最高亮眼的点缀，仅用于 CTA、关键数据、
+          重要标注，不超过画面的 8%。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Usage Rules -->
+  <section class="section">
+    <p class="section-label">05</p>
+    <h2 class="section-title">使用规范</h2>
+
+    <ul class="rules-list">
+      <li class="rule-item">
+        <span class="rule-num">I</span>
+        <p class="rule-text">
+          <strong>背景分层：</strong> 页面底层用 <em>#0F0B07</em>，卡片用 <em>#171108</em>，
+          悬浮弹窗用 <em>#201A0F</em>——三层嵌套，制造空间深度。
+        </p>
+      </li>
+      <li class="rule-item">
+        <span class="rule-num">II</span>
+        <p class="rule-text">
+          <strong>主标题：</strong>用 <em>#F2E8B4（象牙白金）</em>，配合 Cinzel Decorative 字体，
+          是全页面视觉重心。不要随意使用纯白 #FFFFFF，会破坏暖调氛围。
+        </p>
+      </li>
+      <li class="rule-item">
+        <span class="rule-num">III</span>
+        <p class="rule-text">
+          <strong>点缀色铜橙 <em>#E86A28</em></strong> 只用于：CTA 按钮、最关键的数字/成就、
+          鼠标 hover 高亮。严格控制在全页面 5–8% 面积以内。
+        </p>
+      </li>
+      <li class="rule-item">
+        <span class="rule-num">IV</span>
+        <p class="rule-text">
+          <strong>边框与分割线：</strong>用 <em>rgba(176, 148, 48, 0.2)</em> 的半透明金色，
+          不要用纯色硬边框，要有云雾感、朦胧感。
+        </p>
+      </li>
+      <li class="rule-item">
+        <span class="rule-num">V</span>
+        <p class="rule-text">
+          <strong>玫瑰金 <em>#C87858</em></strong> 用于辅助标注、公司名/副标题、次级 hover 状态，
+          是金色和铜橙之间的过渡色，不做主角。
+        </p>
+      </li>
+      <li class="rule-item">
+        <span class="rule-num">VI</span>
+        <p class="rule-text">
+          <strong>禁止使用：</strong>任何冷调纯蓝（<em>#0066FF 类</em>）、
+          纯白（<em>#FFFFFF</em>）、饱和绿色、灰色系——
+          这些颜色会打破暖调宇宙的整体氛围。
+        </p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Section 6: CSS Variables -->
+  <section class="section">
+    <p class="section-label">06</p>
+    <h2 class="section-title">CSS 变量参考</h2>
+
+    <div class="code-block">
+<span class="code-comment">/* ── 背景色族 ───────────────────────── */</span>
+<span class="code-var">--bg-void</span>:      <span class="code-val">#080604</span>;   <span class="code-comment">/* 虚空黑 · 最深底色 */</span>
+<span class="code-var">--bg-base</span>:      <span class="code-val">#0F0B07</span>;   <span class="code-comment">/* 宇宙黑 · 主背景 */</span>
+<span class="code-var">--bg-surface</span>:   <span class="code-val">#171108</span>;   <span class="code-comment">/* 星云黑 · 卡片底色 */</span>
+<span class="code-var">--bg-raised</span>:    <span class="code-val">#201A0F</span>;   <span class="code-comment">/* 晨曦黑 · 悬浮层 */</span>
+<span class="code-var">--bg-hover</span>:     <span class="code-val">#2C2315</span>;   <span class="code-comment">/* 环形暗 · 交互态 */</span>
+
+<span class="code-comment">/* ── 白金主色族 PRIMARY ─────────────── */</span>
+<span class="code-var">--gold-whisper</span>: <span class="code-val">#F8F0D0</span>;   <span class="code-comment">/* 月光白金 · 顶级强调 */</span>
+<span class="code-var">--gold-ivory</span>:   <span class="code-val">#F2E8B4</span>;   <span class="code-comment">/* 象牙白金 · 主标题 */</span>
+<span class="code-var">--gold-light</span>:   <span class="code-val">#E4D080</span>;   <span class="code-comment">/* 浅金 · 次标题 */</span>
+<span class="code-var">--gold-main</span>:    <span class="code-val">#D0B84A</span>;   <span class="code-comment">/* 正金 · 主UI元素 */</span>
+<span class="code-var">--gold-medium</span>:  <span class="code-val">#B09430</span>;   <span class="code-comment">/* 中金 · 边框分割 */</span>
+<span class="code-var">--gold-deep</span>:    <span class="code-val">#7A6418</span>;   <span class="code-comment">/* 深金 · 纹理细节 */</span>
+
+<span class="code-comment">/* ── 点缀色 ACCENT ──────────────────── */</span>
+<span class="code-var">--copper-blaze</span>: <span class="code-val">#E86A28</span>;   <span class="code-comment">/* 灼铜 · CTA 最亮点缀 */</span>
+<span class="code-var">--copper-warm</span>:  <span class="code-val">#C85820</span>;   <span class="code-comment">/* 暖铜 · 深一档点缀 */</span>
+<span class="code-var">--rose-blush</span>:   <span class="code-val">#E8A080</span>;   <span class="code-comment">/* 玫瑰浅金 · 辅助高亮 */</span>
+<span class="code-var">--rose-main</span>:    <span class="code-val">#C87858</span>;   <span class="code-comment">/* 玫瑰主金 · 辅助强调 */</span>
+
+<span class="code-comment">/* ── 文字色 TEXT ─────────────────────── */</span>
+<span class="code-var">--text-star</span>:      <span class="code-val">#F8F0D0</span>;   <span class="code-comment">/* 星光白 · Hero标题 */</span>
+<span class="code-var">--text-primary</span>:   <span class="code-val">#E8D8B0</span>;   <span class="code-comment">/* 暖白 · 正文 */</span>
+<span class="code-var">--text-secondary</span>: <span class="code-val">#B89868</span>;   <span class="code-comment">/* 暖金灰 · 次要文字 */</span>
+<span class="code-var">--text-muted</span>:     <span class="code-val">#785C30</span>;   <span class="code-comment">/* 暗金棕 · 说明注释 */</span>
+
+<span class="code-comment">/* ── 功能色 FUNCTIONAL ───────────────── */</span>
+<span class="code-var">--border-glow</span>:   <span class="code-val">rgba(208, 184, 74, 0.35)</span>;
+<span class="code-var">--border-subtle</span>: <span class="code-val">rgba(176, 148, 48, 0.2)</span>;
+<span class="code-var">--glow-gold</span>:     <span class="code-val">rgba(242, 232, 180, 0.12)</span>;
+<span class="code-var">--glow-copper</span>:   <span class="code-val">rgba(232, 106, 40, 0.18)</span>;
+    </div>
+  </section>
+
+  <!-- Section 7: Gradients & Glow (新增) -->
+  <section class="section">
+    <p class="section-label">07</p>
+    <h2 class="section-title">渐变与发光系统</h2>
+
+    <div class="gradient-grid">
+      <!-- 金色标题渐变 -->
+      <div class="gradient-item">
+        <div class="gradient-swatch-lg" style="background: linear-gradient(135deg, #F8F0D0 0%, #D0B84A 55%, #E86A28 100%)"></div>
+        <div class="gradient-meta">
+          <div class="gradient-name">金色标题渐变</div>
+          <div class="gradient-code">linear-gradient(135deg,<br>#F8F0D0 0%, #D0B84A 55%, #E86A28 100%)</div>
+        </div>
+      </div>
+      <!-- 深空背景渐变 -->
+      <div class="gradient-item">
+        <div class="gradient-swatch-lg" style="background: linear-gradient(180deg, #080604 0%, #0F0B07 58%, #171108 100%)"></div>
+        <div class="gradient-meta">
+          <div class="gradient-name">深空背景渐变</div>
+          <div class="gradient-code">linear-gradient(180deg,<br>#080604 0%, #0F0B07 58%, #171108 100%)</div>
+        </div>
+      </div>
+      <!-- 神秘暖光渐变 -->
+      <div class="gradient-item">
+        <div class="gradient-swatch-lg" style="background: radial-gradient(circle, rgba(208,184,74,0.32) 0%, rgba(200,88,32,0.12) 40%, rgba(8,6,4,0) 72%), #080604"></div>
+        <div class="gradient-meta">
+          <div class="gradient-name">神秘暖光渐变</div>
+          <div class="gradient-code">radial-gradient(circle,<br>rgba(208,184,74,0.32) 0%,<br>rgba(200,88,32,0.12) 40%, transparent 72%)</div>
+        </div>
+      </div>
+      <!-- 玫瑰金辅助渐变 -->
+      <div class="gradient-item">
+        <div class="gradient-swatch-lg" style="background: linear-gradient(135deg, #E8A080 0%, #C85820 60%, #3C3008 100%)"></div>
+        <div class="gradient-meta">
+          <div class="gradient-name">玫瑰铜渐变</div>
+          <div class="gradient-code">linear-gradient(135deg,<br>#E8A080 0%, #C85820 60%, #3C3008 100%)</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="palette-group-title" style="margin-bottom: 20px;">发光效果层级 · Glow Scale</p>
+    <div class="glow-demos">
+      <div class="glow-demo-card">
+        <span class="glow-label">Default</span>
+        <div class="glow-orb" style="background: var(--gold-main);"></div>
+      </div>
+      <div class="glow-demo-card" style="box-shadow: 0 0 24px rgba(208,184,74,0.16);">
+        <span class="glow-label">Soft Glow</span>
+        <div class="glow-orb" style="background: var(--gold-main); box-shadow: 0 0 24px rgba(208,184,74,0.45);"></div>
+      </div>
+      <div class="glow-demo-card" style="border-color: var(--border-glow); box-shadow: 0 0 30px rgba(208,164,64,0.22);">
+        <span class="glow-label">Hover Glow</span>
+        <div class="glow-orb" style="background: var(--gold-light); box-shadow: 0 0 30px rgba(228,208,128,0.6);"></div>
+      </div>
+      <div class="glow-demo-card">
+        <span class="glow-label">Copper Accent</span>
+        <div class="glow-orb" style="background: var(--copper-blaze); box-shadow: 0 0 20px rgba(232,106,40,0.45);"></div>
+      </div>
+      <div class="glow-demo-card">
+        <span class="glow-label">Rose Accent</span>
+        <div class="glow-orb" style="background: var(--rose-main); box-shadow: 0 0 20px rgba(200,120,88,0.4);"></div>
+      </div>
+    </div>
+
+    <!-- Glow value reference -->
+    <div style="margin-top: 36px; padding: 24px 28px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 4px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:0; left:0; right:0; height:1px; background: linear-gradient(90deg, transparent, var(--border-glow), transparent);"></div>
+      <p class="palette-group-title" style="margin-bottom: 16px;">推荐阴影值 · Shadow Reference</p>
+      <div style="display:flex; flex-direction:column; gap:10px; font-family:'Courier New',monospace; font-size:11px; color:var(--text-secondary); line-height:1.8;">
+        <div><span style="color:var(--gold-medium);">/* 柔和环境光 */</span><br><span style="color:var(--gold-light);">box-shadow:</span> <span style="color:var(--rose-blush);">0 0 24px rgba(208, 184, 74, 0.16)</span>;</div>
+        <div><span style="color:var(--gold-medium);">/* Hover 增强光 */</span><br><span style="color:var(--gold-light);">box-shadow:</span> <span style="color:var(--rose-blush);">0 0 30px rgba(208, 164, 64, 0.22)</span>;</div>
+        <div><span style="color:var(--gold-medium);">/* 按钮点击光晕 */</span><br><span style="color:var(--gold-light);">box-shadow:</span> <span style="color:var(--rose-blush);">0 0 18px rgba(232, 106, 40, 0.28)</span>;</div>
+        <div><span style="color:var(--gold-medium);">/* 卡片投影 */</span><br><span style="color:var(--gold-light);">box-shadow:</span> <span style="color:var(--rose-blush);">0 10px 30px rgba(8, 6, 4, 0.85)</span>;</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <span class="footer-glyph">✦</span>
+    <p class="footer-text">Vintage Cosmic Mystery · Color System · 复古宇宙神秘风配色方案</p>
+  </footer>
+
+</div>
+
+<!-- Star Field Script -->
+<script>
+  const canvas = document.getElementById('starCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); initStars(); });
+
+  const STAR_COUNT = 220;
+  let stars = [];
+
+  // Warm gold color palette for stars
+  const starColors = [
+    'rgba(248, 240, 208, ',  // gold-whisper
+    'rgba(232, 208, 128, ',  // gold-light
+    'rgba(232, 160, 128, ',  // rose-blush
+    'rgba(200, 184, 120, ',  // warm gold
+    'rgba(248, 230, 180, ',  // light warm
+  ];
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.2,
+        color: starColors[Math.floor(Math.random() * starColors.length)],
+        alpha: Math.random() * 0.6 + 0.1,
+        speed: Math.random() * 0.004 + 0.001,
+        phase: Math.random() * Math.PI * 2,
+        type: Math.random() > 0.92 ? 'cross' : 'dot'
+      });
+    }
+  }
+  initStars();
+
+  let t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    t += 0.016;
+
+    for (const s of stars) {
+      const alpha = s.alpha * (0.5 + 0.5 * Math.sin(t * s.speed * 100 + s.phase));
+
+      if (s.type === 'cross' && s.r > 0.8) {
+        // Draw a small 4-pointed star
+        ctx.save();
+        ctx.translate(s.x, s.y);
+        ctx.strokeStyle = s.color + alpha + ')';
+        ctx.lineWidth = 0.5;
+        const size = s.r * 3;
+        ctx.beginPath();
+        ctx.moveTo(-size, 0); ctx.lineTo(size, 0);
+        ctx.moveTo(0, -size); ctx.lineTo(0, size);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.color + alpha + ')';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+</script>
+
+</body>
+</html>
