@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F0B07"/>
+      <stop offset="100%" stop-color="#080604"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="360" fill="url(#bg2)"/>
+
+  <!-- Top label -->
+  <text x="600" y="46" font-family="'Cinzel', Georgia, serif" font-size="11" letter-spacing="4" text-anchor="middle" fill="rgba(201,168,76,0.55)">极客工具流 · WORKFLOW STACK</text>
+
+  <!-- Main title -->
+  <text x="600" y="86" font-family="'Cinzel', Georgia, serif" font-size="40" font-weight="700" letter-spacing="4" text-anchor="middle" fill="#C9A84C">Workflow Stack</text>
+
+  <!-- Decorative line -->
+  <line x1="460" y1="102" x2="740" y2="102" stroke="rgba(201,168,76,0.2)" stroke-width="0.5"/>
+
+  <!-- Cards: 6 tools, evenly spaced -->
+  <!-- Card width: 170px, gap: ~14px, total: 6×170 + 5×14 = 1020+70 = 1090, start x = (1200-1090)/2 = 55 -->
+
+  <!-- Arrow connector definition -->
+  <!-- We'll draw arrows between cards -->
+
+  <!-- Card 1: 方案共创 / GPT / Gemini -->
+  <rect x="55" y="130" width="170" height="180" rx="6" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.18)" stroke-width="0.8"/>
+  <line x1="55" y1="130" x2="225" y2="130" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+  <text x="75" y="158" font-family="'Cinzel', Georgia, serif" font-size="9" letter-spacing="2" fill="rgba(201,168,76,0.5)">方案共创 · 需求拆解</text>
+  <text x="75" y="188" font-family="'Cinzel', Georgia, serif" font-size="18" font-weight="700" fill="#E4D080">GPT / Gemini</text>
+  <line x1="75" y1="200" x2="205" y2="200" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+  <text x="75" y="226" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">需求拆解</text>
+  <text x="75" y="248" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">方案共创</text>
+  <text x="75" y="270" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">Prompt 迭代</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="227" y1="220" x2="239" y2="220" stroke="rgba(201,168,76,0.18)" stroke-width="0.8" stroke-dasharray="2 3"/>
+  <path d="M238 217 L243 220 L238 223" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="0.8" stroke-linecap="round"/>
+
+  <!-- Card 2: 视觉探索 / Google Stitch -->
+  <rect x="241" y="130" width="170" height="180" rx="6" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.18)" stroke-width="0.8"/>
+  <line x1="241" y1="130" x2="411" y2="130" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+  <text x="261" y="158" font-family="'Cinzel', Georgia, serif" font-size="9" letter-spacing="2" fill="rgba(201,168,76,0.5)">视觉探索 · 风格定义</text>
+  <text x="261" y="188" font-family="'Cinzel', Georgia, serif" font-size="15" font-weight="700" fill="#E4D080">Google Stitch</text>
+  <line x1="261" y1="200" x2="391" y2="200" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+  <text x="261" y="226" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">前端风格探索</text>
+  <text x="261" y="248" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">视觉方向输出</text>
+  <text x="261" y="270" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">参考图生成</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="413" y1="220" x2="425" y2="220" stroke="rgba(201,168,76,0.18)" stroke-width="0.8" stroke-dasharray="2 3"/>
+  <path d="M424 217 L429 220 L424 223" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="0.8" stroke-linecap="round"/>
+
+  <!-- Card 3: 原型生成 / Claude (highlighted) -->
+  <rect x="427" y="120" width="170" height="200" rx="6" fill="rgba(232,106,40,0.08)" stroke="rgba(232,106,40,0.28)" stroke-width="0.8"/>
+  <line x1="427" y1="120" x2="597" y2="120" stroke="rgba(232,106,40,0.55)" stroke-width="1.5"/>
+  <text x="447" y="149" font-family="'Cinzel', Georgia, serif" font-size="9" letter-spacing="2" fill="rgba(232,106,40,0.6)">核心开发 · PoC验证</text>
+  <text x="447" y="180" font-family="'Cinzel', Georgia, serif" font-size="22" font-weight="700" fill="#E86A28">Claude</text>
+  <line x1="447" y1="192" x2="577" y2="192" stroke="rgba(232,106,40,0.12)" stroke-width="0.5"/>
+  <text x="447" y="218" font-family="Georgia, serif" font-size="12" fill="rgba(228,168,80,0.7)">概念验证 PoC</text>
+  <text x="447" y="240" font-family="Georgia, serif" font-size="12" fill="rgba(228,168,80,0.7)">原型搭建</text>
+  <text x="447" y="262" font-family="Georgia, serif" font-size="12" fill="rgba(228,168,80,0.7)">前端代码生成</text>
+  <text x="447" y="284" font-family="Georgia, serif" font-size="12" fill="rgba(228,168,80,0.7)">动效制作</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="599" y1="220" x2="611" y2="220" stroke="rgba(201,168,76,0.18)" stroke-width="0.8" stroke-dasharray="2 3"/>
+  <path d="M610 217 L615 220 L610 223" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="0.8" stroke-linecap="round"/>
+
+  <!-- Card 4: 代码精修 / Cursor -->
+  <rect x="613" y="130" width="170" height="180" rx="6" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.18)" stroke-width="0.8"/>
+  <line x1="613" y1="130" x2="783" y2="130" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+  <text x="633" y="158" font-family="'Cinzel', Georgia, serif" font-size="9" letter-spacing="2" fill="rgba(201,168,76,0.5)">代码精修 · 局部重构</text>
+  <text x="633" y="188" font-family="'Cinzel', Georgia, serif" font-size="18" font-weight="700" fill="#E4D080">Cursor / Codex</text>
+  <line x1="633" y1="200" x2="763" y2="200" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+  <text x="633" y="226" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">代码融合</text>
+  <text x="633" y="248" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">局部重构</text>
+  <text x="633" y="270" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">细节优化</text>
+
+  <!-- Arrow 4→5 -->
+  <line x1="785" y1="220" x2="797" y2="220" stroke="rgba(201,168,76,0.18)" stroke-width="0.8" stroke-dasharray="2 3"/>
+  <path d="M796 217 L801 220 L796 223" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="0.8" stroke-linecap="round"/>
+
+  <!-- Card 5: Agent 搭建 / Coze + Notion (highlighted) -->
+  <rect x="799" y="130" width="170" height="180" rx="6" fill="rgba(176,148,48,0.08)" stroke="rgba(176,148,48,0.25)" stroke-width="0.8"/>
+  <line x1="799" y1="130" x2="969" y2="130" stroke="rgba(176,148,48,0.5)" stroke-width="1.5"/>
+  <text x="819" y="158" font-family="'Cinzel', Georgia, serif" font-size="9" letter-spacing="2" fill="rgba(176,148,48,0.6)">AGENT / RAG 接入</text>
+  <text x="819" y="185" font-family="'Cinzel', Georgia, serif" font-size="16" font-weight="700" fill="#D0B84A">Coze + Notion</text>
+  <line x1="819" y1="198" x2="949" y2="198" stroke="rgba(176,148,48,0.12)" stroke-width="0.5"/>
+  <text x="819" y="224" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.6)">问答 Agent 配置</text>
+  <text x="819" y="246" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.6)">知识库导入</text>
+  <text x="819" y="268" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.6)">RAG 接入</text>
+
+  <!-- Arrow 5→6 -->
+  <line x1="971" y1="220" x2="983" y2="220" stroke="rgba(201,168,76,0.18)" stroke-width="0.8" stroke-dasharray="2 3"/>
+  <path d="M982 217 L987 220 L982 223" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="0.8" stroke-linecap="round"/>
+
+  <!-- Card 6: 发布迭代 / GitHub + Cloudflare -->
+  <rect x="985" y="130" width="170" height="180" rx="6" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.18)" stroke-width="0.8"/>
+  <line x1="985" y1="130" x2="1155" y2="130" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+  <text x="1005" y="158" font-family="'Cinzel', Georgia, serif" font-size="9" letter-spacing="2" fill="rgba(201,168,76,0.5)">版本控制 · 部署</text>
+  <text x="1005" y="183" font-family="'Cinzel', Georgia, serif" font-size="14" font-weight="700" fill="#E4D080">GitHub +</text>
+  <text x="1005" y="205" font-family="'Cinzel', Georgia, serif" font-size="14" font-weight="700" fill="#E4D080">Cloudflare</text>
+  <line x1="1005" y1="217" x2="1135" y2="217" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+  <text x="1005" y="242" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">版本管理</text>
+  <text x="1005" y="264" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">部署上线</text>
+  <text x="1005" y="286" font-family="Georgia, serif" font-size="12" fill="rgba(201,168,76,0.55)">持续迭代</text>
+
+  <!-- Feedback arrow at bottom (迭代反馈) -->
+  <path d="M1070 320 Q600 348 140 320" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="0.8" stroke-dasharray="4 5"/>
+  <path d="M143 317 L138 320 L143 323" fill="none" stroke="rgba(201,168,76,0.2)" stroke-width="0.8" stroke-linecap="round"/>
+  <text x="600" y="340" font-family="'Cinzel', Georgia, serif" font-size="9" letter-spacing="2" text-anchor="middle" fill="rgba(201,168,76,0.25)">反馈迭代</text>
+
+  <!-- Bottom watermark -->
+  <text x="600" y="356" font-family="'Cinzel', Georgia, serif" font-size="10" letter-spacing="3" text-anchor="middle" fill="rgba(201,168,76,0.15)">PROJECT NEBULA · WORKFLOW STACK</text>
+</svg>
