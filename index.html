@@ -8,6 +8,36 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║           PROJECT NEBULA · CSS 区块导航目录                  ║
+   ║  Ctrl+F 搜索编号快速跳转                                      ║
+   ╠══════════════════════════════════════════════════════════════╣
+   ║  [CSS-01] 设计变量 · Design Tokens                           ║
+   ║  [CSS-02] 基础重置 · Reset & Base                            ║
+   ║  [CSS-03] 视图管理 · View System                             ║
+   ║  [CSS-04] 首屏欢迎页 · Welcome Page                          ║
+   ║  [CSS-05] 星球总览页 · Nebula Hub                            ║
+   ║  [CSS-06] 内容页公共样式 · Content Pages Common              ║
+   ║  [CSS-07] 联络中枢 · Contact Block                           ║
+   ║  [CSS-08] 全局悬浮分身 · Agent FAB                           ║
+   ║  [CSS-09] 每页独立色彩 · Per-Page Colors                     ║
+   ║  [CSS-10] 星工场画廊 · Forge Gallery                         ║
+   ║  [CSS-11] 造物星画廊 · Construct Gallery                     ║
+   ║  [CSS-12] 聚变星时间轴 · Fusion Timeline                     ║
+   ║  [CSS-13] 脉冲星列表 · Pulsar List                           ║
+   ║  [CSS-14] AI奇点左右版式 · Singularity Layout                ║
+   ║  [CSS-15] AI奇点·内嵌分身入口 · Singu Agent Entry           ║
+   ║  [CSS-16] 数字分身·水波纹 · Agent Ripple                     ║
+   ║  [CSS-17] 星球装饰图标 · Planet Deco Icons                   ║
+   ║  [CSS-18] 联络中枢精致化 · Contact H2                        ║
+   ║  [CSS-19] 造物星阅读器 Modal · Doc Reader                    ║
+   ║  [CSS-20] 脉冲星抽屉 · Feed Drawer                           ║
+   ║  [CSS-21] 穹顶弧线构图 · Nebula Arch Layout                  ║
+   ║  [CSS-22] 复古天文星球插画 · Planet SVG Styles               ║
+   ║  [CSS-23] 全局色彩微调 · Global Color Refinement             ║
+   ║  [CSS-24] 全局响应式 · Responsive Breakpoints                ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
 /* ─────────────────────────────────────────
    设计令牌
 ───────────────────────────────────────── */
@@ -3494,6 +3524,32 @@ html, body {
   .fd-header { padding: 16px 16px 14px; }
   .fd-title  { font-size: 1rem; }
 }
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║         PROJECT NEBULA · HTML 区块导航目录                   ║
+   ║  Ctrl+F 搜索编号快速跳转                                      ║
+   ╠══════════════════════════════════════════════════════════════╣
+   ║  [HTML-01] 首屏欢迎页 · Welcome                              ║
+   ║             ↳ 主标题文案 / 标签组 / 两个按钮                  ║
+   ║  [HTML-02] 星球总览页 · Nebula Hub                           ║
+   ║             ↳ 轨道SVG / 5颗星球 / 造物者之手                  ║
+   ║  [HTML-03] AI奇点内容页 · Singularity                        ║
+   ║             ↳ 照片/姓名/技能矩阵 / 一句话/能力卡片/分身入口    ║
+   ║  [HTML-04] 星工场内容页 · Forge                              ║
+   ║             ↳ 3张作品画廊卡片（含外链按钮）                    ║
+   ║  [HTML-05] 造物星内容页 · Construct                          ║
+   ║             ↳ 3张文档画廊卡片（含阅读器按钮）                  ║
+   ║  [HTML-06] 聚变星内容页 · Fusion                             ║
+   ║             ↳ 3段左右时间轴（含数字强化指标）                  ║
+   ║  [HTML-07] 脉冲星内容页 · Pulsar                             ║
+   ║             ↳ 3条洞察列表行（含抽屉+外链）                    ║
+   ║  [HTML-08] 造物星阅读器 Modal · Doc Reader                   ║
+   ║             ↳ PRD/架构图/原型 内容在 JS [JS-03] 修改          ║
+   ║  [HTML-09] 脉冲星阅读抽屉 · Feed Drawer                      ║
+   ║             ↳ 文章内容在 JS [JS-04] 修改                      ║
+   ║  [HTML-10] 全局悬浮数字分身 · Agent FAB                      ║
+   ║             ↳ 欢迎语 / 快捷问题 在此处修改                    ║
+   ╚══════════════════════════════════════════════════════════════╝ */
 </style>
 </head>
 
@@ -3502,7 +3558,8 @@ html, body {
 <canvas id="starfield"></canvas>
 
 <!-- ══════════════════════════════════
-  ① 首屏引导页
+  [HTML-01] 首屏欢迎页 · Welcome
+  ↳ 修改：主标题 / 标签文字 / 按钮文字
 ══════════════════════════════════ -->
 <section id="view-welcome" class="view is-active layer-content">
   <div>
@@ -3529,7 +3586,8 @@ html, body {
 </section>
 
 <!-- ══════════════════════════════════
-  ② 能力星球总览页
+  [HTML-02] 星球总览页 · Nebula Hub
+  ↳ 修改：星球名称 / tooltip文字
 ══════════════════════════════════ -->
 <section id="view-nebula" class="view layer-content">
   <button class="nebula-home-btn" onclick="Nav.go('welcome')" title="返回首屏">← 首页</button>
@@ -3818,7 +3876,10 @@ html, body {
 </section>
 
 <!-- ══════════════════════════════════
-  ③ AI 奇点内容页
+  [HTML-03] AI奇点内容页 · Singularity
+  ↳ 修改：照片(singu-photo-circle) / 姓名(singu-name)
+  ↳ 修改：一句话引语(singu-quote) / 能力卡片(singu-ab-card)
+  ↳ 修改：技能标签(singu-chip) / 分身快捷问题(sae-qbtn)
 ══════════════════════════════════ -->
 <section id="view-singularity" class="view layer-content">
   <div class="content-view">
@@ -3965,7 +4026,9 @@ html, body {
 </section>
 
 <!-- ══════════════════════════════════
-  ④ 星工场内容页
+  [HTML-04] 星工场内容页 · Forge
+  ↳ 修改：项目标题(gallery-title) / 描述(gallery-desc)
+  ↳ 修改：技术栈(gallery-stack) / 外链href
 ══════════════════════════════════ -->
 <section id="view-forge" class="view layer-content">
   <div class="content-view">
@@ -4085,7 +4148,9 @@ html, body {
 </section>
 
 <!-- ══════════════════════════════════
-  ⑤ 造物星内容页
+  [HTML-05] 造物星内容页 · Construct
+  ↳ 修改：文档标题(construct-title) / 描述(construct-desc)
+  ↳ 修改：文档正文内容 → 在 JS [JS-03] DocReader 里修改
 ══════════════════════════════════ -->
 <section id="view-construct" class="view layer-content">
   <div class="content-view">
@@ -4207,7 +4272,9 @@ html, body {
 </section>
 
 <!-- ══════════════════════════════════
-  ⑥ 聚变星内容页
+  [HTML-06] 聚变星内容页 · Fusion
+  ↳ 修改：时间段(fusion-time) / 公司名(fusion-company)
+  ↳ ★ 修改：KPI数字(fusion-metric-num) / 标签(fusion-tag) ★
 ══════════════════════════════════ -->
 <section id="view-fusion" class="view layer-content">
   <div class="content-view">
@@ -4347,7 +4414,10 @@ html, body {
 </section>
 
 <!-- ══════════════════════════════════
-  ⑦ 脉冲星内容页
+  [HTML-07] 脉冲星内容页 · Pulsar
+  ↳ 修改：条目标题(pulsar-title) / 摘要(pulsar-sub)
+  ↳ ★ 修改：文章全文内容 → 在 JS [JS-04] FeedReader 里修改 ★
+  ↳ 修改：外链href → 找 pulsar-ext-btn 的 href="#"
 ══════════════════════════════════ -->
 <section id="view-pulsar" class="view layer-content">
   <div class="content-view">
@@ -4452,15 +4522,18 @@ html, body {
 </section>
 
 <!-- ══════════════════════════════════
-  全局悬浮数字分身
+  [HTML-10] 全局悬浮数字分身 · Agent FAB
+  ↳ 修改：欢迎语(msg-ai) / 快捷问题(quick-btn)
 ══════════════════════════════════ -->
 
 <!-- ══════════════════════════════════
-  造物星·沉浸式文档阅读器
+  [HTML-08] 造物星阅读器 Modal · Doc Reader
+  ↳ 文档内容在 JS [JS-03] DocReader.docs 对象里修改
 ══════════════════════════════════ -->
 
 <!-- ══════════════════════════════════
-  脉冲星·右侧滑出阅读抽屉
+  [HTML-09] 脉冲星阅读抽屉 · Feed Drawer
+  ↳ 文章内容在 JS [JS-04] FeedReader.articles 数组里修改
 ══════════════════════════════════ -->
 <div class="feed-overlay" id="feed-overlay" onclick="FeedReader.close()"></div>
 <div class="feed-drawer" id="feed-drawer">
@@ -4578,8 +4651,26 @@ html, body {
 
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║          PROJECT NEBULA · JS 模块导航目录                    ║
+   ║  Ctrl+F 搜索编号快速跳转                                      ║
+   ╠══════════════════════════════════════════════════════════════╣
+   ║  [JS-01] Nav · 页面路由控制器                                 ║
+   ║           ↳ 修改页面切换逻辑在此                              ║
+   ║  [JS-02] Agent · 数字分身对话逻辑                             ║
+   ║           ↳ 修改快捷回复内容 / 欢迎语 在此                    ║
+   ║  [JS-03] DocReader · 造物星沉浸式阅读器                       ║
+   ║           ↳ ★ 修改PRD文档内容 / 架构图 / 原型 在此 ★         ║
+   ║  [JS-04] FeedReader · 脉冲星侧滑阅读抽屉                      ║
+   ║           ↳ ★ 修改3篇文章内容 在此 ★                         ║
+   ║  [JS-05] Welcome · 首屏5秒自动跳转逻辑                        ║
+   ║  [JS-06] Planet Click · 星球点击交互                          ║
+   ║  [JS-07] Starfield Canvas · 星点背景动画                      ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
 /* ════════════════════════════════════════
-   Nav — 视图切换控制器
+   [JS-01] Nav — 页面路由控制器
+   ↳ visited 集合控制星球已访问状态
 ════════════════════════════════════════ */
 const Nav = (() => {
   const visited = new Set();
@@ -4606,7 +4697,8 @@ const Nav = (() => {
 })();
 
 /* ════════════════════════════════════════
-   Agent — 数字分身
+   [JS-02] Agent — 数字分身对话逻辑
+   ↳ replies 对象：修改快捷问题的回复内容
 ════════════════════════════════════════ */
 const Agent = (() => {
   const panel  = document.getElementById('agent-panel');
@@ -4659,7 +4751,8 @@ const Agent = (() => {
 })();
 
 /* ════════════════════════════════════════
-   Welcome 首屏逻辑
+   [JS-05] Welcome — 首屏自动跳转逻辑
+   ↳ setTimeout 5000 = 5秒后自动进入星球页
 ════════════════════════════════════════ */
 (() => {
   const welcome = document.getElementById('view-welcome');
@@ -4688,14 +4781,14 @@ const Agent = (() => {
 })();
 
 /* ════════════════════════════════════════
-   星球页：点击行星
+   [JS-06] Planet Click — 星球点击交互
 ════════════════════════════════════════ */
 document.querySelectorAll('[data-target]').forEach(el => {
   el.addEventListener('click', () => Nav.go(el.dataset.target));
 });
 
 /* ════════════════════════════════════════
-   星点背景 Canvas
+   [JS-07] Starfield Canvas — 星点背景动画
 ════════════════════════════════════════ */
 (() => {
   const canvas = document.getElementById('starfield');
@@ -4748,7 +4841,12 @@ document.querySelectorAll('[data-target]').forEach(el => {
 })();
 
 /* ════════════════════════════════════════
-   DocReader — 造物星沉浸式阅读器
+   [JS-03] DocReader — 造物星沉浸式阅读器
+   ★ 修改文档内容：找 const docs = { ... } ★
+   ↳ docs.prd.body    → PRD 文档正文
+   ↳ docs.arch.body   → 架构图说明
+   ↳ docs.proto.body  → 原型说明
+   ↳ 外链：修改各 extUrl: '#' 为真实链接
 ════════════════════════════════════════ */
 const DocReader = (() => {
   const overlay  = document.getElementById('doc-reader');
@@ -4891,7 +4989,11 @@ const DocReader = (() => {
 
 
 /* ════════════════════════════════════════
-   FeedReader — 脉冲星侧滑阅读器
+   [JS-04] FeedReader — 脉冲星侧滑阅读器
+   ★ 修改文章内容：找 const articles = [ ... ] ★
+   ↳ articles[0].body → 第1篇文章全文
+   ↳ articles[1].body → 第2篇文章全文
+   ↳ articles[2].body → 第3篇文章全文
 ════════════════════════════════════════ */
 const FeedReader = (() => {
   const overlay  = document.getElementById('feed-overlay');
