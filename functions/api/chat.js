@@ -10,7 +10,7 @@ export async function onRequestPost(context) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3'
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify({ ...body, stream: false })
     });
     
     const data = await res.json();
