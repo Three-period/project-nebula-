@@ -95,4 +95,15 @@ export async function onRequestGet(context) {
     });
   }
 }
-
+export async function onRequestOptions(context) {
+  const token = context.env.COZE_TOKEN || 'EMPTY';
+  return new Response(JSON.stringify({
+    token_length: token.length,
+    token_start: token.substring(0, 8),
+    token_end: token.substring(token.length - 4),
+    has_spaces: token.includes(' '),
+    has_newlines: token.includes('\n')
+  }), {
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+  });
+}
