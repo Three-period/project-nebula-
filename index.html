@@ -3916,7 +3916,7 @@ html, body {
       </g>
     </svg>
 
-    <p class="nebula-tagline">探索她的能力宇宙 · Explore the Nebula</p>
+    <p class="nebula-tagline">探索你的专属宇宙 · Explore the Nebula</p>
   </div>
 </section>
 
@@ -4857,12 +4857,9 @@ const Agent = (() => {
   const COZE_TOKEN  = 'pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3';
 
   async function callCoze(question) {
-    const res = await fetch('https://api.coze.cn/v3/chat', {
+    const res = await fetch('/api/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + COZE_TOKEN
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         bot_id: COZE_BOT_ID,
         user_id: 'visitor_' + Date.now(),
@@ -4877,12 +4874,10 @@ const Agent = (() => {
     const convId = data.data && data.data.conversation_id;
     if (!chatId) return '数字分身暂时无法回应，请稍后再试。';
 
-    // 轮询等待回复完成
     for (let i = 0; i < 30; i++) {
       await new Promise(r => setTimeout(r, 1000));
       const poll = await fetch(
-        'https://api.coze.cn/v3/chat/message/list?chat_id=' + chatId + '&conversation_id=' + convId,
-        { headers: { 'Authorization': 'Bearer ' + COZE_TOKEN } }
+        '/api/chat?chat_id=' + chatId + '&conversation_id=' + convId
       );
       const pd = await poll.json();
       const msgs_list = (pd.data || []);
