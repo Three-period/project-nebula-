@@ -10,7 +10,13 @@ export async function onRequestPost(context) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3'
       },
-      body: JSON.stringify({ ...body, stream: false })
+      body: JSON.stringify({
+  bot_id: body.bot_id,
+  user_id: body.user_id,
+  stream: false,
+  auto_save_history: false,
+  additional_messages: body.additional_messages
+})
     });
     
     const data = await res.json();
