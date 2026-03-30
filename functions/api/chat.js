@@ -12,7 +12,7 @@ export async function onRequestPost(context) {
         bot_id: env.COZE_BOT_ID,
         user_id: body.user_id,
         stream: false,
-        auto_save_history: false,
+        auto_save_history: ture,
         additional_messages: body.additional_messages
       })
     });
@@ -42,8 +42,10 @@ export async function onRequestGet(context) {
     const retrieveData = await retrieveRes.json();
     const status = retrieveData?.data?.status;
 
-    if (status !== 'completed') {
-      return new Response(JSON.stringify({ data: [], code: 0, status }), {
+// 临时调试：把 retrieve 原始结果透传给前端
+return new Response(JSON.stringify(retrieveData), {
+  headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+});
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
     }
