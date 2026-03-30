@@ -12,7 +12,7 @@ export async function onRequestPost(context) {
         bot_id: env.COZE_BOT_ID,
         user_id: body.user_id,
         stream: false,
-        auto_save_history: ture,
+        auto_save_history: true,
         additional_messages: body.additional_messages
       })
     });
@@ -33,33 +33,15 @@ export async function onRequestGet(context) {
   const url = new URL(request.url);
   const chatId = url.searchParams.get('chat_id');
   const convId = url.searchParams.get('conversation_id');
-
   try {
     const retrieveRes = await fetch(
       `https://api.coze.cn/v3/chat/retrieve?chat_id=${chatId}&conversation_id=${convId}`,
       { headers: { 'Authorization': `Bearer ${env.COZE_TOKEN}` } }
     );
     const retrieveData = await retrieveRes.json();
-    const status = retrieveData?.data?.status;
-
-// 临时调试：把 retrieve 原始结果透传给前端
-return new Response(JSON.stringify(retrieveData), {
-  headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-});
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-      });
-    }
-
-    const listRes = await fetch(
-      `https://api.coze.cn/v3/chat/message/list?chat_id=${chatId}&conversation_id=${convId}`,
-      { headers: { 'Authorization': `Bearer ${env.COZE_TOKEN}` } }
-    );
-    const listData = await listRes.json();
-
-    return new Response(JSON.stringify(listData), {
+    return new Response(JSON.stringify(retrieveData), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
-
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message, data: [] }), {
       status: 500,
