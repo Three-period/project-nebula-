@@ -1,9 +1,7 @@
 export async function onRequestPost(context) {
   const { request, env } = context;
-
   try {
     const body = await request.json();
-
     const res = await fetch('https://api.coze.cn/v3/chat', {
       method: 'POST',
       headers: {
@@ -18,24 +16,14 @@ export async function onRequestPost(context) {
         additional_messages: body.additional_messages
       })
     });
-
     const data = await res.json();
-
     return new Response(JSON.stringify(data), {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
   } catch (err) {
-    return new Response(JSON.stringify({
-      error: String(err)
-    }), {
+    return new Response(JSON.stringify({ error: String(err) }), {
       status: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
   }
 }
@@ -49,61 +37,31 @@ export async function onRequestGet(context) {
   try {
     const retrieveRes = await fetch(
       `https://api.coze.cn/v3/chat/retrieve?chat_id=${chatId}&conversation_id=${convId}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${env.COZE_TOKEN}`
-        }
-      }
+      { headers: { 'Authorization': `Bearer ${env.COZE_TOKEN}` } }
     );
-
     const retrieveData = await retrieveRes.json();
+    const status = retrieveData?.data?.status;
 
-    if (retrieveData?.data?.status !== 'completed') {
-      return new Response(JSON.stringify(retrieveData), {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
+    if (status !== 'completed') {
+      return new Response(JSON.stringify({ data: [], code: 0, status }), {
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
     }
 
     const listRes = await fetch(
       `https://api.coze.cn/v3/chat/message/list?chat_id=${chatId}&conversation_id=${convId}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${env.COZE_TOKEN}`
-        }
-      }
+      { headers: { 'Authorization': `Bearer ${env.COZE_TOKEN}` } }
     );
-
     const listData = await listRes.json();
 
     return new Response(JSON.stringify(listData), {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
+
   } catch (err) {
-    return new Response(JSON.stringify({
-      error: err.message
-    }), {
+    return new Response(JSON.stringify({ error: err.message, data: [] }), {
       status: 500,
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
   }
-}
-export async function onRequestOptions(context) {
-  const token = context.env.COZE_TOKEN || 'EMPTY';
-  return new Response(JSON.stringify({
-    token_length: token.length,
-    token_start: token.substring(0, 8),
-    token_end: token.substring(token.length - 4),
-    has_spaces: token.includes(' '),
-    has_newlines: token.includes('\n')
-  }), {
-    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-  });
 }
