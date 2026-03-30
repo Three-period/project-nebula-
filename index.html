@@ -4854,6 +4854,7 @@ const Agent = (() => {
   }
 
   const COZE_BOT_ID = '7620726102771777588';
+  const COZE_TOKEN  = 'pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3';
 
   async function callCoze(question) {
     const res = await fetch('/api/chat', {
@@ -4874,8 +4875,10 @@ const Agent = (() => {
     const convId = data.data && data.data.conversation_id;
     if (!chatId) return '数字分身暂时无法回应，请稍后再试。';
 
-    for (let i = 0; i < 60; i++) {
-      await new Promise(r => setTimeout(r, 1500));
+    // 先等15秒让 Coze 完成思考，再开始轮询取消息
+    await new Promise(r => setTimeout(r, 15000));
+    for (let i = 0; i < 10; i++) {
+      await new Promise(r => setTimeout(r, 3000));
       const poll = await fetch(
         '/api/chat?chat_id=' + chatId + '&conversation_id=' + convId
       );
@@ -4884,7 +4887,7 @@ const Agent = (() => {
       const answer = msgs_list.find(m => m.role === 'assistant' && m.type === 'answer');
       if (answer) return answer.content;
     }
-    return '数字分身正在整理答案，请再稍等一下。';
+    return '数字分身响应超时，请稍后再试。';
   }
 
   function send() {
