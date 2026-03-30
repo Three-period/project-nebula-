@@ -4,30 +4,37 @@ export async function onRequestPost(context) {
   try {
     const body = await request.json();
 
-    return new Response(JSON.stringify({
-      debug: "post-hit",
-      received: {
+    const res = await fetch('https://api.coze.cn/v3/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3'
+      },
+      body: JSON.stringify({
         bot_id: body.bot_id,
         user_id: body.user_id,
-        stream: body.stream,
-        auto_save_history: body.auto_save_history,
+        stream: false,
+        auto_save_history: false,
         additional_messages: body.additional_messages
-      }
-    }), {
+      })
+    });
+
+    const data = await res.json();
+
+    return new Response(JSON.stringify(data), {
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       }
     });
   } catch (err) {
     return new Response(JSON.stringify({
-      debug: "post-error",
       error: String(err)
     }), {
       status: 500,
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       }
     });
   }
@@ -57,9 +64,13 @@ export async function onRequestGet(context) {
       }
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
+    return new Response(JSON.stringify({
+      error: err.message
+    }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
   }
 }
