@@ -45,7 +45,18 @@ export async function onRequestGet(context) {
   const url = new URL(request.url);
   const chatId = url.searchParams.get('chat_id');
   const convId = url.searchParams.get('conversation_id');
-
+return new Response(JSON.stringify({
+  debug: "get-hit",
+  hasToken: !!env.COZE_TOKEN,
+  tokenPrefix: env.COZE_TOKEN ? env.COZE_TOKEN.slice(0, 10) : null,
+  botId: env.COZE_BOT_ID || null
+}), {
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  }
+});
+  
   try {
     const retrieveRes = await fetch(
       `https://api.coze.cn/v3/chat/retrieve?chat_id=${chatId}&conversation_id=${convId}`,
