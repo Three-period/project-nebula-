@@ -14,7 +14,7 @@ export async function onRequestPost(context) {
         bot_id: body.bot_id,
         user_id: body.user_id,
         stream: false,
-        auto_save_history: false,
+auto_save_history: true,
         additional_messages: body.additional_messages
       })
     });
