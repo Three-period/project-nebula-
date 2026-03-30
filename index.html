@@ -4864,6 +4864,7 @@ const Agent = (() => {
         bot_id: COZE_BOT_ID,
         user_id: 'visitor_' + Date.now(),
         auto_save_history: false,
+        stream: false,
         additional_messages: [
           { role: 'user', content: question, content_type: 'text' }
         ]
