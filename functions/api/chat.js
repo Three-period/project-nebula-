@@ -1,5 +1,5 @@
 export async function onRequestPost(context) {
-  const { request } = context;
+  const { request, env } = context;
 
   try {
     const body = await request.json();
@@ -8,13 +8,13 @@ export async function onRequestPost(context) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3'
+        'Authorization': `Bearer ${env.COZE_TOKEN}`
       },
       body: JSON.stringify({
-        bot_id: body.bot_id,
+        bot_id: env.COZE_BOT_ID,
         user_id: body.user_id,
         stream: false,
-auto_save_history: true,
+        auto_save_history: true,
         additional_messages: body.additional_messages
       })
     });
@@ -41,7 +41,8 @@ auto_save_history: true,
 }
 
 export async function onRequestGet(context) {
-  const url = new URL(context.request.url);
+  const { request, env } = context;
+  const url = new URL(request.url);
   const chatId = url.searchParams.get('chat_id');
   const convId = url.searchParams.get('conversation_id');
 
@@ -50,7 +51,7 @@ export async function onRequestGet(context) {
       `https://api.coze.cn/v3/chat/message/list?chat_id=${chatId}&conversation_id=${convId}`,
       {
         headers: {
-          'Authorization': 'Bearer pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3'
+          'Authorization': `Bearer ${env.COZE_TOKEN}`
         }
       }
     );
