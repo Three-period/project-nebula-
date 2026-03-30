@@ -33,13 +33,14 @@ export async function onRequestGet(context) {
   const url = new URL(request.url);
   const chatId = url.searchParams.get('chat_id');
   const convId = url.searchParams.get('conversation_id');
+
   try {
-    const retrieveRes = await fetch(
-      `https://api.coze.cn/v3/chat/retrieve?chat_id=${chatId}&conversation_id=${convId}`,
+    const listRes = await fetch(
+      `https://api.coze.cn/v3/chat/message/list?chat_id=${chatId}&conversation_id=${convId}`,
       { headers: { 'Authorization': `Bearer ${env.COZE_TOKEN}` } }
     );
-    const retrieveData = await retrieveRes.json();
-    return new Response(JSON.stringify(retrieveData), {
+    const listData = await listRes.json();
+    return new Response(JSON.stringify(listData), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
   } catch (err) {
