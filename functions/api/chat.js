@@ -32,28 +32,12 @@ export async function onRequestPost(context) {
     });
   }
 }
-    
-    const data = await res.json();
-    
-    return new Response(JSON.stringify(data), {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
-  }
-}
 
 export async function onRequestGet(context) {
   const url = new URL(context.request.url);
   const chatId = url.searchParams.get('chat_id');
   const convId = url.searchParams.get('conversation_id');
-  
+
   try {
     const res = await fetch(
       `https://api.coze.cn/v3/chat/message/list?chat_id=${chatId}&conversation_id=${convId}`,
@@ -63,9 +47,9 @@ export async function onRequestGet(context) {
         }
       }
     );
-    
+
     const data = await res.json();
-    
+
     return new Response(JSON.stringify(data), {
       headers: {
         'Content-Type': 'application/json',
