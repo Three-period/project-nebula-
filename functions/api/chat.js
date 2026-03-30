@@ -47,7 +47,27 @@ export async function onRequestGet(context) {
   const convId = url.searchParams.get('conversation_id');
 
   try {
-    const res = await fetch(
+    const retrieveRes = await fetch(
+      `https://api.coze.cn/v3/chat/retrieve?chat_id=${chatId}&conversation_id=${convId}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${env.COZE_TOKEN}`
+        }
+      }
+    );
+
+    const retrieveData = await retrieveRes.json();
+
+    if (retrieveData?.data?.status !== 'completed') {
+      return new Response(JSON.stringify(retrieveData), {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      });
+    }
+
+    const listRes = await fetch(
       `https://api.coze.cn/v3/chat/message/list?chat_id=${chatId}&conversation_id=${convId}`,
       {
         headers: {
@@ -56,9 +76,9 @@ export async function onRequestGet(context) {
       }
     );
 
-    const data = await res.json();
+    const listData = await listRes.json();
 
-    return new Response(JSON.stringify(data), {
+    return new Response(JSON.stringify(listData), {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
