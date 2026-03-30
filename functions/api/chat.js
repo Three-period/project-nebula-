@@ -1,23 +1,37 @@
 export async function onRequestPost(context) {
   const { request } = context;
-  
+
   try {
     const body = await request.json();
-    
-    const res = await fetch('https://api.coze.cn/v3/chat', {
-      method: 'POST',
+
+    return new Response(JSON.stringify({
+      debug: "post-hit",
+      received: {
+        bot_id: body.bot_id,
+        user_id: body.user_id,
+        stream: body.stream,
+        auto_save_history: body.auto_save_history,
+        additional_messages: body.additional_messages
+      }
+    }), {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3'
-      },
-      body: JSON.stringify({
-  bot_id: body.bot_id,
-  user_id: body.user_id,
-  stream: false,
-  auto_save_history: false,
-  additional_messages: body.additional_messages
-})
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      }
     });
+  } catch (err) {
+    return new Response(JSON.stringify({
+      debug: "post-error",
+      error: String(err)
+    }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      }
+    });
+  }
+}
     
     const data = await res.json();
     
