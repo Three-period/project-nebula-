@@ -4853,38 +4853,50 @@ const Agent = (() => {
     });
   }
 
-  const COZE_BOT_ID = '7620726102771777588';
+ async function callCoze(question) {
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      user_id: 'visitor_' + Date.now(),
+      additional_messages: [
+        { role: 'user', content: question, content_type: 'text' }
+      ]
+    })
+  });
 
-  async function callCoze(question) {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-     body: JSON.stringify({
-  user_id: 'visitor_' + Date.now(),
-  additional_messages: [
-    { role: 'user', content: question, content_type: 'text' }
-  ]
-})
-    });
-    const data = await res.json();
-    const chatId = data.data && data.data.id;
-    const convId = data.data && data.data.conversation_id;
-    if (!chatId) return '数字分身暂时无法回应，请稍后再试。';
+  const data = await res.json();
 
-    // 先等15秒让 Coze 完成思考，再开始轮询取消息
-    await new Promise(r => setTimeout(r, 15000));
-    for (let i = 0; i < 10; i++) {
-      await new Promise(r => setTimeout(r, 3000));
-      const poll = await fetch(
-        '/api/chat?chat_id=' + chatId + '&conversation_id=' + convId
-      );
-      const pd = await poll.json();
-      const msgs_list = Array.isArray(pd.data) ? pd.data : [];
-const answer = msgs_list.find(m => m.role === 'assistant');
-if (answer && answer.content) return answer.content;
-    }
-    return '数字分身正在进一步思考，请稍后再试。';
+  if (data.error) return '网络异常，请稍后重试。';
+  if (data.code && data.code !== 0) return data.msg || '数字分身暂时无法回应，请稍后再试。';
+
+  const chatId = data.data && data.data.id;
+  const convId = data.data && data.data.conversation_id;
+  if (!chatId || !convId) return '数字分身暂时无法回应，请稍后再试。';
+
+  for (let i = 0; i < 30; i++) {
+    await new Promise(r => setTimeout(r, 2000));
+
+    const poll = await fetch(
+      '/api/chat?chat_id=' + chatId + '&conversation_id=' + convId
+    );
+    const pd = await poll.json();
+
+    if (pd.error) return '网络异常，请稍后重试。';
+    if (pd.code && pd.code !== 0) return pd.msg || '数字分身暂时无法回应，请稍后再试。';
+
+    const msgsList = Array.isArray(pd.data) ? pd.data : [];
+    const answer = msgsList.find(
+      m => m.role === 'assistant' && m.content && String(m.content).trim()
+    );
+    if (answer) return answer.content;
+
+    const status = pd.data && pd.data.status;
+    if (status === 'failed') return '数字分身暂时无法回应，请稍后再试。';
   }
+
+  return '数字分身正在进一步思考，请稍后再试。';
+}
 
   function send() {
     const q = input.value.trim();
