@@ -10,7 +10,7 @@
 <style>
 
 /* ╔══════════════════════════════════════════════════════════════╗
-   ║           PROJECT NEBULA · CSS 区块导航的目录                  ║
+   ║           PROJECT NEBULA · CSS 区块导航目录                  ║
    ║  Ctrl+F 搜索编号快速跳转                                      ║
    ╠══════════════════════════════════════════════════════════════╣
    ║  [CSS-01] 设计变量 · Design Tokens                           ║
@@ -4713,7 +4713,7 @@ html, body {
 <div class="agent-fab">
   <div class="agent-panel" id="agent-panel">
     <div class="agent-panel-head">
-      <div class="agent-orb">🍊</div>
+      <div class="agent-orb">🤖</div>
       <span>数字分身 · Digital Twin</span>
       <button class="agent-close" id="agent-close">✕</button>
     </div>
@@ -4838,58 +4838,56 @@ const Agent = (() => {
     msgs.scrollTop = msgs.scrollHeight;
   }
 
- function ask(q) {
+  function ask(q) {
     addMsg(q, true);
     const thinking = document.createElement('div');
     thinking.className = 'msg msg-ai';
     thinking.textContent = '数字分身正在思考中…';
     msgs.appendChild(thinking);
     msgs.scrollTop = msgs.scrollHeight;
-    callCoze(q, (partial) => {
-      thinking.textContent = partial;
-      msgs.scrollTop = msgs.scrollHeight;
-    }).then(reply => {
-      thinking.textContent = reply || '数字分身暂时无法回应，请稍后再试。';
+    callCoze(q).then(reply => {
+      thinking.textContent = reply;
       msgs.scrollTop = msgs.scrollHeight;
     }).catch(() => {
       thinking.textContent = '网络异常，请稍后重试。';
     });
   }
 
-async function callCoze(question, onChunk) {
+  const COZE_BOT_ID = '7620726102771777588';
+  const COZE_TOKEN  = 'pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3';
+
+  async function callCoze(question) {
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         bot_id: COZE_BOT_ID,
         user_id: 'visitor_' + Date.now(),
+        auto_save_history: false,
+        stream: false,
         additional_messages: [
           { role: 'user', content: question, content_type: 'text' }
         ]
       })
     });
-    if (!res.ok) return '数字分身暂时无法回应，请稍后再试。';
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let answer = '';
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      const chunk = decoder.decode(value, { stream: true });
-      for (const line of chunk.split('\n')) {
-        if (!line.startsWith('data:')) continue;
-        const data = line.slice(5).trim();
-        if (data === '[DONE]') continue;
-        try {
-          const parsed = JSON.parse(data);
-          if (parsed.type === 'answer' && parsed.content) {
-            answer += parsed.content;
-            if (onChunk) onChunk(answer);
-          }
-        } catch (e) {}
-      }
+    const data = await res.json();
+    const chatId = data.data && data.data.id;
+    const convId = data.data && data.data.conversation_id;
+    if (!chatId) return '数字分身暂时无法回应，请稍后再试。';
+
+    // 先等15秒让 Coze 完成思考，再开始轮询取消息
+    await new Promise(r => setTimeout(r, 15000));
+    for (let i = 0; i < 10; i++) {
+      await new Promise(r => setTimeout(r, 3000));
+      const poll = await fetch(
+        '/api/chat?chat_id=' + chatId + '&conversation_id=' + convId
+      );
+      const pd = await poll.json();
+      const msgs_list = (pd.data || []);
+      const answer = msgs_list.find(m => m.role === 'assistant' && m.type === 'answer');
+      if (answer) return answer.content;
     }
-    return answer || '数字分身暂时无法回应，请稍后再试。';
+    return '数字分身响应超时，请稍后再试。';
   }
 
   function send() {
@@ -4902,11 +4900,8 @@ async function callCoze(question, onChunk) {
     thinking.textContent = '数字分身正在思考中…';
     msgs.appendChild(thinking);
     msgs.scrollTop = msgs.scrollHeight;
-    callCoze(q, (partial) => {
-      thinking.textContent = partial;
-      msgs.scrollTop = msgs.scrollHeight;
-    }).then(reply => {
-      thinking.textContent = reply || '数字分身暂时无法回应，请稍后再试。';
+    callCoze(q).then(reply => {
+      thinking.textContent = reply;
       msgs.scrollTop = msgs.scrollHeight;
     }).catch(() => {
       thinking.textContent = '网络异常，请稍后重试。';
