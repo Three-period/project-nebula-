@@ -11,40 +11,20 @@ export async function onRequestPost(context) {
       body: JSON.stringify({
         bot_id: env.COZE_BOT_ID,
         user_id: body.user_id,
-        stream: false,
-        auto_save_history: false,
+        stream: true,
+        auto_save_history: true,
         additional_messages: body.additional_messages
       })
     });
-    const data = await res.json();
-    return new Response(JSON.stringify(data), {
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+    return new Response(res.body, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Access-Control-Allow-Origin': '*'
+      }
     });
   } catch (err) {
     return new Response(JSON.stringify({ error: String(err) }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-    });
-  }
-}
-
-export async function onRequestGet(context) {
-  const { request, env } = context;
-  const url = new URL(request.url);
-  const chatId = url.searchParams.get('chat_id');
-  const convId = url.searchParams.get('conversation_id');
-
-  try {
-    const listRes = await fetch(
-      `https://api.coze.cn/v3/chat/message/list?chat_id=${chatId}&conversation_id=${convId}`,
-      { headers: { 'Authorization': `Bearer ${env.COZE_TOKEN}` } }
-    );
-    const listData = await listRes.json();
-    return new Response(JSON.stringify(listData), {
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-    });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: err.message, data: [] }), {
       status: 500,
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
