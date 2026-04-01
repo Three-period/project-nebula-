@@ -4838,75 +4838,114 @@ const Agent = (() => {
     msgs.scrollTop = msgs.scrollHeight;
   }
 
-  function ask(q) {
-    addMsg(q, true);
-    const thinking = document.createElement('div');
-    thinking.className = 'msg msg-ai';
-    thinking.textContent = '数字分身正在思考中…';
-    msgs.appendChild(thinking);
+ function ask(q) {
+  addMsg(q, true);
+  const thinking = document.createElement('div');
+  thinking.className = 'msg msg-ai';
+  thinking.textContent = '数字分身正在思考中…';
+  msgs.appendChild(thinking);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  callCoze(q, (text) => {
+    thinking.textContent = text || '数字分身正在思考中…';
     msgs.scrollTop = msgs.scrollHeight;
-    callCoze(q).then(reply => {
-      thinking.textContent = reply;
-      msgs.scrollTop = msgs.scrollHeight;
-    }).catch(() => {
-      thinking.textContent = '网络异常，请稍后重试。';
-    });
+  }).catch(() => {
+    thinking.textContent = '网络异常，请稍后重试。';
+  });
+}
+
+ async function callCoze(question, onUpdate) {
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      user_id: 'visitor_' + Date.now(),
+      stream: true,
+      additional_messages: [
+        { role: 'user', content: question, content_type: 'text' }
+      ]
+    })
+  });
+
+  if (!res.ok || !res.body) {
+    throw new Error('stream failed');
   }
 
-  const COZE_BOT_ID = '7620726102771777588';
-  const COZE_TOKEN  = 'pat_odqR9VH2FhDVAERwT6A5qlqsUiaVhjPPwbKQv4ZKS5kjaRCQfdQELrtXyPtxmKa3';
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder('utf-8');
+  let buffer = '';
+  let finalText = '';
 
-  async function callCoze(question) {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        bot_id: COZE_BOT_ID,
-        user_id: 'visitor_' + Date.now(),
-        auto_save_history: false,
-        stream: false,
-        additional_messages: [
-          { role: 'user', content: question, content_type: 'text' }
-        ]
-      })
-    });
-    const data = await res.json();
-    const chatId = data.data && data.data.id;
-    const convId = data.data && data.data.conversation_id;
-    if (!chatId) return '数字分身暂时无法回应，请稍后再试。';
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
 
-    // 先等15秒让 Coze 完成思考，再开始轮询取消息
-    await new Promise(r => setTimeout(r, 15000));
-    for (let i = 0; i < 10; i++) {
-      await new Promise(r => setTimeout(r, 3000));
-      const poll = await fetch(
-        '/api/chat?chat_id=' + chatId + '&conversation_id=' + convId
-      );
-      const pd = await poll.json();
-      const msgs_list = (pd.data || []);
-      const answer = msgs_list.find(m => m.role === 'assistant' && m.type === 'answer');
-      if (answer) return answer.content;
+    buffer += decoder.decode(value, { stream: true });
+    const chunks = buffer.split('\n\n');
+    buffer = chunks.pop() || '';
+
+    for (const chunk of chunks) {
+      const lines = chunk.split('\n');
+      let eventName = '';
+      let dataLine = '';
+
+      for (const line of lines) {
+        if (line.startsWith('event:')) {
+          eventName = line.slice(6).trim();
+        }
+        if (line.startsWith('data:')) {
+          dataLine += line.slice(5).trim();
+        }
+      }
+
+      if (!dataLine) continue;
+
+      let payload;
+      try {
+        payload = JSON.parse(dataLine);
+      } catch {
+        continue;
+      }
+
+      if (eventName === 'conversation.message.delta') {
+        if (payload.content) {
+          finalText += payload.content;
+          onUpdate(finalText);
+        }
+      }
+
+      if (eventName === 'conversation.chat.completed') {
+        return finalText || '数字分身已完成回复。';
+      }
+
+      if (eventName === 'done') {
+        return finalText || '数字分身已完成回复。';
+      }
     }
-    return '数字分身响应超时，请稍后再试。';
   }
 
-  function send() {
-    const q = input.value.trim();
-    if (!q) return;
-    input.value = '';
-    addMsg(q, true);
-    const thinking = document.createElement('div');
-    thinking.className = 'msg msg-ai';
-    thinking.textContent = '数字分身正在思考中…';
-    msgs.appendChild(thinking);
+  return finalText || '数字分身暂时无法回应，请稍后再试。';
+}
+
+ function send() {
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+
+  addMsg(q, true);
+  const thinking = document.createElement('div');
+  thinking.className = 'msg msg-ai';
+  thinking.textContent = '数字分身正在思考中…';
+  msgs.appendChild(thinking);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  callCoze(q, (text) => {
+    thinking.textContent = text || '数字分身正在思考中…';
     msgs.scrollTop = msgs.scrollHeight;
-    callCoze(q).then(reply => {
-      thinking.textContent = reply;
-      msgs.scrollTop = msgs.scrollHeight;
-    }).catch(() => {
-      thinking.textContent = '网络异常，请稍后重试。';
-    });
-  }
+  }).catch(() => {
+    thinking.textContent = '网络异常，请稍后重试。';
+  });
+}
 
   function open() {
     panel.classList.add('open');
