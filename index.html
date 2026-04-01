@@ -3916,7 +3916,7 @@ html, body {
       </g>
     </svg>
 
-    <p class="nebula-tagline">探索你的专属宇宙 · Explore the Nebula</p>
+    <p class="nebula-tagline">探索她的专属宇宙 · Explore the Nebula</p>
   </div>
 </section>
 
@@ -4852,6 +4852,9 @@ const Agent = (() => {
     .replace(/[（(]\s*\[[^\[\]\n]{2,}\]\s*[)）]/g, '')
     // 去掉“来源：...”或“参考资料：...”
     .replace(/(?:来源|参考资料)[:：].*/gi, '')
+    // 去掉单独残留的 （（ 、 (( 、 ）） 、 ))
+    .replace(/[（(]{2,}/g, '')
+    .replace(/[）)]{2,}/g, '')
     // 去掉多余空格
     .replace(/[ \t]+/g, ' ')
     // 去掉多余空行
