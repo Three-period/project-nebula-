@@ -4842,32 +4842,29 @@ const Agent = (() => {
   if (!text) return '';
 
   return text
-    // 去掉 Notion 链接
     .replace(/https?:\/\/www\.notion\.so\/\S+/g, '')
-    // 去掉 [1] [2] [3] 这种编号
     .replace(/\[\d+\]/g, '')
-    // 去掉多余空行
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
-   
- function ask(q) {
+
+function ask(q) {
   addMsg(q, true);
   const thinking = document.createElement('div');
   thinking.className = 'msg msg-ai';
- thinking.textContent = cleanReply(text) || '数字分身正在思考中…';
+  thinking.textContent = '数字分身正在思考中…';
   msgs.appendChild(thinking);
   msgs.scrollTop = msgs.scrollHeight;
 
   callCoze(q, (text) => {
-    thinking.textContent = text || '数字分身正在思考中…';
+    thinking.textContent = cleanReply(text) || '数字分身正在思考中…';
     msgs.scrollTop = msgs.scrollHeight;
   }).catch(() => {
     thinking.textContent = '网络异常，请稍后重试。';
   });
 }
 
- async function callCoze(question, onUpdate) {
+async function callCoze(question, onUpdate) {
   const res = await fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -4923,24 +4920,24 @@ const Agent = (() => {
       if (eventName === 'conversation.message.delta') {
         if (payload.content) {
           finalText += payload.content;
-          onUpdate(finalText);
+          onUpdate(cleanReply(finalText));
         }
       }
 
       if (eventName === 'conversation.chat.completed') {
-        return finalText || '数字分身已完成回复。';
+        return cleanReply(finalText) || '数字分身已完成回复。';
       }
 
       if (eventName === 'done') {
-        return finalText || '数字分身已完成回复。';
+        return cleanReply(finalText) || '数字分身已完成回复。';
       }
     }
   }
 
-  return finalText || '数字分身暂时无法回应，请稍后再试。';
+  return cleanReply(finalText) || '数字分身暂时无法回应，请稍后再试。';
 }
 
- function send() {
+function send() {
   const q = input.value.trim();
   if (!q) return;
   input.value = '';
@@ -4948,12 +4945,12 @@ const Agent = (() => {
   addMsg(q, true);
   const thinking = document.createElement('div');
   thinking.className = 'msg msg-ai';
-  thinking.textContent = cleanReply(text) || '数字分身正在思考中…';
+  thinking.textContent = '数字分身正在思考中…';
   msgs.appendChild(thinking);
   msgs.scrollTop = msgs.scrollHeight;
 
   callCoze(q, (text) => {
-    thinking.textContent = text || '数字分身正在思考中…';
+    thinking.textContent = cleanReply(text) || '数字分身正在思考中…';
     msgs.scrollTop = msgs.scrollHeight;
   }).catch(() => {
     thinking.textContent = '网络异常，请稍后重试。';
