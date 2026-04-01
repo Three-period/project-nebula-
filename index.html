@@ -4838,65 +4838,59 @@ const Agent = (() => {
     msgs.scrollTop = msgs.scrollHeight;
   }
 
-  function ask(q) {
+ function ask(q) {
     addMsg(q, true);
     const thinking = document.createElement('div');
     thinking.className = 'msg msg-ai';
     thinking.textContent = '数字分身正在思考中…';
     msgs.appendChild(thinking);
     msgs.scrollTop = msgs.scrollHeight;
-    callCoze(q).then(reply => {
-      thinking.textContent = reply;
+    callCoze(q, (partial) => {
+      thinking.textContent = partial;
+      msgs.scrollTop = msgs.scrollHeight;
+    }).then(reply => {
+      thinking.textContent = reply || '数字分身暂时无法回应，请稍后再试。';
       msgs.scrollTop = msgs.scrollHeight;
     }).catch(() => {
       thinking.textContent = '网络异常，请稍后重试。';
     });
   }
 
- async function callCoze(question) {
-  const res = await fetch('/api/chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      user_id: 'visitor_' + Date.now(),
-      additional_messages: [
-        { role: 'user', content: question, content_type: 'text' }
-      ]
-    })
-  });
-
-  const data = await res.json();
-
-  if (data.error) return '网络异常，请稍后重试。';
-  if (data.code && data.code !== 0) return data.msg || '数字分身暂时无法回应，请稍后再试。';
-
-  const chatId = data.data && data.data.id;
-  const convId = data.data && data.data.conversation_id;
-  if (!chatId || !convId) return '数字分身暂时无法回应，请稍后再试。';
-
-  for (let i = 0; i < 30; i++) {
-    await new Promise(r => setTimeout(r, 2000));
-
-    const poll = await fetch(
-      '/api/chat?chat_id=' + chatId + '&conversation_id=' + convId
-    );
-    const pd = await poll.json();
-
-    if (pd.error) return '网络异常，请稍后重试。';
-    if (pd.code && pd.code !== 0) return pd.msg || '数字分身暂时无法回应，请稍后再试。';
-
-    const msgsList = Array.isArray(pd.data) ? pd.data : [];
-    const answer = msgsList.find(
-      m => m.role === 'assistant' && m.content && String(m.content).trim()
-    );
-    if (answer) return answer.content;
-
-    const status = pd.data && pd.data.status;
-    if (status === 'failed') return '数字分身暂时无法回应，请稍后再试。';
+async function callCoze(question, onChunk) {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bot_id: COZE_BOT_ID,
+        user_id: 'visitor_' + Date.now(),
+        additional_messages: [
+          { role: 'user', content: question, content_type: 'text' }
+        ]
+      })
+    });
+    if (!res.ok) return '数字分身暂时无法回应，请稍后再试。';
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let answer = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value, { stream: true });
+      for (const line of chunk.split('\n')) {
+        if (!line.startsWith('data:')) continue;
+        const data = line.slice(5).trim();
+        if (data === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.type === 'answer' && parsed.content) {
+            answer += parsed.content;
+            if (onChunk) onChunk(answer);
+          }
+        } catch (e) {}
+      }
+    }
+    return answer || '数字分身暂时无法回应，请稍后再试。';
   }
-
-  return '数字分身正在进一步思考，请稍后再试。';
-}
 
   function send() {
     const q = input.value.trim();
@@ -4908,8 +4902,11 @@ const Agent = (() => {
     thinking.textContent = '数字分身正在思考中…';
     msgs.appendChild(thinking);
     msgs.scrollTop = msgs.scrollHeight;
-    callCoze(q).then(reply => {
-      thinking.textContent = reply;
+    callCoze(q, (partial) => {
+      thinking.textContent = partial;
+      msgs.scrollTop = msgs.scrollHeight;
+    }).then(reply => {
+      thinking.textContent = reply || '数字分身暂时无法回应，请稍后再试。';
       msgs.scrollTop = msgs.scrollHeight;
     }).catch(() => {
       thinking.textContent = '网络异常，请稍后重试。';
