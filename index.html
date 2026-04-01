@@ -4838,11 +4838,24 @@ const Agent = (() => {
     msgs.scrollTop = msgs.scrollHeight;
   }
 
+   function cleanReply(text) {
+  if (!text) return '';
+
+  return text
+    // 去掉 Notion 链接
+    .replace(/https?:\/\/www\.notion\.so\/\S+/g, '')
+    // 去掉 [1] [2] [3] 这种编号
+    .replace(/\[\d+\]/g, '')
+    // 去掉多余空行
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+   
  function ask(q) {
   addMsg(q, true);
   const thinking = document.createElement('div');
   thinking.className = 'msg msg-ai';
-  thinking.textContent = '数字分身正在思考中…';
+ thinking.textContent = cleanReply(text) || '数字分身正在思考中…';
   msgs.appendChild(thinking);
   msgs.scrollTop = msgs.scrollHeight;
 
@@ -4935,7 +4948,7 @@ const Agent = (() => {
   addMsg(q, true);
   const thinking = document.createElement('div');
   thinking.className = 'msg msg-ai';
-  thinking.textContent = '数字分身正在思考中…';
+  thinking.textContent = cleanReply(text) || '数字分身正在思考中…';
   msgs.appendChild(thinking);
   msgs.scrollTop = msgs.scrollHeight;
 
