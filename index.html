@@ -4842,8 +4842,19 @@ const Agent = (() => {
   if (!text) return '';
 
   return text
-    .replace(/https?:\/\/www\.notion\.so\/\S+/g, '')
+    // 去掉 Notion 链接
+    .replace(/https?:\/\/www\.notion\.so\/\S+/gi, '')
+    // 去掉 [1] [2] [3]
     .replace(/\[\d+\]/g, '')
+    // 去掉类似 [08_高频问答库_08_高频问答库]
+    .replace(/\[[^\[\]\n]{2,}\]/g, '')
+    // 去掉类似 （[01_基础身份资料_01_基础身份资料]）
+    .replace(/[（(]\s*\[[^\[\]\n]{2,}\]\s*[)）]/g, '')
+    // 去掉“来源：...”或“参考资料：...”
+    .replace(/(?:来源|参考资料)[:：].*/gi, '')
+    // 去掉多余空格
+    .replace(/[ \t]+/g, ' ')
+    // 去掉多余空行
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
