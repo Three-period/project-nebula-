@@ -12,7 +12,7 @@ export async function onRequestPost(context) {
         bot_id: env.COZE_BOT_ID,
         user_id: body.user_id,
         stream: false,
-        auto_save_history: true,
+        auto_save_history: false,
         additional_messages: body.additional_messages
       })
     });
