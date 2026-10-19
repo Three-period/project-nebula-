@@ -1,0 +1,27 @@
+/* Change shared visual settings here. No component-specific rules. */
+:root {
+  --paper: #f6f3eb;
+  --paper-side: #efebe2;
+  --surface: #fcfaf5;
+  --ink: #292824;
+  --muted: #77736b;
+  --accent: #a6503c;
+  --accent-soft: #eee1d7;
+  --line: #dcd6ca;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-heading: "Songti SC", "Noto Serif CJK SC", "SimSun", serif;
+  --text-sm: .8125rem;
+  --text-base: .9375rem;
+  --text-lg: 1.125rem;
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 5rem;
+  --sidebar-width: 256px;
+  --content-width: 980px;
+  --drawer-width: 780px;
+  --radius: 5px;
+  --ease: 180ms ease;
+}
