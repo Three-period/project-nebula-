@@ -1,0 +1,6 @@
+{
+  "name": "project-nebula",
+  "private": true,
+  "type": "module",
+  "scripts": { "check": "node scripts/check.mjs" }
+}
