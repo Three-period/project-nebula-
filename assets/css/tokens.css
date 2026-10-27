@@ -1,27 +1,12 @@
-/* Change shared visual settings here. No component-specific rules. */
+/* Project Nebula · Light Cosmic Notebook — single source of visual tokens */
 :root {
-  --paper: #f6f3eb;
-  --paper-side: #efebe2;
-  --surface: #fcfaf5;
-  --ink: #292824;
-  --muted: #77736b;
-  --accent: #a6503c;
-  --accent-soft: #eee1d7;
-  --line: #dcd6ca;
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-heading: "Songti SC", "Noto Serif CJK SC", "SimSun", serif;
-  --text-sm: .8125rem;
-  --text-base: .9375rem;
-  --text-lg: 1.125rem;
-  --space-1: .5rem;
-  --space-2: 1rem;
-  --space-3: 1.5rem;
-  --space-4: 2rem;
-  --space-5: 3rem;
-  --space-6: 5rem;
-  --sidebar-width: 256px;
-  --content-width: 980px;
-  --drawer-width: 780px;
-  --radius: 5px;
-  --ease: 180ms ease;
+ --paper:#F7F4EB; --paper-side:#F5F0E7; --surface:#FFFCF6;
+ --ink:#292824; --muted:#6E6962; --accent:#A74736; --accent-soft:#F4E7DD;
+ --ochre:#986846; --gold:#B2995D; --line:#E3DACC;
+ --font-body:"Noto Sans SC","Source Han Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+ --font-heading:"Noto Serif SC","Source Han Serif SC","Songti SC",serif;
+ --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+ --text-sm:.875rem; --text-base:1rem; --text-lg:1.25rem;
+ --space-1:.5rem;--space-2:1rem;--space-3:1.5rem;--space-4:2rem;--space-5:3rem;--space-6:5rem;
+ --sidebar-width:272px;--content-width:1200px;--drawer-width:720px;--radius:12px;--ease:220ms ease;
 }
