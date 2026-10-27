@@ -1,3 +1,4 @@
+// Original cards preserved for historical traceability; placeholders are drafts and never rendered.
 export const projects = [
   {
     "type": "AI 产品",
@@ -12,7 +13,8 @@ export const projects = [
     ],
     "pending": false,
     "document": "prd",
-    "video": "https://www.bilibili.com/video/BV11TXPBUEtK/"
+    "video": "https://www.bilibili.com/video/BV11TXPBUEtK/",
+    "visibility": "legacy"
   },
   {
     "type": "Agent Design",
@@ -27,7 +29,8 @@ export const projects = [
     ],
     "pending": false,
     "document": "agent",
-    "video": null
+    "video": null,
+    "visibility": "legacy"
   },
   {
     "type": "Agent 工作流 [待替换]",
@@ -42,7 +45,8 @@ export const projects = [
     ],
     "pending": true,
     "document": null,
-    "video": null
+    "video": null,
+    "visibility": "draft"
   },
   {
     "type": "AIGC 内容 [待替换]",
@@ -56,7 +60,8 @@ export const projects = [
     ],
     "pending": true,
     "document": null,
-    "video": null
+    "video": null,
+    "visibility": "draft"
   },
   {
     "type": "Coming Soon",
@@ -67,6 +72,7 @@ export const projects = [
     "tags": [],
     "pending": true,
     "document": null,
-    "video": null
+    "video": null,
+    "visibility": "draft"
   }
 ];
