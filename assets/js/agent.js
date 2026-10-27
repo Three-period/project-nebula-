@@ -51,59 +51,10 @@ export async function readCozeStream(response, onUpdate) {
   }
 }
 
-export function initAgent() {
-  const dialog = document.getElementById('chat-dialog');
-  const input = document.getElementById('chat-input');
-  const messages = document.getElementById('chat-messages');
-  const submit = document.getElementById('chat-send');
-  const controller = createDialog(dialog, input);
-  const visitor = `visitor_${crypto.randomUUID()}`;
-  let pending = false;
-  function add(text, user = false) {
-    const message = document.createElement('p');
-    message.className = `message ${user ? 'message-user' : 'message-ai'}`;
-    message.textContent = text;
-    messages.append(message);
-    messages.scrollTop = messages.scrollHeight;
-    return message;
-  }
-  async function ask(question) {
-    controller.open();
-    const text = question.trim().slice(0, 2000);
-    if (!text || pending) return;
-    pending = true;
-    submit.disabled = true;
-    dialog.querySelectorAll('[data-question]').forEach(b => b.disabled = true);
-    add(text, true);
-    const reply = add('数字分身正在思考中…');
-    const abort = new AbortController();
-    const timeout = setTimeout(() => abort.abort(), 60000);
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: abort.signal,
-        body: JSON.stringify({ user_id: visitor, additional_messages: [{ role: 'user', content: text, content_type: 'text' }] })
-      });
-      const answer = await readCozeStream(response, value => {
-        reply.textContent = value || '数字分身正在思考中…';
-        messages.scrollTop = messages.scrollHeight;
-      });
-      reply.textContent = answer || '数字分身暂时没有返回内容，请稍后重试。';
-    } catch (error) {
-      reply.textContent = error.name === 'AbortError' ? '响应超时，请稍后重试。' : '网络或聊天服务异常，请稍后重试。';
-    } finally {
-      clearTimeout(timeout);
-      pending = false;
-      submit.disabled = false;
-      dialog.querySelectorAll('[data-question]').forEach(b => b.disabled = false);
-      messages.scrollTop = messages.scrollHeight;
-    }
-  }
-  document.getElementById('chat-form').addEventListener('submit', event => {
-    event.preventDefault();
-    if (pending || !input.value.trim()) return;
-    const question = input.value;
-    input.value = '';
-    ask(question);
-  });
-  return { open: controller.open, close: controller.close, ask };
+export function initAgent(){
+ const dialog=document.getElementById('chat-dialog');
+ const controller=createDialog(dialog,dialog.querySelector('[data-action="close-chat"]'));
+ // Current product decision: all public entry points are static maintenance messages.
+ // Keep readCozeStream exported for historical tests; never call the API in this version.
+ return {open:controller.open,close:controller.close,ask:controller.open};
 }
