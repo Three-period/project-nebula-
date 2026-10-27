@@ -222,3 +222,12 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
 .fusion-right .actions{flex-wrap:wrap}.fusion-right .actions .button{font-size:12px}.project-detail-meta{color:var(--ochre);margin-bottom:14px}
 .project-story p{margin:16px 0;line-height:1.8}.project-story strong{color:var(--accent)}
 @media(max-width:820px){.group-heading{font-size:23px}.project-cover-placeholder{min-height:110px}.singu-layout{display:block}.singu-left{margin-bottom:25px}}
+
+/* Hero illustration from the confirmed notebook reference */
+.about-section{position:relative;isolation:isolate}
+.about-section .section-heading{position:relative;z-index:1}
+.about-section .section-heading h2{max-width:57%;font-size:clamp(34px,4vw,62px);line-height:1.5}
+.cosmic-orbits{position:absolute;z-index:-1;right:-5%;top:45px;width:min(48vw,570px);opacity:.88;pointer-events:none;user-select:none}
+.about-section .singu-layout{position:relative;z-index:1;margin-top:175px}
+@media(max-width:1100px){.cosmic-orbits{width:45%;top:90px}.about-section .singu-layout{margin-top:80px}}
+@media(max-width:820px){.cosmic-orbits{width:52%;top:20px;opacity:.34}.about-section .section-heading h2{max-width:100%}.about-section .singu-layout{margin-top:28px}}
