@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 650" role="img" aria-label="以细线星轨与中心奇点构成的宇宙探索插画">
+<defs><radialGradient id="g"><stop stop-color="#A74736" stop-opacity=".35"/><stop offset="1" stop-color="#A74736" stop-opacity="0"/></radialGradient></defs>
+<circle cx="330" cy="328" r="200" fill="none" stroke="#B2995D" stroke-opacity=".37" stroke-dasharray="2 5"/>
+<circle cx="330" cy="328" r="150" fill="none" stroke="#986846" stroke-opacity=".24"/>
+<circle cx="330" cy="328" r="60" fill="none" stroke="#B2995D" stroke-opacity=".3"/>
+<circle cx="330" cy="328" r="33" fill="url(#g)"/>
+<g fill="none" stroke="#A74736" stroke-opacity=".66" stroke-width="1.1"><ellipse cx="330" cy="328" rx="286" ry="96" transform="rotate(-36 330 328)"/><ellipse cx="330" cy="328" rx="265" ry="128" transform="rotate(42 330 328)"/><ellipse cx="330" cy="328" rx="255" ry="175" transform="rotate(-10 330 328)"/></g>
+<path d="M330 46V612M48 328H612" stroke="#B2995D" stroke-opacity=".25" stroke-dasharray="3 6"/>
+<g fill="#A74736"><circle cx="148" cy="220" r="6"/><circle cx="513" cy="403" r="6"/><circle cx="220" cy="526" r="4"/><circle cx="441" cy="179" r="5"/><circle cx="330" cy="328" r="8"/></g>
+<g fill="#B2995D"><circle cx="116" cy="383" r="8"/><circle cx="463" cy="468" r="8"/><circle cx="486" cy="184" r="5"/><circle cx="246" cy="129" r="5"/></g>
+<g stroke="#A74736" stroke-width="1.1" stroke-linecap="round"><path d="M330 304v48m-24-24h48m-18-6-6 6 6 6m-12-12 6 6-6 6"/><path d="M330 300l-7 28 7 29 7-29z" fill="#A74736"/></g>
+<g fill="#B2995D"><path d="m90 93 3 16 16 3-16 3-3 16-3-16-16-3 16-3z"/><path d="m530 95 4 20 20 4-20 4-4 20-4-20-20-4 20-4z"/><path d="m570 530 3 14 14 3-14 3-3 14-3-14-14-3 14-3z"/><path d="m200 587 3 10 10 3-10 3-3 10-3-10-10-3 10-3z"/></g>
+<g fill="#986846" opacity=".75"><circle cx="38" cy="47" r="2"/><circle cx="171" cy="258" r="1"/><circle cx="304" cy="469" r="1"/><circle cx="437" cy="120" r="1"/><circle cx="570" cy="331" r="1"/><circle cx="153" cy="542" r="2"/><circle cx="286" cy="193" r="1"/><circle cx="419" cy="404" r="1"/><circle cx="552" cy="55" r="1"/><circle cx="135" cy="266" r="1"/><circle cx="268" cy="477" r="2"/><circle cx="401" cy="128" r="1"/><circle cx="534" cy="339" r="1"/><circle cx="117" cy="550" r="1"/><circle cx="250" cy="201" r="1"/><circle cx="383" cy="412" r="2"/><circle cx="516" cy="63" r="1"/><circle cx="99" cy="274" r="1"/><circle cx="232" cy="485" r="1"/><circle cx="365" cy="136" r="1"/><circle cx="498" cy="347" r="2"/><circle cx="81" cy="558" r="1"/><circle cx="214" cy="209" r="1"/><circle cx="347" cy="420" r="1"/><circle cx="480" cy="71" r="1"/><circle cx="63" cy="282" r="2"/><circle cx="196" cy="493" r="1"/><circle cx="329" cy="144" r="1"/></g>
+</svg>
