@@ -1,9 +1,9 @@
 export const documentList = [
   {
     "key": "paper",
-    "type": "CURRENT DESIGN",
+    "type": "HISTORICAL DESIGN",
     "title": "宣纸风阅读界面与设计规范",
-    "description": "目录导航、连续正文与统一详情抽屉，配合暖白底色和墨色文字，降低阅读与维护成本。",
+    "description": "上一轮宣纸风长页改版说明，作为历史资料保留；本次视觉规范以新 PRD 为准。",
     "tags": [
       "信息平铺",
       "统一组件",
@@ -53,5 +53,6 @@ export const documentList = [
       "交互逻辑",
       "产品闭环"
     ]
-  }
+  },
+  {"key":"agent","type":"AGENT DESIGN · HISTORICAL","title":"个人数字分身 Agent 架构设计与落地指南","description":"保留 Coze、知识库、Prompt 与接入方案历史材料；当前实时问答维护中。","tags":["Agent","RAG","历史技术材料"]}
 ];
