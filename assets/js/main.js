@@ -46,28 +46,30 @@ document.getElementById('sae-input').addEventListener('keydown', event => {
   if (event.key === 'Enter' && !event.isComposing) { event.preventDefault(); askInline(); }
 });
 
-// Use actual section positions so active navigation stays correct for long sections.
-let scheduled = false;
-function updateCurrent() {
-  const threshold = innerWidth <= 820 ? 118 : 100;
-  let current = sections[0];
-  for (const section of sections) {
-    if (section.getBoundingClientRect().top <= threshold) current = section;
-  }
-  for (const link of links) {
-    if (link.hash === `#${current.id}`) link.setAttribute('aria-current', 'location');
-    else link.removeAttribute('aria-current');
-  }
-  scheduled = false;
+
+const oldAnchors={singularity:'about',forge:'projects',construct:'projects',design:'projects',fusion:'experience',pulsar:'insights'};
+function activate(raw){
+ const id=oldAnchors[raw]||raw;
+ const next=sections.find(s=>s.id===id)||sections[0];
+ sections.forEach(s=>s.hidden=s!==next);
+ links.forEach(a=>{if(a.hash==='#'+next.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+ collapseMenu();
+ window.scrollTo(0,0);
 }
-function scheduleUpdate() {
-  if (!scheduled) { scheduled = true; requestAnimationFrame(updateCurrent); }
-}
-addEventListener('scroll', scheduleUpdate, { passive: true });
-addEventListener('resize', scheduleUpdate);
-updateCurrent();
-// Resolve both current anchors and the original view identifiers when linked directly.
-const oldAnchors = { singularity: 'about', forge: 'projects', construct: 'design', fusion: 'experience', pulsar: 'insights' };
-const hash = location.hash.slice(1);
-const anchor = oldAnchors[hash.replace(/^view-/, '')] || hash;
-if (anchor) document.getElementById(anchor)?.scrollIntoView({ behavior: 'instant' });
+document.addEventListener('click',event=>{
+ const a=event.target.closest('a[href^="#"]');
+ if(!a)return;
+ const id=a.hash.slice(1);
+ if(sections.some(s=>s.id===id)||oldAnchors[id]){event.preventDefault();history.pushState(null,'','#'+id);activate(id);}
+});
+window.addEventListener('popstate',()=>activate(location.hash.slice(1)||'about'));
+activate(location.hash.replace(/^#(?:view-)?/,'')||'about');
+document.addEventListener('click',event=>{
+ const target=event.target.closest('.project button,.document-card button');
+ if(!target)return;
+ const card=target.closest('.project,.document-card');
+ card?.classList.remove('is-orbiting');
+ void card?.offsetWidth;
+ card?.classList.add('is-orbiting');
+ card?.addEventListener('animationend',()=>card.classList.remove('is-orbiting'),{once:true});
+});
