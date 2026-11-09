@@ -3,7 +3,7 @@ export const personalProjects = [
   {
     "id": "personal-nebula",
     "title": "Project Nebula｜个人 AI 在线简历",
-    "year": "2026.02—至今",
+    "year": "2026.01—至今",
     "type": "个人项目",
     "stage": "初版已上线 · 数字分身维修",
     "tags": [

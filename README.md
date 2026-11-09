@@ -17,6 +17,7 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 | 思考与方法六篇文章 | `assets/data/articles.js` |
 | 内容卡片生成及 HTML 编码 | `assets/js/content.js` |
 | 四板块目录、卡片反馈、交互委托 | `assets/js/main.js` |
+| 个人奇点中英文文案和切换 | `assets/data/about-i18n.js`、`assets/js/i18n.js` |
 | 项目 / 文档 / 文章阅读抽屉 | `assets/js/drawer.js` |
 | 数字分身静态维修状态 | `assets/js/agent.js` |
 | 视觉 tokens、布局与动效 | `assets/css/tokens.css`、`assets/css/main.css` |
@@ -24,6 +25,7 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 
 ## 开发原则
 - 目录点击仅显示当前板块，不使用旧版全站连续长页；深层详情统一从右侧抽屉打开。
+- 个人奇点支持中文 / English 切换；其他板块保留中文。Project Nebula 的经历入口复用原项目与材料数据，不复制正文。
 - 五个工作项目与两个个人项目各自存储；三张历史占位项目仅保留在数据中不公开展示。
 - PRD 中确认的 V3 内容是新增项目权威正文，历史文章及文档不擅自重写。
 - 暂无实际附件链接的项目不制作假下载入口；PDF 沿用旧文件，不代表简历已更新。
