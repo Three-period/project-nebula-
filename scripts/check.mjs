@@ -9,6 +9,7 @@ import { personalProjects } from '../assets/data/personal-projects.js';
 import { documents } from '../assets/data/documents.js';
 import { articles } from '../assets/data/articles.js';
 import { documentList } from '../assets/data/document-list.js';
+import { aboutI18n } from '../assets/data/about-i18n.js';
 import { readCozeStream } from '../assets/js/agent.js';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const files = [];
@@ -53,4 +54,21 @@ assert.equal(answer, '你好，世界');
 assert.equal(updates.length, 2);
 await assert.rejects(() => readCozeStream(new Response('failure', { status: 502 }), () => {}));
 await assert.rejects(() => readCozeStream(streamResponse('event: conversation.chat.failed\ndata: {}\n\n'), () => {}));
-console.log('PASS: module syntax/imports, HTML structure, content references, SSE chunking and errors.');
+
+// V1 regression checks: responsive safety, bilingual copy, original articles.
+const translationKeys = [...html.matchAll(/\bdata-i18n="([^"]+)"/g)].map(match => match[1]).sort();
+assert(translationKeys.length > 0, 'About translations must be present');
+assert.equal(new Set(translationKeys).size, translationKeys.length, 'Translation keys must be unique');
+for (const language of ['zh', 'en']) {
+  assert.deepEqual(Object.keys(aboutI18n[language]).sort(), translationKeys, 'About translation coverage: ' + language);
+}
+assert(html.includes('data-lang="zh"') && html.includes('data-lang="en"'), 'Both language controls are required');
+assert(html.includes('independent-project-resources'), 'Independent Nebula resources must be linked');
+assert(html.indexOf('2026.04 — 至今') < html.indexOf('2026.01 — 至今') && html.indexOf('2026.01 — 至今') < html.indexOf('2024.07'), 'Experience order');
+assert.equal(personalProjects.find(project => project.id === 'personal-nebula').year, '2026.01—至今');
+assert(articles.every(article => !article.sample && !article.body.includes('这是示范性内容')), 'Insights are original articles');
+const style = await readFile(resolve(root, 'assets/css/main.css'), 'utf8');
+assert(style.includes('padding: 18px 2em'), 'Article inset must be two characters');
+assert(style.includes('@media (max-width: 560px)') && style.includes('padding: 80px 20px 0'), 'Mobile safe gutters');
+assert(style.includes('prefers-reduced-motion') && style.includes('cosmic-orbit'), 'Reduced-motion fallback');
+console.log('PASS: module syntax/imports, HTML/data references, translations, responsive styles and SSE integration.');
