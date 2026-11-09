@@ -6,7 +6,7 @@
  --font-body:"Noto Sans SC","Source Han Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
  --font-heading:"Noto Serif SC","Source Han Serif SC","Songti SC",serif;
  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
- --text-sm:.875rem; --text-base:1rem; --text-lg:1.25rem;
+ --text-sm:.8rem; --text-base:.90625rem; --text-lg:1.1rem;
  --space-1:.5rem;--space-2:1rem;--space-3:1.5rem;--space-4:2rem;--space-5:3rem;--space-6:5rem;
  --sidebar-width:272px;--content-width:1200px;--drawer-width:720px;--radius:12px;--ease:220ms ease;
 }
