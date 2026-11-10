@@ -148,7 +148,7 @@ export const siteI18n = {
       "ability3Title": "Communicate Clearly, Document Methods",
       "ability3Body": "I value direct and efficient communication. I make ideas clear, move work forward, turn reusable practices into SOPs, and build practical workflows for my own work.",
       "learningTitle": "How I Keep Learning",
-      "learningBody": "Build foundations: Andrew Ng's machine learning and deep learning courses · Learn by doing: YouTube, Bilibili, and tech communities · Track developments: Datawhale, 机器之心, OpenBuild · Explore further: Hugging Face",
+      "learningBody": "Build foundations: Andrew Ng's machine learning and deep learning courses · Learn by doing: YouTube, Bilibili, and tech communities · Track developments: Datawhale, Jiqizhixin, OpenBuild · Explore further: Hugging Face",
       "exploringTitle": "Currently Exploring",
       "exploringBody": "AI for individual work · AI for team workflows · How to organize agents",
       "experienceEyebrow": "OBSERVATION 02 / EXPERIENCE",
