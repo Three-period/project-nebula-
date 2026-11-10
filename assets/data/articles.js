@@ -113,11 +113,11 @@ export const articles = [
           <li>信任构建需要显性化，不能依赖用户自己去找引用</li>
           <li>会话深度是 AI 搜索产品的核心留存指标</li>
         </ul>
-        <div class="fd-placeholder-note">📌 这是示范性内容，替换为你的真实文章后删除此提示。</div>
+        
       `,
     "summary": "从产品交互视角分析自然语言 UI 如何重塑搜索链路，以及 CUI 体验设计对用户留存的影响。",
     "url": null,
-    "sample": true
+    "sample": false
   },
   {
     "en": "Model Insight · 2026.02",
@@ -142,11 +142,11 @@ export const articles = [
           <li><strong>高频中文任务</strong>：Qwen / DeepSeek（成本优势显著）</li>
           <li><strong>Agent 工作流</strong>：优先考虑 Tool Use 文档完善度</li>
         </ul>
-        <div class="fd-placeholder-note">📌 这是示范性内容，替换为你的真实分析后删除此提示。</div>
+        
       `,
     "summary": "盘点 GPT-4o / Claude 3.5 / 国内大模型的选型策略与 API 调用成本分析，为产品选型提供判断依据。",
     "url": null,
-    "sample": true
+    "sample": false
   },
   {
     "en": "Industry Signal · 2026.01",
@@ -169,10 +169,10 @@ export const articles = [
           <li>PMF 的信号是用户<strong>不用你会痛苦</strong>，而不是用你会兴奋</li>
           <li>套壳产品的死亡方式：大模型能力更新后，包装层失去差异化价值</li>
         </ul>
-        <div class="fd-placeholder-note">📌 这是示范性内容，替换为你的真实思考后删除此提示。</div>
+        
       `,
     "summary": "探讨原生 AI 应用的 PMF 验证路径，拒绝盲目套壳，深入 B 端真实痛点与商业化路径探索。",
     "url": null,
-    "sample": true
+    "sample": false
   }
 ];
