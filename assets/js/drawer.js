@@ -26,7 +26,7 @@ export function initDrawer() {
     document.getElementById('drawer-type').textContent = item.type || t('projectType');
     document.getElementById('drawer-title').textContent = item.title;
     const notice = item.historical ? '<p class="drawer-notice">' + escapeHTML(t('historicalNotice')) + '</p>' : '';
-    const returnLink = currentProject && item.type !== 'Work Project' && item.type !== 'Personal Project'
+    const returnLink = currentProject && item.historical
       ? '<button class="button" data-project="' + escapeHTML(currentProject) + '">' + escapeHTML(t('returnToProject')) + '</button>' : '';
     body.innerHTML = returnLink + notice + (item.body || '');
     body.querySelectorAll('a[target="_blank"]').forEach(link => { link.rel = 'noopener noreferrer'; });
