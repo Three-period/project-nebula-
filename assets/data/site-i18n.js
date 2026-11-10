@@ -102,7 +102,10 @@ export const siteI18n = {
       "chatClose": "关闭提示",
       "chatDescription": "数字分身正在维修升级，暂时无法提供实时问答。欢迎先浏览我的项目、文章与联系方式。",
       "projectPreviewAlt": "项目预览",
-      "noScriptNotice": "项目与文章详情、数字分身需要开启 JavaScript。你仍可查看介绍、履历，或下载 PDF 简历。"
+      "noScriptNotice": "项目与文章详情、数字分身需要开启 JavaScript。你仍可查看介绍、履历，或下载 PDF 简历。",
+      "invDate": "2026.04 — 至今",
+      "nebulaDate": "2026.01 — 至今",
+      "graduationDate": "2024 年毕业"
     },
     "en": {
       "pageTitle": "He Ying · AI Product Manager | Project Nebula",
@@ -205,7 +208,10 @@ export const siteI18n = {
       "chatClose": "Close notice",
       "chatDescription": "The digital twin is being upgraded and cannot provide live answers at the moment. Please explore my projects, articles, and contact details.",
       "projectPreviewAlt": "project preview",
-      "noScriptNotice": "Project and article details and the digital twin require JavaScript. You can still read the profile and experience or download the PDF resume."
+      "noScriptNotice": "Project and article details and the digital twin require JavaScript. You can still read the profile and experience or download the PDF resume.",
+      "invDate": "2026.04 — Present",
+      "nebulaDate": "2026.01 — Present",
+      "graduationDate": "Graduated 2024"
     }
   }
 };
