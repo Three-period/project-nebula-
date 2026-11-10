@@ -3,62 +3,92 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="何盈的个人简历与 AI 产品作品集，展示项目实践、产品设计、工作经历与独立思考。">
-<title>何盈 · AI 产品经理 | Project Nebula</title>
+<meta name="description" content="何盈的个人简历与 AI 产品作品集，展示项目实践、产品设计、工作经历与独立思考。" data-i18n-meta="pageDescription">
+<title data-i18n-title>何盈 · AI 产品经理 | Project Nebula</title>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/main.css">
 <script type="module" src="assets/js/main.js"></script>
 </head>
 <body>
-<a class="skip-link" href="#main">跳至正文</a>
-<aside class="sidebar" aria-label="个人简历目录">
- <a class="identity" href="#about"><span class="identity-mark" aria-hidden="true">✦</span><span><strong>何盈</strong><small>AI 产品经理</small></span></a>
- <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="sidebar-content">目录 <span aria-hidden="true">＋</span></button>
+<a class="skip-link" href="#main" data-i18n="skipToContent">跳至正文</a>
+<aside class="sidebar" aria-label="个人简历目录" data-i18n-aria-label="sidebarAria">
+ <a class="identity" href="#about"><span class="identity-mark" aria-hidden="true">✦</span><span><strong>何盈</strong><small data-i18n="jobTitle">AI 产品经理</small></span></a>
+ <div class="global-language-switch" role="group" aria-label="切换网站语言" data-i18n-aria-label="languageSwitchAria">
+  <button type="button" class="lang-tab" data-language="zh" aria-pressed="true">中文</button>
+  <button type="button" class="lang-tab" data-language="en" aria-pressed="false">EN</button>
+ </div>
+ <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="sidebar-content"><span data-i18n="menu">目录</span> <span aria-hidden="true">＋</span></button>
  <div id="sidebar-content" class="sidebar-content">
-  <p class="sidebar-label">RESUME & SELECTED WORK</p>
-  <nav class="toc" aria-label="章节目录"><a href="#about" class="toc-link"><span class="toc-index">01</span><span>个人奇点</span></a><a href="#experience" class="toc-link"><span class="toc-index">02</span><span>经历与成长</span></a><a href="#projects" class="toc-link"><span class="toc-index">03</span><span>作品与实践</span></a><a href="#insights" class="toc-link"><span class="toc-index">04</span><span>思考与方法</span></a></nav>
-  <div class="sidebar-footer"><button class="button primary" data-action="chat">数字分身 · 维修中</button><a class="utility-link" href="/public/images/heying-cqu-AI-PM.pdf" download>下载简历 PDF ↓</a><a class="utility-link" href="#contact">联系我 ↗</a><small>PROJECT NEBULA<br>产品 · 技术 · 真实场景</small></div>
+  <p class="sidebar-label" data-i18n="sidebarLabel">RESUME & SELECTED WORK</p>
+  <nav class="toc" aria-label="章节目录" data-i18n-aria-label="navAria">
+   <a href="#about" class="toc-link"><span class="toc-index">01</span><span data-i18n="aboutNav">个人奇点</span></a>
+   <a href="#experience" class="toc-link"><span class="toc-index">02</span><span data-i18n="experienceNav">经历与成长</span></a>
+   <a href="#projects" class="toc-link"><span class="toc-index">03</span><span data-i18n="projectsNav">作品与实践</span></a>
+   <a href="#insights" class="toc-link"><span class="toc-index">04</span><span data-i18n="insightsNav">思考与方法</span></a>
+  </nav>
+  <div class="sidebar-footer">
+   <button class="button primary" data-action="chat" data-i18n="sidebarAction">数字分身 · 维修中</button>
+   <a class="utility-link" href="/public/images/heying-cqu-AI-PM.pdf" download data-i18n="downloadResume">下载简历 PDF ↓</a>
+   <a class="utility-link" href="#contact" data-i18n="contactMe">联系我 ↗</a>
+   <small>PROJECT NEBULA<br><span data-i18n="sidebarTagline">产品 · 技术 · 真实场景</span></small>
+  </div>
  </div>
 </aside>
 <main id="main" class="main" tabindex="-1">
  
- <section id="about" class="resume-section about-section" aria-labelledby="about-title"><header class="section-heading"><p class="eyebrow" data-i18n="eyebrow">OBSERVATION 01 / 个人奇点</p><h2 id="about-title" data-i18n="headline">敢于跨界，乐于深究，把复杂问题理出路径。</h2></header><div class="about-language-switch" role="group" aria-label="Language / 语言"><button type="button" class="lang-tab" data-lang="zh" aria-pressed="true">中文</button><button type="button" class="lang-tab" data-lang="en" aria-pressed="false">English</button></div><img class="cosmic-orbits" src="public/images/nebula-orbits-v2.svg" alt="" aria-hidden="true"><div class="singu-layout">
-
-      <div class="singu-left">
-
-        <div class="singu-photo-wrap">
-          <div class="singu-photo-circle">
-         <img src="public/images/heying-photo.jpg" alt="何盈个人照片" loading="eager">
-            </div>
-          </div>
-
-        <div>
-          <div class="singu-name" data-i18n="name">何盈</div>
-          <div class="singu-name-sub" data-i18n="subtitle">AI 产品经理 · 跨界实践者 · 持续学习者</div>
-        </div>
-
-        <div class="singu-skill-groups"><h3 data-i18n="skillTitle">能力与工具</h3><p data-i18n="skillProduct">产品分析与设计 · 业务流程、需求分析、PRD、SOP、Axure、Figma、Notion</p><p data-i18n="skillAI">AI 应用实践 · Coze 智能体、Prompt、知识库与 RAG</p><p data-i18n="skillDelivery">AI 辅助交付 · GPT、Claude、Codex、GitHub、Cloudflare Pages</p><p data-i18n="skillLearning">持续学习 · Agent、Workflow、Skills 与人机协作</p></div></div><div class="singu-right">
-
-        <div class="singu-quote">
-          <span class="singu-quote-line1" data-i18n="quote1">不太想被定义成一个 AI 工具使用者。</span>
-          <span class="singu-quote-line2"><span class="quote-inline" data-i18n="quotePrefix">更想成为一个</span><em data-i18n="quoteEmphasis">把事情做清楚、把话说明白</em><span class="quote-inline" data-i18n="quoteSuffix">的人。</span></span>
-        </div>
-
-
-        <div class="singu-agent-entry"><p class="sae-title" data-i18n="agentTitle">与我的 AI 数字分身聊聊</p><p data-i18n="agentDescription">数字分身正在维修升级，暂时无法回答问题。欢迎先浏览我的作品与思考。</p><button class="button" data-action="chat" data-i18n="agentButton">查看维修说明 ↗</button></div><div class="singu-ability-grid"><article class="singu-ab-card"><h3 data-i18n="ability1Title">先想清楚，再动手</h3><p data-i18n="ability1Body">先明确目标、约束与关键问题，把准备工作做在前面。沟通时带着问题，也带着自己的初步判断与方案。</p></article><article class="singu-ab-card"><h3 data-i18n="ability2Title">把复杂理出结构</h3><p data-i18n="ability2Body">愿意深入理解业务，从分散信息与复杂逻辑中找到主线，再拆成清晰的流程、任务与交付物。</p></article><article class="singu-ab-card"><h3 data-i18n="ability3Title">直接沟通，沉淀方法</h3><p data-i18n="ability3Body">偏好直接、高效的表达，把话说明白，把事情推进去。习惯将可复用的方法写成 SOP，也为自己的工作建立流程。</p></article></div><div class="learning-notes"><h3 data-i18n="learningTitle">我如何保持学习</h3><p data-i18n="learningBody">补基础：吴恩达机器学习与深度学习课程 · 跟实践：YouTube、B 站、技术社区 · 看变化：Datawhale、机器之心、OpenBuild 等 · 拓边界：Hugging Face</p><h3 data-i18n="exploringTitle">最近在探索</h3><p data-i18n="exploringBody">个人工作的 AI 化 · 团队工作的 AI 化 · Agent 的组织方式</p></div></div></div></section><section id="experience" class="resume-section" aria-labelledby="experience-title"><header class="section-heading"><p class="eyebrow">OBSERVATION 02 / 经历与成长</p><h2 id="experience-title">经历与成长</h2><p class="section-lead">跨界经历中的业务理解、产品思考与落地实践。</p></header><div class="fusion-timeline">
-<article class="fusion-item"><div class="fusion-left"><div class="fusion-time">2026.04 — 至今</div><div class="fusion-role">AI 产品</div></div><div class="fusion-right"><h3 class="fusion-company">英维克软件信息有限公司</h3><p class="fusion-summary">参与企业研发数字化与 AI 产品建设，负责业务需求分析、产品方案设计、AI 应用场景探索及跨部门协同，推动复杂研发流程向结构化、产品化方案转化。</p><div class="actions"><button class="button" data-jump-project="work-rd-platform">研发数字化平台 ↗</button><button class="button" data-jump-project="work-skillhub">SkillHub ↗</button><button class="button" data-jump-project="work-code-review">AI 代码检视 ↗</button></div></div></article>
-<article class="fusion-item fusion-independent"><div class="fusion-left"><div class="fusion-time">2026.01 — 至今</div><div class="fusion-role">AI 全栈产品<br>独立项目实践</div></div><div class="fusion-right"><h3 class="fusion-company">Project Nebula · 个人 AI 产品实践</h3><p class="fusion-summary">围绕招聘场景下的个人信息展示与 AI 交互需求，独立推进产品定义、PRD、信息架构、前端实现与 Cloudflare Pages 部署；探索 Coze Agent、知识库与 RAG，并持续优化阅读体验。数字分身目前处于维修模式。</p><p class="fusion-detail">代表项目与材料（共用作品与实践中的项目数据）：</p><div id="independent-project-resources" class="experience-resources" aria-label="Project Nebula 项目资料"></div></div></article>
-<article class="fusion-item"><div class="fusion-left"><div class="fusion-time">2024.07 — 2025.07</div><div class="fusion-role">产品经理<br>文旅 IP / 政企方案</div></div><div class="fusion-right"><h3 class="fusion-company">广州怡境规划设计有限公司</h3><p class="fusion-summary">面向文旅与政企客户，承担需求分析、竞品研究、产品策划、方案设计及项目汇报，并探索 AIGC 工作流在产品设计中的实际应用。</p><div class="actions"><button class="button" data-jump-project="work-huizhou-ip">惠州体育公园 ↗</button><button class="button" data-jump-project="work-luoburen">罗布人村寨 ↗</button></div></div></article>
-<article class="fusion-item"><div class="fusion-left"><div class="fusion-time">2024 年毕业</div><div class="fusion-role">风景园林 · 本科</div></div><div class="fusion-right"><h3 class="fusion-company">重庆大学</h3><p class="fusion-summary">工科底座培养了扎实的调研能力、汇报表达与设计审美，跨界复合是差异化优势而非劣势。</p><p class="fusion-detail">工科底座建立了严密的系统思维与逻辑推导能力；专业训练强化了一线调研、用户感知与可视化汇报表达能力。</p></div></article>
-</div></section><section id="projects" class="resume-section" aria-labelledby="projects-title"><header class="section-heading"><p class="eyebrow">OBSERVATION 03 / 作品与实践</p><h2 id="projects-title">作品与实践</h2><p class="section-lead">从产品定义到工程交付，让想法成为可使用的产品。</p></header><h3 class="group-heading">工作项目</h3><div id="work-project-list" class="project-list"></div><h3 class="group-heading">个人项目</h3><div id="personal-project-list" class="project-list"></div><div class="related-docs"><h3>相关作品材料 · Project Nebula</h3><div id="document-list" class="document-list"></div></div></section><section id="insights" class="resume-section" aria-labelledby="insights-title"><header class="section-heading"><p class="eyebrow">OBSERVATION 04 / 思考与方法</p><h2 id="insights-title">思考与方法</h2><p class="section-lead">持续输入，独立判断。以下保留原创文章及其日期。</p></header><div id="article-list" class="article-list"></div></section>
- <footer id="contact" class="contact-section"><p class="eyebrow">LET’S TALK</p><h2>随时开始一段对话。</h2><p>关于合作、交流或任何 AI 相关话题，欢迎与我联系。</p><div class="contact-links"><a href="mailto:2730006134@qq.com">2730006134@qq.com ↗</a><a href="tel:15384468905">15384468905</a><a href="https://github.com/Three-period" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/public/images/heying-cqu-AI-PM.pdf" download>简历 PDF ↓</a></div><p class="footer-note">何盈 / Project Nebula</p></footer>
+ <section id="about" class="resume-section about-section" aria-labelledby="about-title">
+ <header class="section-heading">
+  <p class="eyebrow" data-i18n="aboutEyebrow">OBSERVATION 01 / 个人奇点</p>
+  <h2 id="about-title" data-i18n="aboutHeadline">敢于跨界，乐于深究，把复杂问题理出路径。</h2>
+ </header>
+ <img class="cosmic-orbits" src="public/images/nebula-orbits-v2.svg" alt="" aria-hidden="true">
+ <div class="singu-layout">
+  <div class="singu-left">
+   <div class="singu-name" data-i18n="name">何盈</div>
+   <div class="singu-name-sub" data-i18n="subtitle">AI 产品经理 · 跨界实践者 · 持续学习者</div>
+   <div class="singu-skill-groups">
+    <h3 data-i18n="skillTitle">能力与工具</h3>
+    <p data-i18n="skillProduct">产品分析与设计 · 业务流程、需求分析、PRD、SOP、Axure、Figma、Notion</p>
+    <p data-i18n="skillAI">AI 应用实践 · Coze 智能体、Prompt、知识库与 RAG</p>
+    <p data-i18n="skillDelivery">AI 辅助交付 · GPT、Claude、Codex、GitHub、Cloudflare Pages</p>
+    <p data-i18n="skillLearning">持续学习 · Agent、Workflow、Skills 与人机协作</p>
+   </div>
+  </div>
+  <div class="singu-right">
+   <div class="singu-quote">
+    <span class="singu-quote-line1" data-i18n="quote1">不太想被定义成一个 AI 工具使用者。</span>
+    <span class="singu-quote-line2"><span class="quote-inline" data-i18n="quotePrefix">更想成为一个</span><em data-i18n="quoteEmphasis">把事情做清楚、把话说明白</em><span class="quote-inline" data-i18n="quoteSuffix">的人。</span></span>
+   </div>
+   <div class="singu-agent-entry">
+    <p class="sae-title" data-i18n="agentTitle">与我的 AI 数字分身聊聊</p>
+    <p data-i18n="agentDescription">数字分身正在维修升级，暂时无法回答问题。欢迎先浏览我的作品与思考。</p>
+    <button class="button" data-action="chat" data-i18n="agentButton">查看维修说明 ↗</button>
+   </div>
+   <div class="singu-ability-grid">
+    <article class="singu-ab-card"><h3 data-i18n="ability1Title">先想清楚，再动手</h3><p data-i18n="ability1Body">先明确目标、约束与关键问题，把准备工作做在前面。沟通时带着问题，也带着自己的初步判断与方案。</p></article>
+    <article class="singu-ab-card"><h3 data-i18n="ability2Title">把复杂理出结构</h3><p data-i18n="ability2Body">愿意深入理解业务，从分散信息与复杂逻辑中找到主线，再拆成清晰的流程、任务与交付物。</p></article>
+    <article class="singu-ab-card"><h3 data-i18n="ability3Title">直接沟通，沉淀方法</h3><p data-i18n="ability3Body">偏好直接、高效的表达，把话说明白，把事情推进去。习惯将可复用的方法写成 SOP，也为自己的工作建立流程。</p></article>
+   </div>
+   <div class="learning-notes">
+    <h3 data-i18n="learningTitle">我如何保持学习</h3><p data-i18n="learningBody">补基础：吴恩达机器学习与深度学习课程 · 跟实践：YouTube、B 站、技术社区 · 看变化：Datawhale、机器之心、OpenBuild 等 · 拓边界：Hugging Face</p>
+    <h3 data-i18n="exploringTitle">最近在探索</h3><p data-i18n="exploringBody">个人工作的 AI 化 · 团队工作的 AI 化 · Agent 的组织方式</p>
+   </div>
+  </div>
+ </div>
+</section><section id="experience" class="resume-section" aria-labelledby="experience-title"><header class="section-heading"><p class="eyebrow" data-i18n="experienceEyebrow">OBSERVATION 02 / 经历与成长</p><h2 id="experience-title" data-i18n="experienceTitle">经历与成长</h2><p class="section-lead" data-i18n="experienceLead">跨界经历中的业务理解、产品思考与落地实践。</p></header><div class="fusion-timeline">
+<article class="fusion-item"><div class="fusion-left"><div class="fusion-time">2026.04 — 至今</div><div class="fusion-role" data-i18n="invRole">AI 产品</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="invCompany">英维克软件信息有限公司</h3><p class="fusion-summary" data-i18n="invSummary">参与企业研发数字化与 AI 产品建设，负责业务需求分析、产品方案设计、AI 应用场景探索及跨部门协同，推动复杂研发流程向结构化、产品化方案转化。</p><div class="actions"><button class="button" data-jump-project="work-rd-platform" data-i18n="jumpRd">研发数字化平台 ↗</button><button class="button" data-jump-project="work-skillhub" data-i18n="jumpSkillHub">SkillHub ↗</button><button class="button" data-jump-project="work-code-review" data-i18n="jumpCodeReview">AI 代码检视 ↗</button></div></div></article>
+<article class="fusion-item fusion-independent"><div class="fusion-left"><div class="fusion-time">2026.01 — 至今</div><div class="fusion-role" data-i18n="nebulaRole">AI 全栈产品 · 独立项目实践</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="nebulaCompany">Project Nebula · 个人 AI 产品实践</h3><p class="fusion-summary" data-i18n="nebulaSummary">围绕招聘场景下的个人信息展示与 AI 交互需求，独立推进产品定义、PRD、信息架构、前端实现与 Cloudflare Pages 部署；探索 Coze Agent、知识库与 RAG，并持续优化阅读体验。数字分身目前处于维修模式。</p><p class="fusion-detail" data-i18n="nebulaMaterials">代表项目与材料（共用作品与实践中的项目数据）：</p><div id="independent-project-resources" class="experience-resources" aria-label="Project Nebula 项目资料" data-i18n-aria-label="nebulaResourcesAria"></div></div></article>
+<article class="fusion-item"><div class="fusion-left"><div class="fusion-time">2024.07 — 2025.07</div><div class="fusion-role" data-i18n="yijingRole">产品经理 · 文旅 IP / 政企方案</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="yijingCompany">广州怡境规划设计有限公司</h3><p class="fusion-summary" data-i18n="yijingSummary">面向文旅与政企客户，承担需求分析、竞品研究、产品策划、方案设计及项目汇报，并探索 AIGC 工作流在产品设计中的实际应用。</p><div class="actions"><button class="button" data-jump-project="work-huizhou-ip" data-i18n="jumpHuizhou">惠州体育公园 ↗</button><button class="button" data-jump-project="work-luoburen" data-i18n="jumpLuoburen">罗布人村寨 ↗</button></div></div></article>
+<article class="fusion-item"><div class="fusion-left"><div class="fusion-time">2024 年毕业</div><div class="fusion-role" data-i18n="educationRole">风景园林 · 本科</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="educationCompany">重庆大学</h3><p class="fusion-summary" data-i18n="educationSummary">工科底座培养了扎实的调研能力、汇报表达与设计审美，跨界复合是差异化优势而非劣势。</p><p class="fusion-detail" data-i18n="educationDetail">工科底座建立了严密的系统思维与逻辑推导能力；专业训练强化了一线调研、用户感知与可视化汇报表达能力。</p></div></article>
+</div></section><section id="projects" class="resume-section" aria-labelledby="projects-title"><header class="section-heading"><p class="eyebrow" data-i18n="projectsEyebrow">OBSERVATION 03 / 作品与实践</p><h2 id="projects-title" data-i18n="projectsTitle">作品与实践</h2><p class="section-lead" data-i18n="projectsLead">从产品定义到工程交付，让想法成为可使用的产品。</p></header><h3 class="group-heading" data-i18n="workProjectsTitle">工作项目</h3><div id="work-project-list" class="project-list"></div><h3 class="group-heading" data-i18n="personalProjectsTitle">个人项目</h3><div id="personal-project-list" class="project-list"></div><div class="related-docs"><h3 data-i18n="relatedMaterialsTitle">相关作品材料 · Project Nebula</h3><div id="document-list" class="document-list"></div></div></section><section id="insights" class="resume-section" aria-labelledby="insights-title"><header class="section-heading"><p class="eyebrow" data-i18n="insightsEyebrow">OBSERVATION 04 / 思考与方法</p><h2 id="insights-title" data-i18n="insightsTitle">思考与方法</h2><p class="section-lead" data-i18n="insightsLead">持续输入，独立判断。以下保留原创文章及其日期。</p></header><div id="article-list" class="article-list"></div></section>
+ <footer id="contact" class="contact-section"><p class="eyebrow" data-i18n="contactEyebrow">LET’S TALK</p><h2 data-i18n="contactTitle">随时开始一段对话。</h2><p data-i18n="contactLead">关于合作、交流或任何 AI 相关话题，欢迎与我联系。</p><div class="contact-links"><a href="mailto:2730006134@qq.com">2730006134@qq.com ↗</a><a href="tel:15384468905">15384468905</a><a href="https://github.com/Three-period" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/public/images/heying-cqu-AI-PM.pdf" download data-i18n="resumeLink">简历 PDF ↓</a></div><p class="footer-note" data-i18n="footerNote">何盈 / Project Nebula</p></footer>
 </main>
 <dialog id="detail-dialog" class="drawer" aria-labelledby="drawer-title">
- <header class="drawer-header"><div><p id="drawer-type" class="eyebrow"></p><h2 id="drawer-title"></h2></div><button class="icon-button" data-action="close-drawer" aria-label="关闭详情">×</button></header>
+ <header class="drawer-header"><div><p id="drawer-type" class="eyebrow"></p><h2 id="drawer-title"></h2></div><button class="icon-button" data-action="close-drawer" aria-label="关闭详情" data-i18n-aria-label="drawerClose">×</button></header>
  <div id="drawer-body" class="drawer-body"></div>
- <footer class="drawer-footer"><a id="drawer-external" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><div class="reader-nav"><button id="article-prev" class="button" data-action="prev-article">← 上一篇</button><button id="article-next" class="button" data-action="next-article">下一篇 →</button></div></footer>
+ <footer class="drawer-footer"><a id="drawer-external" target="_blank" rel="noopener noreferrer" data-i18n="drawerExternal">打开原文 ↗</a><div class="reader-nav"><button id="article-prev" class="button" data-action="prev-article" data-i18n="previousArticle">← 上一篇</button><button id="article-next" class="button" data-action="next-article" data-i18n="nextArticle">下一篇 →</button></div></footer>
 </dialog>
-<dialog id="chat-dialog" class="drawer chat-drawer" aria-labelledby="chat-title"><header class="drawer-header"><div><p class="eyebrow">AI TWIN / MAINTENANCE</p><h2 id="chat-title">数字分身维护中</h2></div><button class="icon-button" data-action="close-chat" aria-label="关闭提示">×</button></header><div class="drawer-body"><p>数字分身正在维修升级，暂时无法提供实时问答。欢迎先浏览我的项目、文章与联系方式。</p></div></dialog>
-<noscript><p class="noscript-notice">项目与文章详情、数字分身需要开启 JavaScript。你仍可查看介绍、履历，或下载 PDF 简历。</p></noscript>
+<dialog id="chat-dialog" class="drawer chat-drawer" aria-labelledby="chat-title"><header class="drawer-header"><div><p class="eyebrow" data-i18n="chatEyebrow">AI TWIN / MAINTENANCE</p><h2 id="chat-title" data-i18n="chatTitle">数字分身维护中</h2></div><button class="icon-button" data-action="close-chat" aria-label="关闭提示" data-i18n-aria-label="chatClose">×</button></header><div class="drawer-body"><p data-i18n="chatDescription">数字分身正在维修升级，暂时无法提供实时问答。欢迎先浏览我的项目、文章与联系方式。</p></div></dialog>
+<noscript><p class="noscript-notice" data-i18n="noScriptNotice">项目与文章详情、数字分身需要开启 JavaScript。你仍可查看介绍、履历，或下载 PDF 简历。</p></noscript>
 </body>
 </html>
