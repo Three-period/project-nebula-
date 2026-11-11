@@ -106,6 +106,16 @@ h1, h2 {
   background: var(--color-primary-hover);
   color: #fff;
 }
+.button:disabled:hover {
+  border-color: var(--color-line-strong);
+  background: var(--color-surface-solid);
+  color: var(--color-text);
+}
+.button.primary:disabled:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
 .icon-button {
   display: inline-grid;
   width: var(--control-height);
