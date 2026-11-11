@@ -34,3 +34,11 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 
 ## 验收重点
 桌面及手机 390px / 820px：四板块切换、卡片交互和星轨反馈、项目／材料／文章抽屉、Esc／遮罩关闭、焦点与滚动恢复、外链、PDF 和维修提示。浏览器与正式站的实际手工验收需另行完成。
+
+
+## Global bilingual content (V1.1)
+
+- Chinese remains the canonical source copy in the existing HTML and data files.
+- English interface copy is stored in `assets/data/site-i18n.js`; project, document, and article translations are stored in the corresponding `*-i18n.js` files.
+- The global language switch updates static sections, rendered cards, and open detail drawers. The selected language is remembered locally in the browser.
+- When adding or editing content, update the matching English translation entry. Existing translations are stored in GitHub; no translation API, backend, or database is required.
