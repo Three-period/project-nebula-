@@ -3,6 +3,7 @@ import { workProjects } from '../data/work-projects.js';
 import { personalProjects } from '../data/personal-projects.js';
 import { documentList } from '../data/document-list.js';
 import { articles } from '../data/articles.js';
+import { capabilityGroups } from '../data/capabilities.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
 
 export function escapeHTML(value = '') {
@@ -23,7 +24,35 @@ function projectCard(raw, index) {
     '<div class="actions"><button class="button" data-project="' + escapeHTML(p.id) + '">' + escapeHTML(t('projectDetails')) + '</button>' + video + '</div></div></article>';
 }
 
+const projectById = new Map([...workProjects, ...personalProjects].map(project => [project.id, project]));
+
+function renderCapabilities(language) {
+  const target = document.getElementById('capability-grid');
+  if (!target) return;
+  target.innerHTML = capabilityGroups.map(group => {
+    const skills = t(group.skillsKey, language).split('|').map(skill =>
+      '<span class="tag">' + escapeHTML(skill.trim()) + '</span>'
+    ).join('');
+    const evidence = group.evidence.map(id => {
+      const raw = projectById.get(id);
+      if (!raw) return '';
+      const project = getLocalizedRecord('project', id, raw, language);
+      return '<button class="capability-evidence-item" type="button" data-project="' + escapeHTML(id) +
+        '" aria-label="' + escapeHTML(t('capabilityOpenEvidence', language) + project.title) + '">' +
+        '<strong>' + escapeHTML(project.title) + '</strong><small>' + escapeHTML(project.stage) + '</small></button>';
+    }).filter(Boolean).join('');
+    return '<article class="capability-card"><header><span class="capability-index">' +
+      escapeHTML(group.number) + '</span><h4>' + escapeHTML(t(group.titleKey, language)) +
+      '</h4></header><p class="capability-description">' +
+      escapeHTML(t(group.descriptionKey, language)) + '</p><div class="capability-skills">' +
+      skills + '</div><div class="capability-evidence"><p class="eyebrow">' +
+      escapeHTML(t('capabilityEvidenceLabel', language)) + '</p><div class="capability-evidence-list">' +
+      evidence + '</div></div></article>';
+  }).join('');
+}
+
 export function renderContent(language = getCurrentLanguage()) {
+  renderCapabilities(language);
   document.getElementById('work-project-list').innerHTML = workProjects.map(projectCard).join('');
   document.getElementById('personal-project-list').innerHTML = personalProjects.map(projectCard).join('');
 
