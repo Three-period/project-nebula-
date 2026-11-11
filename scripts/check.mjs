@@ -160,6 +160,12 @@ assert(designSystem.includes('COLOR TOKENS') && designSystem.includes('TYPOGRAPH
 assert(designSystem.includes('#285C43') && designSystem.includes('13.03:1') && designSystem.includes('7.77:1'), 'The design system must record the active palette and measured contrast');
 assert(documentList.find(item => item.key === 'prd')?.title.includes('原始方案'), 'The original planet PRD must be labeled as an original plan');
 assert(documentList.find(item => item.key === 'design')?.title.includes('历史归档'), 'The former cosmic design guide must be labeled as archived');
+
+assert(documentList.find(item => item.key === 'paper')?.title.includes('历史归档') && documents.paper.historical, 'The rice-paper guide must be labeled as historical');
+assert(documentI18n.cards.paper?.type === 'HISTORICAL DESIGN' && documentI18n.details.paper?.body.includes('Archive note'), 'The archived rice-paper guide needs bilingual historical labeling');
+assert(designSystem.includes('METADATA · 10px') && designSystem.includes('13–16px'), 'The active type scale must distinguish micro-metadata from readable supporting copy');
+assert(style.includes('.button:disabled:hover') && style.includes('.media-tab:hover:not([aria-selected="true"])'), 'Disabled and inactive component states must be defined');
+
 assert(documents.prd.body.includes('实施状态说明') && documents.design.body.includes('历史归档说明'), 'Historical documents must disclose their implementation status');
 assert(!readme.includes('其他板块保留中文'), 'README must not contradict site-wide bilingual implementation');
 
