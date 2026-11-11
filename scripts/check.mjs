@@ -104,4 +104,29 @@ assert(themeSource.includes("landscape") && /document\.documentElement\.dataset\
 for (const token of ['--font-body:', '--sidebar-width:', '--surface-blur:', '--ease:']) assert(tokens.includes(token), 'Missing shared design token: ' + token);
 for (const token of ['--color-page:', '--color-primary:', '--color-mist:', '--shadow-contact:', '--shadow-spatial:']) assert(themeStyle.includes(token), 'Missing landscape design token: ' + token);
 assert(html.includes('data-theme="landscape"'), 'Landscape must be the default theme');
-console.log('PASS: syntax/imports, global bilingual coverage, all stored translations, photo removal, responsive styles and SSE integration.');
+
+const viewerSource = await readFile(resolve(root, 'assets/js/viewer.js'), 'utf8');
+const drawerSource = await readFile(resolve(root, 'assets/js/drawer.js'), 'utf8');
+const dialogSource = await readFile(resolve(root, 'assets/js/dialog.js'), 'utf8');
+const mediaProject = personalProjects.find(project => project.id === 'personal-nebula');
+assert(mediaProject?.cover && mediaProject.media?.length, 'Project Nebula needs a real cover and media collection');
+assert(mediaProject.media.some(item => item.type === 'image') && mediaProject.media.some(item => item.type === 'video'), 'Project Nebula image and video tabs must be available');
+for (const item of mediaProject.media) {
+  assert(['image', 'video', 'gif'].includes(item.type), 'Unsupported project media type: ' + item.type);
+  assert(item.src && item.title && item.alt, 'Every media item needs a source, title, and accessible description');
+  if (item.type === 'image' || item.type === 'gif') {
+    const assetPath = resolve(root, item.src.startsWith('/') ? item.src.slice(1) : item.src);
+    await readFile(assetPath);
+  }
+}
+assert(html.includes('id="viewer-dialog"') && html.includes('data-action="preview-pdf"'), 'The tertiary viewer and PDF preview entry must exist');
+assert(files.some(file => file.endsWith('/public/images/heying-cqu-AI-PM.pdf')), 'The referenced resume PDF must exist');
+assert(mainSource.includes("from './viewer.js'") && mainSource.includes("viewer.setLanguage(language)"), 'Viewer must initialize and follow global language changes');
+assert(drawerSource.includes('data-action="open-document-full"') && drawerSource.includes('renderProjectMedia'), 'Document summaries and project media must be available in drawers');
+assert(viewerSource.includes("kind: 'document'") && viewerSource.includes("kind: 'media'") && viewerSource.includes("kind: 'pdf'"), 'Viewer must support full documents, project media, and PDFs');
+assert(dialogSource.includes('stack = false') && dialogSource.includes('if (!stack)'), 'The viewer must stack above a drawer without closing it');
+for (const key of ['previewResume', 'documentOverview', 'readFullDocument', 'mediaImages', 'mediaVideo', 'mediaGif', 'viewMediaFull', 'pdfViewerType']) {
+  for (const language of ['zh', 'en']) assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing viewer translation: ' + language + '/' + key);
+}
+
+console.log('PASS: syntax/imports, bilingual coverage, responsive styles, document/media/PDF viewers and SSE integration.');

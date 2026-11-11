@@ -15,7 +15,7 @@ const preview = p => p.cover
 
 function projectCard(raw, index) {
   const p = getLocalizedRecord('project', raw.id, raw);
-  const video = p.video ? '<a class="button" href="' + escapeHTML(p.video) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('demoVideo')) + '</a>' : '';
+  const video = p.video && !p.media?.some(item => item.type === 'video') ? '<a class="button" href="' + escapeHTML(p.video) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('demoVideo')) + '</a>' : '';
   return '<article class="project" data-project-id="' + escapeHTML(p.id) + '">' + preview(p) +
     '<div class="project-content"><div class="item-meta"><span class="item-number">' + String(index + 1).padStart(2, '0') + '</span><span>' + escapeHTML(p.type) + '</span><span>' + escapeHTML(p.year) + '</span></div>' +
     '<h3>' + escapeHTML(p.title) + '</h3><p class="project-description">' + escapeHTML(p.description) + '</p>' +

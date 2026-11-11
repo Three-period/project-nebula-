@@ -19,6 +19,8 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 | 四板块目录、卡片反馈、交互委托 | `assets/js/main.js` |
 | 个人奇点中英文文案和切换 | `assets/data/about-i18n.js`、`assets/js/i18n.js` |
 | 项目 / 文档 / 文章阅读抽屉 | `assets/js/drawer.js` |
+| 全文、图片、GIF、视频与 PDF 第三级查看器 | `assets/js/viewer.js` |
+| 原生弹窗与抽屉堆叠、焦点恢复 | `assets/js/dialog.js` |
 | 数字分身静态维修状态 | `assets/js/agent.js` |
 | 通用设计 tokens | `assets/css/tokens.css` |
 | 景观白绿主题 tokens | `assets/css/themes/landscape.css` |
@@ -66,3 +68,11 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - The previous cosmic/parchment override stack and transitional color aliases have been removed from the active stylesheet. The orbit SVG remains an unreferenced asset for possible future theme work.
 - Responsive behavior uses a 960px tablet-navigation breakpoint, a 760px single-column composition breakpoint, and 560px compact mobile refinements.
 - Landscape cards use translucent frosted surfaces, restrained green borders, and two-layer contact/spatial shadows.
+
+
+## Rich content presentation (V1)
+- Project details use the existing right-side drawer as the second-level container. Project media is stored as typed records (image, video, gif) in the project data file; only available media types appear as tabs.
+- The Project Nebula record reuses image assets already in public/images and its existing Bilibili demo link. No placeholder GIF or photography is fabricated.
+- Document drawers show a short overview and tags. The full stored document opens in a third-level modal viewer; the modal can stack above the drawer and returns focus to the originating control when closed.
+- The existing resume PDF has an online preview modal and retains its download link. Future PDFs can reuse the same viewer entry point.
+- Full-document, media and PDF viewers follow the global Chinese / English setting. The photography portfolio is intentionally deferred until original photography assets and grouping information are supplied.

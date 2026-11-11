@@ -33,6 +33,7 @@
   <div class="sidebar-footer">
    <button class="button primary" data-action="chat" data-i18n="sidebarAction">数字分身 · 维修中</button>
    <a class="utility-link" href="/public/images/heying-cqu-AI-PM.pdf" download data-i18n="downloadResume">下载简历 PDF ↓</a>
+   <button class="utility-link utility-button" type="button" data-action="preview-pdf" data-pdf-src="/public/images/heying-cqu-AI-PM.pdf" data-i18n="previewResume">在线预览 PDF ↗</button>
    <a class="utility-link" href="#contact" data-i18n="contactMe">联系我 ↗</a>
    <small>PROJECT NEBULA<br><span data-i18n="sidebarTagline">产品 · 技术 · 真实场景</span></small>
   </div>
@@ -90,6 +91,13 @@
  <header class="drawer-header"><div><p id="drawer-type" class="eyebrow"></p><h2 id="drawer-title"></h2></div><button class="icon-button" data-action="close-drawer" aria-label="关闭详情" data-i18n-aria-label="drawerClose">×</button></header>
  <div id="drawer-body" class="drawer-body"></div>
  <footer class="drawer-footer"><a id="drawer-external" target="_blank" rel="noopener noreferrer" data-i18n="drawerExternal">打开原文 ↗</a><div class="reader-nav"><button id="article-prev" class="button" data-action="prev-article" data-i18n="previousArticle">← 上一篇</button><button id="article-next" class="button" data-action="next-article" data-i18n="nextArticle">下一篇 →</button></div></footer>
+</dialog>
+<dialog id="viewer-dialog" class="viewer-dialog" aria-labelledby="viewer-title">
+ <header class="viewer-header">
+  <div><p id="viewer-type" class="eyebrow"></p><h2 id="viewer-title"></h2></div>
+  <button class="icon-button" type="button" data-action="close-viewer" aria-label="关闭详情" data-i18n-aria-label="drawerClose">×</button>
+ </header>
+ <div id="viewer-body" class="viewer-body"></div>
 </dialog>
 <dialog id="chat-dialog" class="drawer chat-drawer" aria-labelledby="chat-title"><header class="drawer-header"><div><p class="eyebrow" data-i18n="chatEyebrow">AI TWIN / MAINTENANCE</p><h2 id="chat-title" data-i18n="chatTitle">数字分身维护中</h2></div><button class="icon-button" data-action="close-chat" aria-label="关闭提示" data-i18n-aria-label="chatClose">×</button></header><div class="drawer-body"><p data-i18n="chatDescription">数字分身正在维修升级，暂时无法提供实时问答。欢迎先浏览我的项目、文章与联系方式。</p></div></dialog>
 <noscript><p class="noscript-notice" data-i18n="noScriptNotice">项目与文章详情、数字分身需要开启 JavaScript。你仍可查看介绍、履历，或下载 PDF 简历。</p></noscript>

@@ -1,11 +1,12 @@
 import { renderContent } from './content.js';
 import { initDrawer } from './drawer.js';
+import { initViewer } from './viewer.js';
 import { initAgent } from './agent.js';
 import { initGlobalI18n } from './i18n.js';
 import { initTheme } from './theme.js';
 initTheme();
-const drawer=initDrawer(),agent=initAgent();
-initGlobalI18n(language=>{renderContent(language);drawer.setLanguage(language);});
+const viewer=initViewer(),drawer=initDrawer(),agent=initAgent();
+initGlobalI18n(language=>{renderContent(language);drawer.setLanguage(language);viewer.setLanguage(language);});
 const sidebar=document.querySelector('.sidebar'),menu=document.getElementById('menu-toggle');
 const links=[...document.querySelectorAll('.toc-link')],sections=[...document.querySelectorAll('.resume-section')];
 function collapseMenu(){sidebar.classList.remove('is-expanded');menu.setAttribute('aria-expanded','false');}
@@ -32,6 +33,10 @@ document.addEventListener('click',event=>{
   case 'close-drawer':drawer.close();break;
   case 'prev-article':drawer.previous();break;
   case 'next-article':drawer.next();break;
+  case 'open-document-full':viewer.openDocument(target.dataset.documentFull);break;
+  case 'open-media':viewer.openMedia(target.dataset.projectId,Number(target.dataset.mediaIndex));break;
+  case 'preview-pdf':viewer.openPdf(target.dataset.pdfSrc);break;
+  case 'close-viewer':viewer.close();break;
  }
 });
 window.addEventListener('popstate',()=>activate(location.hash.slice(1)||'about'));
