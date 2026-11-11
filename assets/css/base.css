@@ -77,7 +77,7 @@ h1, h2 {
 /* 02 · Shared controls */
 .button {
   display: inline-flex;
-  min-height: 36px;
+  min-height: var(--control-height);
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -106,10 +106,20 @@ h1, h2 {
   background: var(--color-primary-hover);
   color: #fff;
 }
+.button:disabled:hover {
+  border-color: var(--color-line-strong);
+  background: var(--color-surface-solid);
+  color: var(--color-text);
+}
+.button.primary:disabled:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
 .icon-button {
   display: inline-grid;
-  width: 40px;
-  height: 40px;
+  width: var(--control-height);
+  height: var(--control-height);
   flex: none;
   place-items: center;
   border: 1px solid var(--color-line);
@@ -147,6 +157,9 @@ h1, h2 {
   line-height: 1.55;
 }
 .text-link {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
   padding: 0;
   border: 0;
   background: transparent;

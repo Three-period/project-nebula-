@@ -6,6 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { projects } from '../assets/data/projects.js';
 import { workProjects } from '../assets/data/work-projects.js';
 import { personalProjects } from '../assets/data/personal-projects.js';
+import { capabilityGroups } from '../assets/data/capabilities.js';
 import { documents } from '../assets/data/documents.js';
 import { articles } from '../assets/data/articles.js';
 import { documentList } from '../assets/data/document-list.js';
@@ -31,7 +32,7 @@ const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
-for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'work-project-list', 'personal-project-list', 'document-list', 'article-list']) assert(ids.includes(id));
+for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'work-project-list', 'personal-project-list', 'document-list', 'article-list', 'capability-grid']) assert(ids.includes(id));
 for (const match of html.matchAll(/(?:href|src)="(assets\/[^"#]+)"/g)) await readFile(resolve(root, match[1]));
 assert.equal(projects.length, 5);
 assert.equal(workProjects.length, 5);
@@ -128,5 +129,47 @@ assert(dialogSource.includes('stack = false') && dialogSource.includes('if (!sta
 for (const key of ['previewResume', 'documentOverview', 'readFullDocument', 'mediaImages', 'mediaVideo', 'mediaGif', 'viewMediaFull', 'pdfViewerType']) {
   for (const language of ['zh', 'en']) assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing viewer translation: ' + language + '/' + key);
 }
+
+
+const capabilitySource = await readFile(resolve(root, 'assets/js/content.js'), 'utf8');
+const designSystem = await readFile(resolve(root, 'design-system.html'), 'utf8');
+const readme = await readFile(resolve(root, 'README.md'), 'utf8');
+const projectIds = new Set([...workProjects, ...personalProjects].map(project => project.id));
+assert.equal(capabilityGroups.length, 4, 'The capability map must contain four domains');
+for (const group of capabilityGroups) {
+  assert(group.id && group.number && group.titleKey && group.descriptionKey && group.skillsKey, 'Capability domain metadata is required');
+  assert(group.evidence.length > 0, 'Every capability domain needs project evidence: ' + group.id);
+  for (const id of group.evidence) assert(projectIds.has(id), 'Unknown capability evidence project: ' + id);
+  for (const language of ['zh', 'en']) {
+    for (const key of [group.titleKey, group.descriptionKey, group.skillsKey]) {
+      assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing capability copy: ' + language + '/' + key);
+    }
+  }
+}
+for (const key of ['capabilitiesEyebrow', 'capabilitiesTitle', 'capabilitiesLead', 'capabilityEvidenceLabel', 'capabilityOpenEvidence']) {
+  for (const language of ['zh', 'en']) assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing capability interface copy: ' + language + '/' + key);
+}
+assert(html.includes('<section class="capability-section"') && capabilitySource.includes('renderCapabilities(language)'), 'The evidence-linked capability map must render inside Projects');
+assert(capabilitySource.includes('data-project="') && capabilitySource.includes('project.stage'), 'Capability evidence must open existing project records and show their actual status');
+assert.equal((styleFiles[3].match(/\.viewer-dialog \{/g) || []).length, 1, 'Viewer mobile rules must not be duplicated');
+assert(drawerSource.includes("event.key === 'ArrowRight'") && drawerSource.includes("event.key === 'ArrowLeft'") && drawerSource.includes("event.key === 'Home'") && drawerSource.includes("event.key === 'End'"), 'Media tabs must support keyboard navigation');
+assert(drawerSource.includes('tabindex="') && drawerSource.includes('role="tabpanel"'), 'Media tabs need roving focus and an associated panel');
+for (const token of ['--control-height: 40px;', '--control-height-compact: 36px;']) assert(tokens.includes(token), 'Missing control dimension token: ' + token);
+assert(style.includes('min-height: var(--control-height)') && style.includes('min-height: var(--control-height-compact)'), 'Controls must consume shared height tokens');
+assert(designSystem.includes('COLOR TOKENS') && designSystem.includes('TYPOGRAPHY') && designSystem.includes('COMPONENTS') && designSystem.includes('LAYOUT & RESPONSIVE'), 'The active design system must document real swatches, type, components, and layout');
+assert(designSystem.includes('#285C43') && designSystem.includes('13.03:1') && designSystem.includes('7.77:1'), 'The design system must record the active palette and measured contrast');
+assert(designSystem.includes('SECTION TITLE · 28–34px') && designSystem.includes('BODY · 16px / 1.75') && designSystem.includes('CARD SUMMARY · 13px'), 'The design system must document the current implemented typography hierarchy');
+
+assert(components.includes('width: min(var(--modal-width), calc(100vw - 48px))'), 'The tertiary viewer must consume the shared modal-width token');
+
+
+
+
+
+assert(designSystem.includes('METADATA · 10px') && designSystem.includes('13–16px'), 'The active type scale must distinguish micro-metadata from readable supporting copy');
+assert(style.includes('.button:disabled:hover') && style.includes('.media-tab:hover:not([aria-selected="true"])'), 'Disabled and inactive component states must be defined');
+
+
+assert(!readme.includes('其他板块保留中文'), 'README must not contradict site-wide bilingual implementation');
 
 console.log('PASS: syntax/imports, bilingual coverage, responsive styles, document/media/PDF viewers and SSE integration.');

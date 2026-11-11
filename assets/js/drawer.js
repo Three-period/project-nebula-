@@ -25,7 +25,7 @@ function renderProjectMedia(project, activeType, activeIndex) {
   const title = mediaCopy(item, 'title') || project.title;
   const alt = mediaCopy(item, 'alt') || title;
   const tabs = types.map(tab => '<button class="media-tab" type="button" role="tab" aria-selected="' +
-    String(tab === type) + '" id="media-tab-' + tab + '" aria-controls="project-media-panel" data-media-tab="' + tab + '">' + escapeHTML(t(mediaLabels[tab])) + '</button>').join('');
+    String(tab === type) + '" id="media-tab-' + tab + '" tabindex="' + (tab === type ? '0' : '-1') + '" aria-controls="project-media-panel" data-media-tab="' + tab + '">' + escapeHTML(t(mediaLabels[tab])) + '</button>').join('');
 
   let stage = '';
   if (type === 'image' || type === 'gif') {
@@ -119,6 +119,24 @@ export function initDrawer() {
       activeMediaIndex = (activeMediaIndex + Number(step.dataset.mediaStep) + count) % count;
       refreshProjectMedia();
     }
+  });
+
+  body.addEventListener('keydown', event => {
+    const tab = event.target.closest?.('[data-media-tab]');
+    if (!tab || !['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+    const tabs = [...body.querySelectorAll('[data-media-tab]')];
+    const currentIndex = tabs.indexOf(tab);
+    if (currentIndex < 0 || tabs.length < 2) return;
+    let nextIndex = currentIndex;
+    if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+    if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    if (event.key === 'Home') nextIndex = 0;
+    if (event.key === 'End') nextIndex = tabs.length - 1;
+    event.preventDefault();
+    activeMediaType = tabs[nextIndex].dataset.mediaTab;
+    activeMediaIndex = 0;
+    refreshProjectMedia();
+    body.querySelector('[data-media-tab="' + activeMediaType + '"]')?.focus();
   });
 
   function openProject(id, preserveScroll = false) {

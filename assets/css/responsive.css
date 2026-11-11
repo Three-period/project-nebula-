@@ -83,6 +83,7 @@
   .singu-layout { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .singu-left, .singu-right { padding: 20px; }
   .singu-ability-grid { grid-template-columns: minmax(0, 1fr); }
+  .capability-grid { grid-template-columns: minmax(0, 1fr); }
   .project { grid-template-columns: 76px minmax(0, 1fr); gap: 14px; }
   .project-cover { width: 76px; height: 76px; }
   .document-card {
@@ -123,6 +124,9 @@
   .project h3 { font-size: 15px; }
   .document-card { padding: 15px; }
   .group-heading { font-size: 19px; }
+  .capability-card { padding: 16px; }
+  .capability-evidence-item { align-items: flex-start; flex-direction: column; gap: 3px; }
+  .capability-evidence-item small { max-width: none; text-align: left; }
   .article-row { padding: 16px; }
   .contact-section h2 { font-size: 22px; }
   .contact-links { gap: 11px 18px; }
@@ -195,29 +199,4 @@
 }
 
 
-@media (max-width: 760px) {
-  .viewer-dialog {
-    inset: 0;
-    width: 100vw;
-    height: 100dvh;
-    border: 0;
-    border-radius: 0;
-    transform: none;
-  }
-  .viewer-dialog[open] { animation: none; }
-  .viewer-header { padding: 14px 16px; }
-  .viewer-body { padding: 16px; }
-  .viewer-media-image { max-height: calc(100dvh - 150px); }
-  .viewer-pdf-frame { min-height: calc(100dvh - 170px); }
-  .project-media { padding: 10px; }
-  .media-stage { min-height: 150px; }
-  .media-image-button { min-height: 150px; }
-  .media-controls .button { padding-inline: 9px; }
-  .document-overview { padding: 18px; }
-}
-@media (max-width: 380px) {
-  .viewer-header { padding: 12px; }
-  .viewer-body { padding: 12px; }
-  .media-controls { gap: 6px; }
-  .media-controls .button { font-size: 11px; }
-}
+

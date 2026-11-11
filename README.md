@@ -8,7 +8,8 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 ## 维护入口
 | 内容 | 文件 |
 | --- | --- |
-| 四板块结构、个人奇点和经历与成长 | `index.html` |
+| 四板块结构、个人奇点、能力图谱和经历与成长 | `index.html` |
+| 能力领域及其项目证据映射 | `assets/data/capabilities.js` |
 | 工作项目 V3 正文 | `assets/data/work-projects.js` |
 | 个人项目 V3 正文 | `assets/data/personal-projects.js` |
 | 旧项目卡与隐藏占位草稿原文 | `assets/data/projects.js` |
@@ -32,9 +33,9 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 
 ## 开发原则
 - 目录点击仅显示当前板块，不使用旧版全站连续长页；深层详情统一从右侧抽屉打开。
-- 个人奇点支持中文 / English 切换；其他板块保留中文。Project Nebula 的经历入口复用原项目与材料数据，不复制正文。
+- 全站导航、个人介绍、经历、项目、材料、文章与抽屉内容支持中文 / English 切换；中文为内容源语言，新增数据需同步维护对应翻译。Project Nebula 的经历入口复用原项目与材料数据，不复制正文。
 - 五个工作项目与两个个人项目各自存储；三张历史占位项目仅保留在数据中不公开展示。
-- PRD 中确认的 V3 内容是新增项目权威正文，历史文章及文档不擅自重写。
+- 当前确认的 V3 项目内容是新增项目权威正文，历史文章及文档不擅自重写。
 - 暂无实际附件链接的项目不制作假下载入口；PDF 沿用旧文件，不代表简历已更新。
 - 数字分身处于维修模式，不调用后端 `/api/chat`；保留原 Pages Function 供未来重启。
 - 静态站部署仍由原 Cloudflare Pages 项目从 `main` 自动发布，不新建站点。
@@ -66,7 +67,7 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - `assets/css/themes/landscape.css` stores the Landscape White & Green semantic palette. Future themes can add a sibling theme file without rewriting shared components.
 - `base.css`, `layout.css`, `components.css` and `responsive.css` separate global foundations, page structure, reusable UI and viewport-specific behavior. They are loaded in order by HTML link tags; no build tool or CSS import chain is required.
 - The previous cosmic/parchment override stack and transitional color aliases have been removed from the active stylesheet. The orbit SVG remains an unreferenced asset for possible future theme work.
-- Responsive behavior uses a 960px tablet-navigation breakpoint, a 760px single-column composition breakpoint, and 560px compact mobile refinements.
+- Responsive behavior uses 1100px layout balancing, 960px tablet navigation, 760px single-column composition, 560px compact mobile refinements, and 380px narrow-screen refinements.
 - Landscape cards use translucent frosted surfaces, restrained green borders, and two-layer contact/spatial shadows.
 
 
@@ -76,3 +77,15 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - Document drawers show a short overview and tags. The full stored document opens in a third-level modal viewer; the modal can stack above the drawer and returns focus to the originating control when closed.
 - The existing resume PDF has an online preview modal and retains its download link. Future PDFs can reuse the same viewer entry point.
 - Full-document, media and PDF viewers follow the global Chinese / English setting. The photography portfolio is intentionally deferred until original photography assets and grouping information are supplied.
+
+
+## Capability map (V1)
+- The Projects section begins with four evidence-linked capability domains: business understanding/modeling, product definition/solution design, AI capability engineering, and end-to-end delivery/collaboration.
+- Capability copy is bilingual and stored in `assets/data/site-i18n.js`; group definitions and evidence project IDs are stored in `assets/data/capabilities.js`.
+- Each evidence item opens its existing project drawer. Project records remain the source of truth for titles, stages, and project descriptions; capability cards do not duplicate project narratives.
+- No personal photography assets were found in the repository. The photography portfolio is not populated with AI-generated or unrelated project images; it remains pending original photos and category metadata.
+
+
+## Refactoring quality review
+- `docs/phase-audit.md` records the four refactoring stages, the current implementation review, and outstanding acceptance work.
+- `design-system.html` is the active visual reference for the current Landscape White & Green theme, component dimensions, typography, and responsive rules.
