@@ -27,6 +27,7 @@ for (const file of files.filter(f => /\.(js|mjs)$/.test(f))) {
   }
 }
 const html = await readFile(resolve(root, 'index.html'), 'utf8');
+const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
@@ -66,6 +67,7 @@ for (const language of ['zh', 'en']) {
 }
 assert(html.includes('data-language="zh"') && html.includes('data-language="en"'), 'Global language controls are required');
 assert(!html.includes('heying-photo.jpg') && !html.includes('about-language-switch'), 'Profile photo and About-only language switch must be removed');
+assert(!html.includes('class="cosmic-orbits"'), 'Obsolete cosmic illustration markup must be removed');
 assert(html.includes('global-language-switch'), 'Global language switch must be in the navigation');
 assert(html.includes('independent-project-resources'), 'Independent Nebula resources must be linked');
 assert(html.indexOf('2026.04 — 至今') < html.indexOf('2026.01 — 至今') && html.indexOf('2026.01 — 至今') < html.indexOf('2024.07'), 'Experience order');
@@ -82,11 +84,14 @@ for (const [key, document] of Object.entries(documents)) assert(documentI18n.det
 assert.equal(articleI18n.length, articles.length, 'Every article needs English copy');
 for (const [index, article] of articles.entries()) assert(articleI18n[index]?.body && articleI18n[index]?.title && articleI18n[index]?.summary, 'Incomplete article translation: ' + index);
 const style = await readFile(resolve(root, 'assets/css/main.css'), 'utf8');
-assert(style.includes('grid-template-columns: minmax(0, 1fr) minmax(0, 1fr)'), 'Profile columns must be balanced');
-assert(style.includes('padding: 18px 2em'), 'Article card inset must be two characters');
-assert(style.includes('@media (max-width: 560px)') && style.includes('padding: 80px 20px 0'), 'Mobile safe gutters');
-assert(style.includes('global-language-switch') && style.includes('prefers-reduced-motion') && style.includes('cosmic-orbit'), 'Global switch and motion fallback');
+assert(style.includes('grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr)'), 'Profile columns must use a balanced responsive grid');
+assert(style.includes('backdrop-filter: blur(var(--surface-blur))') && style.includes('box-shadow: var(--shadow-card)'), 'Landscape cards need frosted glass and layered architectural shadows');
+assert(style.includes('@media (max-width: 960px)') && style.includes('@media (max-width: 760px)') && style.includes('@media (max-width: 560px)'), 'Desktop, tablet and mobile breakpoints must be explicit');
+assert(style.includes('global-language-switch') && style.includes('prefers-reduced-motion') && style.includes('100dvh'), 'Global language, reduced motion and dynamic viewport support');
+assert(!style.includes('cosmic-orbit') && !style.includes('body::after') && !style.includes('rgba(178, 153, 93'), 'Legacy cosmic and parchment visuals must be removed');
 assert(!style.includes('singu-photo') && !style.includes('about-language-switch'), 'Obsolete photo/language styles must be removed');
+assert(!html.includes('class="cosmic-orbits"') && !mainSource.includes('is-orbiting'), 'Unused cosmic illustration and animation trigger must be removed');
+assert(!tokens.includes('--paper:') && !tokens.includes('--ochre:') && !tokens.includes('--gold:'), 'Transitional legacy color aliases must be removed');
 assert(!files.some(file => file.endsWith('/heying-photo.jpg')), 'Personal photo asset must be deleted');
 const themeSource = await readFile(resolve(root, 'assets/js/theme.js'), 'utf8');
 assert(themeSource.includes("landscape") && /document\.documentElement\.dataset\.theme\s*=\s*themeId/.test(themeSource), 'Landscape theme registry must initialize through the document theme attribute');
