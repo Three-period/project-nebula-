@@ -32,6 +32,8 @@
 .ds-type-body { font-size: var(--text-base); line-height: 1.75; }
 .ds-type-secondary { color: var(--color-muted); font-size: var(--text-sm); line-height: 1.7; }
 .ds-type-caption { color: var(--color-muted); font-size: var(--text-caption); line-height: 1.6; }
+.ds-type-caption { color: var(--color-muted); font-size: var(--text-caption); line-height: 1.6; }
+.ds-type-metadata { color: var(--color-muted); font-size: 10px; line-height: 1.5; }
 .ds-type-eyebrow { color: var(--color-secondary); font: 600 .7rem/1.5 var(--font-code); letter-spacing: .1em; }
 .ds-component-panel { padding: 18px; border: 1px solid var(--color-line); border-radius: var(--radius-card); background: var(--color-page-soft); }
 .ds-component-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 12px 0; }
@@ -95,10 +97,11 @@
   <div class="ds-type-row"><span class="ds-type-meta">H3 · 21px</span><p class="ds-type-h3">业务理解与建模</p></div>
   <div class="ds-type-row"><span class="ds-type-meta">BODY · 16px / 1.75</span><p class="ds-type-body">通过清晰的内容组织、适度留白和稳定的阅读节奏，呈现真实项目与方法。</p></div>
   <div class="ds-type-row"><span class="ds-type-meta">SECONDARY · 14px</span><p class="ds-type-secondary">说明、摘要与辅助描述使用较低字重和次级颜色。</p></div>
-  <div class="ds-type-row"><span class="ds-type-meta">CAPTION · 12px</span><p class="ds-type-caption">日期、状态与补充信息；不用于长段正文。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">CAPTION · 12px</span><p class="ds-type-caption">说明性短句与辅助信息。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">METADATA · 10px</span><p class="ds-type-metadata">2026.11 / PROJECT STATUS / SMALL LABEL</p></div>
   <div class="ds-type-row"><span class="ds-type-meta">EYEBROW · 11px</span><p class="ds-type-eyebrow">OBSERVATION / SECTION LABEL</p></div>
  </div>
- <p class="ds-note">字体栈：Noto Sans SC → Source Han Sans SC → PingFang SC → Microsoft YaHei → sans-serif。代码与编号使用 IBM Plex Mono / ui-monospace。当前未加载外部字体文件，因此不同操作系统可能使用不同回退字体。</p>
+ <p class="ds-note">字体栈：Noto Sans SC → Source Han Sans SC → PingFang SC → Microsoft YaHei → sans-serif。代码与编号使用 IBM Plex Mono / ui-monospace。10px 仅用于日期、编号等微型 metadata，不用于长段说明；标签约 11px，正文说明优先使用 13–16px。当前未加载外部字体文件，因此不同操作系统可能使用不同回退字体。</p>
 </section>
 
 <section class="resume-section">
