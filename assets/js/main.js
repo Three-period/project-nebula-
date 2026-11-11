@@ -33,11 +33,6 @@ document.addEventListener('click',event=>{
   case 'prev-article':drawer.previous();break;
   case 'next-article':drawer.next();break;
  }
- const card=target.closest('.project,.document-card');
- if(card&&target.matches('button')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
-  card.classList.remove('is-orbiting');void card.offsetWidth;card.classList.add('is-orbiting');
-  card.addEventListener('animationend',()=>card.classList.remove('is-orbiting'),{once:true});
- }
 });
 window.addEventListener('popstate',()=>activate(location.hash.slice(1)||'about'));
 activate(location.hash.replace(/^#(?:view-)?/,'')||'about',false);
