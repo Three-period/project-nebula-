@@ -2,8 +2,8 @@ export const documentList = [
   {
     "key": "paper",
     "type": "HISTORICAL DESIGN",
-    "title": "宣纸风阅读界面与设计规范",
-    "description": "上一轮宣纸风长页改版说明，作为历史资料保留；本次视觉规范以新 PRD 为准。",
+    "title": "宣纸风阅读界面与设计规范（历史归档）",
+    "description": "上一轮宣纸风长页改版说明，作为历史资料保留；当前生效视觉规范见景观白绿设计系统页。",
     "tags": [
       "信息平铺",
       "统一组件",
