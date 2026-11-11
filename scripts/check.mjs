@@ -98,7 +98,7 @@ assert(!style.includes('singu-photo') && !style.includes('about-language-switch'
 assert(!html.includes('class="cosmic-orbits"') && !mainSource.includes('is-orbiting'), 'Unused cosmic illustration and animation trigger must be removed');
 assert(themeStyle.includes(':root[data-theme="landscape"]') && themeStyle.includes('--color-primary: #285C43'), 'Landscape palette must be isolated in its theme file');
 assert(!tokens.includes('--color-primary:') && !tokens.includes('--paper:') && !tokens.includes('--ochre:'), 'Shared tokens must not contain theme palette or legacy aliases');
-assert(!files.some(file => /\\/heying-photo(?:\\.jpg)?$/.test(file)), 'Personal photo asset and empty placeholder must be deleted');
+assert(!files.some(file => file.endsWith('/heying-photo') || file.endsWith('/heying-photo.jpg')), 'Personal photo asset and empty placeholder must be deleted');
 const themeSource = await readFile(resolve(root, 'assets/js/theme.js'), 'utf8');
 assert(themeSource.includes("landscape") && /document\.documentElement\.dataset\.theme\s*=\s*themeId/.test(themeSource), 'Landscape theme registry must initialize through the document theme attribute');
 for (const token of ['--font-body:', '--sidebar-width:', '--surface-blur:', '--ease:']) assert(tokens.includes(token), 'Missing shared design token: ' + token);
