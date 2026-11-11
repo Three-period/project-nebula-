@@ -1,9 +1,9 @@
 // Stored English copy for Project Nebula document cards and full detail views.
 export const documentI18n = {
   cards: {
-    paper: { type: "HISTORICAL DESIGN", title: "Rice-Paper Reading Interface & Design Guidelines · Archived", description: "Historical notes from the previous rice-paper long-page redesign. The active visual specification is the Landscape White & Green design system page.", tags: ["Archived Design", "Reading Layout", "Historical Reference"] },
-    prd: { type: "PRD · ORIGINAL PLAN", title: "Project Nebula Showcase PRD V7 · Original Planet Architecture", description: "The original three-layer planet information architecture and interaction concept. The current site has since moved to four top-level resume/portfolio sections; implementation differences are recorded in the phase audit.", tags: ["Original Product Vision", "Planet Architecture", "Historical Plan"] },
-    design: { type: "DESIGN SYSTEM · ARCHIVED", title: "Retro Cosmic UI/UX Design Guide · Archived", description: "Historical visual guidance for the former cosmic theme. The active visual standard is the Landscape White & Green design system page.", tags: ["Archived Theme", "Historical Reference", "Visual Evolution"] },
+    paper: { type: "HISTORICAL DESIGN", title: "Rice-Paper Reading Interface & Design Guidelines", description: "Notes from the previous rice-paper long-page redesign, retained as historical reference. The current visual standard is defined by the latest PRD.", tags: ["Flat Information Layout", "Unified Components", "Responsive Design"] },
+    prd: { type: "PRD", title: "Product Requirements Document", description: "An end-to-end PRD from 0 to 1, covering product positioning, information architecture, interaction logic, and acceptance criteria. The site's PRD V7 is a representative work.", tags: ["Requirements Framing", "Scope Definition", "Product Closure"] },
+    design: { type: "Design System", title: "Retro Cosmic UI/UX Design Guide", description: "The core visual specification for this site, defining the color system, typography, component styles, and interaction states to keep the experience visually consistent.", tags: ["Color System", "Component Standards", "Visual Consistency"] },
     arch: { type: "Architecture", title: "Business Architecture & System Design", description: "Maps business workflows, data flows, and system boundaries, translating complex business scenarios into a clear product model.", tags: ["Workflow Mapping", "Scope Definition", "Interaction Logic"] },
     proto: { type: "Prototype", title: "High-Fidelity Interactive Prototype · Full-Site Coverage", description: "High-fidelity screens, design standards, and interaction specifications, with an emphasis on implementation feasibility and clear communication.", tags: ["Specification Delivery", "Interaction Logic", "Product Closure"] },
     agent: { type: "AGENT DESIGN · HISTORICAL", title: "Personal Digital Twin Agent · Architecture & Implementation Guide", description: "Historical materials covering Coze, knowledge bases, Prompt design, and integration. The live Q&A service is currently under maintenance.", tags: ["Agent", "RAG", "Historical Technical Reference"] }
@@ -11,13 +11,13 @@ export const documentI18n = {
   details: {
     prd: {
       type: "PRD",
-      title: "Project Nebula · Showcase PRD V7 (Original Planet Architecture)",
+      title: "Project Nebula · Product Requirements Document (Showcase Edition)",
       body: `<div class="dr-doc-content">
         <h2>1. Product Positioning & Objectives</h2>
         <h3>Core Problem</h3>
         <p>A traditional resume presents experience statically and cannot effectively demonstrate the capabilities that matter in the AI era: product thinking for AI, an understanding of large-model limitations, and the ability to turn ideas into usable products.</p>
         <h3>One-Sentence Positioning</h3>
-        <p>A personal AI showcase built around an interactive “capability planet system”—a product prototype that can be <strong>explored, interacted with, and talked to.</strong></p><p class="drawer-notice"><strong>Implementation note:</strong> This page preserves the original planet-based product proposal. The current site uses four top-level resume/portfolio sections and does not implement the planet overview, automatic transition, exploration-state feedback, or a live global Agent. Do not use this historical PRD as a line-by-line acceptance checklist for the current build.</p>
+        <p>A personal AI showcase built around an interactive “capability planet system”—a product prototype that can be <strong>explored, interacted with, and talked to.</strong></p>
         <h3>Product Objectives</h3>
         <ul>
           <li>Replace a conventional resume format with a distinctive product experience.</li>
@@ -85,10 +85,10 @@ export const documentI18n = {
     },
     design: {
       type: "Design System",
-      title: "Retro Cosmic UI/UX Design Guide · Archived",
+      title: "Retro Cosmic UI/UX Design Guide",
       body: `<div class="dr-doc-content">
         <h2>1. Design Context & Objectives</h2>
-        <p>This guide records the former retro-cosmic visual direction used in an earlier Project Nebula iteration.</p><p class="drawer-notice"><strong>Archive note:</strong> The colors, typefaces, and component rules below no longer govern the active website. Use the <a href="/design-system.html" target="_blank" rel="noopener noreferrer">Landscape White & Green design system ↗</a> as the current visual specification.</p>
+        <p>During Project Nebula's front-end development, multiple iterations introduced visual drift and inconsistent colors. This complete UI design system was created as a “visual constitution” to keep the retro, mysterious cosmic aesthetic consistent across every page and component.</p>
         <div class="dr-tag-row"><span class="dr-tag">Design System</span><span class="dr-tag">Visual Standards</span><span class="dr-tag">Retro Cosmic Style</span></div>
         <h2>2. Color System</h2>
         <h3>Background Palette</h3>
@@ -223,9 +223,9 @@ export const documentI18n = {
       </div>`
     },
     paper: {
-      type: "HISTORICAL DESIGN",
-      title: "Rice-Paper Reading Interface & Design Guidelines · Archived",
-      body: `<p class="drawer-notice"><strong>Archive note:</strong> This describes a retired rice-paper layout. Use the <a href="/design-system.html" target="_blank" rel="noopener noreferrer">active Landscape White & Green design system ↗</a> for the current site.</p><h2>Visual Design & Reading</h2><p>A warm rice-paper white sets the page background, with ink-gray body text and muted cinnabar accents establishing the reading hierarchy. The left navigation keeps the reader oriented, the main content flows continuously, and detailed content opens in a right-side drawer.</p><h2>Design Tokens</h2><p>Background: #F6F3EB; primary text: #292824; secondary text: #77736B; accent: #A6503C. Typography, spacing, and content width are centrally managed in tokens.css.</p><h2>Interaction Standards</h2><p>Navigation anchors support section positioning and scroll highlighting. The drawer supports Escape, backdrop dismissal, focus containment, and return to the previous position. On mobile, navigation collapses and details use a full-screen layout.</p>`
+      type: "Design System",
+      title: "Rice-Paper Reading Interface & Design Guidelines",
+      body: `<h2>Visual Design & Reading</h2><p>A warm rice-paper white sets the page background, with ink-gray body text and muted cinnabar accents establishing the reading hierarchy. The left navigation keeps the reader oriented, the main content flows continuously, and detailed content opens in a right-side drawer.</p><h2>Design Tokens</h2><p>Background: #F6F3EB; primary text: #292824; secondary text: #77736B; accent: #A6503C. Typography, spacing, and content width are centrally managed in tokens.css.</p><h2>Interaction Standards</h2><p>Navigation anchors support section positioning and scroll highlighting. The drawer supports Escape, backdrop dismissal, focus containment, and return to the previous position. On mobile, navigation collapses and details use a full-screen layout.</p>`
     }
   }
 };
