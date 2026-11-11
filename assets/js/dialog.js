@@ -1,27 +1,32 @@
-// Native dialog handles focus containment and Escape; restore focus and reading position.
-export function createDialog(element, initialFocus) {
+// Native dialogs handle focus containment, Escape, backdrop dismissal and scroll restoration.
+export function createDialog(element, initialFocus, { stack = false } = {}) {
   let opener;
   let scrollY = 0;
   let previousOverflow = '';
   let pointerStartedOutside = false;
+
   element.addEventListener('pointerdown', event => {
-    const r = element.getBoundingClientRect();
-    pointerStartedOutside = event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom;
+    const rect = element.getBoundingClientRect();
+    pointerStartedOutside = event.clientX < rect.left || event.clientX > rect.right ||
+      event.clientY < rect.top || event.clientY > rect.bottom;
   });
+
   element.addEventListener('click', event => {
     if (event.target === element && pointerStartedOutside) element.close();
     pointerStartedOutside = false;
   });
+
   element.addEventListener('close', () => {
     document.body.style.overflow = previousOverflow;
     opener?.focus({ preventScroll: true });
     window.scrollTo({ top: scrollY, behavior: 'instant' });
   });
+
   return {
     open() {
       if (element.open) return;
-      // Keep one modal visible at a time. Dialog content is replaced, never nested.
-      document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close());
+      // A viewer may stack above a drawer; ordinary drawers still replace other dialogs.
+      if (!stack) document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close());
       opener = document.activeElement;
       scrollY = window.scrollY;
       previousOverflow = document.body.style.overflow;
@@ -29,6 +34,8 @@ export function createDialog(element, initialFocus) {
       document.body.style.overflow = 'hidden';
       initialFocus?.focus({ preventScroll: true });
     },
-    close() { element.close(); }
+    close() {
+      if (element.open) element.close();
+    }
   };
 }
