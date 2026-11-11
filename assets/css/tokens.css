@@ -4,7 +4,6 @@
   --font-sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-heading: var(--font-sans);
   --font-body: var(--font-sans);
-  --font-display: "Manrope", "Inter", var(--font-sans);
   --font-code: "IBM Plex Mono", ui-monospace, monospace;
 
   /* Shared type scale */
@@ -16,6 +15,8 @@
   --text-lg: 1.125rem;
   --text-sm: .875rem;
   --text-caption: .75rem;
+  --control-height: 40px;
+  --control-height-compact: 36px;
 
   /* Layout and spacing */
   --space-1: .25rem;
