@@ -1,7 +1,7 @@
 // Stored English copy for Project Nebula document cards and full detail views.
 export const documentI18n = {
   cards: {
-    paper: { type: "HISTORICAL DESIGN", title: "Rice-Paper Reading Interface & Design Guidelines", description: "Notes from the previous rice-paper long-page redesign, retained as historical reference. The current visual standard is defined by the latest PRD.", tags: ["Flat Information Layout", "Unified Components", "Responsive Design"] },
+    paper: { type: "HISTORICAL DESIGN", title: "Rice-Paper Reading Interface & Design Guidelines · Archived", description: "Historical notes from the previous rice-paper long-page redesign. The active visual specification is the Landscape White & Green design system page.", tags: ["Archived Design", "Reading Layout", "Historical Reference"] },
     prd: { type: "PRD · ORIGINAL PLAN", title: "Project Nebula Showcase PRD V7 · Original Planet Architecture", description: "The original three-layer planet information architecture and interaction concept. The current site has since moved to four top-level resume/portfolio sections; implementation differences are recorded in the phase audit.", tags: ["Original Product Vision", "Planet Architecture", "Historical Plan"] },
     design: { type: "DESIGN SYSTEM · ARCHIVED", title: "Retro Cosmic UI/UX Design Guide · Archived", description: "Historical visual guidance for the former cosmic theme. The active visual standard is the Landscape White & Green design system page.", tags: ["Archived Theme", "Historical Reference", "Visual Evolution"] },
     arch: { type: "Architecture", title: "Business Architecture & System Design", description: "Maps business workflows, data flows, and system boundaries, translating complex business scenarios into a clear product model.", tags: ["Workflow Mapping", "Scope Definition", "Interaction Logic"] },
@@ -223,9 +223,9 @@ export const documentI18n = {
       </div>`
     },
     paper: {
-      type: "Design System",
-      title: "Rice-Paper Reading Interface & Design Guidelines",
-      body: `<h2>Visual Design & Reading</h2><p>A warm rice-paper white sets the page background, with ink-gray body text and muted cinnabar accents establishing the reading hierarchy. The left navigation keeps the reader oriented, the main content flows continuously, and detailed content opens in a right-side drawer.</p><h2>Design Tokens</h2><p>Background: #F6F3EB; primary text: #292824; secondary text: #77736B; accent: #A6503C. Typography, spacing, and content width are centrally managed in tokens.css.</p><h2>Interaction Standards</h2><p>Navigation anchors support section positioning and scroll highlighting. The drawer supports Escape, backdrop dismissal, focus containment, and return to the previous position. On mobile, navigation collapses and details use a full-screen layout.</p>`
+      type: "HISTORICAL DESIGN",
+      title: "Rice-Paper Reading Interface & Design Guidelines · Archived",
+      body: `<p class="drawer-notice"><strong>Archive note:</strong> This describes a retired rice-paper layout. Use the <a href="/design-system.html" target="_blank" rel="noopener noreferrer">active Landscape White & Green design system ↗</a> for the current site.</p><h2>Visual Design & Reading</h2><p>A warm rice-paper white sets the page background, with ink-gray body text and muted cinnabar accents establishing the reading hierarchy. The left navigation keeps the reader oriented, the main content flows continuously, and detailed content opens in a right-side drawer.</p><h2>Design Tokens</h2><p>Background: #F6F3EB; primary text: #292824; secondary text: #77736B; accent: #A6503C. Typography, spacing, and content width are centrally managed in tokens.css.</p><h2>Interaction Standards</h2><p>Navigation anchors support section positioning and scroll highlighting. The drawer supports Escape, backdrop dismissal, focus containment, and return to the previous position. On mobile, navigation collapses and details use a full-screen layout.</p>`
     }
   }
 };
