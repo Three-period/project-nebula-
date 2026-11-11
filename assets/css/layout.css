@@ -261,7 +261,7 @@
 .singu-skill-groups p, .learning-notes p {
   margin: 6px 0;
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.8;
 }
 .singu-quote {
@@ -293,7 +293,7 @@
 }
 .singu-agent-entry p:not(.sae-title) {
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 .singu-agent-entry .button { margin-top: 12px; }
 .singu-ability-grid {
@@ -318,7 +318,7 @@
 }
 .singu-ab-card p {
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.75;
 }
 .learning-notes {
