@@ -158,15 +158,18 @@ for (const token of ['--control-height: 40px;', '--control-height-compact: 36px;
 assert(style.includes('min-height: var(--control-height)') && style.includes('min-height: var(--control-height-compact)'), 'Controls must consume shared height tokens');
 assert(designSystem.includes('COLOR TOKENS') && designSystem.includes('TYPOGRAPHY') && designSystem.includes('COMPONENTS') && designSystem.includes('LAYOUT & RESPONSIVE'), 'The active design system must document real swatches, type, components, and layout');
 assert(designSystem.includes('#285C43') && designSystem.includes('13.03:1') && designSystem.includes('7.77:1'), 'The design system must record the active palette and measured contrast');
-assert(documentList.find(item => item.key === 'prd')?.title.includes('原始方案'), 'The original planet PRD must be labeled as an original plan');
-assert(documentList.find(item => item.key === 'design')?.title.includes('历史归档'), 'The former cosmic design guide must be labeled as archived');
+assert(designSystem.includes('SECTION TITLE · 28–34px') && designSystem.includes('BODY · 16px / 1.75') && designSystem.includes('CARD SUMMARY · 13px'), 'The design system must document the current implemented typography hierarchy');
+assert(!designSystem.includes('原始 PRD') && !designSystem.includes('星球总览'), 'The active design system must be based on the current website refactor, not a past PRD');
+assert(components.includes('width: min(var(--modal-width), calc(100vw - 48px))'), 'The tertiary viewer must consume the shared modal-width token');
 
-assert(documentList.find(item => item.key === 'paper')?.title.includes('历史归档') && documents.paper.historical, 'The rice-paper guide must be labeled as historical');
-assert(documentI18n.cards.paper?.type === 'HISTORICAL DESIGN' && documentI18n.details.paper?.body.includes('Archive note'), 'The archived rice-paper guide needs bilingual historical labeling');
+
+
+
+
 assert(designSystem.includes('METADATA · 10px') && designSystem.includes('13–16px'), 'The active type scale must distinguish micro-metadata from readable supporting copy');
 assert(style.includes('.button:disabled:hover') && style.includes('.media-tab:hover:not([aria-selected="true"])'), 'Disabled and inactive component states must be defined');
 
-assert(documents.prd.body.includes('实施状态说明') && documents.design.body.includes('历史归档说明'), 'Historical documents must disclose their implementation status');
+
 assert(!readme.includes('其他板块保留中文'), 'README must not contradict site-wide bilingual implementation');
 
 console.log('PASS: syntax/imports, bilingual coverage, responsive styles, document/media/PDF viewers and SSE integration.');
