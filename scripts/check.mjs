@@ -91,7 +91,7 @@ const themeStyle = await readFile(resolve(root, 'assets/css/themes/landscape.css
 const tokens = await readFile(resolve(root, 'assets/css/tokens.css'), 'utf8');
 assert(style.includes('grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr)'), 'Profile columns must use a balanced responsive grid');
 assert(style.includes('backdrop-filter: blur(var(--surface-blur))') && style.includes('box-shadow: var(--shadow-card)'), 'Landscape cards need frosted glass and layered architectural shadows');
-assert(style.includes('@media (max-width: 960px)') && style.includes('@media (max-width: 760px)') && style.includes('@media (max-width: 560px)'), 'Desktop, tablet and mobile breakpoints must be explicit');
+assert(style.includes('@media (max-width: 1100px)') && style.includes('@media (max-width: 960px)') && style.includes('@media (max-width: 760px)') && style.includes('@media (max-width: 560px)'), 'Desktop, tablet and mobile breakpoints must be explicit');
 assert(style.includes('global-language-switch') && style.includes('prefers-reduced-motion') && style.includes('100dvh'), 'Global language, reduced motion and dynamic viewport support');
 assert(!style.includes('cosmic-orbit') && !style.includes('body::after') && !style.includes('rgba(178, 153, 93'), 'Legacy cosmic and parchment visuals must be removed');
 assert(!style.includes('singu-photo') && !style.includes('about-language-switch'), 'Obsolete photo/language styles must be removed');
