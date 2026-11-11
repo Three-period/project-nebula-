@@ -107,7 +107,7 @@
 .document-card .document-copy > p {
   margin-bottom: 8px;
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 .document-card .tags { gap: 5px; }
 .document-card .actions {
@@ -237,7 +237,7 @@
 }
 .drawer-body p, .drawer-body ul, .drawer-body ol, .drawer-body blockquote {
   margin: 0 0 14px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.8;
 }
 .drawer-body ul, .drawer-body ol { padding-left: 22px; }
@@ -456,7 +456,7 @@
 .media-caption {
   margin-top: 9px !important;
   color: var(--color-muted);
-  font-size: 11px !important;
+  font-size: 12px !important;
   text-align: center;
 }
 .media-controls {
