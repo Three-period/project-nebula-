@@ -1,4 +1,4 @@
-# Project Nebula · 浅色宇宙手记
+# Project Nebula · 景观白绿
 本项目为纯 HTML、CSS 与原生 ES Modules 实现的个人 AI 展示站，无需构建步骤。
 
 ## 运行和验证
@@ -21,7 +21,7 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 | 项目 / 文档 / 文章阅读抽屉 | `assets/js/drawer.js` |
 | 数字分身静态维修状态 | `assets/js/agent.js` |
 | 视觉 tokens、布局与动效 | `assets/css/tokens.css`、`assets/css/main.css` |
-| 星轨矢量插画 | `public/images/nebula-orbits-v2.svg` |
+| 设计规范页 | `design-system.html` |
 
 ## 开发原则
 - 目录点击仅显示当前板块，不使用旧版全站连续长页；深层详情统一从右侧抽屉打开。
@@ -42,3 +42,12 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - English interface copy is stored in `assets/data/site-i18n.js`; project, document, and article translations are stored in the corresponding `*-i18n.js` files.
 - The global language switch updates static sections, rendered cards, and open detail drawers. The selected language is remembered locally in the browser.
 - When adding or editing content, update the matching English translation entry. Existing translations are stored in GitHub; no translation API, backend, or database is required.
+
+
+## Landscape White & Green theme
+
+- Default theme: `landscape`, initialized by `assets/js/theme.js` and `data-theme="landscape"`.
+- Semantic palette and layout tokens are maintained in `assets/css/tokens.css`.
+- The component layer in `assets/css/main.css` maps the existing interface to white surfaces, forest-green actions, mist-green borders, and restrained spatial shadows.
+- Existing content, bilingual copy, navigation, drawers, and maintenance-mode behavior remain unchanged in this visual phase.
+- The former cosmic orbit illustration remains in the repository as a historical asset but is hidden by the current theme.
