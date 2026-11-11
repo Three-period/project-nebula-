@@ -1,23 +1,5 @@
-/* Project Nebula · Shared foundation tokens + theme defaults */
-:root,
-:root[data-theme="landscape"] {
-  color-scheme: light;
-
-  /* Landscape White & Green palette */
-  --color-page: #FFFFFF;
-  --color-page-soft: #F5F8F6;
-  --color-surface: rgba(255, 255, 255, .88);
-  --color-surface-solid: #FFFFFF;
-  --color-text: #26342D;
-  --color-muted: #66746C;
-  --color-primary: #285C43;
-  --color-primary-hover: #1F4D37;
-  --color-primary-soft: #EAF2EC;
-  --color-secondary: #4F755D;
-  --color-mist: #B9CCBE;
-  --color-line: #DCE6DE;
-  --color-line-strong: #C6D5CA;
-
+/* Project Nebula · Theme-independent typography, layout and motion tokens */
+:root {
   /* Typography */
   --font-sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-heading: var(--font-sans);
@@ -49,13 +31,10 @@
   --drawer-width: 760px;
   --modal-width: 1120px;
 
-  /* Material, shape and motion */
+  /* Shared shape and motion */
   --radius: 4px;
   --radius-control: 3px;
   --radius-card: 6px;
   --surface-blur: 12px;
-  --shadow-contact: 0 2px 5px rgba(33, 61, 43, .07);
-  --shadow-spatial: 0 14px 30px rgba(33, 61, 43, .09);
-  --shadow-card: var(--shadow-contact), var(--shadow-spatial);
   --ease: 220ms cubic-bezier(.2, .7, .2, 1);
 }
