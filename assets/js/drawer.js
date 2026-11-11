@@ -25,7 +25,7 @@ function renderProjectMedia(project, activeType, activeIndex) {
   const title = mediaCopy(item, 'title') || project.title;
   const alt = mediaCopy(item, 'alt') || title;
   const tabs = types.map(tab => '<button class="media-tab" type="button" role="tab" aria-selected="' +
-    String(tab === type) + '" data-media-tab="' + tab + '">' + escapeHTML(t(mediaLabels[tab])) + '</button>').join('');
+    String(tab === type) + '" id="media-tab-' + tab + '" aria-controls="project-media-panel" data-media-tab="' + tab + '">' + escapeHTML(t(mediaLabels[tab])) + '</button>').join('');
 
   let stage = '';
   if (type === 'image' || type === 'gif') {
@@ -55,7 +55,7 @@ function renderProjectMedia(project, activeType, activeIndex) {
 
   return '<section class="project-media" aria-label="' + escapeHTML(t('mediaTabAria')) + '">' +
     '<div class="media-tabs" role="tablist" aria-label="' + escapeHTML(t('mediaTabAria')) + '">' + tabs + '</div>' +
-    '<div class="media-stage' + (type === 'video' ? ' media-stage-video' : '') + '">' + stage + '</div>' +
+    '<div id="project-media-panel" role="tabpanel" aria-labelledby="media-tab-' + type + '" class="media-stage' + (type === 'video' ? ' media-stage-video' : '') + '">' + stage + '</div>' +
     '<p class="media-caption">' + escapeHTML(title) + '</p>' + controls + '</section>';
 }
 
