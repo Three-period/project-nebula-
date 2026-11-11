@@ -166,3 +166,30 @@
   .resume-section { padding: 22px 0; }
   .project, .document-card, .fusion-item, .article-row { break-inside: avoid; }
 }
+
+@media (max-width: 760px) {
+  .viewer-dialog {
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    transform: none;
+  }
+  .viewer-dialog[open] { animation: none; }
+  .viewer-header { padding: 14px 16px; }
+  .viewer-body { padding: 16px; }
+  .viewer-media-image { max-height: calc(100dvh - 150px); }
+  .viewer-pdf-frame { min-height: calc(100dvh - 170px); }
+  .project-media { padding: 10px; }
+  .media-stage { min-height: 150px; }
+  .media-image-button { min-height: 150px; }
+  .media-controls .button { padding-inline: 9px; }
+  .document-overview { padding: 18px; }
+}
+@media (max-width: 380px) {
+  .viewer-header { padding: 12px; }
+  .viewer-body { padding: 12px; }
+  .media-controls { gap: 6px; }
+  .media-controls .button { font-size: 11px; }
+}
