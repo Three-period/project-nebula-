@@ -73,6 +73,10 @@
   background: var(--color-primary);
   color: #fff;
 }
+.lang-tab:hover:not([aria-pressed="true"]) {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
 .menu-toggle { display: none; }
 
 .sidebar-content {
