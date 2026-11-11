@@ -60,6 +60,7 @@
 }
 .lang-tab {
   min-width: 38px;
+  min-height: 32px;
   padding: 5px 9px;
   border: 0;
   border-radius: 2px;
@@ -131,6 +132,9 @@
 }
 .sidebar-footer .button { width: 100%; }
 .utility-link {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
   color: var(--color-text);
   font-size: 12px;
   text-decoration: none;
