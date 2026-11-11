@@ -2,8 +2,8 @@ export const documentList = [
   {
     "key": "paper",
     "type": "HISTORICAL DESIGN",
-    "title": "宣纸风阅读界面与设计规范（历史归档）",
-    "description": "上一轮宣纸风长页改版说明，作为历史资料保留；当前生效视觉规范见景观白绿设计系统页。",
+    "title": "宣纸风阅读界面与设计规范",
+    "description": "上一轮宣纸风长页改版说明，作为历史资料保留；本次视觉规范以新 PRD 为准。",
     "tags": [
       "信息平铺",
       "统一组件",
@@ -13,8 +13,8 @@ export const documentList = [
   {
     "key": "prd",
     "type": "PRD",
-    "title": "Project Nebula 展示版 PRD V7（星球式原始方案）",
-    "description": "保留最初的三层星球信息架构与交互构想。当前网站已调整为四个一级板块；原始 PRD 与现状的差异见阶段审查记录。",
+    "title": "产品需求文档",
+    "description": "从 0 到 1 的完整 PRD 设计，包含产品定位、信息架构、交互逻辑与验收标准。本站 PRD V7 即为代表作。",
     "tags": [
       "需求抽象",
       "边界定义",
@@ -24,8 +24,8 @@ export const documentList = [
   {
     "key": "design",
     "type": "Design System",
-    "title": "复古宇宙 UI/UX 设计指南（历史归档）",
-    "description": "旧版复古宇宙主题的历史设计稿，保留供追溯；当前生效规范以景观白绿设计系统页为准。",
+    "title": "复古宇宙神秘风格 UI/UX 设计指南",
+    "description": "本站核心视觉设计规范——色彩系统、字体层级、组件样式与交互状态的完整定义，确保全站视觉表达一致不偏移。",
     "tags": [
       "色彩系统",
       "组件规范",
