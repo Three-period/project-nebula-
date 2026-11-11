@@ -3,45 +3,163 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>景观白绿设计规范 · Project Nebula</title>
+<meta name="description" content="Project Nebula 当前生效的景观白绿设计系统，包含颜色、字体、组件、交互状态与响应式规范。">
+<title>景观白绿设计系统 · Project Nebula</title>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/themes/landscape.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/layout.css">
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
+<style>
+.ds-main { width: min(1120px, 100%); margin: 0 auto; padding: 40px 28px 72px; }
+.ds-main .page-intro { padding-top: 30px; }
+.ds-main .resume-section { padding: 34px 0 42px; }
+.ds-note { margin-top: 16px; padding: 13px 16px; border-left: 3px solid var(--color-secondary); background: var(--color-page-soft); color: var(--color-muted); font-size: 13px; line-height: 1.8; }
+.ds-color-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ds-color-card { display: flex; min-width: 0; gap: 12px; align-items: center; padding: 12px; border: 1px solid var(--color-line); border-radius: var(--radius-card); background: var(--color-surface-solid); }
+.ds-swatch { width: 52px; height: 52px; flex: none; border: 1px solid rgba(38,52,45,.12); border-radius: var(--radius-control); }
+.ds-color-card h3 { color: var(--color-text); font-size: 13px; font-weight: 600; }
+.ds-color-card p { margin-top: 3px; color: var(--color-muted); font-size: 11px; line-height: 1.5; }
+.ds-color-card code { display: block; margin-top: 4px; color: var(--color-secondary); font-size: 10px; }
+.ds-type-list { display: grid; gap: 0; border-top: 1px solid var(--color-line); }
+.ds-type-row { display: grid; grid-template-columns: 150px minmax(0,1fr); align-items: baseline; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--color-line); }
+.ds-type-meta { color: var(--color-muted); font: 10px/1.6 var(--font-code); letter-spacing: .04em; }
+.ds-type-display { font-size: var(--text-display); line-height: 1.25; }
+.ds-type-h1 { font-size: var(--text-h1); line-height: 1.35; }
+.ds-type-h2 { font-size: var(--text-h2); line-height: 1.4; }
+.ds-type-h3 { font-size: var(--text-h3); line-height: 1.5; }
+.ds-type-body { font-size: var(--text-base); line-height: 1.75; }
+.ds-type-secondary { color: var(--color-muted); font-size: var(--text-sm); line-height: 1.7; }
+.ds-type-caption { color: var(--color-muted); font-size: var(--text-caption); line-height: 1.6; }
+.ds-type-eyebrow { color: var(--color-secondary); font: 600 .7rem/1.5 var(--font-code); letter-spacing: .1em; }
+.ds-component-panel { padding: 18px; border: 1px solid var(--color-line); border-radius: var(--radius-card); background: var(--color-page-soft); }
+.ds-component-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 12px 0; }
+.ds-component-row .media-tabs { margin: 0; }
+.ds-demo-card { max-width: 560px; padding: 18px; border: 1px solid var(--color-line); border-radius: var(--radius-card); background: rgba(255,255,255,.84); box-shadow: var(--shadow-card); }
+.ds-demo-card h3 { margin-bottom: 7px; color: var(--color-text); font-size: 16px; }
+.ds-demo-card p { color: var(--color-muted); font-size: 13px; line-height: 1.8; }
+.ds-breakpoints { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; }
+.ds-breakpoint { padding: 12px; border: 1px solid var(--color-line); border-radius: var(--radius-control); background: var(--color-surface-solid); }
+.ds-breakpoint strong { display: block; color: var(--color-primary); font: 600 14px/1.5 var(--font-code); }
+.ds-breakpoint span { display: block; margin-top: 4px; color: var(--color-muted); font-size: 11px; line-height: 1.5; }
+.ds-spec-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px 24px; padding-left: 18px; color: var(--color-muted); font-size: 13px; line-height: 1.8; }
+.ds-spec-list strong { color: var(--color-text); }
+@media (max-width: 760px) {
+  .ds-main { padding: 24px 20px 48px; }
+  .ds-color-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .ds-breakpoints { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .ds-type-row { grid-template-columns: 112px minmax(0,1fr); gap: 10px; }
+  .ds-spec-list { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-width: 480px) {
+  .ds-main { padding-inline: 16px; }
+  .ds-color-grid { grid-template-columns: minmax(0,1fr); }
+  .ds-type-row { grid-template-columns: minmax(0,1fr); gap: 5px; }
+  .ds-component-panel { padding: 14px; }
+}
+</style>
 </head>
 <body>
-<main class="main" style="margin:0 auto;max-width:960px;padding:48px 24px">
-<a href="/" class="text-link">← 返回简历</a>
+<main class="main ds-main">
+<a class="text-link" href="/">← 返回 Project Nebula</a>
 <header class="page-intro">
-<p class="eyebrow">PROJECT NEBULA / DESIGN SYSTEM</p>
-<h1>留白为底，绿色为序。</h1>
-<p>景观白绿界面 · 当前版本</p>
+ <p class="eyebrow">PROJECT NEBULA / DESIGN SYSTEM · ACTIVE</p>
+ <h1>留白为底，绿色为序。</h1>
+ <p>景观白绿 · 当前生效视觉规范。所有颜色、字号与控件尺寸以共享 tokens 和主题变量为准。</p>
+ <p class="ds-note">版本边界：本页是当前实现规范。旧版复古宇宙、宣纸风文档保留为历史方案，不再约束当前页面。当前产品采用四个一级板块；原始 PRD V7 的星球总览方案属于尚未实现的产品方向。</p>
 </header>
+
 <section class="resume-section">
-<header class="section-heading"><p class="eyebrow">01 / COLOR</p><h2>色彩系统</h2></header>
-<div class="document-list">
-<article class="document-card"><div class="document-copy"><h3>纯白 · #FFFFFF</h3><p>页面与主要内容表面，建立清晰、轻盈的阅读基底。</p></div></article>
-<article class="document-card"><div class="document-copy"><h3>雾白绿 · #F5F8F6</h3><p>次级背景与提示区域，用低对比度区分内容层级。</p></div></article>
-<article class="document-card"><div class="document-copy"><h3>森林绿 · #285C43</h3><p>主要按钮、当前导航、重点链接与关键操作。</p></div></article>
-<article class="document-card"><div class="document-copy"><h3>植被绿 · #4F755D</h3><p>辅助强调、说明标签与轻量状态提示。</p></div></article>
-<article class="document-card"><div class="document-copy"><h3>墨绿灰 · #26342D</h3><p>标题与正文；辅助文字使用 #66746C。</p></div></article>
-<article class="document-card"><div class="document-copy"><h3>雾绿线 · #DCE6DE</h3><p>边框与分隔线；避免高对比度装饰干扰内容。</p></div></article>
-</div>
+ <header class="section-heading"><p class="eyebrow">01 / COLOR TOKENS</p><h2>色彩系统</h2><p class="section-lead">颜色通过语义变量调用，避免组件直接绑定主题色值。</p></header>
+ <div class="ds-color-grid">
+  <article class="ds-color-card"><span class="ds-swatch" style="background:#FFFFFF"></span><div><h3>纯白 · 页面基底</h3><p>主页面与主要内容表面</p><code>#FFFFFF</code></div></article>
+  <article class="ds-color-card"><span class="ds-swatch" style="background:#F5F8F6"></span><div><h3>雾白绿 · 次级表面</h3><p>提示区、卡片内衬与弱分区</p><code>#F5F8F6</code></div></article>
+  <article class="ds-color-card"><span class="ds-swatch" style="background:#285C43"></span><div><h3>森林绿 · 主强调</h3><p>主按钮、当前导航与关键链接</p><code>#285C43</code></div></article>
+  <article class="ds-color-card"><span class="ds-swatch" style="background:#4F755D"></span><div><h3>植被绿 · 辅助强调</h3><p>辅助标签、说明标记与次级状态</p><code>#4F755D</code></div></article>
+  <article class="ds-color-card"><span class="ds-swatch" style="background:#26342D"></span><div><h3>墨绿灰 · 正文</h3><p>标题与正文的主要文字色</p><code>#26342D</code></div></article>
+  <article class="ds-color-card"><span class="ds-swatch" style="background:#66746C"></span><div><h3>苔灰 · 辅助文字</h3><p>说明、日期与次要信息</p><code>#66746C</code></div></article>
+  <article class="ds-color-card"><span class="ds-swatch" style="background:#DCE6DE"></span><div><h3>雾绿线 · 边界</h3><p>卡片边框与内容分隔线</p><code>#DCE6DE</code></div></article>
+  <article class="ds-color-card"><span class="ds-swatch" style="background:#B9CCBE"></span><div><h3>雾绿 · 装饰</h3><p>装饰性点缀，不单独承载小字号文本</p><code>#B9CCBE</code></div></article>
+  <article class="ds-color-card"><span class="ds-swatch" style="background:#EDF3EF"></span><div><h3>浅叶绿 · 主色弱化</h3><p>主色的低对比背景状态</p><code>#EDF3EF</code></div></article>
+ </div>
+ <p class="ds-note">白底对比度实测：正文 #26342D 为 13.03:1；辅助文字 #66746C 为 4.91:1；主色 #285C43 为 7.77:1；辅助绿 #4F755D 为 5.20:1。雾绿装饰色仅用于边界与装饰，不作为正文颜色。</p>
 </section>
+
 <section class="resume-section">
-<header class="section-heading"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>字体与层级</h2></header>
-<p>标题与正文统一使用系统无衬线字体。正文基准 16px，辅助文字 12–14px；通过字号、字重和留白建立层级，不依赖外部字体请求。</p>
+ <header class="section-heading"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>字体与信息层级</h2><p class="section-lead">中文与英文统一采用系统无衬线字体栈，不依赖外部字体服务。</p></header>
+ <div class="ds-type-list">
+  <div class="ds-type-row"><span class="ds-type-meta">DISPLAY · 40–44px</span><p class="ds-type-display">留白为底，绿色为序。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">H1 · 28–34px</span><p class="ds-type-h1">把复杂问题理出路径。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">H2 · 23–26px</span><p class="ds-type-h2">作品与实践</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">H3 · 21px</span><p class="ds-type-h3">业务理解与建模</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">BODY · 16px / 1.75</span><p class="ds-type-body">通过清晰的内容组织、适度留白和稳定的阅读节奏，呈现真实项目与方法。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">SECONDARY · 14px</span><p class="ds-type-secondary">说明、摘要与辅助描述使用较低字重和次级颜色。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">CAPTION · 12px</span><p class="ds-type-caption">日期、状态与补充信息；不用于长段正文。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">EYEBROW · 11px</span><p class="ds-type-eyebrow">OBSERVATION / SECTION LABEL</p></div>
+ </div>
+ <p class="ds-note">字体栈：Noto Sans SC → Source Han Sans SC → PingFang SC → Microsoft YaHei → sans-serif。代码与编号使用 IBM Plex Mono / ui-monospace。当前未加载外部字体文件，因此不同操作系统可能使用不同回退字体。</p>
 </section>
+
 <section class="resume-section">
-<header class="section-heading"><p class="eyebrow">03 / COMPONENTS</p><h2>组件与材质</h2></header>
-<div class="actions"><a class="button primary" href="/#projects">主要操作 ↗</a><a class="button" href="/#experience">次级操作 ↗</a><span class="tag">辅助标签</span></div>
-<p style="margin-top:24px">卡片以半透明磨砂表面、细雾绿边框与两层建筑体块阴影组织：接触阴影建立贴合感，空间投影拉开层次。圆角保持克制；不使用大面积渐变、纸张纹理或高亮动效。</p>
+ <header class="section-heading"><p class="eyebrow">03 / COMPONENTS</p><h2>按钮、标签与卡片组件</h2><p class="section-lead">组件以语义区分主操作、次操作和辅助信息；状态必须可识别，不依赖颜色作为唯一提示。</p></header>
+ <div class="ds-component-panel">
+  <p class="eyebrow">BUTTONS / ACTION HIERARCHY</p>
+  <div class="ds-component-row">
+   <button class="button primary" type="button">主要操作</button>
+   <button class="button" type="button">次级操作</button>
+   <button class="text-link" type="button">文本操作 ↗</button>
+   <button class="icon-button" type="button" aria-label="关闭">×</button>
+   <button class="button" type="button" disabled>不可用状态</button>
+  </div>
+  <p class="eyebrow">LANGUAGE / MEDIA / TAGS</p>
+  <div class="ds-component-row">
+   <div class="global-language-switch" role="group" aria-label="语言切换示例"><button class="lang-tab" type="button" aria-pressed="true">中文</button><button class="lang-tab" type="button" aria-pressed="false">EN</button></div>
+   <div class="media-tabs" role="group" aria-label="媒体切换示例"><button class="media-tab" type="button" aria-pressed="true">图片</button><button class="media-tab" type="button" aria-pressed="false">视频</button></div>
+   <span class="tag">产品设计</span><span class="tag">AI 应用</span>
+  </div>
+  <p class="ds-note">控件高度：主要按钮 40px；图标按钮 40×40px；媒体切换 36px；语言切换 36px；证据链接最小高度 44px。所有可交互控件继承统一 focus-visible 描边与 disabled 状态。</p>
+ </div>
+ <div class="ds-demo-card" style="margin-top:14px">
+  <p class="eyebrow">CARD / FROSTED SURFACE</p>
+  <h3>证据卡片示例</h3>
+  <p>卡片使用半透明白色表面、低对比雾绿边框和克制阴影。悬停仅做轻微抬升，不使用大面积渐变或强光效。</p>
+  <div class="tags" style="margin-top:12px"><span class="tag">清晰层级</span><span class="tag">低装饰</span><span class="tag">可复用</span></div>
+ </div>
 </section>
+
 <section class="resume-section">
-<header class="section-heading"><p class="eyebrow">04 / INTERACTION</p><h2>导航与阅读</h2></header>
-<p>桌面端使用左侧固定目录；平板与手机端将目录收纳到顶部折叠菜单。个人奇点在宽屏采用左右双栏，在窄屏自动切换为单栏。项目、材料与文章详情统一从右侧抽屉打开。保留键盘操作、Esc 关闭和减少动态效果设置。</p>
+ <header class="section-heading"><p class="eyebrow">04 / LAYOUT & RESPONSIVE</p><h2>页面布局与响应式</h2><p class="section-lead">桌面保持稳定导航和内容阅读宽度；窄屏优先保障单列阅读、触控与弹窗可用性。</p></header>
+ <div class="ds-breakpoints">
+  <div class="ds-breakpoint"><strong>1100px</strong><span>压缩双栏间距</span></div>
+  <div class="ds-breakpoint"><strong>960px</strong><span>侧栏转顶部目录</span></div>
+  <div class="ds-breakpoint"><strong>760px</strong><span>个人区与能力卡单列</span></div>
+  <div class="ds-breakpoint"><strong>560px</strong><span>紧凑卡片与边距</span></div>
+  <div class="ds-breakpoint"><strong>380px</strong><span>窄屏控件收敛</span></div>
+ </div>
+ <ul class="ds-spec-list" style="margin-top:18px">
+  <li><strong>侧栏：</strong>264px；平板及手机改为顶部折叠菜单。</li>
+  <li><strong>正文：</strong>最大宽度 1200px，避免超宽行长。</li>
+  <li><strong>详情抽屉：</strong>最大宽度 760px；手机端全屏。</li>
+  <li><strong>第三级查看器：</strong>最大宽度 1120px；手机端全屏。</li>
+  <li><strong>桌面双栏：</strong>个人介绍左右布局；窄屏切换为单列。</li>
+  <li><strong>内容密度：</strong>卡片摘要控制长度，完整内容进入抽屉或查看器。</li>
+ </ul>
+</section>
+
+<section class="resume-section">
+ <header class="section-heading"><p class="eyebrow">05 / INTERACTION & ACCESSIBILITY</p><h2>交互状态与无障碍</h2></header>
+ <ul class="ds-spec-list">
+  <li><strong>Hover：</strong>桌面设备轻微抬升与边框强调；触控设备不依赖 hover。</li>
+  <li><strong>Focus：</strong>键盘焦点使用 2px 可见描边。</li>
+  <li><strong>Disabled：</strong>禁用控件降低透明度并显示不可操作状态。</li>
+  <li><strong>Dialog：</strong>支持 Esc、遮罩关闭、焦点恢复和背景滚动锁定。</li>
+  <li><strong>Media tabs：</strong>支持左右方向键、Home、End 切换。</li>
+  <li><strong>Reduced motion：</strong>遵循 prefers-reduced-motion 设置。</li>
+  <li><strong>Language：</strong>全站中文 / English 切换，新增内容需同步维护翻译。</li>
+  <li><strong>Image：</strong>必须提供有意义的 alt；纯装饰图片使用空 alt 或 aria-hidden。</li>
+ </ul>
+ <p class="ds-note">本页展示的是代码中当前生效的规范。若组件实现与本页示例不一致，以阶段审查记录中的缺陷项为准，并在修复后同步更新此页。</p>
 </section>
 </main>
 </body>
