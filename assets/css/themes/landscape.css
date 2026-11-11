@@ -1,0 +1,23 @@
+/* Project Nebula · Landscape White & Green theme tokens */
+:root[data-theme="landscape"] {
+  color-scheme: light;
+  /* Landscape White & Green palette */
+  --color-page: #FFFFFF;
+  --color-page-soft: #F5F8F6;
+  --color-surface: rgba(255, 255, 255, .88);
+  --color-surface-solid: #FFFFFF;
+  --color-text: #26342D;
+  --color-muted: #66746C;
+  --color-primary: #285C43;
+  --color-primary-hover: #1F4D37;
+  --color-primary-soft: #EAF2EC;
+  --color-secondary: #4F755D;
+  --color-mist: #B9CCBE;
+  --color-line: #DCE6DE;
+  --color-line-strong: #C6D5CA;
+
+  /* Landscape material shadows: contact + spatial volume */
+  --shadow-contact: 0 2px 5px rgba(33, 61, 43, .07);
+  --shadow-spatial: 0 14px 30px rgba(33, 61, 43, .09);
+  --shadow-card: var(--shadow-contact), var(--shadow-spatial);
+}

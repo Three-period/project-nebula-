@@ -2,6 +2,8 @@ import { renderContent } from './content.js';
 import { initDrawer } from './drawer.js';
 import { initAgent } from './agent.js';
 import { initGlobalI18n } from './i18n.js';
+import { initTheme } from './theme.js';
+initTheme();
 const drawer=initDrawer(),agent=initAgent();
 initGlobalI18n(language=>{renderContent(language);drawer.setLanguage(language);});
 const sidebar=document.querySelector('.sidebar'),menu=document.getElementById('menu-toggle');
@@ -30,11 +32,6 @@ document.addEventListener('click',event=>{
   case 'close-drawer':drawer.close();break;
   case 'prev-article':drawer.previous();break;
   case 'next-article':drawer.next();break;
- }
- const card=target.closest('.project,.document-card');
- if(card&&target.matches('button')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
-  card.classList.remove('is-orbiting');void card.offsetWidth;card.classList.add('is-orbiting');
-  card.addEventListener('animationend',()=>card.classList.remove('is-orbiting'),{once:true});
  }
 });
 window.addEventListener('popstate',()=>activate(location.hash.slice(1)||'about'));

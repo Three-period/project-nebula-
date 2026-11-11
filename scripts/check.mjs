@@ -27,6 +27,7 @@ for (const file of files.filter(f => /\.(js|mjs)$/.test(f))) {
   }
 }
 const html = await readFile(resolve(root, 'index.html'), 'utf8');
+const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
@@ -38,7 +39,7 @@ assert.equal(personalProjects.length, 2);
 assert.equal(projects.filter(p => p.visibility === 'draft').length, 3);
 assert(!html.includes('id="sae-input"'));
 assert(!html.includes('id="design"'));
-assert(html.includes('nebula-orbits-v2.svg'));
+assert(files.some(file => file.endsWith('/nebula-orbits-v2.svg')), 'Cosmic orbit artwork is retained only as an inactive future-theme asset');
 const agentClient = await readFile(resolve(root, 'assets/js/agent.js'), 'utf8');
 assert(!agentClient.includes("fetch('/api/chat'"), 'Agent maintenance mode must not fetch');
 assert.equal(articles.length, 6);
@@ -66,6 +67,7 @@ for (const language of ['zh', 'en']) {
 }
 assert(html.includes('data-language="zh"') && html.includes('data-language="en"'), 'Global language controls are required');
 assert(!html.includes('heying-photo.jpg') && !html.includes('about-language-switch'), 'Profile photo and About-only language switch must be removed');
+assert(!html.includes('class="cosmic-orbits"'), 'Obsolete cosmic illustration markup must be removed');
 assert(html.includes('global-language-switch'), 'Global language switch must be in the navigation');
 assert(html.includes('independent-project-resources'), 'Independent Nebula resources must be linked');
 assert(html.indexOf('2026.04 — 至今') < html.indexOf('2026.01 — 至今') && html.indexOf('2026.01 — 至今') < html.indexOf('2024.07'), 'Experience order');
@@ -81,11 +83,25 @@ assert.equal(Object.keys(documentI18n.details).length, Object.keys(documents).le
 for (const [key, document] of Object.entries(documents)) assert(documentI18n.details[key]?.body && documentI18n.details[key]?.title, 'Incomplete document translation: ' + key);
 assert.equal(articleI18n.length, articles.length, 'Every article needs English copy');
 for (const [index, article] of articles.entries()) assert(articleI18n[index]?.body && articleI18n[index]?.title && articleI18n[index]?.summary, 'Incomplete article translation: ' + index);
-const style = await readFile(resolve(root, 'assets/css/main.css'), 'utf8');
-assert(style.includes('grid-template-columns: minmax(0, 1fr) minmax(0, 1fr)'), 'Profile columns must be balanced');
-assert(style.includes('padding: 18px 2em'), 'Article card inset must be two characters');
-assert(style.includes('@media (max-width: 560px)') && style.includes('padding: 80px 20px 0'), 'Mobile safe gutters');
-assert(style.includes('global-language-switch') && style.includes('prefers-reduced-motion') && style.includes('cosmic-orbit'), 'Global switch and motion fallback');
+const styleFiles = await Promise.all([
+  'base.css', 'layout.css', 'components.css', 'responsive.css'
+].map(file => readFile(resolve(root, 'assets/css', file), 'utf8')));
+const style = styleFiles.join('\n');
+const themeStyle = await readFile(resolve(root, 'assets/css/themes/landscape.css'), 'utf8');
+const tokens = await readFile(resolve(root, 'assets/css/tokens.css'), 'utf8');
+assert(style.includes('grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr)'), 'Profile columns must use a balanced responsive grid');
+assert(style.includes('backdrop-filter: blur(var(--surface-blur))') && style.includes('box-shadow: var(--shadow-card)'), 'Landscape cards need frosted glass and layered architectural shadows');
+assert(style.includes('@media (max-width: 1100px)') && style.includes('@media (max-width: 960px)') && style.includes('@media (max-width: 760px)') && style.includes('@media (max-width: 560px)'), 'Desktop, tablet and mobile breakpoints must be explicit');
+assert(style.includes('global-language-switch') && style.includes('prefers-reduced-motion') && style.includes('100dvh'), 'Global language, reduced motion and dynamic viewport support');
+assert(!style.includes('cosmic-orbit') && !style.includes('body::after') && !style.includes('rgba(178, 153, 93'), 'Legacy cosmic and parchment visuals must be removed');
 assert(!style.includes('singu-photo') && !style.includes('about-language-switch'), 'Obsolete photo/language styles must be removed');
-assert(!files.some(file => file.endsWith('/heying-photo.jpg')), 'Personal photo asset must be deleted');
+assert(!html.includes('class="cosmic-orbits"') && !mainSource.includes('is-orbiting'), 'Unused cosmic illustration and animation trigger must be removed');
+assert(themeStyle.includes(':root[data-theme="landscape"]') && themeStyle.includes('--color-primary: #285C43'), 'Landscape palette must be isolated in its theme file');
+assert(!tokens.includes('--color-primary:') && !tokens.includes('--paper:') && !tokens.includes('--ochre:'), 'Shared tokens must not contain theme palette or legacy aliases');
+assert(!files.some(file => file.endsWith('/heying-photo') || file.endsWith('/heying-photo.jpg')), 'Personal photo asset and empty placeholder must be deleted');
+const themeSource = await readFile(resolve(root, 'assets/js/theme.js'), 'utf8');
+assert(themeSource.includes("landscape") && /document\.documentElement\.dataset\.theme\s*=\s*themeId/.test(themeSource), 'Landscape theme registry must initialize through the document theme attribute');
+for (const token of ['--font-body:', '--sidebar-width:', '--surface-blur:', '--ease:']) assert(tokens.includes(token), 'Missing shared design token: ' + token);
+for (const token of ['--color-page:', '--color-primary:', '--color-mist:', '--shadow-contact:', '--shadow-spatial:']) assert(themeStyle.includes(token), 'Missing landscape design token: ' + token);
+assert(html.includes('data-theme="landscape"'), 'Landscape must be the default theme');
 console.log('PASS: syntax/imports, global bilingual coverage, all stored translations, photo removal, responsive styles and SSE integration.');

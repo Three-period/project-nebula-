@@ -1,4 +1,4 @@
-# Project Nebula · 浅色宇宙手记
+# Project Nebula · 景观白绿
 本项目为纯 HTML、CSS 与原生 ES Modules 实现的个人 AI 展示站，无需构建步骤。
 
 ## 运行和验证
@@ -20,8 +20,13 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 | 个人奇点中英文文案和切换 | `assets/data/about-i18n.js`、`assets/js/i18n.js` |
 | 项目 / 文档 / 文章阅读抽屉 | `assets/js/drawer.js` |
 | 数字分身静态维修状态 | `assets/js/agent.js` |
-| 视觉 tokens、布局与动效 | `assets/css/tokens.css`、`assets/css/main.css` |
-| 星轨矢量插画 | `public/images/nebula-orbits-v2.svg` |
+| 通用设计 tokens | `assets/css/tokens.css` |
+| 景观白绿主题 tokens | `assets/css/themes/landscape.css` |
+| 基础样式与控件 | `assets/css/base.css` |
+| 页面布局 | `assets/css/layout.css` |
+| 卡片、抽屉与内容组件 | `assets/css/components.css` |
+| 响应式、无障碍与打印 | `assets/css/responsive.css` |
+| 设计规范页 | `design-system.html` |
 
 ## 开发原则
 - 目录点击仅显示当前板块，不使用旧版全站连续长页；深层详情统一从右侧抽屉打开。
@@ -42,3 +47,22 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - English interface copy is stored in `assets/data/site-i18n.js`; project, document, and article translations are stored in the corresponding `*-i18n.js` files.
 - The global language switch updates static sections, rendered cards, and open detail drawers. The selected language is remembered locally in the browser.
 - When adding or editing content, update the matching English translation entry. Existing translations are stored in GitHub; no translation API, backend, or database is required.
+
+
+## Landscape White & Green theme
+
+- Default theme: `landscape`, initialized by `assets/js/theme.js` and `data-theme="landscape"`.
+- Shared typography, spacing and layout tokens are maintained in `assets/css/tokens.css`; the landscape palette lives in `assets/css/themes/landscape.css`.
+- Shared components consume semantic color variables, so future themes can change the palette without duplicating card, drawer or navigation behavior.
+- Existing content, bilingual copy, navigation, drawers, and maintenance-mode behavior remain unchanged in this visual phase.
+- The former cosmic orbit illustration remains in the repository as a historical asset but is hidden by the current theme.
+
+
+## CSS maintenance structure
+
+- `assets/css/tokens.css` stores theme-independent typography, spacing, radii, layout and motion tokens.
+- `assets/css/themes/landscape.css` stores the Landscape White & Green semantic palette. Future themes can add a sibling theme file without rewriting shared components.
+- `base.css`, `layout.css`, `components.css` and `responsive.css` separate global foundations, page structure, reusable UI and viewport-specific behavior. They are loaded in order by HTML link tags; no build tool or CSS import chain is required.
+- The previous cosmic/parchment override stack and transitional color aliases have been removed from the active stylesheet. The orbit SVG remains an unreferenced asset for possible future theme work.
+- Responsive behavior uses a 960px tablet-navigation breakpoint, a 760px single-column composition breakpoint, and 560px compact mobile refinements.
+- Landscape cards use translucent frosted surfaces, restrained green borders, and two-layer contact/spatial shadows.

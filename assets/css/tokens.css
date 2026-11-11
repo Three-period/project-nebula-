@@ -1,12 +1,40 @@
-/* Project Nebula · Light Cosmic Notebook — single source of visual tokens */
+/* Project Nebula · Theme-independent typography, layout and motion tokens */
 :root {
- --paper:#F7F4EB; --paper-side:#F5F0E7; --surface:#FFFCF6;
- --ink:#292824; --muted:#6E6962; --accent:#A74736; --accent-soft:#F4E7DD;
- --ochre:#986846; --gold:#B2995D; --line:#E3DACC;
- --font-body:"Noto Sans SC","Source Han Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
- --font-heading:"Noto Serif SC","Source Han Serif SC","Songti SC",serif;
- --font-mono:"IBM Plex Mono",ui-monospace,monospace;
- --text-sm:.8rem; --text-base:.90625rem; --text-lg:1.1rem;
- --space-1:.5rem;--space-2:1rem;--space-3:1.5rem;--space-4:2rem;--space-5:3rem;--space-6:5rem;
- --sidebar-width:272px;--content-width:1200px;--drawer-width:720px;--radius:12px;--ease:220ms ease;
+  /* Typography */
+  --font-sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-heading: var(--font-sans);
+  --font-body: var(--font-sans);
+  --font-display: "Manrope", "Inter", var(--font-sans);
+  --font-code: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Shared type scale */
+  --text-display: clamp(2.5rem, 4vw, 2.75rem);
+  --text-h1: clamp(1.75rem, 3vw, 2.125rem);
+  --text-h2: clamp(1.4375rem, 2.4vw, 1.625rem);
+  --text-h3: 1.3125rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-sm: .875rem;
+  --text-caption: .75rem;
+
+  /* Layout and spacing */
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4rem;
+  --sidebar-width: 264px;
+  --topbar-height: 68px;
+  --content-width: 1200px;
+  --drawer-width: 760px;
+  --modal-width: 1120px;
+
+  /* Shared shape and motion */
+  --radius: 4px;
+  --radius-control: 3px;
+  --radius-card: 6px;
+  --surface-blur: 12px;
+  --ease: 220ms cubic-bezier(.2, .7, .2, 1);
 }
