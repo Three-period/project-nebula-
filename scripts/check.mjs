@@ -88,4 +88,9 @@ assert(style.includes('@media (max-width: 560px)') && style.includes('padding: 8
 assert(style.includes('global-language-switch') && style.includes('prefers-reduced-motion') && style.includes('cosmic-orbit'), 'Global switch and motion fallback');
 assert(!style.includes('singu-photo') && !style.includes('about-language-switch'), 'Obsolete photo/language styles must be removed');
 assert(!files.some(file => file.endsWith('/heying-photo.jpg')), 'Personal photo asset must be deleted');
+const themeSource = await readFile(resolve(root, 'assets/js/theme.js'), 'utf8');
+assert(themeSource.includes("landscape") && themeSource.includes("data-theme"), 'Landscape theme registry must initialize');
+const tokens = await readFile(resolve(root, 'assets/css/tokens.css'), 'utf8');
+for (const token of ['--color-page:', '--color-primary:', '--color-mist:', '--shadow-contact:', '--shadow-spatial:']) assert(tokens.includes(token), 'Missing landscape design token: ' + token);
+assert(html.includes('data-theme="landscape"'), 'Landscape must be the default theme');
 console.log('PASS: syntax/imports, global bilingual coverage, all stored translations, photo removal, responsive styles and SSE integration.');

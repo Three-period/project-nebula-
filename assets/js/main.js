@@ -2,6 +2,8 @@ import { renderContent } from './content.js';
 import { initDrawer } from './drawer.js';
 import { initAgent } from './agent.js';
 import { initGlobalI18n } from './i18n.js';
+import { initTheme } from './theme.js';
+initTheme();
 const drawer=initDrawer(),agent=initAgent();
 initGlobalI18n(language=>{renderContent(language);drawer.setLanguage(language);});
 const sidebar=document.querySelector('.sidebar'),menu=document.getElementById('menu-toggle');
