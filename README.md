@@ -51,3 +51,12 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - The component layer in `assets/css/main.css` maps the existing interface to white surfaces, forest-green actions, mist-green borders, and restrained spatial shadows.
 - Existing content, bilingual copy, navigation, drawers, and maintenance-mode behavior remain unchanged in this visual phase.
 - The former cosmic orbit illustration remains in the repository as a historical asset but is hidden by the current theme.
+
+
+## CSS maintenance structure
+
+- `assets/css/tokens.css` is the single source for semantic colors, typography, spacing, radii, material blur, and layered shadows.
+- `assets/css/main.css` is intentionally build-free and organized in numbered sections: foundation, shared controls, application shell, profile, content cards, experience/insights, contact, drawers, motion, responsive breakpoints, accessibility and print.
+- The previous cosmic/parchment override stack and transitional color aliases have been removed from the active stylesheet. The orbit SVG remains an unreferenced asset for possible future theme work.
+- Responsive behavior uses a 960px tablet-navigation breakpoint, a 760px single-column composition breakpoint, and 560px compact mobile refinements.
+- Landscape cards use translucent frosted surfaces, restrained green borders, and two-layer contact/spatial shadows.
