@@ -15,4 +15,9 @@
   --color-mist: #B9CCBE;
   --color-line: #DCE6DE;
   --color-line-strong: #C6D5CA;
+
+  /* Landscape material shadows: contact + spatial volume */
+  --shadow-contact: 0 2px 5px rgba(33, 61, 43, .07);
+  --shadow-spatial: 0 14px 30px rgba(33, 61, 43, .09);
+  --shadow-card: var(--shadow-contact), var(--shadow-spatial);
 }
