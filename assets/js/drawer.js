@@ -55,7 +55,7 @@ function renderProjectMedia(project, activeType, activeIndex) {
 
   return '<section class="project-media" aria-label="' + escapeHTML(t('mediaTabAria')) + '">' +
     '<div class="media-tabs" role="tablist" aria-label="' + escapeHTML(t('mediaTabAria')) + '">' + tabs + '</div>' +
-    '<div class="media-stage">' + stage + '</div>' +
+    '<div class="media-stage' + (type === 'video' ? ' media-stage-video' : '') + '">' + stage + '</div>' +
     '<p class="media-caption">' + escapeHTML(title) + '</p>' + controls + '</section>';
 }
 
