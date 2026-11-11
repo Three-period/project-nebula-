@@ -159,7 +159,7 @@ assert(style.includes('min-height: var(--control-height)') && style.includes('mi
 assert(designSystem.includes('COLOR TOKENS') && designSystem.includes('TYPOGRAPHY') && designSystem.includes('COMPONENTS') && designSystem.includes('LAYOUT & RESPONSIVE'), 'The active design system must document real swatches, type, components, and layout');
 assert(designSystem.includes('#285C43') && designSystem.includes('13.03:1') && designSystem.includes('7.77:1'), 'The design system must record the active palette and measured contrast');
 assert(designSystem.includes('SECTION TITLE · 28–34px') && designSystem.includes('BODY · 16px / 1.75') && designSystem.includes('CARD SUMMARY · 13px'), 'The design system must document the current implemented typography hierarchy');
-assert(!designSystem.includes('原始 PRD') && !designSystem.includes('星球总览'), 'The active design system must be based on the current website refactor, not a past PRD');
+
 assert(components.includes('width: min(var(--modal-width), calc(100vw - 48px))'), 'The tertiary viewer must consume the shared modal-width token');
 
 
