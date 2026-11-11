@@ -35,7 +35,7 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - 目录点击仅显示当前板块，不使用旧版全站连续长页；深层详情统一从右侧抽屉打开。
 - 全站导航、个人介绍、经历、项目、材料、文章与抽屉内容支持中文 / English 切换；中文为内容源语言，新增数据需同步维护对应翻译。Project Nebula 的经历入口复用原项目与材料数据，不复制正文。
 - 五个工作项目与两个个人项目各自存储；三张历史占位项目仅保留在数据中不公开展示。
-- PRD 中确认的 V3 内容是新增项目权威正文，历史文章及文档不擅自重写。
+- 当前确认的 V3 项目内容是新增项目权威正文，历史文章及文档不擅自重写。
 - 暂无实际附件链接的项目不制作假下载入口；PDF 沿用旧文件，不代表简历已更新。
 - 数字分身处于维修模式，不调用后端 `/api/chat`；保留原 Pages Function 供未来重启。
 - 静态站部署仍由原 Cloudflare Pages 项目从 `main` 自动发布，不新建站点。
@@ -85,7 +85,7 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - Each evidence item opens its existing project drawer. Project records remain the source of truth for titles, stages, and project descriptions; capability cards do not duplicate project narratives.
 - No personal photography assets were found in the repository. The photography portfolio is not populated with AI-generated or unrelated project images; it remains pending original photos and category metadata.
 
-## Product and design audit
-- `docs/phase-audit.md` records the four implementation stages, the deviations from the original Notion PRD V7, visual-system findings, and outstanding acceptance work.
-- The original three-layer planet PRD and retro-cosmic design guide are retained as historical source documents. The active site currently uses four top-level resume/portfolio sections and the Landscape White & Green design system. This is a product-scope divergence, not a completed implementation of the original planet-navigation concept.
-- `design-system.html` is the active visual reference; historical design documents are labeled accordingly.
+
+## Refactoring quality review
+- `docs/phase-audit.md` records the four refactoring stages, the current implementation review, and outstanding acceptance work.
+- `design-system.html` is the active visual reference for the current Landscape White & Green theme, component dimensions, typography, and responsive rules.
