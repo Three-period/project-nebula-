@@ -439,7 +439,7 @@
   min-height: 200px;
   border: 0;
 }
-.media-stage:has(.media-video-frame) { display: block; }
+.media-stage-video { display: block; }
 .media-stage-actions {
   display: flex;
   flex-wrap: wrap;
