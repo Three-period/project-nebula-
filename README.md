@@ -20,7 +20,12 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 | 个人奇点中英文文案和切换 | `assets/data/about-i18n.js`、`assets/js/i18n.js` |
 | 项目 / 文档 / 文章阅读抽屉 | `assets/js/drawer.js` |
 | 数字分身静态维修状态 | `assets/js/agent.js` |
-| 视觉 tokens、布局与动效 | `assets/css/tokens.css`、`assets/css/main.css` |
+| 通用设计 tokens | `assets/css/tokens.css` |
+| 景观白绿主题 tokens | `assets/css/themes/landscape.css` |
+| 基础样式与控件 | `assets/css/base.css` |
+| 页面布局 | `assets/css/layout.css` |
+| 卡片、抽屉与内容组件 | `assets/css/components.css` |
+| 响应式、无障碍与打印 | `assets/css/responsive.css` |
 | 设计规范页 | `design-system.html` |
 
 ## 开发原则
@@ -47,16 +52,17 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 ## Landscape White & Green theme
 
 - Default theme: `landscape`, initialized by `assets/js/theme.js` and `data-theme="landscape"`.
-- Semantic palette and layout tokens are maintained in `assets/css/tokens.css`.
-- The component layer in `assets/css/main.css` maps the existing interface to white surfaces, forest-green actions, mist-green borders, and restrained spatial shadows.
+- Shared typography, spacing and layout tokens are maintained in `assets/css/tokens.css`; the landscape palette lives in `assets/css/themes/landscape.css`.
+- Shared components consume semantic color variables, so future themes can change the palette without duplicating card, drawer or navigation behavior.
 - Existing content, bilingual copy, navigation, drawers, and maintenance-mode behavior remain unchanged in this visual phase.
 - The former cosmic orbit illustration remains in the repository as a historical asset but is hidden by the current theme.
 
 
 ## CSS maintenance structure
 
-- `assets/css/tokens.css` is the single source for semantic colors, typography, spacing, radii, material blur, and layered shadows.
-- `assets/css/main.css` is intentionally build-free and organized in numbered sections: foundation, shared controls, application shell, profile, content cards, experience/insights, contact, drawers, motion, responsive breakpoints, accessibility and print.
+- `assets/css/tokens.css` stores theme-independent typography, spacing, radii, layout and motion tokens.
+- `assets/css/themes/landscape.css` stores the Landscape White & Green semantic palette. Future themes can add a sibling theme file without rewriting shared components.
+- `base.css`, `layout.css`, `components.css` and `responsive.css` separate global foundations, page structure, reusable UI and viewport-specific behavior. They are loaded in order by HTML link tags; no build tool or CSS import chain is required.
 - The previous cosmic/parchment override stack and transitional color aliases have been removed from the active stylesheet. The orbit SVG remains an unreferenced asset for possible future theme work.
 - Responsive behavior uses a 960px tablet-navigation breakpoint, a 760px single-column composition breakpoint, and 560px compact mobile refinements.
 - Landscape cards use translucent frosted surfaces, restrained green borders, and two-layer contact/spatial shadows.
