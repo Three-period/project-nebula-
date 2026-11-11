@@ -128,3 +128,15 @@ Notion《Project Nebula · 展示版 PRD》将产品定义为可探索、可交�
 - [ ] 中文 / English 下项目、能力图谱、文档、媒体与文章均无缺译或布局溢出。
 - [ ] 摄影原图补齐后再验收摄影作品集，不以占位内容冒充完成。
 
+
+
+## 2026-11-11 阶段 5 分支验证补充
+
+- 静态语法解析：9 个相关 JS/MJS 与数据模块通过。
+- 能力图谱：4 个能力域，7 个项目证据引用全部有效；中文与英文能力文案均完整。
+- 文档翻译：文档卡片与详情的中英文覆盖检查通过；PRD V7、复古宇宙指南、宣纸风指南均已标注为原始方案/历史归档。
+- HTML：能力图谱位于「作品与实践」板块，ID 唯一。
+- CSS：自定义属性无缺失，花括号与括号平衡；查看器移动端规则仅保留一份；控件尺寸使用共享 token；响应式断点与 reduced-motion 规则存在。
+- Cloudflare Pages：阶段 5 分支预览部署成功，预览地址为 https://2477df7b.heying-project-nebula.pages.dev ，分支预览为 https://feat-capability-map-audit-v1.heying-project-nebula.pages.dev 。
+- Cloudflare Workers Builds：同一提交的 Worker 构建检查失败，当前检查输出未提供具体错误原因，不能据此推断 Pages 静态页面部署失败。
+- 仍未执行完整 `npm run check`，也未完成人工浏览器验收；部署成功不替代这两项验收。
