@@ -26,10 +26,14 @@
 .ds-type-row { display: grid; grid-template-columns: 150px minmax(0,1fr); align-items: baseline; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--color-line); }
 .ds-type-meta { color: var(--color-muted); font: 10px/1.6 var(--font-code); letter-spacing: .04em; }
 .ds-type-display { font-size: var(--text-display); line-height: 1.25; }
-.ds-type-h1 { font-size: var(--text-h1); line-height: 1.35; }
-.ds-type-h2 { font-size: var(--text-h2); line-height: 1.4; }
-.ds-type-h3 { font-size: var(--text-h3); line-height: 1.5; }
+.ds-type-section { font-size: var(--text-h1); line-height: 1.35; }
+.ds-type-group { font-size: var(--text-h3); line-height: 1.5; }
+.ds-type-card { font-size: 16px; line-height: 1.5; }
+.ds-type-detail-h2 { font-size: 19px; line-height: 1.55; }
+.ds-type-detail-h3 { font-size: 15px; line-height: 1.55; }
 .ds-type-body { font-size: var(--text-base); line-height: 1.75; }
+.ds-type-lead { color: var(--color-muted); font-size: 14px; line-height: 1.7; }
+.ds-type-summary { color: var(--color-muted); font-size: 13px; line-height: 1.7; }
 .ds-type-secondary { color: var(--color-muted); font-size: var(--text-sm); line-height: 1.7; }
 .ds-type-caption { color: var(--color-muted); font-size: var(--text-caption); line-height: 1.6; }
 .ds-type-caption { color: var(--color-muted); font-size: var(--text-caption); line-height: 1.6; }
@@ -69,7 +73,7 @@
  <p class="eyebrow">PROJECT NEBULA / DESIGN SYSTEM · ACTIVE</p>
  <h1>留白为底，绿色为序。</h1>
  <p>景观白绿 · 当前生效视觉规范。所有颜色、字号与控件尺寸以共享 tokens 和主题变量为准。</p>
- <p class="ds-note">版本边界：本页是当前实现规范。旧版复古宇宙、宣纸风文档保留为历史方案，不再约束当前页面。当前产品采用四个一级板块；原始 PRD V7 的星球总览方案属于尚未实现的产品方向。</p>
+ <p class="ds-note">本页只描述当前网站重构中实际采用的景观白绿视觉系统。色彩、字号、间距与控件尺寸以当前共享 tokens 和活动 CSS 为准；页面内容结构以首页当前四个板块为准。</p>
 </header>
 
 <section class="resume-section">
@@ -92,16 +96,19 @@
  <header class="section-heading"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>字体与信息层级</h2><p class="section-lead">中文与英文统一采用系统无衬线字体栈，不依赖外部字体服务。</p></header>
  <div class="ds-type-list">
   <div class="ds-type-row"><span class="ds-type-meta">DISPLAY · 40–44px</span><p class="ds-type-display">留白为底，绿色为序。</p></div>
-  <div class="ds-type-row"><span class="ds-type-meta">H1 · 28–34px</span><p class="ds-type-h1">把复杂问题理出路径。</p></div>
-  <div class="ds-type-row"><span class="ds-type-meta">H2 · 23–26px</span><p class="ds-type-h2">作品与实践</p></div>
-  <div class="ds-type-row"><span class="ds-type-meta">H3 · 21px</span><p class="ds-type-h3">业务理解与建模</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">SECTION TITLE · 28–34px</span><p class="ds-type-section">把复杂问题理出路径。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">GROUP TITLE · 21px</span><p class="ds-type-group">经历与成长 · 工作项目</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">CARD TITLE · 16px</span><p class="ds-type-card">业务理解与建模</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">DETAIL H2 · 19px</span><p class="ds-type-detail-h2">项目背景与目标</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">DETAIL H3 · 15px</span><p class="ds-type-detail-h3">关键工作与结果</p></div>
   <div class="ds-type-row"><span class="ds-type-meta">BODY · 16px / 1.75</span><p class="ds-type-body">通过清晰的内容组织、适度留白和稳定的阅读节奏，呈现真实项目与方法。</p></div>
-  <div class="ds-type-row"><span class="ds-type-meta">SECONDARY · 14px</span><p class="ds-type-secondary">说明、摘要与辅助描述使用较低字重和次级颜色。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">SECTION LEAD · 14px</span><p class="ds-type-lead">区块引导文字与简短说明，控制阅读密度。</p></div>
+  <div class="ds-type-row"><span class="ds-type-meta">CARD SUMMARY · 13px</span><p class="ds-type-summary">项目摘要与卡片描述用于快速了解内容，不承担长文阅读。</p></div>
   <div class="ds-type-row"><span class="ds-type-meta">CAPTION · 12px</span><p class="ds-type-caption">说明性短句与辅助信息。</p></div>
   <div class="ds-type-row"><span class="ds-type-meta">METADATA · 10px</span><p class="ds-type-metadata">2026.11 / PROJECT STATUS / SMALL LABEL</p></div>
   <div class="ds-type-row"><span class="ds-type-meta">EYEBROW · 11px</span><p class="ds-type-eyebrow">OBSERVATION / SECTION LABEL</p></div>
  </div>
- <p class="ds-note">字体栈：Noto Sans SC → Source Han Sans SC → PingFang SC → Microsoft YaHei → sans-serif。代码与编号使用 IBM Plex Mono / ui-monospace。10px 仅用于日期、编号等微型 metadata，不用于长段说明；标签约 11px，正文说明优先使用 13–16px。当前未加载外部字体文件，因此不同操作系统可能使用不同回退字体。</p>
+ <p class="ds-note">字体栈：Noto Sans SC → Source Han Sans SC → PingFang SC → Microsoft YaHei → sans-serif。代码与编号使用 IBM Plex Mono / ui-monospace。实际页面正文为 16px；14px 用于区块引导，13px 用于卡片摘要，12px 用于 caption，11px 用于标签与 eyebrow，10px 仅用于日期、编号等短 metadata。当前未加载外部字体文件，因此不同操作系统可能使用不同回退字体。</p>
 </section>
 
 <section class="resume-section">
