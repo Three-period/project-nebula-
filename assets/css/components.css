@@ -132,7 +132,7 @@
   padding-left: 14px;
   border-left: 3px solid var(--color-primary);
   color: var(--color-text);
-  font: 600 21px/1.5 var(--font-heading);
+  font: 600 var(--text-h3)/1.5 var(--font-heading);
 }
 .related-docs { margin-top: 40px; }
 .related-docs > h3 {
@@ -601,7 +601,7 @@
 .capability-section-heading h3 {
   margin: 7px 0 6px;
   color: var(--color-text);
-  font: 600 20px/1.5 var(--font-heading);
+  font: 600 var(--text-h3)/1.5 var(--font-heading);
 }
 .capability-section-heading > p:not(.eyebrow) {
   max-width: 760px;
