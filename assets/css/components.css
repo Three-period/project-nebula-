@@ -356,7 +356,7 @@
 
 /* 09 · Interaction states and motion */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .project:hover, .document-card:hover, .article-row:hover {
+  .project:hover, .document-card:hover, .article-row:hover, .capability-card:hover {
     transform: translateY(-2px);
     border-color: var(--color-line-strong);
     box-shadow: var(--shadow-spatial);
@@ -401,6 +401,11 @@
   border-color: var(--color-primary);
   background: var(--color-primary);
   color: #fff;
+}
+.media-tab:hover:not([aria-selected="true"]) {
+  border-color: var(--color-line-strong);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
 }
 .media-stage {
   display: grid;
