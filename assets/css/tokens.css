@@ -1,9 +1,9 @@
-/* Project Nebula · Foundation and theme tokens */
+/* Project Nebula · Shared foundation tokens + theme defaults */
 :root,
 :root[data-theme="landscape"] {
   color-scheme: light;
 
-  /* Semantic color tokens · Landscape White & Green */
+  /* Landscape White & Green palette */
   --color-page: #FFFFFF;
   --color-page-soft: #F5F8F6;
   --color-surface: rgba(255, 255, 255, .88);
@@ -24,9 +24,8 @@
   --font-body: var(--font-sans);
   --font-display: "Manrope", "Inter", var(--font-sans);
   --font-code: "IBM Plex Mono", ui-monospace, monospace;
-  --font-mono: var(--font-code);
 
-  /* Type scale · shared semantic hierarchy */
+  /* Shared type scale */
   --text-display: clamp(2.5rem, 4vw, 2.75rem);
   --text-h1: clamp(1.75rem, 3vw, 2.125rem);
   --text-h2: clamp(1.4375rem, 2.4vw, 1.625rem);
@@ -36,7 +35,7 @@
   --text-sm: .875rem;
   --text-caption: .75rem;
 
-  /* Spacing and layout */
+  /* Layout and spacing */
   --space-1: .25rem;
   --space-2: .5rem;
   --space-3: 1rem;
@@ -45,30 +44,18 @@
   --space-6: 3rem;
   --space-7: 4rem;
   --sidebar-width: 264px;
-  --topbar-height: 72px;
+  --topbar-height: 68px;
   --content-width: 1200px;
   --drawer-width: 760px;
   --modal-width: 1120px;
 
-  /* Shape, material and motion */
+  /* Material, shape and motion */
   --radius: 4px;
   --radius-control: 3px;
+  --radius-card: 6px;
   --surface-blur: 12px;
   --shadow-contact: 0 2px 5px rgba(33, 61, 43, .07);
   --shadow-spatial: 0 14px 30px rgba(33, 61, 43, .09);
   --shadow-card: var(--shadow-contact), var(--shadow-spatial);
   --ease: 220ms cubic-bezier(.2, .7, .2, 1);
-
-  /* Transitional aliases for the existing component stylesheet.
-     They are removed when the landscape component layer replaces the legacy styles. */
-  --paper: var(--color-page);
-  --paper-side: var(--color-page-soft);
-  --surface: var(--color-surface-solid);
-  --ink: var(--color-text);
-  --muted: var(--color-muted);
-  --accent: var(--color-primary);
-  --accent-soft: var(--color-primary-soft);
-  --ochre: var(--color-secondary);
-  --gold: var(--color-mist);
-  --line: var(--color-line);
 }
