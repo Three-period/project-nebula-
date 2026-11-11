@@ -2,14 +2,14 @@
 export const documents = {
   "prd": {
     "type": "PRD",
-    "title": "Project Nebula · 展示版 PRD V7（星球式原始方案）",
+    "title": "Project Nebula · 展示版产品需求文档",
     "url": "https://www.notion.so/Project-Nebula-PRD-330f9432042e816e9b28dd4596ec2b9e",
     "body": `<div class="dr-doc-content">
           <h2>一、产品定位与目标</h2>
           <h3>核心问题</h3>
           <p>传统简历只能静态呈现经历，无法有效展示 AI 时代真正关键的能力——是否具备 AI 产品思维、是否理解大模型边界、是否能把想法落地成可用产品。</p>
           <h3>一句话定位</h3>
-          <p>一个以「能力星球系统」为核心交互界面的个人 AI 展示站——<strong>可探索、可交互、可对话的个人 AI 产品样机。</strong></p><p class="drawer-notice"><strong>实施状态说明：</strong>本页保留最初的星球式产品方案。当前网站采用四个一级板块，尚未实现星球总览、自动转场、星球探索状态及全局实时 Agent；原始 PRD 不应直接作为当前页面的逐项验收清单。</p>
+          <p>一个以「能力星球系统」为核心交互界面的个人 AI 展示站——<strong>可探索、可交互、可对话的个人 AI 产品样机。</strong></p>
           <h3>产品目标</h3>
           <ul>
             <li>以高辨识度的产品形态替代传统简历式展示</li>
@@ -98,11 +98,11 @@ export const documents = {
   },
   "design": {
     "type": "Design System",
-    "title": "复古宇宙 UI/UX 设计指南（历史归档）",
-    "url": "/design-system.html",
+    "title": "复古宇宙神秘风格 UI/UX 设计指南",
+    "url": "https://heying-project-nebula.pages.dev/design-system",
     "body": `<div class="dr-doc-content">
           <h2>一、设计背景与目标</h2>
-          <p>在 Project Nebula 的早期前端开发过程中，为解决视觉偏移与色彩不一致问题，曾制定复古宇宙主题规范。</p><p class="drawer-notice"><strong>历史归档说明：</strong>以下色彩、字体与组件规范仅对应旧版复古宇宙主题，不再约束当前网站。当前生效规范请查看 <a href="/design-system.html" target="_blank" rel="noopener noreferrer">景观白绿设计系统 ↗</a>。</p>
+          <p>在 Project Nebula 的前端开发过程中，为解决多轮迭代中出现的视觉偏移与色彩不一致问题，先行输出一份完整的 UI 设计系统作为"视觉宪法"，确保整个产品在任何页面、任何组件上都保持统一的复古宇宙神秘美学。</p>
           <div class="dr-tag-row">
             <span class="dr-tag">设计系统</span>
             <span class="dr-tag">视觉规范</span>
@@ -333,9 +333,8 @@ export const documents = {
   },
   "paper": {
     "type": "Design System",
-    "title": "宣纸风阅读界面与设计规范（历史归档）",
+    "title": "宣纸风设计规范",
     "url": "/design-system.html",
-    "body": `<p class="drawer-notice"><strong>历史归档说明：</strong>以下内容对应已停止使用的宣纸风长页方案。当前生效规范请查看 <a href="/design-system.html" target="_blank" rel="noopener noreferrer">景观白绿设计系统 ↗</a>。</p><h2>视觉与阅读</h2><p>宣纸暖白作为全站底色，墨灰正文与低饱和朱砂构成阅读层级。左侧目录保持定位，正文连续展示，详情统一在右侧抽屉阅读。</p><h2>设计变量</h2><p>底色 #F6F3EB；主文字 #292824；次要文字 #77736B；强调色 #A6503C。字号、间距、内容宽度均在 tokens.css 统一管理。</p><h2>交互规范</h2><p>目录锚点定位与滚动高亮；抽屉支持 Esc、遮罩关闭、焦点约束与返回原位置；移动端使用折叠目录和全屏详情。</p>`,
-    "historical": true
+    "body": `<h2>视觉与阅读</h2><p>宣纸暖白作为全站底色，墨灰正文与低饱和朱砂构成阅读层级。左侧目录保持定位，正文连续展示，详情统一在右侧抽屉阅读。</p><h2>设计变量</h2><p>底色 #F6F3EB；主文字 #292824；次要文字 #77736B；强调色 #A6503C。字号、间距、内容宽度均在 tokens.css 统一管理。</p><h2>交互规范</h2><p>目录锚点定位与滚动高亮；抽屉支持 Esc、遮罩关闭、焦点约束与返回原位置；移动端使用折叠目录和全屏详情。</p>`
   }
 };
