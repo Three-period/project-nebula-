@@ -89,7 +89,7 @@ assert(style.includes('global-language-switch') && style.includes('prefers-reduc
 assert(!style.includes('singu-photo') && !style.includes('about-language-switch'), 'Obsolete photo/language styles must be removed');
 assert(!files.some(file => file.endsWith('/heying-photo.jpg')), 'Personal photo asset must be deleted');
 const themeSource = await readFile(resolve(root, 'assets/js/theme.js'), 'utf8');
-assert(themeSource.includes("landscape") && /document\\.documentElement\\.dataset\\.theme\\s*=\\s*themeId/.test(themeSource), 'Landscape theme registry must initialize through the document theme attribute');
+assert(themeSource.includes("landscape") && /document\.documentElement\.dataset\.theme\s*=\s*themeId/.test(themeSource), 'Landscape theme registry must initialize through the document theme attribute');
 const tokens = await readFile(resolve(root, 'assets/css/tokens.css'), 'utf8');
 for (const token of ['--color-page:', '--color-primary:', '--color-mist:', '--shadow-contact:', '--shadow-spatial:']) assert(tokens.includes(token), 'Missing landscape design token: ' + token);
 assert(html.includes('data-theme="landscape"'), 'Landscape must be the default theme');
