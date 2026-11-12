@@ -1,0 +1,171 @@
+/* Mystical Cosmic · light-grey astronomy, antique gold, twin gilded borders.
+ * Theme-only skin. Never changes shared content structure or interaction semantics.
+ * Source Han Serif / Noto Serif SC local fallbacks keep offline readability. */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap");
+
+:root[data-theme="cosmic"] {
+  color-scheme:light;
+  --color-page:#F3F1EE;
+  --color-page-soft:#EBE7E0;
+  --color-surface:#FAF9F6;
+  --color-surface-solid:#FBFAF7;
+  --color-text:#382F29;
+  --color-muted:#665A4E;
+  --color-primary:#76502C;
+  --color-primary-hover:#58381F;
+  --color-primary-soft:#EFE4D2;
+  --color-secondary:#8D6840;
+  --color-mist:#DAC9AD;
+  --color-line:#D9CCB9;
+  --color-line-strong:#A9895D;
+  --color-on-primary:#FFFBF4;
+
+  /* Shared semantic material API: double gilt outline is visible at rest. */
+  --card-surface:rgba(251,250,247,.98);
+  --card-border:rgba(125,86,45,.78);
+  --card-radius:9px;
+  --card-blur:0px;
+  --shadow-contact:0 3px 9px rgba(85,57,36,.055);
+  --shadow-spatial:0 14px 30px rgba(85,57,36,.08);
+  --shadow-card:var(--shadow-contact),var(--shadow-spatial);
+  --card-shadow-rest:inset 0 0 0 4px rgba(251,250,247,.96),inset 0 0 0 5px rgba(211,183,133,.84),0 4px 10px rgba(75,47,29,.045),0 15px 33px rgba(75,47,29,.06);
+  --card-shadow-hover:inset 0 0 0 4px rgba(251,250,247,.96),inset 0 0 0 5px rgba(171,128,69,.96),0 5px 14px rgba(75,47,29,.09),0 18px 38px rgba(75,47,29,.13);
+  --card-hover-lift:-2px;
+  --color-sidebar:rgba(247,245,240,.97);
+  --color-topbar:rgba(250,249,245,.94);
+  --shadow-sidebar:3px 0 16px rgba(72,49,35,.05);
+  --shadow-topbar:0 2px 12px rgba(72,49,35,.04);
+  --shadow-button-primary:0 2px 7px rgba(95,57,31,.15);
+  --modal-shadow:0 22px 72px rgba(58,41,30,.18);
+  --button-primary-bg:#76502C;
+  --button-secondary-bg:rgba(250,249,246,.92);
+  --button-radius:7px;
+  --tag-surface:#F0E9DD;
+  --overlay-backdrop:rgba(53,41,33,.32);
+  --overlay-backdrop-strong:rgba(48,37,30,.50);
+  --decoration-accent:#CEAF7B;
+  --font-heading-zh:"Source Han Serif SC","Noto Serif SC","Songti SC","STSong",serif;
+  --font-body-zh:"Source Han Sans SC","Noto Sans SC","PingFang SC",sans-serif;
+  --font-heading-en:"Cormorant Garamond",Georgia,serif;
+  --font-body-en:"Inter",system-ui,sans-serif;
+  --radius-card:var(--card-radius);
+  --radius-control:var(--button-radius);
+  --surface-blur:var(--card-blur);
+  --motion-card:320ms;
+  --motion-control:240ms;
+  --motion-curve:cubic-bezier(.22,.68,.25,1);
+}
+
+/* Light paper-grey palette; never a black-space redesign. */
+:root[data-theme="cosmic"] body {
+  background-color:var(--color-page);
+  background-image:radial-gradient(circle at 86% 18%,rgba(196,167,117,.12),transparent 38%),
+    radial-gradient(circle at 8% 80%,rgba(168,144,113,.065),transparent 42%);
+  background-attachment:fixed;
+}
+:root[data-theme="cosmic"] :is(.resume-section,.contact-section) .eyebrow {
+  color:var(--color-secondary);letter-spacing:.145em;
+}
+:root[data-theme="cosmic"] :is(.section-heading h2,.singu-name,.fusion-company,.group-heading,.contact-section h2) {
+  font-family:var(--font-heading);
+  letter-spacing:.012em;
+}
+:root[data-theme="cosmic"] .section-heading {
+  border-bottom-color:var(--color-line-strong);
+}
+:root[data-theme="cosmic"] .section-heading::after {
+  content:"";display:block;width:56px;height:1px;position:relative;top:19px;
+  background:linear-gradient(90deg,var(--color-primary),transparent);
+}
+:root[data-theme="cosmic"] :is(.topbar-brand-mark,.capability-index) {
+  border-color:var(--color-line-strong);border-radius:50%;
+  background:var(--color-primary-soft);color:var(--color-primary);
+  box-shadow:inset 0 0 0 3px rgba(251,250,247,.88);
+}
+:root[data-theme="cosmic"] .toc-link[aria-current="page"] {
+  border-left-color:var(--color-primary);background:var(--color-primary-soft);
+}
+:root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card,.singu-left,.singu-right) {
+  position:relative;
+  border-color:var(--card-border);
+  background:var(--card-surface);
+  box-shadow:var(--card-shadow-rest);
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+}
+:root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card):is(:hover,:focus-within) {
+  border-color:#9A6B36;
+  box-shadow:var(--card-shadow-hover);
+}
+:root[data-theme="cosmic"] .photography-theme-card[aria-pressed="true"] {
+  border-color:var(--color-primary);background:var(--color-primary-soft);
+}
+/* Delicate celestial ornaments never intercept input or obscure text. */
+:root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::after {
+  content:"✧";position:absolute;right:11px;top:5px;
+  font:16px/1 "Cormorant Garamond",Georgia,serif;
+  color:var(--color-secondary);opacity:.42;pointer-events:none;
+  transition:opacity var(--motion-card) var(--motion-curve);
+}
+:root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card):is(:hover,:focus-within)::after {
+  opacity:.9;
+}
+:root[data-theme="cosmic"] .button.primary {
+  background:#76502C;border-color:#76502C;color:var(--color-on-primary);
+}
+:root[data-theme="cosmic"] .button.primary:hover {
+  background:#58381F;border-color:#58381F;color:var(--color-on-primary);
+}
+:root[data-theme="cosmic"] :is(.tag,.dr-tag,.singu-chip) {
+  border-color:#D4BE9C;background:var(--tag-surface);
+  color:#6D4D2F;border-radius:5px;
+}
+:root[data-theme="cosmic"] :is(.project-cover-placeholder,.photography-empty) {
+  background:linear-gradient(142deg,#F7F2E9,#ECE6DA);
+}
+:root[data-theme="cosmic"] :is(.drawer,.viewer-dialog,.theme-dialog,.search-dialog) {
+  border-color:var(--color-line-strong);
+}
+:root[data-theme="cosmic"] .topbar-control:focus-visible {
+  outline-color:var(--color-primary);
+}
+/* Only the home heading receives the celestial chart; other pages remain quiet. */
+:root[data-theme="cosmic"] .landscape-hero {
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(190px,.7fr);
+  align-items:center;gap:20px;
+}
+:root[data-theme="cosmic"] .landscape-intro {display:none}
+:root[data-theme="cosmic"] .cosmic-intro {
+  display:grid;place-items:center;justify-self:end;width:min(370px,100%);
+  pointer-events:none;isolation:isolate;opacity:.88;
+}
+:root[data-theme="cosmic"] .cosmic-intro svg {display:block;width:100%;height:auto;overflow:visible}
+:root[data-theme="cosmic"] .cosmic-chart-grid {opacity:.23;stroke-width:.55;stroke-dasharray:2 6;color:#AA8756}
+:root[data-theme="cosmic"] .cosmic-chart-orbit {stroke-width:1.3;opacity:.86}
+:root[data-theme="cosmic"] .cosmic-chart-constellation {color:#9B7242;opacity:.6;stroke-width:1}
+:root[data-theme="cosmic"] .cosmic-chart-sun {color:#86552C}
+:root[data-theme="cosmic"] .cosmic-chart-stars {color:#B08445}
+@media(prefers-reduced-motion:no-preference) {
+  :root[data-theme="cosmic"] .cosmic-chart-orbit {
+    transform-origin:170px 120px;animation:cosmic-orbit-drift 30s linear infinite;
+  }
+  :root[data-theme="cosmic"] .cosmic-chart-stars {
+    animation:cosmic-starlight 4.5s ease-in-out infinite alternate;
+  }
+  :root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card):hover {
+    animation:cosmic-edge-glow 1.5s ease-out 1;
+  }
+}
+@keyframes cosmic-orbit-drift {to{transform:rotate(360deg)}}
+@keyframes cosmic-starlight {from{opacity:.4}to{opacity:.9}}
+@keyframes cosmic-edge-glow {0%,100%{border-color:var(--card-border)}45%{border-color:#A8763E}}
+@media(max-width:760px) {
+  :root[data-theme="cosmic"] .landscape-hero {grid-template-columns:minmax(0,1fr);gap:4px}
+  :root[data-theme="cosmic"] .cosmic-intro {width:min(260px,80%);justify-self:center}
+}
+@media(prefers-reduced-motion:reduce) {
+  :root[data-theme="cosmic"] .cosmic-intro * {animation:none!important}
+}
+@media print {
+  :root[data-theme="cosmic"] body {background-image:none}
+  :root[data-theme="cosmic"] .cosmic-intro {display:none}
+}

@@ -943,3 +943,10 @@
 
 .search-result-group { display:grid;gap:7px;margin-bottom:7px; }
 .search-result-group h3 { padding:7px 2px 2px;color:var(--color-secondary);font:600 12px/1.5 var(--font-heading); }
+
+/* Theme miniature is independent of the selected page palette. */
+.theme-option[data-theme-select="cosmic"] .theme-mini-card {
+  border-color:#8B6B43;border-radius:9px;
+  box-shadow:inset 0 0 0 4px #FAF9F6,inset 0 0 0 5px #D8BF91,0 6px 16px rgba(90,66,41,.1);
+}
+.theme-option[data-theme-select="cosmic"] .theme-mini-button {border-radius:5px;}
