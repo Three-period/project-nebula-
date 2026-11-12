@@ -8,11 +8,13 @@ const CARD_SELECTOR = [
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 function makeGiltOutline() {
+  // HTML [hidden] reliably hides the decoration after Cosmic CSS unloads.
+  const holder = document.createElement('span');
+  holder.hidden = true;
+  holder.setAttribute('aria-hidden', 'true');
+  holder.classList.add('cosmic-gilt-outline');
   const svg = document.createElementNS(SVG_NS, 'svg');
-  svg.setAttribute('hidden', '');
-  svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('focusable', 'false');
-  svg.classList.add('cosmic-gilt-outline');
 
   // SVG percentage dimensions track each responsive card without JS measuring.
   // pathLength normalizes the dash to a complete 100-unit rounded perimeter.
@@ -27,7 +29,8 @@ function makeGiltOutline() {
     outline.classList.add('cosmic-gilt-' + layer);
     svg.appendChild(outline);
   }
-  return svg;
+  holder.appendChild(svg);
+  return holder;
 }
 
 export function initCosmicGilt() {

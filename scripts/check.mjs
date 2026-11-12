@@ -370,7 +370,8 @@ assert(giltSource.includes("document.createElementNS") &&
   giltSource.includes("'width', '100%'") &&
   giltSource.includes("new MutationObserver(syncCardOutlines)") &&
   giltSource.includes("dataset.theme !== 'cosmic'") &&
-  giltSource.includes("'hidden', ''") &&
+  giltSource.includes('holder.hidden = true') &&
+  giltSource.includes("holder.appendChild(svg)") &&
   mainSource.includes('initCosmicGilt()'),
   'Cosmic outline needs responsive SVG layers that survive theme/language updates without affecting Landscape');
 assert(cosmicStyle.includes('--card-hover-lift:0px') &&
