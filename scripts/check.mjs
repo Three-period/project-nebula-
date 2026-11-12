@@ -18,6 +18,7 @@ import { projectI18n } from '../assets/data/project-i18n.js';
 import { documentI18n } from '../assets/data/document-i18n.js';
 import { articleI18n } from '../assets/data/article-i18n.js';
 import { readCozeStream } from '../assets/js/agent.js';
+import { buildSearchIndex, searchEntries } from '../assets/data/search-index.js';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const files = [];
 async function walk(dir) { for (const entry of await readdir(dir, { withFileTypes: true })) { const path = resolve(dir, entry.name); if (entry.isDirectory()) await walk(path); else files.push(path); } }
@@ -96,7 +97,7 @@ const style = styleFiles.join('\n');
 const themeStyle = await readFile(resolve(root, 'assets/css/themes/landscape.css'), 'utf8');
 const tokens = await readFile(resolve(root, 'assets/css/tokens.css'), 'utf8');
 assert(style.includes('grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr)'), 'Profile columns must use a balanced responsive grid');
-assert(style.includes('backdrop-filter: blur(var(--surface-blur))') && style.includes('box-shadow: var(--shadow-card)'), 'Landscape cards need frosted glass and layered architectural shadows');
+assert(style.includes('backdrop-filter: blur(var(--surface-blur))') && style.includes('box-shadow: var(--card-shadow-rest)') && themeStyle.includes('--card-shadow-hover:'), 'Landscape cards need frosted glass and layered architectural shadows');
 assert(style.includes('@media (max-width: 1100px)') && style.includes('@media (max-width: 960px)') && style.includes('@media (max-width: 760px)') && style.includes('@media (max-width: 560px)'), 'Desktop, tablet and mobile breakpoints must be explicit');
 assert(style.includes('global-language-switch') && style.includes('prefers-reduced-motion') && style.includes('100dvh'), 'Global language, reduced motion and dynamic viewport support');
 assert(!style.includes('cosmic-orbit') && !style.includes('body::after') && !style.includes('rgba(178, 153, 93'), 'Legacy cosmic and parchment visuals must be removed');
@@ -284,4 +285,38 @@ const checklist = await readFile(resolve(root, 'docs/implementation-checklist.md
 assert(phaseAudit.includes('PR #8') && phaseAudit.includes('已合并') && phaseAudit.includes('主题 Phase 1'), 'The audit baseline must reflect merged PRs and theme phases');
 assert(checklist.includes('M1-01') && checklist.includes('M6-01'), 'Confirmed requirement acceptance matrix is missing');
 
-console.log('PASS: five pages, photography schemas and viewers, theme registry, landscape intro, bilingual coverage, responsive UI, document/media/PDF and SSE.');
+
+/* V2 visual foundation remediation: enforce intended UI structure and real search behavior. */
+for(const id of ['search-dialog','theme-dialog','search-input','search-results','search-trigger','theme-trigger','menu-toggle','projects-subnav']) {
+ assert(ids.includes(id), 'Missing V2 UI control: '+id);
+}
+assert(html.includes('class="topbar"') && html.indexOf('class="topbar"') < html.indexOf('class="sidebar"'), 'TopBar must exist independently above the content sidebar');
+assert(html.includes('data-action="open-search"') && html.includes('data-action="open-theme"'), 'Search and Theme must have working triggers');
+assert(html.includes('id="projects-subnav"'), 'Projects subsections must be available');
+assert(mainSource.includes("case 'open-search'") && mainSource.includes("case 'open-theme'"), 'Main app must initialize Search and ThemePicker');
+assert(mainSource.includes("initThemePicker") && mainSource.includes("initSearch"), 'V2 functional controllers must be connected');
+for (const language of ['zh','en']) {
+ const all=buildSearchIndex(language);
+ assert(all.length >= 5+7+6+6+4, 'V2 search index misses known content: '+language);
+ assert(all.some(x=>x.kind==='page' && x.pageId==='photography'), 'Photography page must be indexed');
+ assert(all.some(x=>x.kind==='project' && x.recordId==='personal-nebula'), 'Project Nebula must be indexed');
+ assert(searchEntries(all,language==='zh'?'摄影':'Photography').length>0, 'Localized search must match');
+ for (const key of ['topbarNavAria','searchTitle','searchPlaceholder','searchNoResults','themeDialogTitle','themePlanned','themeLoadError'])
+  assert.equal(typeof siteI18n.ui[language][key],'string','Missing V2 UI copy: '+language+'/'+key);
+}
+assert(searchEntries(buildSearchIndex('en'),'NEBULA').some(x=>x.kind==='project'), 'Search should be case-insensitive');
+assert.equal(searchEntries(buildSearchIndex('en'),'unlikely-search-token-123').length,0,'Search must support empty state');
+for(const token of ['--motion-card:','--motion-drawer:','--motion-viewer:','--font-heading-en:'])
+ assert(tokens.includes(token),'Missing V2 foundation token '+token);
+for(const token of ['--card-surface:','--card-shadow-rest:','--card-shadow-hover:','--card-radius:','--button-secondary-bg:','--tag-surface:','--overlay-backdrop:'])
+ assert(themeStyle.includes(token),'Missing landscape semantic token '+token);
+assert(!style.includes('box-shadow: var(--shadow-spatial);'), 'Card hover must not discard the contact shadow');
+assert(themeStyle.includes('drafting corners') && style.includes(':focus-within'), 'Landscape corner decorations and keyboard focus states must exist');
+assert(html.includes('class="topbar-actions"') && html.includes('class="sidebar-subnav"'), 'Navigation needs top utilities and optional local sections');
+const pickerSrc=await readFile(resolve(root,'assets/js/theme-picker.js'),'utf8');
+assert(pickerSrc.includes('theme.status===\'active\'') && pickerSrc.includes('disabled aria-disabled'), 'Planned themes must remain disabled');
+const searchSrc=await readFile(resolve(root,'assets/js/search.js'),'utf8');
+assert(searchSrc.includes("event.key==='ArrowDown'") && searchSrc.includes("event.key==='Enter'"), 'Search must support keyboard selection');
+assert(searchSrc.includes("event.ctrlKey||event.metaKey"), 'Search should provide a keyboard shortcut');
+
+console.log('PASS: V2 foundation, TopBar, bilingual Search, ThemePicker, landscape cards; five pages, photography schemas and viewers, theme registry, landscape intro, bilingual coverage, responsive UI, document/media/PDF and SSE.');

@@ -83,8 +83,8 @@ h1, h2 {
   gap: 8px;
   padding: 7px 13px;
   border: 1px solid var(--color-line-strong);
-  border-radius: var(--radius-control);
-  background: var(--color-surface-solid);
+  border-radius: var(--button-radius);
+  background: var(--button-secondary-bg);
   color: var(--color-text);
   font-size: var(--text-sm);
   line-height: 1.4;
@@ -98,13 +98,13 @@ h1, h2 {
 }
 .button.primary {
   border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--button-primary-bg);
+  color: var(--color-on-primary);
 }
 .button.primary:hover {
   border-color: var(--color-primary-hover);
   background: var(--color-primary-hover);
-  color: #fff;
+  color: var(--color-on-primary);
 }
 .button:disabled:hover {
   border-color: var(--color-line-strong);
@@ -151,7 +151,7 @@ h1, h2 {
   padding: 3px 8px;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-control);
-  background: var(--color-page-soft);
+  background: var(--tag-surface);
   color: var(--color-muted);
   font-size: 11px;
   line-height: 1.55;
@@ -169,3 +169,10 @@ h1, h2 {
 }
 .text-link:hover { color: var(--color-primary-hover); }
 
+
+/* Button states consume the theme contract instead of embedding a landscape style. */
+.button { -webkit-backdrop-filter:blur(var(--card-blur));backdrop-filter:blur(var(--card-blur));transition:transform var(--motion-control) var(--motion-curve),background var(--motion-control) var(--motion-curve),border-color var(--motion-control) var(--motion-curve),box-shadow var(--motion-control) var(--motion-curve),color var(--motion-control) var(--motion-curve); }
+.button.primary { -webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:var(--shadow-button-primary); }
+.button:active:not(:disabled) { transform:translateY(1px) scale(.99); }
+.button.primary:active:not(:disabled) { box-shadow:var(--shadow-contact); }
+:root:not([data-theme="landscape"]) .button { -webkit-backdrop-filter:none;backdrop-filter:none; }

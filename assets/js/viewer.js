@@ -158,7 +158,26 @@ export function initViewer() {
       open({ kind: 'pdf', src, title: titleText });
     },
     setLanguage() {
-      if (current) render();
+      if (!current) return;
+      // Keep embedded video/PDF resources alive when only the site's UI language changes.
+      if (current.kind === 'pdf') {
+        type.textContent = t('pdfViewerType');
+        body.querySelector('.viewer-fallback a')?.replaceChildren(document.createTextNode(t('downloadPdf')));
+        return;
+      }
+      if (current.kind === 'media') {
+        const item = projectMap.get(current.projectId)?.media?.[current.mediaIndex];
+        if (item?.type === 'video') {
+          type.textContent = t('mediaViewerType');
+          title.textContent = mediaCopy(item, 'title') || title.textContent;
+          const link = body.querySelector('.viewer-fallback a');
+          if (link) link.textContent = t('demoVideo');
+          return;
+        }
+      }
+      const scrollTop = body.scrollTop;
+      render();
+      body.scrollTop = scrollTop;
     },
     close() {
       controller.close();

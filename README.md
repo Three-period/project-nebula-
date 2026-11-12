@@ -103,3 +103,13 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - `assets/js/theme.js` loads enabled CSS without losing page state and falls back when CSS loading fails.
 - `assets/js/landscape-intro.js` handles the 1.3-second one-shot SVG grid/building/plant opening illustration, with session memory and reduced-motion fallback.
 - No new framework, database, network API or external media content is required.
+
+
+## V2 视觉底座修缮（叠加 PR）
+本轮以景观白绿 Phase 1 PR #9 为基线，在 `feat/visual-foundation-v2-remediation` 独立分支提交，不覆盖 `main`。实施内容：
+- 顶部 Home / Search / 中文 EN / Theme + 独立左侧五栏目内容导航；960px 以下目录改为顶部 Menu 弹出。
+- 浏览器内静态双语搜索：五页面、项目、文档、文章、能力图谱、摄影分类/已登记照片，结果复用现有抽屉/查看器；不承诺解析 PDF 文件全文。
+- 四主题视觉预览与注册表：景观白绿 active，神秘宇宙、小王子、冷调烟紫仍 planned/disabled。
+- 分层视觉 Token、景观卡片双层悬停阴影/建筑角线、字体与按钮细节，以及阅读器语言切换状态保护。
+
+修改前后可核查每个独立 commit；详见 `docs/v2-visual-remediation.md`。图片原图及另外三套主题的完整 CSS 仍属于后续阶段。自动化运行 `npm run check`；真实浏览器的 1440/820/390px 验收需另行记录。
