@@ -105,63 +105,64 @@
 }
 :root[data-theme="cosmic"] .singu-quote em {color:var(--color-cosmic-ember)}
 :root[data-theme="cosmic"] .singu-agent-entry {border-left-color:var(--color-cosmic-ember)}
-/* A one-shot rotating gold glint follows the entire gilt frame, not the card
- * body. Registered angle makes a clear bright point travel along the border.
- * Keep ::after reserved for the existing star decoration. */
-@property --cosmic-gilt-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-:root[data-theme="cosmic"] :is(
-  .project, .document-card, .article-row, .capability-card,
-  .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
-)::before {
-  content: "";
+/* A luminous stroke follows the real rounded-rectangle perimeter, including
+ * its corners. Unlike a rotating conic mask, it is equally visible on cards of
+ * very different aspect ratios. The SVG is decorative and never covers content.
+ * ::after remains exclusively owned by the existing celestial star. */
+:root[data-theme="cosmic"] .cosmic-gilt-outline {
   position: absolute;
-  inset: -2px;
-  z-index: 2;
-  padding: 3px;
-  border-radius: inherit;
+  inset: 0;
+  z-index: 3;
+  display: block; /* Overrides the SVG's [hidden] only while cosmic is active. */
+  width: 100%;
+  height: 100%;
+  overflow: visible;
   pointer-events: none;
-  opacity: 0;
-  background: conic-gradient(
-    from var(--cosmic-gilt-angle),
-    transparent 0deg,
-    transparent 255deg,
-    rgba(217,169,91,.18) 285deg,
-    #F9DF9C 312deg,
-    #FFF9D7 329deg,
-    #D6A75D 346deg,
-    transparent 360deg
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  filter: drop-shadow(0 0 4px rgba(203,156,86,.65));
 }
+:root[data-theme="cosmic"] .cosmic-gilt-outline rect {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 10 90;
+  stroke-dashoffset: 100;
+  opacity: 0;
+}
+:root[data-theme="cosmic"] .cosmic-gilt-glow {
+  stroke: #C98D39;
+  stroke-width: 12;
+  filter: drop-shadow(0 0 5px rgba(191,123,38,.9))
+          drop-shadow(0 0 10px rgba(221,159,59,.65));
+}
+:root[data-theme="cosmic"] .cosmic-gilt-halo {
+  stroke: #E6B65E;
+  stroke-width: 6;
+  filter: drop-shadow(0 0 3px rgba(160,99,26,.7));
+}
+:root[data-theme="cosmic"] .cosmic-gilt-core {
+  stroke: #FFF6C5;
+  stroke-width: 2.5;
+}
+/* One pass on entry; leaving the card cancels the effect. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   :root[data-theme="cosmic"] :is(
     .project, .document-card, .article-row, .capability-card,
     .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
-  ):hover::before {
-    animation: cosmic-gilt-sweep var(--cosmic-gilt-duration) linear 1 both;
+  ):hover > .cosmic-gilt-outline rect {
+    animation: cosmic-outline-trace var(--cosmic-gilt-duration) linear 1 both;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
   :root[data-theme="cosmic"] :is(
     .project, .document-card, .article-row, .capability-card,
     .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
-  ):focus-within::before {
-    animation: cosmic-gilt-sweep var(--cosmic-gilt-duration) linear 1 both;
+  ):focus-within > .cosmic-gilt-outline rect {
+    animation: cosmic-outline-trace var(--cosmic-gilt-duration) linear 1 both;
   }
 }
-@keyframes cosmic-gilt-sweep {
-  0% { opacity: 0; --cosmic-gilt-angle: 0deg; }
+@keyframes cosmic-outline-trace {
+  0% { stroke-dashoffset: 100; opacity: 0; }
   5% { opacity: 1; }
   93% { opacity: 1; }
-  100% { opacity: 0; --cosmic-gilt-angle: 360deg; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
 }
 /* Delicate celestial ornaments never intercept input or obscure text. */
 :root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::after {
