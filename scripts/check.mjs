@@ -26,8 +26,10 @@ for (const file of files.filter(f => /\.(js|mjs)$/.test(f))) {
   const result = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const source = await readFile(file, 'utf8');
-  for (const match of source.matchAll(/from\s+['"]([^'"]+)['"]/g)) {
-    if (match[1].startsWith('.')) await readFile(resolve(dirname(file), match[1]));
+  // Resolve only static import/export statements, not quoted test assertions.
+  for (const line of source.split(/\r?\n/)) {
+    const match = line.match(/^\s*(?:import|export)\s+.*?\s+from\s+['"]([^'"]+)['"]/);
+    if (match?.[1]?.startsWith('.')) await readFile(resolve(dirname(file), match[1]));
   }
 }
 const html = await readFile(resolve(root, 'index.html'), 'utf8');
