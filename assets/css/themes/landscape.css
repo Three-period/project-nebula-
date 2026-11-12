@@ -69,6 +69,12 @@
   -webkit-backdrop-filter: blur(var(--card-blur)) saturate(120%);
   backdrop-filter: blur(var(--card-blur)) saturate(120%);
 }
+/* Large profile panels share the same smooth exit as the smaller cards. */
+:root[data-theme="landscape"] :is(.singu-left, .singu-right) {
+  transition: transform var(--motion-card) var(--motion-curve),
+    border-color var(--motion-card) var(--motion-curve),
+    box-shadow var(--motion-card) var(--motion-curve);
+}
 /* Keep the two shadow layers on hover, including when motion is reduced. */
 @media (hover: hover) {
   :root[data-theme="landscape"] :is(
@@ -91,8 +97,6 @@
     .singu-left, .singu-right
   ):hover {
     transform: translateY(var(--card-hover-lift));
-    transition: transform var(--motion-card) var(--motion-curve),
-      box-shadow var(--motion-card) var(--motion-curve);
   }
 }
 
