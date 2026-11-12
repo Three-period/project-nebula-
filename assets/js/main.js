@@ -8,11 +8,13 @@ import { initSearch } from './search.js';
 import { initThemePicker } from './theme-picker.js';
 import { initPhotography } from './photography.js';
 import { initLandscapeIntro } from './landscape-intro.js';
+import { initCosmicGilt } from './cosmic-gilt.js';
 const themeManager=initTheme();
 const themePicker=initThemePicker(themeManager);
 const viewer=initViewer(),drawer=initDrawer(),agent=initAgent();
 const photography=initPhotography({onOpenTheme:id=>drawer.openPhotographyTheme(id)});
 const landscapeIntro=initLandscapeIntro();
+initCosmicGilt();
 const search=initSearch({onNavigate:item=>{
   go(item.pageId);
   if(item.kind==='project')drawer.openProject(item.recordId);

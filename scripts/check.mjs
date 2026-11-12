@@ -355,17 +355,25 @@ assert(themeStyle.includes('repeating-linear-gradient(115deg') &&
 assert(themeStyle.includes('Keep the two shadow layers on hover') &&
   themeStyle.includes(':focus-within'),
   'Landscape elevation must remain visible on hover/focus even with reduced motion');
-assert(cosmicStyle.includes('@property --cosmic-gilt-angle') &&
-  cosmicStyle.includes('conic-gradient(') &&
-  cosmicStyle.includes('mask-composite: exclude') &&
-  cosmicStyle.includes('--cosmic-gilt-duration:3200ms') &&
-  cosmicStyle.includes('animation: cosmic-gilt-sweep var(--cosmic-gilt-duration) linear 1 both') &&
-  cosmicStyle.includes('5% { opacity: 1; }') &&
-  cosmicStyle.includes('93% { opacity: 1; }') &&
-  cosmicStyle.includes('--cosmic-gilt-angle: 360deg') &&
-  cosmicStyle.includes('@media (hover: hover) and (prefers-reduced-motion: no-preference)') &&
-  !cosmicStyle.includes('cosmic-edge-glow'),
-  'Cosmic cards must show a readable one-shot 3.2s gold light around the gilt frame');
+const giltSource = await readFile(resolve(root, 'assets/js/cosmic-gilt.js'), 'utf8');
+assert(cosmicStyle.includes('--cosmic-gilt-duration:3200ms') &&
+  cosmicStyle.includes('stroke-dasharray: 10 90') &&
+  cosmicStyle.includes('@keyframes cosmic-outline-trace') &&
+  cosmicStyle.includes('stroke-dashoffset: 0; opacity: 0') &&
+  cosmicStyle.includes('animation: cosmic-outline-trace var(--cosmic-gilt-duration) linear 1 both') &&
+  cosmicStyle.includes('prefers-reduced-motion: no-preference') &&
+  !cosmicStyle.includes('cosmic-gilt-sweep') &&
+  !cosmicStyle.includes('conic-gradient('),
+  'Cosmic must trace the real border, retain 3.2s one-shot motion and respect reduced motion');
+assert(giltSource.includes("document.createElementNS") &&
+  giltSource.includes("'pathLength', '100'") &&
+  giltSource.includes("'width', '100%'") &&
+  giltSource.includes("new MutationObserver(syncCardOutlines)") &&
+  giltSource.includes("dataset.theme !== 'cosmic'") &&
+  giltSource.includes('holder.hidden = true') &&
+  giltSource.includes("holder.appendChild(svg)") &&
+  mainSource.includes('initCosmicGilt()'),
+  'Cosmic outline needs responsive SVG layers that survive theme/language updates without affecting Landscape');
 assert(cosmicStyle.includes('--card-hover-lift:0px') &&
   cosmicStyle.includes('--card-shadow-hover:var(--card-shadow-rest)'),
   'Cosmic card hover must not gain heavier elevation');
