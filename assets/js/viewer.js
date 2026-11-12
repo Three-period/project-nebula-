@@ -117,7 +117,8 @@ export function initViewer() {
 
   let touchStart = null;
   body.addEventListener('pointerdown', event => {
-    if (current?.kind === 'photography' && event.pointerType === 'touch')
+    if (current?.kind === 'photography' && event.pointerType === 'touch' &&
+        event.target.closest('.photography-viewer-figure'))
       touchStart = { x: event.clientX, y: event.clientY };
   });
   body.addEventListener('pointerup', event => {
