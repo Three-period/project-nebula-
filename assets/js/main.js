@@ -20,12 +20,15 @@ const sidebar=document.querySelector('.sidebar'),menu=document.getElementById('m
 const links=[...document.querySelectorAll('.toc-link')],sections=[...document.querySelectorAll('.resume-section')];
 function collapseMenu(){sidebar.classList.remove('is-expanded');menu.setAttribute('aria-expanded','false');}
 menu.addEventListener('click',()=>{const expanded=sidebar.classList.toggle('is-expanded');menu.setAttribute('aria-expanded',String(expanded));});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sidebar.classList.contains('is-expanded')){collapseMenu();menu.focus();}});
+document.addEventListener('pointerdown',e=>{if(sidebar.classList.contains('is-expanded')&&!sidebar.contains(e.target)&&!menu.contains(e.target))collapseMenu();});
 const aliases={singularity:'about',forge:'projects',construct:'projects',design:'projects',fusion:'experience',pulsar:'insights',gallery:'photography'};
 function activate(raw,reset=true){
  const id=aliases[raw]||raw;
  const next=sections.find(s=>s.id===id)||sections[0];
  sections.forEach(s=>s.hidden=s!==next);
  links.forEach(a=>{if(a.hash==='#'+next.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+ document.getElementById('projects-subnav').hidden=next.id!=='projects';
  collapseMenu();
  photography.setVisible(next.id==='photography');
  if(next.id==='about')landscapeIntro.onHomeActivate();
@@ -34,6 +37,7 @@ function activate(raw,reset=true){
 function go(id){history.pushState(null,'','#'+id);activate(id);}
 document.addEventListener('click',event=>{
  const target=event.target.closest('button,a');if(!target)return;
+ if(target.dataset.scrollTarget){document.getElementById(target.dataset.scrollTarget)?.scrollIntoView({block:'start'});collapseMenu();return;}
  if(target.matches('a[href^="#"]')){const id=target.hash.slice(1);if(sections.some(s=>s.id===id)||aliases[id]){event.preventDefault();go(id);return;}collapseMenu();}
  if(target.dataset.jumpProject){go('projects');const card=document.querySelector('[data-project-id="'+target.dataset.jumpProject+'"]');card?.scrollIntoView({block:'center'});card?.querySelector('[data-project]')?.focus({preventScroll:true});return;}
  if(target.dataset.project){drawer.openProject(target.dataset.project);}

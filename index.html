@@ -15,13 +15,14 @@
 </head>
 <body>
 <a class="skip-link" href="#main" data-i18n="skipToContent">跳至正文</a>
+<header class="topbar"><a class="topbar-brand" href="#about" data-i18n-aria-label="topbarBrandAria"><span class="topbar-brand-mark" aria-hidden="true">⌂</span><span class="topbar-brand-copy" data-i18n="name">何盈</span></a><nav class="topbar-actions" data-i18n-aria-label="topbarNavAria" aria-label="网站功能">
+<a href="#about" class="topbar-control" data-i18n-aria-label="topbarHomeAria"><span aria-hidden="true">⌂</span><span data-i18n="topbarHome">Home</span></a>
+<button type="button" id="search-trigger" class="topbar-control" data-action="open-search" aria-haspopup="dialog" aria-controls="search-dialog" data-i18n-aria-label="searchOpenAria"><span aria-hidden="true">⌕</span><span data-i18n="topbarSearch">Search</span></button>
+<div class="global-language-switch" role="group" data-i18n-aria-label="languageSwitchAria"><button type="button" class="lang-tab" data-language="zh" aria-pressed="true">中</button><button type="button" class="lang-tab" data-language="en" aria-pressed="false">EN</button></div>
+<button type="button" id="theme-trigger" class="topbar-control" data-action="open-theme" aria-haspopup="dialog" aria-controls="theme-dialog" data-i18n-aria-label="themeOpenAria"><span aria-hidden="true">◈</span><span data-i18n="topbarTheme">Theme</span></button>
+<button type="button" id="menu-toggle" class="topbar-control menu-toggle" aria-expanded="false" aria-controls="sidebar-content" data-i18n-aria-label="menu"><span aria-hidden="true">☰</span><span data-i18n="menu">目录</span></button>
+</nav></header>
 <aside class="sidebar" aria-label="个人简历目录" data-i18n-aria-label="sidebarAria">
- <a class="identity" href="#about"><span class="identity-mark" aria-hidden="true">✦</span><span><strong data-i18n="name">何盈</strong><small data-i18n="jobTitle">AI 产品经理</small></span></a>
- <div class="global-language-switch" role="group" aria-label="切换网站语言" data-i18n-aria-label="languageSwitchAria">
-  <button type="button" class="lang-tab" data-language="zh" aria-pressed="true">中文</button>
-  <button type="button" class="lang-tab" data-language="en" aria-pressed="false">EN</button>
- </div>
- <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="sidebar-content"><span data-i18n="menu">目录</span> <span aria-hidden="true">＋</span></button>
  <div id="sidebar-content" class="sidebar-content">
   <p class="sidebar-label" data-i18n="sidebarLabel">RESUME & SELECTED WORK</p>
   <nav class="toc" aria-label="章节目录" data-i18n-aria-label="navAria">
@@ -30,7 +31,7 @@
    <a href="#projects" class="toc-link"><span class="toc-index">03</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2-9 5 9 5 9-5-9-5Z"/><path d="M3 7v10l9 5 9-5V7M12 12v10"/></svg><span data-i18n="projectsNav">作品与实践</span></a>
    <a href="#insights" class="toc-link"><span class="toc-index">04</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 6h6a5 5 0 0 1 0 10H9a4 4 0 0 0-4 4"/></svg><span data-i18n="insightsNav">思考与方法</span></a>
    <a href="#photography" class="toc-link"><span class="toc-index">05</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h4l2-3h4l2 3h4v13H4z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="photographyNav">摄影作品</span></a>
-  </nav>
+  <div class="sidebar-subnav" id="projects-subnav" hidden aria-label="项目子目录" data-i18n-aria-label="projectsSubnavAria"><button type="button" data-scroll-target="capabilities-title" data-i18n="capabilitiesTitle">能力图谱</button><button type="button" data-scroll-target="work-projects-heading" data-i18n="workProjectsTitle">工作项目</button><button type="button" data-scroll-target="personal-projects-heading" data-i18n="personalProjectsTitle">个人项目</button><button type="button" data-scroll-target="related-materials" data-i18n="relatedMaterialsTitle">相关作品材料</button></div></nav>
   <div class="sidebar-footer">
    <button class="button primary" data-action="chat" data-i18n="sidebarAction">数字分身 · 维修中</button>
    <a class="utility-link" href="/public/images/heying-cqu-AI-PM.pdf" download data-i18n="downloadResume">下载简历 PDF ↓</a>
@@ -113,7 +114,7 @@
  </header>
  <div id="capability-grid" class="capability-grid"></div>
 </section>
-<h3 class="group-heading" data-i18n="workProjectsTitle">工作项目</h3><div id="work-project-list" class="project-list"></div><h3 class="group-heading" data-i18n="personalProjectsTitle">个人项目</h3><div id="personal-project-list" class="project-list"></div><div class="related-docs"><h3 data-i18n="relatedMaterialsTitle">相关作品材料 · Project Nebula</h3><div id="document-list" class="document-list"></div></div></section><section id="insights" class="resume-section" aria-labelledby="insights-title"><header class="section-heading"><p class="eyebrow" data-i18n="insightsEyebrow">OBSERVATION 04 / 思考与方法</p><h2 id="insights-title" data-i18n="insightsTitle">思考与方法</h2><p class="section-lead" data-i18n="insightsLead">持续输入，独立判断。以下保留原创文章及其日期。</p></header><div id="article-list" class="article-list"></div></section>
+<h3 id="work-projects-heading" class="group-heading" data-i18n="workProjectsTitle">工作项目</h3><div id="work-project-list" class="project-list"></div><h3 id="personal-projects-heading" class="group-heading" data-i18n="personalProjectsTitle">个人项目</h3><div id="personal-project-list" class="project-list"></div><div class="related-docs" id="related-materials"><h3 data-i18n="relatedMaterialsTitle">相关作品材料 · Project Nebula</h3><div id="document-list" class="document-list"></div></div></section><section id="insights" class="resume-section" aria-labelledby="insights-title"><header class="section-heading"><p class="eyebrow" data-i18n="insightsEyebrow">OBSERVATION 04 / 思考与方法</p><h2 id="insights-title" data-i18n="insightsTitle">思考与方法</h2><p class="section-lead" data-i18n="insightsLead">持续输入，独立判断。以下保留原创文章及其日期。</p></header><div id="article-list" class="article-list"></div></section>
 <section id="photography" class="resume-section photography-section" aria-labelledby="photography-title">
   <header class="section-heading">
     <p class="eyebrow" data-i18n="photographyEyebrow">OBSERVATION 05 / 摄影作品</p>
