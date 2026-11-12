@@ -104,26 +104,40 @@
 }
 :root[data-theme="cosmic"] .singu-quote em {color:var(--color-cosmic-ember)}
 :root[data-theme="cosmic"] .singu-agent-entry {border-left-color:var(--color-cosmic-ember)}
-/* A brief gold glint travels across the top and bottom gilt edges once per
- * hover/focus entry. The existing decorative star keeps its ::after layer.
- * The sweep is edge-only, so text and imagery remain unobscured. */
+/* A one-shot rotating gold glint follows the entire gilt frame, not the card
+ * body. Registered angle makes a clear bright point travel along the border.
+ * Keep ::after reserved for the existing star decoration. */
+@property --cosmic-gilt-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
 :root[data-theme="cosmic"] :is(
   .project, .document-card, .article-row, .capability-card,
   .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
 )::before {
   content: "";
   position: absolute;
-  inset: 1px;
-  z-index: 1;
+  inset: -2px;
+  z-index: 2;
+  padding: 3px;
   border-radius: inherit;
   pointer-events: none;
   opacity: 0;
-  background-image:
-    linear-gradient(90deg, transparent, rgba(195,147,74,.35) 24%, #FFF5CC 50%, rgba(195,147,74,.45) 76%, transparent),
-    linear-gradient(90deg, transparent, rgba(192,143,74,.18) 24%, #EACD93 50%, rgba(192,143,74,.25) 76%, transparent);
-  background-repeat: no-repeat;
-  background-size: 42% 2px, 42% 1px;
-  background-position: -100% top, -100% bottom;
+  background: conic-gradient(
+    from var(--cosmic-gilt-angle),
+    transparent 0deg,
+    transparent 255deg,
+    rgba(217,169,91,.18) 285deg,
+    #F9DF9C 312deg,
+    #FFF9D7 329deg,
+    #D6A75D 346deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
   filter: drop-shadow(0 0 4px rgba(203,156,86,.65));
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
@@ -131,7 +145,7 @@
     .project, .document-card, .article-row, .capability-card,
     .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
   ):hover::before {
-    animation: cosmic-gilt-sweep 950ms ease-out 1 both;
+    animation: cosmic-gilt-sweep 950ms ease-in-out 1 both;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -139,14 +153,14 @@
     .project, .document-card, .article-row, .capability-card,
     .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
   ):focus-within::before {
-    animation: cosmic-gilt-sweep 950ms ease-out 1 both;
+    animation: cosmic-gilt-sweep 950ms ease-in-out 1 both;
   }
 }
 @keyframes cosmic-gilt-sweep {
-  0% { opacity: 0; background-position: -100% top, -100% bottom; }
+  0% { opacity: 0; --cosmic-gilt-angle: 0deg; }
   12% { opacity: 1; }
-  82% { opacity: 1; }
-  100% { opacity: 0; background-position: 190% top, 190% bottom; }
+  80% { opacity: 1; }
+  100% { opacity: 0; --cosmic-gilt-angle: 360deg; }
 }
 /* Delicate celestial ornaments never intercept input or obscure text. */
 :root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::after {

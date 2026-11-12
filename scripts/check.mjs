@@ -355,11 +355,14 @@ assert(themeStyle.includes('repeating-linear-gradient(115deg') &&
 assert(themeStyle.includes('Keep the two shadow layers on hover') &&
   themeStyle.includes(':focus-within'),
   'Landscape elevation must remain visible on hover/focus even with reduced motion');
-assert(cosmicStyle.includes('@keyframes cosmic-gilt-sweep') &&
-  cosmicStyle.includes('background-position: 190% top') &&
-  cosmicStyle.includes('animation: cosmic-gilt-sweep 950ms ease-out 1 both') &&
+assert(cosmicStyle.includes('@property --cosmic-gilt-angle') &&
+  cosmicStyle.includes('conic-gradient(') &&
+  cosmicStyle.includes('mask-composite: exclude') &&
+  cosmicStyle.includes('animation: cosmic-gilt-sweep 950ms ease-in-out 1 both') &&
+  cosmicStyle.includes('--cosmic-gilt-angle: 360deg') &&
+  cosmicStyle.includes('@media (hover: hover) and (prefers-reduced-motion: no-preference)') &&
   !cosmicStyle.includes('cosmic-edge-glow'),
-  'Cosmic cards should show a traveling one-shot gilt streak, not a border-color flicker');
+  'Cosmic cards must show a visible one-shot 950ms light around the entire gilt frame');
 assert(cosmicStyle.includes('--card-hover-lift:0px') &&
   cosmicStyle.includes('--card-shadow-hover:var(--card-shadow-rest)'),
   'Cosmic card hover must not gain heavier elevation');
