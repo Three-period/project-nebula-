@@ -21,3 +21,87 @@
   --shadow-spatial: 0 14px 30px rgba(33, 61, 43, .09);
   --shadow-card: var(--shadow-contact), var(--shadow-spatial);
 }
+
+
+
+/* Landscape-only first-visit hero illustration. Shared components never depend on its geometry. */
+:root[data-theme="landscape"] .landscape-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(190px, .6fr);
+  align-items: center;
+  gap: 16px;
+}
+:root[data-theme="landscape"] .landscape-hero-copy { min-width: 0; }
+:root[data-theme="landscape"] .landscape-intro {
+  width: min(360px, 100%);
+  max-width: 100%;
+  justify-self: end;
+  opacity: .78;
+  pointer-events: none;
+}
+:root[data-theme="landscape"] .landscape-intro svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+:root[data-theme="landscape"] .landscape-intro-grid {
+  fill: none;
+  stroke: var(--color-line-strong);
+  stroke-width: .75;
+  stroke-dasharray: 3 5;
+  opacity: .48;
+}
+:root[data-theme="landscape"] .landscape-intro-building {
+  fill: none;
+  stroke: var(--color-secondary);
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+:root[data-theme="landscape"] .landscape-intro-plants {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+:root[data-theme="landscape"] .landscape-intro.is-playing .landscape-intro-grid {
+  animation: landscape-grid-in .3s ease-out both;
+}
+:root[data-theme="landscape"] .landscape-intro.is-playing .landscape-intro-building path {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+  animation: landscape-lines-draw .75s .22s ease-out both;
+}
+:root[data-theme="landscape"] .landscape-intro.is-playing .landscape-intro-plants {
+  animation: landscape-plants-in .55s .75s ease-out both;
+}
+@keyframes landscape-grid-in {
+  from { opacity: 0; }
+  to { opacity: .48; }
+}
+@keyframes landscape-lines-draw {
+  from { stroke-dashoffset: 700; opacity: .4; }
+  to { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes landscape-plants-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 760px) {
+  :root[data-theme="landscape"] .landscape-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  :root[data-theme="landscape"] .landscape-intro {
+    width: min(320px, 100%);
+    justify-self: end;
+  }
+}
+@media (max-width: 560px) {
+  :root[data-theme="landscape"] .landscape-intro { width: min(260px, 100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme="landscape"] .landscape-intro * { animation: none !important; }
+}
