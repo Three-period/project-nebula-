@@ -5,9 +5,11 @@ import { initAgent } from './agent.js';
 import { initGlobalI18n } from './i18n.js';
 import { initTheme } from './theme.js';
 import { initSearch } from './search.js';
+import { initThemePicker } from './theme-picker.js';
 import { initPhotography } from './photography.js';
 import { initLandscapeIntro } from './landscape-intro.js';
-initTheme();
+const themeManager=initTheme();
+const themePicker=initThemePicker(themeManager);
 const viewer=initViewer(),drawer=initDrawer(),agent=initAgent();
 const photography=initPhotography({onOpenTheme:id=>drawer.openPhotographyTheme(id)});
 const landscapeIntro=initLandscapeIntro();
@@ -26,6 +28,7 @@ initGlobalI18n(language=>{
   viewer.setLanguage(language);
   photography.setLanguage(language);
   search.setLanguage();
+  themePicker.setLanguage();
 });
 const sidebar=document.querySelector('.sidebar'),menu=document.getElementById('menu-toggle');
 const links=[...document.querySelectorAll('.toc-link')],sections=[...document.querySelectorAll('.resume-section')];
@@ -57,6 +60,7 @@ document.addEventListener('click',event=>{
  switch(target.dataset.action){
   case 'chat':collapseMenu();agent.open();break;
   case 'open-search':collapseMenu();search.open();break;
+  case 'open-theme':collapseMenu();themePicker.open();break;
   case 'close-chat':agent.close();break;
   case 'close-drawer':drawer.close();break;
   case 'prev-article':drawer.previous();break;
