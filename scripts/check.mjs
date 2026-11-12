@@ -333,7 +333,7 @@ assert(searchSrc.includes("event.ctrlKey||event.metaKey"), 'Search should provid
 /* Phase 2: published Cosmic theme and compact cross-page navigation. */
 const cosmicStyle=await readFile(resolve(root,'assets/css/themes/cosmic.css'),'utf8');
 assert(themeRegistry.cosmic.status==='active' && themeRegistry.cosmic.stylesheet==='assets/css/themes/cosmic.css','Cosmic must be the second published theme');
-for(const key of ['--color-page:#F3F1EE','--color-cosmic-ember:#874B42','--card-shadow-rest:inset','--card-shadow-hover:inset','--font-heading-zh:','--font-heading-en:','cosmic-chart-orbit','prefers-reduced-motion:reduce'])
+for(const key of ['--color-page:#F3F1EE','--color-cosmic-ember:#874B42','--card-shadow-rest:inset','--card-shadow-hover:var(--card-shadow-rest)','--font-heading-zh:','--font-heading-en:','cosmic-chart-orbit','prefers-reduced-motion:reduce'])
  assert(cosmicStyle.includes(key),'Missing Cosmic theme contract: '+key);
 assert(!cosmicStyle.includes('background-color:#000') && cosmicStyle.includes('light-grey astronomy'),'Cosmic must remain a light-grey, gold theme');
 assert(html.includes('class="cosmic-intro"') && html.includes('id="landscape-intro"'),'Both theme art directions must retain a separate hero');
@@ -344,4 +344,36 @@ assert(style.includes(':root.sidebar-is-collapsed .sidebar') && style.includes('
 for(const language of ['zh','en'])for(const key of ['sidebarCollapseAria','sidebarExpandAria'])
  assert.equal(typeof siteI18n.ui[language][key],'string','Missing collapse i18n '+language+'/'+key);
 for(const key of ['littlePrince','smokyLavender'])assert(themeRegistry[key].status==='planned' && themeRegistry[key].stylesheet===null,'Deferred themes must remain disabled: '+key);
+/* Scoped visual polish: preserve two different visual languages and footer ownership. */
+const landscapeHoverShadow = themeStyle.match(/--card-shadow-hover:\s*([^;]+);/)?.[1] ?? '';
+assert.equal((landscapeHoverShadow.match(/rgba\(/g) || []).length, 2,
+  'Landscape hover must have a contact and a separate spatial shadow');
+assert(themeStyle.includes('repeating-linear-gradient(115deg') &&
+  themeStyle.includes('backdrop-filter: blur(var(--card-blur))') &&
+  themeStyle.includes('saturate(120%)'),
+  'Landscape cards need an identifiable milk-frost material, not flat white');
+assert(themeStyle.includes('Keep the two shadow layers on hover') &&
+  themeStyle.includes(':focus-within'),
+  'Landscape elevation must remain visible on hover/focus even with reduced motion');
+assert(cosmicStyle.includes('@property --cosmic-gilt-angle') &&
+  cosmicStyle.includes('conic-gradient(') &&
+  cosmicStyle.includes('mask-composite: exclude') &&
+  cosmicStyle.includes('animation: cosmic-gilt-sweep 950ms ease-in-out 1 both') &&
+  cosmicStyle.includes('--cosmic-gilt-angle: 360deg') &&
+  cosmicStyle.includes('@media (hover: hover) and (prefers-reduced-motion: no-preference)') &&
+  !cosmicStyle.includes('cosmic-edge-glow'),
+  'Cosmic cards must show a visible one-shot 950ms light around the entire gilt frame');
+assert(cosmicStyle.includes('--card-hover-lift:0px') &&
+  cosmicStyle.includes('--card-shadow-hover:var(--card-shadow-rest)'),
+  'Cosmic card hover must not gain heavier elevation');
+assert(html.indexOf('class="sidebar-footer"') < html.indexOf('id="sidebar-collapse-toggle"'),
+  'Sidebar collapse toggle must be after footer utilities at the lower-left');
+assert(style.includes('.sidebar-content{min-height:0;overflow-y:auto}') &&
+  style.includes('.sidebar{overflow:hidden;transition:width') &&
+  style.includes(':root.sidebar-is-collapsed .sidebar-collapse-control{margin-top:auto'),
+  'Collapse toggle must remain pinned to bottom while the menu scrolls');
+assert(style.includes('.sidebar-footer .button.primary') &&
+  style.includes('.sidebar-footer .utility-link') &&
+  style.includes('min-height: 28px'),
+  'Sidebar footer should show compact equal-weight utilities');
 console.log('PASS: published landscape + cosmic, compact contact footer, collapsible sidebar, V2 foundation, navigation, search, photography, viewers, i18n and regression suites.');

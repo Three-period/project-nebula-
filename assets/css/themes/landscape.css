@@ -17,18 +17,18 @@
   --color-line-strong: #C6D5CA;
 
   /* Landscape material shadows: contact + spatial volume */
-  --shadow-contact: 0 2px 5px rgba(33, 61, 43, .07);
-  --shadow-spatial: 0 14px 30px rgba(33, 61, 43, .09);
+  --shadow-contact: 0 2px 5px rgba(29, 64, 43, .13);
+  --shadow-spatial: 0 16px 36px rgba(29, 73, 46, .12);
   --shadow-card: var(--shadow-contact), var(--shadow-spatial);
 
   /* Shared semantic theme contract: every appearance uses these variables. */
   --color-on-primary: #FFFFFF;
-  --card-surface: rgba(255,255,255,.88);
+  --card-surface: rgba(244,250,246,.78);
   --card-border: rgba(220,230,222,.96);
   --card-radius: 4px;
-  --card-blur: 12px;
+  --card-blur: 14px;
   --card-shadow-rest: var(--shadow-contact), var(--shadow-spatial);
-  --card-shadow-hover: 0 4px 9px rgba(33,61,43,.13), 0 22px 40px rgba(33,61,43,.17);
+  --card-shadow-hover: 0 5px 9px rgba(28,61,41,.20), 0 28px 52px rgba(30,70,44,.20);
   --card-hover-lift: -3px;
   --color-sidebar: rgba(255,255,255,.97);
   --color-topbar: rgba(255,255,255,.93);
@@ -53,6 +53,52 @@
 }
 
 
+
+/* Landscape-only render material: translucent milk glass, fine surface grain,
+ * and a near contact shadow plus a separate distant architectural shadow.
+ * Restrict to card shells: text and photos remain sharp and untouched. */
+:root[data-theme="landscape"] :is(
+  .project, .document-card, .article-row, .capability-card,
+  .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+) {
+  background:
+    repeating-linear-gradient(115deg, rgba(42, 97, 60, .020) 0 1px, transparent 1px 5px),
+    linear-gradient(120deg, rgba(255,255,255,.92), rgba(232,244,235,.73) 55%, rgba(255,255,255,.88));
+  border-color: var(--card-border);
+  box-shadow: var(--card-shadow-rest);
+  -webkit-backdrop-filter: blur(var(--card-blur)) saturate(120%);
+  backdrop-filter: blur(var(--card-blur)) saturate(120%);
+}
+/* Large profile panels share the same smooth exit as the smaller cards. */
+:root[data-theme="landscape"] :is(.singu-left, .singu-right) {
+  transition: transform var(--motion-card) var(--motion-curve),
+    border-color var(--motion-card) var(--motion-curve),
+    box-shadow var(--motion-card) var(--motion-curve);
+}
+/* Keep the two shadow layers on hover, including when motion is reduced. */
+@media (hover: hover) {
+  :root[data-theme="landscape"] :is(
+    .project, .document-card, .article-row, .capability-card,
+    .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+  ):hover {
+    border-color: var(--color-line-strong);
+    box-shadow: var(--card-shadow-hover);
+  }
+}
+:root[data-theme="landscape"] :is(
+  .project, .document-card, .article-row, .capability-card,
+  .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+):focus-within {
+  border-color: var(--color-line-strong);
+  box-shadow: var(--card-shadow-hover);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :root[data-theme="landscape"] :is(
+    .singu-left, .singu-right
+  ):hover {
+    transform: translateY(var(--card-hover-lift));
+  }
+}
 
 /* Landscape-only first-visit hero illustration. Shared components never depend on its geometry. */
 :root[data-theme="landscape"] .landscape-hero {
