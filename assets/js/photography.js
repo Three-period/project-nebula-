@@ -97,7 +97,7 @@ export function initPhotography({ onOpenTheme = () => {} } = {}) {
     if (!photographyThemes.some(item => item.id === id)) return;
     selectedId = id;
     currentIndex = 0;
-    userPaused = false;
+    userPaused = openDrawer;
     renderThemeCards();
     renderStage();
     syncAuto();
@@ -126,6 +126,10 @@ export function initPhotography({ onOpenTheme = () => {} } = {}) {
     }
     const button = event.target.closest('[data-photo-step]');
     if (button) step(Number(button.dataset.photoStep));
+    if (event.target.closest('[data-action="open-photo-theme"]')) {
+      userPaused = true;
+      syncAuto();
+    }
   });
 
   stage.addEventListener('pointerdown', event => {
