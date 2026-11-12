@@ -20,6 +20,30 @@
   --shadow-contact: 0 2px 5px rgba(33, 61, 43, .07);
   --shadow-spatial: 0 14px 30px rgba(33, 61, 43, .09);
   --shadow-card: var(--shadow-contact), var(--shadow-spatial);
+
+  /* Shared semantic theme contract: every appearance uses these variables. */
+  --color-on-primary: #FFFFFF;
+  --card-surface: rgba(255,255,255,.88);
+  --card-border: rgba(220,230,222,.96);
+  --card-radius: 4px;
+  --card-blur: 12px;
+  --card-shadow-rest: var(--shadow-contact), var(--shadow-spatial);
+  --card-shadow-hover: 0 4px 9px rgba(33,61,43,.13), 0 22px 40px rgba(33,61,43,.17);
+  --card-hover-lift: -3px;
+  --button-primary-bg: var(--color-primary);
+  --button-secondary-bg: rgba(255,255,255,.88);
+  --button-radius: 3px;
+  --tag-surface: rgba(234,242,236,.88);
+  --overlay-backdrop: rgba(24,43,32,.3);
+  --overlay-backdrop-strong: rgba(18,33,25,.48);
+  --decoration-accent: #B9CCBE;
+  --font-heading-zh: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", sans-serif;
+  --font-body-zh: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", sans-serif;
+  --font-heading-en: "Manrope", "Inter", system-ui, sans-serif;
+  --font-body-en: "Inter", system-ui, sans-serif;
+  --radius-card: var(--card-radius);
+  --radius-control: var(--button-radius);
+  --surface-blur: var(--card-blur);
 }
 
 
