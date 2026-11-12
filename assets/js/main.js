@@ -4,17 +4,28 @@ import { initViewer } from './viewer.js';
 import { initAgent } from './agent.js';
 import { initGlobalI18n } from './i18n.js';
 import { initTheme } from './theme.js';
+import { initSearch } from './search.js';
 import { initPhotography } from './photography.js';
 import { initLandscapeIntro } from './landscape-intro.js';
 initTheme();
 const viewer=initViewer(),drawer=initDrawer(),agent=initAgent();
 const photography=initPhotography({onOpenTheme:id=>drawer.openPhotographyTheme(id)});
 const landscapeIntro=initLandscapeIntro();
+const search=initSearch({onNavigate:item=>{
+  go(item.pageId);
+  if(item.kind==='project')drawer.openProject(item.recordId);
+  if(item.kind==='document')drawer.openDocument(item.recordId);
+  if(item.kind==='article')drawer.openArticle(Number(item.recordId));
+  if(item.kind==='photoTheme')drawer.openPhotographyTheme(item.recordId);
+  if(item.kind==='photo')viewer.openPhotography(item.recordId,item.photoIndex);
+  if(item.kind==='capability')document.getElementById('capabilities-title')?.scrollIntoView({block:'start'});
+}});
 initGlobalI18n(language=>{
   renderContent(language);
   drawer.setLanguage(language);
   viewer.setLanguage(language);
   photography.setLanguage(language);
+  search.setLanguage();
 });
 const sidebar=document.querySelector('.sidebar'),menu=document.getElementById('menu-toggle');
 const links=[...document.querySelectorAll('.toc-link')],sections=[...document.querySelectorAll('.resume-section')];
@@ -45,6 +56,7 @@ document.addEventListener('click',event=>{
  else if(target.dataset.article!==undefined){drawer.openArticle(Number(target.dataset.article));}
  switch(target.dataset.action){
   case 'chat':collapseMenu();agent.open();break;
+  case 'open-search':collapseMenu();search.open();break;
   case 'close-chat':agent.close();break;
   case 'close-drawer':drawer.close();break;
   case 'prev-article':drawer.previous();break;

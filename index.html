@@ -135,6 +135,14 @@
 </section>
  <footer id="contact" class="contact-section"><p class="eyebrow" data-i18n="contactEyebrow">LET’S TALK</p><h2 data-i18n="contactTitle">随时开始一段对话。</h2><p data-i18n="contactLead">关于合作、交流或任何 AI 相关话题，欢迎与我联系。</p><div class="contact-links"><a href="mailto:2730006134@qq.com">2730006134@qq.com ↗</a><a href="tel:15384468905">15384468905</a><a href="https://github.com/Three-period" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/public/images/heying-cqu-AI-PM.pdf" download data-i18n="resumeLink">简历 PDF ↓</a></div><p class="footer-note" data-i18n="footerNote">何盈 / Project Nebula</p></footer>
 </main>
+<dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
+ <div class="search-shell">
+  <header class="search-header"><div><p class="eyebrow">SEARCH / INDEX</p><h2 id="search-title" data-i18n="searchTitle">站内搜索</h2></div><button class="icon-button" type="button" data-action="close-search" data-i18n-aria-label="searchCloseAria" aria-label="关闭搜索">×</button></header>
+  <label class="sr-only" for="search-input" data-i18n="searchInputLabel">搜索关键词</label><input type="search" id="search-input" class="search-input" autocomplete="off" spellcheck="false" aria-controls="search-results" data-i18n-aria-label="searchInputLabel" placeholder="搜索项目、文章、文档、摄影…">
+  <p class="search-help" data-i18n="searchHelp">输入关键词；↑ ↓ 选择，Enter 打开，Esc 关闭。</p>
+  <div id="search-results" class="search-results" aria-label="搜索结果" data-i18n-aria-label="searchResultsAria"></div>
+ </div>
+</dialog>
 <dialog id="detail-dialog" class="drawer" aria-labelledby="drawer-title">
  <header class="drawer-header"><div><p id="drawer-type" class="eyebrow"></p><h2 id="drawer-title"></h2></div><button class="icon-button" data-action="close-drawer" aria-label="关闭详情" data-i18n-aria-label="drawerClose">×</button></header>
  <div id="drawer-body" class="drawer-body"></div>

@@ -892,3 +892,20 @@
   color: var(--color-muted);
   font: 12px/1.5 var(--font-code);
 }
+
+/* Shared searchable content dialog. The same UI adapts through theme tokens. */
+.search-dialog{position:fixed;inset:min(10dvh,80px) 0 auto;width:min(760px,calc(100vw - 32px));max-width:none;max-height:82dvh;margin:0 auto;padding:0;overflow:hidden;border:1px solid var(--color-line);border-radius:var(--card-radius);background:var(--color-surface-solid);box-shadow:var(--modal-shadow,0 22px 70px rgba(0,0,0,.16));color:var(--color-text)}
+.search-dialog::backdrop{background:var(--overlay-backdrop-strong);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+.search-shell{display:flex;flex-direction:column;max-height:82dvh;padding:22px;gap:13px}
+.search-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.search-header h2{font-size:22px;margin-top:4px}
+.search-input{width:100%;min-height:48px;padding:10px 15px;border:1px solid var(--color-line-strong);border-radius:var(--button-radius);background:var(--color-page-soft);color:var(--color-text);font-size:16px}
+.search-help{color:var(--color-muted);font-size:12px}
+.search-results{display:grid;gap:8px;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.search-result{display:grid;gap:3px;width:100%;padding:12px 15px;text-align:left;border:1px solid var(--color-line);border-radius:var(--card-radius);background:var(--card-surface);color:var(--color-text)}
+.search-result:hover,.search-result:focus-visible{border-color:var(--color-primary);background:var(--color-primary-soft)}
+.search-result-kind{font:600 11px/1.5 var(--font-code);color:var(--color-primary)}
+.search-result strong{font:600 15px/1.5 var(--font-heading)}
+.search-result small{color:var(--color-muted);font:13px/1.6 var(--font-body)}
+.search-empty{padding:26px;color:var(--color-muted);text-align:center}
+@media(max-width:560px){.search-dialog{inset:calc(var(--topbar-height) + 8px) 0 auto;width:calc(100vw - 20px);max-height:calc(100dvh - var(--topbar-height) - 16px)}.search-shell{padding:15px;max-height:calc(100dvh - var(--topbar-height) - 16px)}}
