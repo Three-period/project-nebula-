@@ -879,7 +879,7 @@
   background: var(--color-page-soft);
 }
 .photography-drawer-empty p { margin-bottom: 7px; color: var(--color-muted); }
-.photography-viewer-figure { min-height: auto; }
+.photography-viewer-figure { min-height: auto; touch-action: pan-y; }
 .photography-viewer-controls {
   display: flex;
   align-items: center;
