@@ -703,3 +703,192 @@
   line-height: 1.5;
   text-align: right;
 }
+
+
+/* 12 · Photography portfolio: theme list, carousel, drawer and fullscreen photo view */
+.photography-layout {
+  display: grid;
+  grid-template-columns: minmax(225px, .72fr) minmax(0, 1.28fr);
+  gap: 20px;
+  align-items: start;
+}
+.photography-themes, .photography-preview { min-width: 0; }
+.photography-subtitle {
+  margin: 0 0 12px;
+  color: var(--color-text);
+  font: 600 17px/1.55 var(--font-heading);
+}
+.photography-theme-list { display: grid; gap: 10px; }
+.photography-theme-card {
+  display: flex;
+  width: 100%;
+  min-height: 104px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 15px 17px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-contact);
+  color: var(--color-text);
+  text-align: left;
+  transition: border-color var(--ease), background var(--ease), box-shadow var(--ease);
+}
+.photography-theme-card:hover {
+  border-color: var(--color-line-strong);
+  background: var(--color-surface-solid);
+  box-shadow: var(--shadow-card);
+}
+.photography-theme-card[aria-pressed="true"] {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+.photography-theme-card-title { font: 600 15px/1.5 var(--font-heading); }
+.photography-theme-card-desc {
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.photography-theme-card-count {
+  margin-top: auto;
+  color: var(--color-secondary);
+  font: 11px/1.5 var(--font-code);
+}
+.photography-preview {
+  padding: 18px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.photography-preview-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+.photography-preview-heading h3 {
+  margin-top: 5px;
+  color: var(--color-text);
+  font: 600 18px/1.5 var(--font-heading);
+}
+.photography-empty {
+  display: flex;
+  min-height: 335px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px;
+  border: 1px dashed var(--color-line-strong);
+  border-radius: var(--radius-control);
+  background: var(--color-page-soft);
+  text-align: center;
+}
+.photography-empty-symbol {
+  display: grid;
+  width: 70px;
+  height: 70px;
+  place-items: center;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 50%;
+  color: var(--color-secondary);
+  font: 36px/1 var(--font-heading);
+}
+.photography-empty h4 { color: var(--color-text); font: 600 16px/1.5 var(--font-heading); }
+.photography-empty p { max-width: 360px; color: var(--color-muted); font-size: 13px; line-height: 1.7; }
+.photography-empty .photography-empty-detail { font-size: 12px; }
+.photography-frame {
+  display: grid;
+  min-height: 335px;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background: var(--color-page-soft);
+  touch-action: pan-y;
+}
+.photography-stage-open {
+  display: grid;
+  width: 100%;
+  min-height: 335px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+.photography-stage-open img {
+  width: 100%;
+  max-height: min(65vh, 540px);
+  object-fit: contain;
+}
+.photography-stage-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 11px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+.photography-stage-caption span:last-child { flex: none; font-family: var(--font-code); }
+.photography-controls {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 13px;
+}
+.photography-drawer-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.photography-drawer-summary > p { flex: 1; }
+.photography-drawer-gallery { display: grid; gap: 12px; }
+.photography-drawer-item {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 130px minmax(0,1fr);
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-solid);
+  color: var(--color-text);
+  text-align: left;
+}
+.photography-drawer-item:hover { border-color: var(--color-primary); background: var(--color-primary-soft); }
+.photography-drawer-item img { width: 130px; height: 95px; border-radius: var(--radius-control); object-fit: cover; }
+.photography-drawer-item strong { display: block; font-size: 14px; line-height: 1.6; }
+.photography-drawer-item small { display: block; margin-top: 5px; color: var(--color-muted); font-size: 12px; line-height: 1.6; }
+.photography-drawer-empty {
+  padding: 30px 22px;
+  border: 1px dashed var(--color-line-strong);
+  border-radius: var(--radius-card);
+  background: var(--color-page-soft);
+}
+.photography-drawer-empty p { margin-bottom: 7px; color: var(--color-muted); }
+.photography-viewer-figure { min-height: auto; }
+.photography-viewer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px auto 0;
+  max-width: 850px;
+}
+.photography-viewer-controls span {
+  color: var(--color-muted);
+  font: 12px/1.5 var(--font-code);
+}
