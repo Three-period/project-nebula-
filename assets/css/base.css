@@ -176,3 +176,6 @@ h1, h2 {
 .button:active:not(:disabled) { transform:translateY(1px) scale(.99); }
 .button.primary:active:not(:disabled) { box-shadow:var(--shadow-contact); }
 :root:not([data-theme="landscape"]) .button { -webkit-backdrop-filter:none;backdrop-filter:none; }
+
+/* Cosmic art is opt-in; do not show a second hero illustration in Landscape. */
+.cosmic-intro { display:none; }

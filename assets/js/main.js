@@ -2,7 +2,7 @@ import { renderContent } from './content.js';
 import { initDrawer } from './drawer.js';
 import { initViewer } from './viewer.js';
 import { initAgent } from './agent.js';
-import { initGlobalI18n } from './i18n.js';
+import { initGlobalI18n,t } from './i18n.js';
 import { initTheme } from './theme.js';
 import { initSearch } from './search.js';
 import { initThemePicker } from './theme-picker.js';
@@ -30,8 +30,31 @@ initGlobalI18n(language=>{
   photography.setLanguage(language);
   search.setLanguage();
   themePicker.setLanguage();
+  updateSidebarCollapseLabel();
 });
 const sidebar=document.querySelector('.sidebar'),menu=document.getElementById('menu-toggle');
+const sidebarCollapseToggle=document.getElementById('sidebar-collapse-toggle');
+const SIDEBAR_COLLAPSE_KEY='project-nebula-sidebar-collapsed';
+function updateSidebarCollapseLabel(){
+ const button=document.getElementById('sidebar-collapse-toggle');
+ if(!button)return;
+ const collapsed=document.documentElement.classList.contains('sidebar-is-collapsed');
+ const copy=t(collapsed?'sidebarExpandAria':'sidebarCollapseAria');
+ button.setAttribute('aria-label',copy);
+ button.title=copy;
+ button.setAttribute('aria-expanded',String(!collapsed));
+}
+function setSidebarCollapsed(collapsed,{persist=true}={}){
+ document.documentElement.classList.toggle('sidebar-is-collapsed',collapsed);
+ updateSidebarCollapseLabel();
+ if(persist){try{localStorage.setItem(SIDEBAR_COLLAPSE_KEY,collapsed?'1':'0');}catch{/* Storage may be disabled. */}}
+}
+let initiallyCollapsed=false;
+try{initiallyCollapsed=localStorage.getItem(SIDEBAR_COLLAPSE_KEY)==='1';}catch{/* Default: expanded. */}
+setSidebarCollapsed(initiallyCollapsed,{persist:false});
+sidebarCollapseToggle.addEventListener('click',()=>{
+ setSidebarCollapsed(!document.documentElement.classList.contains('sidebar-is-collapsed'));
+});
 const links=[...document.querySelectorAll('.toc-link')],sections=[...document.querySelectorAll('.resume-section')];
 function collapseMenu(){sidebar.classList.remove('is-expanded');menu.setAttribute('aria-expanded','false');}
 menu.addEventListener('click',()=>{const expanded=sidebar.classList.toggle('is-expanded');menu.setAttribute('aria-expanded',String(expanded));});
