@@ -31,8 +31,9 @@
   --shadow-spatial:0 14px 30px rgba(85,57,36,.08);
   --shadow-card:var(--shadow-contact),var(--shadow-spatial);
   --card-shadow-rest:inset 0 0 0 4px rgba(251,250,247,.96),inset 0 0 0 5px rgba(211,183,133,.84),0 4px 10px rgba(75,47,29,.045),0 15px 33px rgba(75,47,29,.06);
-  --card-shadow-hover:inset 0 0 0 4px rgba(251,250,247,.96),inset 0 0 0 5px rgba(171,128,69,.96),0 5px 14px rgba(75,47,29,.09),0 18px 38px rgba(75,47,29,.13);
-  --card-hover-lift:-2px;
+  /* Gilded cards stay grounded: the transient traveling light, not elevation, is the interaction cue. */
+  --card-shadow-hover:var(--card-shadow-rest);
+  --card-hover-lift:0px;
   --color-sidebar:rgba(247,245,240,.97);
   --color-topbar:rgba(250,249,245,.94);
   --shadow-sidebar:3px 0 16px rgba(72,49,35,.05);
@@ -103,6 +104,50 @@
 }
 :root[data-theme="cosmic"] .singu-quote em {color:var(--color-cosmic-ember)}
 :root[data-theme="cosmic"] .singu-agent-entry {border-left-color:var(--color-cosmic-ember)}
+/* A brief gold glint travels across the top and bottom gilt edges once per
+ * hover/focus entry. The existing decorative star keeps its ::after layer.
+ * The sweep is edge-only, so text and imagery remain unobscured. */
+:root[data-theme="cosmic"] :is(
+  .project, .document-card, .article-row, .capability-card,
+  .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+)::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background-image:
+    linear-gradient(90deg, transparent, rgba(195,147,74,.35) 24%, #FFF5CC 50%, rgba(195,147,74,.45) 76%, transparent),
+    linear-gradient(90deg, transparent, rgba(192,143,74,.18) 24%, #EACD93 50%, rgba(192,143,74,.25) 76%, transparent);
+  background-repeat: no-repeat;
+  background-size: 42% 2px, 42% 1px;
+  background-position: -100% top, -100% bottom;
+  filter: drop-shadow(0 0 4px rgba(203,156,86,.65));
+}
+@media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) {
+    :root[data-theme="cosmic"] :is(
+      .project, .document-card, .article-row, .capability-card,
+      .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+    ):hover::before {
+      animation: cosmic-gilt-sweep 950ms ease-out 1 both;
+    }
+  }
+  :root[data-theme="cosmic"] :is(
+    .project, .document-card, .article-row, .capability-card,
+    .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+  ):focus-within::before {
+    animation: cosmic-gilt-sweep 950ms ease-out 1 both;
+  }
+}
+@keyframes cosmic-gilt-sweep {
+  0% { opacity: 0; background-position: -100% top, -100% bottom; }
+  12% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { opacity: 0; background-position: 190% top, 190% bottom; }
+}
 /* Delicate celestial ornaments never intercept input or obscure text. */
 :root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::after {
   content:"✧";position:absolute;right:11px;top:5px;
@@ -155,13 +200,9 @@
   :root[data-theme="cosmic"] .cosmic-chart-stars {
     animation:cosmic-starlight 4.5s ease-in-out infinite alternate;
   }
-  :root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card):hover {
-    animation:cosmic-edge-glow 1.5s ease-out 1;
-  }
 }
 @keyframes cosmic-orbit-drift {to{transform:rotate(360deg)}}
 @keyframes cosmic-starlight {from{opacity:.4}to{opacity:.9}}
-@keyframes cosmic-edge-glow {0%,100%{border-color:var(--card-border)}45%{border-color:#A8763E}}
 @media(max-width:760px) {
   :root[data-theme="cosmic"] .landscape-hero {grid-template-columns:minmax(0,1fr);gap:4px}
   :root[data-theme="cosmic"] .cosmic-intro {width:min(260px,80%);justify-self:center}
