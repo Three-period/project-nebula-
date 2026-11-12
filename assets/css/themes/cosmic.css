@@ -126,15 +126,15 @@
   background-position: -100% top, -100% bottom;
   filter: drop-shadow(0 0 4px rgba(203,156,86,.65));
 }
-@media (prefers-reduced-motion: no-preference) {
-  @media (hover: hover) {
-    :root[data-theme="cosmic"] :is(
-      .project, .document-card, .article-row, .capability-card,
-      .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
-    ):hover::before {
-      animation: cosmic-gilt-sweep 950ms ease-out 1 both;
-    }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :root[data-theme="cosmic"] :is(
+    .project, .document-card, .article-row, .capability-card,
+    .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+  ):hover::before {
+    animation: cosmic-gilt-sweep 950ms ease-out 1 both;
   }
+}
+@media (prefers-reduced-motion: no-preference) {
   :root[data-theme="cosmic"] :is(
     .project, .document-card, .article-row, .capability-card,
     .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
