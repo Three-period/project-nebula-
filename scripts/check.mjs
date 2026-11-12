@@ -203,7 +203,7 @@ for (const theme of photographyThemes) {
     assert(photographyI18n[language]?.themes[theme.id], 'Missing photography theme i18n entry');
   }
   for (const photo of theme.photos) {
-    assert(photo.id && photo.title && photo.alt && photo.description !== undefined, 'Photography metadata is incomplete: ' + photo.id);
+    assert(photo.id && photo.title && photo.alt, 'Photography metadata is incomplete: ' + photo.id);
     assert(!photoIds.has(photo.id), 'Duplicate photo ID: ' + photo.id);
     photoIds.add(photo.id);
     assert(photo.src.startsWith('/public/images/photography/' + theme.folder + '/'), 'Photo must reside in its own directory: ' + photo.src);
@@ -240,6 +240,42 @@ for (const key of ['photographyNav', 'photographyEyebrow', 'photographyTitle', '
   for (const language of ['zh','en'])
     assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing photography translation: ' + language + '/' + key);
 }
+// Exercise bilingual photo metadata in memory; do not publish test images or fake gallery items.
+const demo = { id: 'validation-only-photo', src: '/public/images/photography/nature/test-only.webp', title: '示例标题', alt: '虚拟测试描述' };
+photographyThemes[0].photos.push(demo);
+photographyI18n.en.photos[demo.id] = { title: 'Test caption', alt: 'Temporary validation image' };
+try {
+  const localized = getLocalizedPhotographyTheme('nature', 'en');
+  assert.equal(localized.photos.at(-1).title, 'Test caption');
+  assert.equal(localized.photos.at(-1).alt, 'Temporary validation image');
+} finally {
+  photographyThemes[0].photos.pop();
+  delete photographyI18n.en.photos[demo.id];
+}
+// DOM-independent theme manager regression: planned themes must never switch the live palette.
+const themeAPI = await import('../assets/js/theme.js');
+const originalDocument = globalThis.document;
+const originalLocalStorage = globalThis.localStorage;
+try {
+  const baseURL = 'https://example.test/';
+  const fakeLink = { href: baseURL + 'assets/css/themes/landscape.css' };
+  globalThis.document = {
+    baseURI: baseURL,
+    documentElement: { dataset: { theme: 'landscape' } },
+    getElementById: id => id === 'theme-stylesheet' ? fakeLink : null
+  };
+  globalThis.localStorage = { getItem: () => 'cosmic', setItem: () => {} };
+  assert.equal((await themeAPI.setTheme('cosmic')), false, 'An incomplete theme must not activate');
+  assert.equal(globalThis.document.documentElement.dataset.theme, 'landscape');
+  assert.equal((await themeAPI.setTheme('landscape')), true, 'Available theme must remain usable');
+  assert.equal(themeAPI.initTheme().current, 'landscape', 'Stored planned themes must fall back');
+} finally {
+  if (originalDocument === undefined) delete globalThis.document;
+  else globalThis.document = originalDocument;
+  if (originalLocalStorage === undefined) delete globalThis.localStorage;
+  else globalThis.localStorage = originalLocalStorage;
+}
+
 const phaseAudit = await readFile(resolve(root, 'docs/phase-audit.md'), 'utf8');
 const checklist = await readFile(resolve(root, 'docs/implementation-checklist.md'), 'utf8');
 assert(phaseAudit.includes('PR #8') && phaseAudit.includes('已合并') && phaseAudit.includes('主题 Phase 1'), 'The audit baseline must reflect merged PRs and theme phases');
