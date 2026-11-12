@@ -4,6 +4,7 @@ import { articles } from '../data/articles.js';
 import { workProjects } from '../data/work-projects.js';
 import { personalProjects } from '../data/personal-projects.js';
 import { createDialog } from './dialog.js';
+import { getLocalizedPhotographyTheme } from '../data/photography-i18n.js';
 import { escapeHTML } from './content.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
 
@@ -178,6 +179,34 @@ export function initDrawer() {
     show({ ...item, body: overview, historical: true }, -1, preserveScroll);
   }
 
+  function openPhotographyTheme(id, preserveScroll = false) {
+    const theme = getLocalizedPhotographyTheme(id, getCurrentLanguage());
+    if (!theme) return;
+    currentProject = null;
+    const photos = theme.photos.map((photo, index) =>
+      '<button class="photography-drawer-item" type="button" data-action="open-photo" data-photo-theme="' +
+      escapeHTML(id) + '" data-photo-index="' + index + '" aria-label="' +
+      escapeHTML(t('photographyOpenPhoto') + ': ' + photo.title) + '">' +
+      '<img src="' + escapeHTML(photo.src) + '" alt="' + escapeHTML(photo.alt || photo.title) +
+      '" loading="lazy" decoding="async">' +
+      '<span><strong>' + escapeHTML(photo.title) + '</strong>' +
+      (photo.description ? '<small>' + escapeHTML(photo.description) + '</small>' : '') +
+      '</span></button>'
+    ).join('');
+    const gallery = photos
+      ? '<div class="photography-drawer-gallery">' + photos + '</div>'
+      : '<div class="photography-drawer-empty"><p>' + escapeHTML(t('photographyThemeEmpty')) +
+        '</p><p>' + escapeHTML(t('photographyNoPhotos')) + '</p></div>';
+    show({
+      type: t('photographyDrawerType'),
+      title: theme.title,
+      body: '<div class="photography-drawer-summary"><p>' +
+        escapeHTML(theme.description) + '</p><span class="tag">' +
+        theme.photos.length + ' ' + escapeHTML(t('photographyPhotoCount')) +
+        '</span></div>' + gallery
+    }, -1, preserveScroll);
+  }
+
   function openArticle(index, preserveScroll = false) {
     currentProject = null;
     const raw = articles[index];
@@ -197,6 +226,10 @@ export function initDrawer() {
     },
     openArticle(index) {
       currentView = preserve => openArticle(index, preserve);
+      currentView(false);
+    },
+    openPhotographyTheme(id) {
+      currentView = preserve => openPhotographyTheme(id, preserve);
       currentView(false);
     },
     setLanguage() {
