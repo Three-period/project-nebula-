@@ -21,10 +21,19 @@ export function initSearch({onNavigate=()=>{}}={}){
       list.innerHTML='<p class="search-empty" role="status">'+escapeHTML(t('searchNoResults'))+'</p>';
       return;
     }
-    list.innerHTML=results.map((item,index)=>'<button class="search-result" type="button" data-search-result="'+index+'">'+
-      '<span class="search-result-kind">'+escapeHTML(t(category[item.kind]))+'</span>'+
-      '<strong>'+escapeHTML(item.title||'')+'</strong>'+
-      (item.summary?'<small>'+escapeHTML(item.summary)+'</small>':'')+'</button>').join('');
+    const kinds=['page','project','capability','article','document','photoTheme','photo'];
+    results=kinds.flatMap(kind=>results.filter(item=>item.kind===kind));
+    list.innerHTML=kinds.map(kind=>{
+      const group=results.map((item,index)=>({item,index})).filter(x=>x.item.kind===kind);
+      if(!group.length)return '';
+      const heading=escapeHTML(t(category[kind]));
+      return '<section class="search-result-group" aria-label="'+heading+'"><h3>'+heading+'</h3>'+
+        group.map(({item,index})=>'<button class="search-result" type="button" data-search-result="'+index+'">'+
+          '<span class="search-result-kind">'+heading+'</span>'+
+          '<strong>'+escapeHTML(item.title||'')+'</strong>'+
+          (item.summary?'<small>'+escapeHTML(item.summary)+'</small>':'')+'</button>').join('')+
+        '</section>';
+    }).join('');
   }
   function focusResult(index){
     if(!results.length)return;
