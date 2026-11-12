@@ -13,6 +13,8 @@
   --color-muted:#665A4E;
   --color-primary:#76502C;
   --color-primary-hover:#58381F;
+  --color-cosmic-ember:#874B42;
+  --color-cosmic-ember-soft:#F2E6DF;
   --color-primary-soft:#EFE4D2;
   --color-secondary:#8D6840;
   --color-mist:#DAC9AD;
@@ -99,6 +101,8 @@
 :root[data-theme="cosmic"] .photography-theme-card[aria-pressed="true"] {
   border-color:var(--color-primary);background:var(--color-primary-soft);
 }
+:root[data-theme="cosmic"] .singu-quote em {color:var(--color-cosmic-ember)}
+:root[data-theme="cosmic"] .singu-agent-entry {border-left-color:var(--color-cosmic-ember)}
 /* Delicate celestial ornaments never intercept input or obscure text. */
 :root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::after {
   content:"✧";position:absolute;right:11px;top:5px;

@@ -261,16 +261,28 @@ const originalDocument = globalThis.document;
 const originalLocalStorage = globalThis.localStorage;
 try {
   const baseURL = 'https://example.test/';
-  const fakeLink = { href: baseURL + 'assets/css/themes/landscape.css' };
+  let activeLink;
+  const attach = next => { activeLink = next; queueMicrotask(() => next.onload?.()); };
+  const fakeLink = { href: baseURL + 'assets/css/themes/landscape.css',
+    insertAdjacentElement: (_position, next) => attach(next), remove() {} };
+  activeLink = fakeLink;
   globalThis.document = {
     baseURI: baseURL,
     documentElement: { dataset: { theme: 'landscape' } },
-    getElementById: id => id === 'theme-stylesheet' ? fakeLink : null
+    getElementById: id => id === 'theme-stylesheet' ? activeLink : null,
+    createElement: tag => {
+      assert.equal(tag,'link');
+      return { dataset: {}, remove() {}, insertAdjacentElement: (_position,next) => attach(next) };
+    }
   };
   globalThis.localStorage = { getItem: () => 'littlePrince', setItem: () => {} };
   assert.equal((await themeAPI.setTheme('littlePrince')), false, 'An incomplete theme must not activate');
   assert.equal(globalThis.document.documentElement.dataset.theme, 'landscape');
-  assert.equal((await themeAPI.setTheme('landscape')), true, 'Available theme must remain usable');
+  assert.equal((await themeAPI.setTheme('cosmic')), true, 'Completed Cosmic stylesheet must load');
+  assert.equal(globalThis.document.documentElement.dataset.theme, 'cosmic');
+  assert(activeLink.href.endsWith('assets/css/themes/cosmic.css'), 'Active CSS must match Cosmic');
+  assert.equal((await themeAPI.setTheme('landscape')), true, 'Switching back to Landscape must work');
+  assert.equal(globalThis.document.documentElement.dataset.theme, 'landscape');
   assert.equal(themeAPI.initTheme().current, 'landscape', 'Stored planned themes must fall back');
 } finally {
   if (originalDocument === undefined) delete globalThis.document;
@@ -321,7 +333,7 @@ assert(searchSrc.includes("event.ctrlKey||event.metaKey"), 'Search should provid
 /* Phase 2: published Cosmic theme and compact cross-page navigation. */
 const cosmicStyle=await readFile(resolve(root,'assets/css/themes/cosmic.css'),'utf8');
 assert(themeRegistry.cosmic.status==='active' && themeRegistry.cosmic.stylesheet==='assets/css/themes/cosmic.css','Cosmic must be the second published theme');
-for(const key of ['--color-page:#F3F1EE','--card-shadow-rest:inset','--card-shadow-hover:inset','--font-heading-zh:','--font-heading-en:','cosmic-chart-orbit','prefers-reduced-motion:reduce'])
+for(const key of ['--color-page:#F3F1EE','--color-cosmic-ember:#874B42','--card-shadow-rest:inset','--card-shadow-hover:inset','--font-heading-zh:','--font-heading-en:','cosmic-chart-orbit','prefers-reduced-motion:reduce'])
  assert(cosmicStyle.includes(key),'Missing Cosmic theme contract: '+key);
 assert(!cosmicStyle.includes('background-color:#000') && cosmicStyle.includes('light-grey astronomy'),'Cosmic must remain a light-grey, gold theme');
 assert(html.includes('class="cosmic-intro"') && html.includes('id="landscape-intro"'),'Both theme art directions must retain a separate hero');
