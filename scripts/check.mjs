@@ -46,7 +46,7 @@ assert.equal(personalProjects.length, 2);
 assert.equal(projects.filter(p => p.visibility === 'draft').length, 3);
 assert(!html.includes('id="sae-input"'));
 assert(!html.includes('id="design"'));
-assert(files.some(file => file.endsWith('/nebula-orbits-v2.svg')), 'Cosmic orbit artwork is retained only as an inactive future-theme asset');
+assert(files.some(file => file.endsWith('/nebula-orbits-v2.svg')), 'Legacy orbit SVG must be preserved without being reintroduced into the default page');
 const agentClient = await readFile(resolve(root, 'assets/js/agent.js'), 'utf8');
 assert(!agentClient.includes("fetch('/api/chat'"), 'Agent maintenance mode must not fetch');
 assert.equal(articles.length, 6);
@@ -218,8 +218,7 @@ for (const theme of photographyThemes) {
 }
 await readFile(resolve(root, 'public/images/photography/README.md'));
 const visibleThemes = availableThemes();
-assert.equal(visibleThemes.length, 1, 'Only completed themes may be exposed');
-assert.equal(visibleThemes[0].id, 'landscape', 'Landscape must remain the sole active theme');
+assert.deepEqual(visibleThemes.map(theme=>theme.id).sort(),['cosmic','landscape'], 'Landscape and completed Cosmic must both be selectable');
 assert.equal(Object.keys(themeRegistry).length, 4, 'All four future theme IDs must be reserved');
 for (const item of Object.values(themeRegistry)) {
   assert(['active','planned'].includes(item.status), 'Invalid theme status');
@@ -268,8 +267,8 @@ try {
     documentElement: { dataset: { theme: 'landscape' } },
     getElementById: id => id === 'theme-stylesheet' ? fakeLink : null
   };
-  globalThis.localStorage = { getItem: () => 'cosmic', setItem: () => {} };
-  assert.equal((await themeAPI.setTheme('cosmic')), false, 'An incomplete theme must not activate');
+  globalThis.localStorage = { getItem: () => 'littlePrince', setItem: () => {} };
+  assert.equal((await themeAPI.setTheme('littlePrince')), false, 'An incomplete theme must not activate');
   assert.equal(globalThis.document.documentElement.dataset.theme, 'landscape');
   assert.equal((await themeAPI.setTheme('landscape')), true, 'Available theme must remain usable');
   assert.equal(themeAPI.initTheme().current, 'landscape', 'Stored planned themes must fall back');
@@ -319,4 +318,18 @@ const searchSrc=await readFile(resolve(root,'assets/js/search.js'),'utf8');
 assert(searchSrc.includes("event.key==='ArrowDown'") && searchSrc.includes("event.key==='Enter'"), 'Search must support keyboard selection');
 assert(searchSrc.includes("event.ctrlKey||event.metaKey"), 'Search should provide a keyboard shortcut');
 
-console.log('PASS: V2 foundation, TopBar, bilingual Search, ThemePicker, landscape cards; five pages, photography schemas and viewers, theme registry, landscape intro, bilingual coverage, responsive UI, document/media/PDF and SSE.');
+/* Phase 2: published Cosmic theme and compact cross-page navigation. */
+const cosmicStyle=await readFile(resolve(root,'assets/css/themes/cosmic.css'),'utf8');
+assert(themeRegistry.cosmic.status==='active' && themeRegistry.cosmic.stylesheet==='assets/css/themes/cosmic.css','Cosmic must be the second published theme');
+for(const key of ['--color-page:#F3F1EE','--card-shadow-rest:inset','--card-shadow-hover:inset','--font-heading-zh:','--font-heading-en:','cosmic-chart-orbit','prefers-reduced-motion:reduce'])
+ assert(cosmicStyle.includes(key),'Missing Cosmic theme contract: '+key);
+assert(!cosmicStyle.includes('background-color:#000') && cosmicStyle.includes('light-grey astronomy'),'Cosmic must remain a light-grey, gold theme');
+assert(html.includes('class="cosmic-intro"') && html.includes('id="landscape-intro"'),'Both theme art directions must retain a separate hero');
+assert(html.includes('id="sidebar-collapse-toggle"') && html.includes('aria-controls="sidebar-content"'),'A real sidebar collapse button must be present');
+assert(mainSource.includes('setSidebarCollapsed') && mainSource.includes('sidebar-is-collapsed') && mainSource.includes('SIDEBAR_COLLAPSE_KEY'),'Sidebar collapse must persist and be reversible');
+assert(style.includes('.contact-section h2') && style.includes('font-size:clamp(16px,1.35vw,19px)'), 'All pages require a compact contact footer');
+assert(style.includes(':root.sidebar-is-collapsed .sidebar') && style.includes(':root.sidebar-is-collapsed .main'), 'Collapsed sidebar must free desktop content width');
+for(const language of ['zh','en'])for(const key of ['sidebarCollapseAria','sidebarExpandAria'])
+ assert.equal(typeof siteI18n.ui[language][key],'string','Missing collapse i18n '+language+'/'+key);
+for(const key of ['littlePrince','smokyLavender'])assert(themeRegistry[key].status==='planned' && themeRegistry[key].stylesheet===null,'Deferred themes must remain disabled: '+key);
+console.log('PASS: published landscape + cosmic, compact contact footer, collapsible sidebar, V2 foundation, navigation, search, photography, viewers, i18n and regression suites.');
