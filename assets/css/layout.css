@@ -511,7 +511,9 @@
 .sidebar-collapse-control:hover {background:var(--color-primary-soft);border-color:var(--color-primary)}
 .sidebar-collapse-control svg {width:19px;height:19px;transition:transform var(--motion-menu) var(--motion-curve)}
 @media(min-width:961px){
-  .sidebar{transition:width var(--motion-menu) var(--motion-curve),padding var(--motion-menu) var(--motion-curve)}
+  /* Keep the bottom toggle on screen while long menu contents scroll independently. */
+  .sidebar{overflow:hidden;transition:width var(--motion-menu) var(--motion-curve),padding var(--motion-menu) var(--motion-curve)}
+  .sidebar-content{min-height:0;overflow-y:auto}
   .main{transition:margin-left var(--motion-menu) var(--motion-curve)}
   :root.sidebar-is-collapsed .sidebar{width:var(--sidebar-collapsed-width);padding:20px 9px}
   :root.sidebar-is-collapsed .sidebar-content{display:none}
