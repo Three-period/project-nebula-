@@ -200,3 +200,34 @@
 
 
 
+
+
+/* Photography page and landscape opening illustration */
+@media (max-width: 960px) {
+  .photography-layout { grid-template-columns: minmax(180px, .65fr) minmax(0, 1.35fr); gap: 15px; }
+  .photography-preview { padding: 15px; }
+}
+@media (max-width: 760px) {
+  .photography-layout { display: flex; flex-direction: column; }
+  .photography-preview { order: 0; width: 100%; }
+  .photography-themes { order: 1; width: 100%; }
+  .photography-theme-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .photography-empty, .photography-frame, .photography-stage-open { min-height: 230px; }
+  .photography-viewer-controls { gap: 7px; }
+  .landscape-hero { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .landscape-intro { width: min(320px, 100%); justify-self: end; }
+}
+@media (max-width: 560px) {
+  .photography-theme-list { grid-template-columns: minmax(0, 1fr); }
+  .photography-theme-card { min-height: 90px; padding: 13px 15px; }
+  .photography-preview { padding: 12px; }
+  .photography-preview-heading .button { width: 100%; }
+  .photography-drawer-item { grid-template-columns: 90px minmax(0, 1fr); gap: 10px; }
+  .photography-drawer-item img { width: 90px; height: 78px; }
+  .photography-viewer-controls .button { padding: 7px 8px; font-size: 12px; }
+  .landscape-intro { width: min(260px, 100%); }
+}
+@media print {
+  .photography-empty { min-height: 120px; }
+  .photography-controls, .photography-viewer-controls, .landscape-intro { display: none !important; }
+}
