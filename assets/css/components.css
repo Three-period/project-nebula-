@@ -934,3 +934,9 @@
 .theme-option-meta strong{font:600 15px/1.5 var(--font-heading)}.theme-option-meta small{color:var(--color-muted);font-size:12px}
 .theme-picker-status{min-height:1.5em;margin-top:14px;color:var(--color-primary);font-size:13px}
 @media(max-width:560px){.theme-dialog{width:calc(100vw - 18px)}.theme-picker-shell{padding:16px}.theme-picker-grid{grid-template-columns:1fr;gap:10px}.theme-miniature{min-height:75px;padding:8px}.theme-mini-card{height:55px}.theme-picker-header h2{font-size:22px}}
+
+/* A noninteractive photographic change fades in, respecting reduced motion. */
+@media (prefers-reduced-motion:no-preference) {
+ .photography-frame img { animation:photography-image-in var(--motion-photo) var(--motion-curve) both; }
+}
+@keyframes photography-image-in { from {opacity:.4} to {opacity:1} }

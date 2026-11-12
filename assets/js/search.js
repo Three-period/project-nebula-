@@ -7,7 +7,7 @@ export function initSearch({onNavigate=()=>{}}={}){
   const input=document.getElementById('search-input');
   const list=document.getElementById('search-results');
   if(!dialog||!input||!list)return {open(){},setLanguage(){}};
-  let entries=[],results=[],opener=null;
+  let entries=[],results=[],opener=null,navigating=false;
   let activeIndex=0;
   const category={
     page:'searchKindPage',project:'searchKindProject',article:'searchKindArticle',
@@ -34,6 +34,7 @@ export function initSearch({onNavigate=()=>{}}={}){
   function choose(index){
     const item=results[index];
     if(!item)return;
+    navigating=true;
     dialog.close();
     onNavigate(item);
   }
@@ -50,7 +51,7 @@ export function initSearch({onNavigate=()=>{}}={}){
     input.focus();
     input.select();
   }
-  dialog.addEventListener('close',()=>{opener?.focus({preventScroll:true});});
+  dialog.addEventListener('close',()=>{if(!navigating)opener?.focus({preventScroll:true});navigating=false;});
   input.addEventListener('input',render);
   input.addEventListener('keydown',event=>{
     if(event.key==='ArrowDown'){event.preventDefault();focusResult(0);}
