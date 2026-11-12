@@ -200,3 +200,49 @@
 
 
 
+
+
+/* Photography page and landscape opening illustration */
+@media (max-width: 960px) {
+  .photography-layout { grid-template-columns: minmax(180px, .65fr) minmax(0, 1.35fr); gap: 15px; }
+  .photography-preview { padding: 15px; }
+}
+@media (max-width: 760px) {
+  .photography-layout { display: flex; flex-direction: column; }
+  .photography-preview { order: 0; width: 100%; }
+  .photography-themes { order: 1; width: 100%; }
+  .photography-theme-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .photography-empty, .photography-frame, .photography-stage-open { min-height: 230px; }
+  .photography-viewer-controls { gap: 7px; }
+}
+@media (max-width: 560px) {
+  .photography-theme-list { grid-template-columns: minmax(0, 1fr); }
+  .photography-theme-card { min-height: 90px; padding: 13px 15px; }
+  .photography-preview { padding: 12px; }
+  .photography-preview-heading .button { width: 100%; }
+  .photography-drawer-item { grid-template-columns: 90px minmax(0, 1fr); gap: 10px; }
+  .photography-drawer-item img { width: 90px; height: 78px; }
+  .photography-viewer-controls .button { padding: 7px 8px; font-size: 12px; }
+}
+@media print {
+  .photography-empty { min-height: 120px; }
+  .photography-controls, .photography-viewer-controls, .landscape-intro { display: none !important; }
+}
+
+/* Tablet/mobile: shared topbar persists and the content-only sidebar becomes a popover. */
+@media (max-width:960px){
+.topbar .menu-toggle{display:inline-flex;position:static}
+.sidebar{display:none;position:fixed;z-index:19;inset:var(--topbar-height) 0 auto;width:100%;max-height:calc(100dvh - var(--topbar-height));overflow:auto;padding:15px 24px 20px;border-right:0;border-bottom:1px solid var(--color-line);background:var(--color-surface-solid)}
+.sidebar.is-expanded{display:block}.sidebar-content{display:flex;max-height:none;padding:0}
+.sidebar-label{margin:7px 0 10px}.sidebar-footer{margin-top:18px}
+.main{margin-left:0;padding-top:calc(var(--topbar-height) + 14px)}
+.global-language-switch{position:static;margin:0}
+}
+@media (max-width:560px){.topbar{padding-inline:12px;gap:5px}.topbar-brand-copy{display:none}.topbar-actions{gap:2px}.topbar-control{width:36px;padding:5px}.topbar-control>span:not([aria-hidden]){display:none}.topbar .lang-tab{min-width:29px;padding-inline:5px}.topbar .global-language-switch{gap:0;padding:2px}.sidebar{padding-inline:18px}}
+@media print{.topbar{display:none!important}}
+
+/* V2 type and legibility calibration for narrow reading surfaces */
+@media(max-width:760px){
+ .drawer-body p,.drawer-body ul,.drawer-body ol,.drawer-body blockquote{font-size:15px}
+ .fusion-summary,.fusion-detail,.singu-skill-groups p,.learning-notes p{font-size:15px}
+}

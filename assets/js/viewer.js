@@ -2,6 +2,7 @@ import { documents } from '../data/documents.js';
 import { workProjects } from '../data/work-projects.js';
 import { personalProjects } from '../data/personal-projects.js';
 import { createDialog } from './dialog.js';
+import { getLocalizedPhotographyTheme } from '../data/photography-i18n.js';
 import { escapeHTML } from './content.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
 
@@ -60,6 +61,32 @@ export function initViewer() {
       return;
     }
 
+    if (current.kind === 'photography') {
+      const theme = getLocalizedPhotographyTheme(current.themeId, getCurrentLanguage());
+      const photos = theme?.photos ?? [];
+      if (!photos.length) return;
+      current.index = ((current.index % photos.length) + photos.length) % photos.length;
+      const photo = photos[current.index];
+      type.textContent = t('photographyViewerType');
+      title.textContent = photo.title;
+      body.innerHTML = '<figure class="viewer-media-figure photography-viewer-figure">' +
+        '<img class="viewer-media-image" src="' + escapeHTML(photo.src) + '" alt="' +
+        escapeHTML(photo.alt || photo.title) + '">' +
+        '<figcaption>' + escapeHTML(photo.description || photo.title) +
+        '</figcaption></figure>' +
+        '<nav class="photography-viewer-controls" aria-label="' +
+        escapeHTML(t('photographyPreviewLabel')) + '">' +
+        '<button type="button" class="button" data-action="photo-viewer-prev" ' +
+        (photos.length < 2 ? 'disabled ' : '') + 'aria-label="' +
+        escapeHTML(t('photographyPrev')) + '">← ' + escapeHTML(t('photographyPrev')) +
+        '</button><span>' + (current.index + 1) + ' / ' + photos.length +
+        '</span><button type="button" class="button" data-action="photo-viewer-next" ' +
+        (photos.length < 2 ? 'disabled ' : '') + 'aria-label="' +
+        escapeHTML(t('photographyNext')) + '">' + escapeHTML(t('photographyNext')) +
+        ' →</button></nav>';
+      return;
+    }
+
     if (current.kind === 'pdf') {
       type.textContent = t('pdfViewerType');
       title.textContent = current.title || t('resumePdfTitle');
@@ -76,7 +103,39 @@ export function initViewer() {
     controller.open();
   }
 
-  element.addEventListener('close', () => { current = null; });
+  function stepPhotography(delta) {
+    if (current?.kind !== 'photography') return;
+    const theme = getLocalizedPhotographyTheme(current.themeId, getCurrentLanguage());
+    if (!theme || theme.photos.length < 2) return;
+    const focusAction = document.activeElement?.dataset?.action;
+    current.index = (current.index + delta + theme.photos.length) % theme.photos.length;
+    render();
+    if (focusAction === 'photo-viewer-prev' || focusAction === 'photo-viewer-next') {
+      body.querySelector('[data-action="' + focusAction + '"]')?.focus({ preventScroll: true });
+    }
+  }
+
+  let touchStart = null;
+  body.addEventListener('pointerdown', event => {
+    if (current?.kind === 'photography' && event.pointerType === 'touch' &&
+        event.target.closest('.photography-viewer-figure'))
+      touchStart = { x: event.clientX, y: event.clientY };
+  });
+  body.addEventListener('pointerup', event => {
+    if (!touchStart || current?.kind !== 'photography') return;
+    const dx = event.clientX - touchStart.x;
+    const dy = event.clientY - touchStart.y;
+    touchStart = null;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.2)
+      stepPhotography(dx < 0 ? 1 : -1);
+  });
+  body.addEventListener('pointercancel', () => { touchStart = null; });
+  element.addEventListener('keydown', event => {
+    if (current?.kind !== 'photography' || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    event.preventDefault();
+    stepPhotography(event.key === 'ArrowRight' ? 1 : -1);
+  });
+  element.addEventListener('close', () => { current = null; touchStart = null; body.innerHTML = ''; });
 
   return {
     openDocument(key) {
@@ -88,12 +147,37 @@ export function initViewer() {
       if (!project?.media?.[mediaIndex]) return;
       open({ kind: 'media', projectId, mediaIndex });
     },
+    openPhotography(themeId, index = 0) {
+      const theme = getLocalizedPhotographyTheme(themeId, getCurrentLanguage());
+      if (!theme || !theme.photos[Number(index)]) return;
+      open({ kind: 'photography', themeId, index: Number(index) });
+    },
+    stepPhotography,
     openPdf(src, titleText = '') {
       if (typeof src !== 'string' || !src.startsWith('/public/') || !src.toLowerCase().endsWith('.pdf')) return;
       open({ kind: 'pdf', src, title: titleText });
     },
     setLanguage() {
-      if (current) render();
+      if (!current) return;
+      // Keep embedded video/PDF resources alive when only the site's UI language changes.
+      if (current.kind === 'pdf') {
+        type.textContent = t('pdfViewerType');
+        body.querySelector('.viewer-fallback a')?.replaceChildren(document.createTextNode(t('downloadPdf')));
+        return;
+      }
+      if (current.kind === 'media') {
+        const item = projectMap.get(current.projectId)?.media?.[current.mediaIndex];
+        if (item?.type === 'video') {
+          type.textContent = t('mediaViewerType');
+          title.textContent = mediaCopy(item, 'title') || title.textContent;
+          const link = body.querySelector('.viewer-fallback a');
+          if (link) link.textContent = t('demoVideo');
+          return;
+        }
+      }
+      const scrollTop = body.scrollTop;
+      render();
+      body.scrollTop = scrollTop;
     },
     close() {
       controller.close();

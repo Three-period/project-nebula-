@@ -2,8 +2,12 @@
 :root {
   /* Typography */
   --font-sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-heading: var(--font-sans);
-  --font-body: var(--font-sans);
+  --font-heading-zh: var(--font-sans);
+  --font-body-zh: var(--font-sans);
+  --font-heading-en: "Manrope", "Inter", system-ui, sans-serif;
+  --font-body-en: "Inter", system-ui, sans-serif;
+  --font-heading: var(--font-heading-zh);
+  --font-body: var(--font-body-zh);
   --font-code: "IBM Plex Mono", ui-monospace, monospace;
 
   /* Shared type scale */
@@ -38,4 +42,20 @@
   --radius-card: 6px;
   --surface-blur: 12px;
   --ease: 220ms cubic-bezier(.2, .7, .2, 1);
+}
+
+/* Foundation motion contract: visual personality remains in the active theme. */
+:root {
+  --motion-icon: 180ms;
+  --motion-control: 220ms;
+  --motion-card: 300ms;
+  --motion-menu: 250ms;
+  --motion-drawer: 340ms;
+  --motion-viewer: 270ms;
+  --motion-photo: 500ms;
+  --motion-curve: cubic-bezier(.2, .7, .2, 1);
+}
+:root[lang="en"] {
+  --font-heading: var(--font-heading-en);
+  --font-body: var(--font-body-en);
 }

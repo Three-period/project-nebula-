@@ -8,7 +8,7 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 ## 维护入口
 | 内容 | 文件 |
 | --- | --- |
-| 四板块结构、个人奇点、能力图谱和经历与成长 | `index.html` |
+| 五页面结构、个人奇点、能力图谱、经历与成长和摄影作品 | `index.html` |
 | 能力领域及其项目证据映射 | `assets/data/capabilities.js` |
 | 工作项目 V3 正文 | `assets/data/work-projects.js` |
 | 个人项目 V3 正文 | `assets/data/personal-projects.js` |
@@ -17,8 +17,8 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 | 材料入口与版本说明 | `assets/data/document-list.js` |
 | 思考与方法六篇文章 | `assets/data/articles.js` |
 | 内容卡片生成及 HTML 编码 | `assets/js/content.js` |
-| 四板块目录、卡片反馈、交互委托 | `assets/js/main.js` |
-| 个人奇点中英文文案和切换 | `assets/data/about-i18n.js`、`assets/js/i18n.js` |
+| 五页面目录、卡片反馈、交互委托 | `assets/js/main.js` |
+| 全站中文 / English 文案和切换 | `assets/data/about-i18n.js`、`assets/js/i18n.js` |
 | 项目 / 文档 / 文章阅读抽屉 | `assets/js/drawer.js` |
 | 全文、图片、GIF、视频与 PDF 第三级查看器 | `assets/js/viewer.js` |
 | 原生弹窗与抽屉堆叠、焦点恢复 | `assets/js/dialog.js` |
@@ -41,7 +41,7 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - 静态站部署仍由原 Cloudflare Pages 项目从 `main` 自动发布，不新建站点。
 
 ## 验收重点
-桌面及手机 390px / 820px：四板块切换、卡片交互和星轨反馈、项目／材料／文章抽屉、Esc／遮罩关闭、焦点与滚动恢复、外链、PDF 和维修提示。浏览器与正式站的实际手工验收需另行完成。
+桌面及手机 390px / 820px：五页面切换、摄影空状态、卡片交互与首页空间动画、项目／材料／文章抽屉、Esc／遮罩关闭、焦点与滚动恢复、外链、PDF 和维修提示。浏览器与正式站的实际手工验收需另行完成。
 
 
 ## Global bilingual content (V1.1)
@@ -83,9 +83,33 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 - The Projects section begins with four evidence-linked capability domains: business understanding/modeling, product definition/solution design, AI capability engineering, and end-to-end delivery/collaboration.
 - Capability copy is bilingual and stored in `assets/data/site-i18n.js`; group definitions and evidence project IDs are stored in `assets/data/capabilities.js`.
 - Each evidence item opens its existing project drawer. Project records remain the source of truth for titles, stages, and project descriptions; capability cards do not duplicate project narratives.
-- No personal photography assets were found in the repository. The photography portfolio is not populated with AI-generated or unrelated project images; it remains pending original photos and category metadata.
+- Photography directories and data schemas are reserved; no stock, generated, or unrelated project images are presented as the owner's photography.
 
 
 ## Refactoring quality review
-- `docs/phase-audit.md` records the four refactoring stages, the current implementation review, and outstanding acceptance work.
+- `docs/phase-audit.md` distinguishes completed development PRs from theme phases; `docs/implementation-checklist.md` tracks the confirmed Phase 1 requirements and acceptance criteria.
 - `design-system.html` is the active visual reference for the current Landscape White & Green theme, component dimensions, typography, and responsive rules.
+
+
+## Photography page and upload workflow (Landscape Phase 1)
+- The fifth page uses `#photography` with a theme list, carousel, theme detail drawer and fullscreen image viewer. Without original images, it shows an honest bilingual empty state.
+- Reserve original photos under `public/images/photography/{nature,architecture,travel,details}/`. Read `public/images/photography/README.md` before uploading; actual category names remain provisional.
+- `assets/data/photography.js` defines themes and photo records; `assets/data/photography-i18n.js` defines translated theme labels and future photo captions. Uploading a file alone does not publish it; add a data record and build/deploy.
+- Desktop uses a theme list on the left and media carousel on the right. Mobile moves the carousel above the theme list. Image view and keyboard/swipe interactions reuse `drawer.js` and `viewer.js`.
+- Autoplay is 6 seconds only with multiple photos, an active photography page and no hover, focus, manual interaction, reduced-motion preference, or hidden document.
+
+## Theme registry and opening motion
+- `assets/js/theme-registry.js` stores completed vs planned theme metadata. Only `landscape` is active; other theme palettes/styles and the theme choice UI remain deferred.
+- `assets/js/theme.js` loads enabled CSS without losing page state and falls back when CSS loading fails.
+- `assets/js/landscape-intro.js` handles the 1.3-second one-shot SVG grid/building/plant opening illustration, with session memory and reduced-motion fallback.
+- No new framework, database, network API or external media content is required.
+
+
+## V2 视觉底座修缮（叠加 PR）
+本轮以景观白绿 Phase 1 PR #9 为基线，在 `feat/visual-foundation-v2-remediation` 独立分支提交，不覆盖 `main`。实施内容：
+- 顶部 Home / Search / 中文 EN / Theme + 独立左侧五栏目内容导航；960px 以下目录改为顶部 Menu 弹出。
+- 浏览器内静态双语搜索：五页面、项目、文档、文章、能力图谱、摄影分类/已登记照片，结果复用现有抽屉/查看器；不承诺解析 PDF 文件全文。
+- 四主题视觉预览与注册表：景观白绿 active，神秘宇宙、小王子、冷调烟紫仍 planned/disabled。
+- 分层视觉 Token、景观卡片双层悬停阴影/建筑角线、字体与按钮细节，以及阅读器语言切换状态保护。
+
+修改前后可核查每个独立 commit；详见 `docs/v2-visual-remediation.md`。图片原图及另外三套主题的完整 CSS 仍属于后续阶段。自动化运行 `npm run check`；真实浏览器的 1440/820/390px 验收需另行记录。

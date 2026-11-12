@@ -7,6 +7,9 @@ import { projects } from '../assets/data/projects.js';
 import { workProjects } from '../assets/data/work-projects.js';
 import { personalProjects } from '../assets/data/personal-projects.js';
 import { capabilityGroups } from '../assets/data/capabilities.js';
+import { photographyThemes } from '../assets/data/photography.js';
+import { photographyI18n, getLocalizedPhotographyTheme } from '../assets/data/photography-i18n.js';
+import { themeRegistry, availableThemes } from '../assets/js/theme-registry.js';
 import { documents } from '../assets/data/documents.js';
 import { articles } from '../assets/data/articles.js';
 import { documentList } from '../assets/data/document-list.js';
@@ -15,6 +18,7 @@ import { projectI18n } from '../assets/data/project-i18n.js';
 import { documentI18n } from '../assets/data/document-i18n.js';
 import { articleI18n } from '../assets/data/article-i18n.js';
 import { readCozeStream } from '../assets/js/agent.js';
+import { buildSearchIndex, searchEntries } from '../assets/data/search-index.js';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const files = [];
 async function walk(dir) { for (const entry of await readdir(dir, { withFileTypes: true })) { const path = resolve(dir, entry.name); if (entry.isDirectory()) await walk(path); else files.push(path); } }
@@ -23,8 +27,10 @@ for (const file of files.filter(f => /\.(js|mjs)$/.test(f))) {
   const result = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const source = await readFile(file, 'utf8');
-  for (const match of source.matchAll(/from\s+['"]([^'"]+)['"]/g)) {
-    if (match[1].startsWith('.')) await readFile(resolve(dirname(file), match[1]));
+  // Resolve only static import/export statements, not quoted test assertions.
+  for (const line of source.split(/\r?\n/)) {
+    const match = line.match(/^\s*(?:import|export)\s+.*?\s+from\s+['"]([^'"]+)['"]/);
+    if (match?.[1]?.startsWith('.')) await readFile(resolve(dirname(file), match[1]));
   }
 }
 const html = await readFile(resolve(root, 'index.html'), 'utf8');
@@ -32,7 +38,7 @@ const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
-for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'work-project-list', 'personal-project-list', 'document-list', 'article-list', 'capability-grid']) assert(ids.includes(id));
+for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'work-project-list', 'personal-project-list', 'document-list', 'article-list', 'capability-grid', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
 for (const match of html.matchAll(/(?:href|src)="(assets\/[^"#]+)"/g)) await readFile(resolve(root, match[1]));
 assert.equal(projects.length, 5);
 assert.equal(workProjects.length, 5);
@@ -91,7 +97,7 @@ const style = styleFiles.join('\n');
 const themeStyle = await readFile(resolve(root, 'assets/css/themes/landscape.css'), 'utf8');
 const tokens = await readFile(resolve(root, 'assets/css/tokens.css'), 'utf8');
 assert(style.includes('grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr)'), 'Profile columns must use a balanced responsive grid');
-assert(style.includes('backdrop-filter: blur(var(--surface-blur))') && style.includes('box-shadow: var(--shadow-card)'), 'Landscape cards need frosted glass and layered architectural shadows');
+assert(style.includes('backdrop-filter: blur(var(--surface-blur))') && style.includes('box-shadow: var(--card-shadow-rest)') && themeStyle.includes('--card-shadow-hover:'), 'Landscape cards need frosted glass and layered architectural shadows');
 assert(style.includes('@media (max-width: 1100px)') && style.includes('@media (max-width: 960px)') && style.includes('@media (max-width: 760px)') && style.includes('@media (max-width: 560px)'), 'Desktop, tablet and mobile breakpoints must be explicit');
 assert(style.includes('global-language-switch') && style.includes('prefers-reduced-motion') && style.includes('100dvh'), 'Global language, reduced motion and dynamic viewport support');
 assert(!style.includes('cosmic-orbit') && !style.includes('body::after') && !style.includes('rgba(178, 153, 93'), 'Legacy cosmic and parchment visuals must be removed');
@@ -160,16 +166,157 @@ assert(designSystem.includes('COLOR TOKENS') && designSystem.includes('TYPOGRAPH
 assert(designSystem.includes('#285C43') && designSystem.includes('13.03:1') && designSystem.includes('7.77:1'), 'The design system must record the active palette and measured contrast');
 assert(designSystem.includes('SECTION TITLE · 28–34px') && designSystem.includes('BODY · 16px / 1.75') && designSystem.includes('CARD SUMMARY · 13px'), 'The design system must document the current implemented typography hierarchy');
 
-assert(components.includes('width: min(var(--modal-width), calc(100vw - 48px))'), 'The tertiary viewer must consume the shared modal-width token');
+assert(styleFiles[2].includes('width: min(var(--modal-width), calc(100vw - 48px))'), 'The tertiary viewer must consume the shared modal-width token');
 
 
 
 
 
-assert(designSystem.includes('METADATA · 10px') && designSystem.includes('13–16px'), 'The active type scale must distinguish micro-metadata from readable supporting copy');
+assert(designSystem.includes('METADATA · 10px') && designSystem.includes('CARD SUMMARY · 13px') && designSystem.includes('BODY · 16px / 1.75'), 'The active type scale must distinguish micro-metadata from readable supporting copy');
 assert(style.includes('.button:disabled:hover') && style.includes('.media-tab:hover:not([aria-selected="true"])'), 'Disabled and inactive component states must be defined');
 
 
 assert(!readme.includes('其他板块保留中文'), 'README must not contradict site-wide bilingual implementation');
 
-console.log('PASS: syntax/imports, bilingual coverage, responsive styles, document/media/PDF viewers and SSE integration.');
+
+/* Landscape Phase 1 completion: 5 sections, photography structure, theme scope and opening animation. */
+const photoUI = await readFile(resolve(root, 'assets/js/photography.js'), 'utf8');
+const photoDrawer = await readFile(resolve(root, 'assets/js/drawer.js'), 'utf8');
+const photoViewer = await readFile(resolve(root, 'assets/js/viewer.js'), 'utf8');
+const photoIntro = await readFile(resolve(root, 'assets/js/landscape-intro.js'), 'utf8');
+const registrySrc = await readFile(resolve(root, 'assets/js/theme-registry.js'), 'utf8');
+assert.equal([...html.matchAll(/class="toc-link"/g)].length, 5, 'Exactly five major navigation links');
+assert.equal([...html.matchAll(/class="toc-icon"/g)].length, 5, 'Five navigation icons must use a consistent line SVG language');
+for (const page of ['about', 'experience', 'projects', 'insights', 'photography'])
+  assert(html.includes('id="' + page + '"'), 'Missing page: ' + page);
+assert(html.includes('href="#photography"') && html.includes('data-i18n="photographyNav"'), 'Photography page must be navigable and translated');
+assert(mainSource.includes("photography.setVisible(next.id==='photography')"), 'The carousel must pause outside its page');
+assert(mainSource.includes('landscapeIntro.onHomeActivate()'), 'Home activation must trigger opening motion');
+assert(html.includes('id="theme-stylesheet"'), 'An identifiable active theme stylesheet is required');
+assert.equal(photographyThemes.length, 4, 'Four reserved photography themes');
+const names = new Set();
+const photoIds = new Set();
+for (const theme of photographyThemes) {
+  assert(!names.has(theme.id), 'Duplicated photography theme: ' + theme.id);
+  names.add(theme.id);
+  const relative = 'public/images/photography/' + theme.folder + '/README.md';
+  await readFile(resolve(root, relative), 'utf8');
+  for (const language of ['zh', 'en']) {
+    const translated = getLocalizedPhotographyTheme(theme.id, language);
+    assert(translated?.title && translated.description, 'Missing photography category translation: ' + theme.id + '/' + language);
+    assert(photographyI18n[language]?.themes[theme.id], 'Missing photography theme i18n entry');
+  }
+  for (const photo of theme.photos) {
+    assert(photo.id && photo.title && photo.alt, 'Photography metadata is incomplete: ' + photo.id);
+    assert(!photoIds.has(photo.id), 'Duplicate photo ID: ' + photo.id);
+    photoIds.add(photo.id);
+    assert(photo.src.startsWith('/public/images/photography/' + theme.folder + '/'), 'Photo must reside in its own directory: ' + photo.src);
+    await readFile(resolve(root, photo.src.slice(1)));
+    const translation = photographyI18n.en.photos[photo.id];
+    assert(translation?.title && translation.alt, 'Published photo needs a confirmed English caption: ' + photo.id);
+  }
+}
+await readFile(resolve(root, 'public/images/photography/README.md'));
+const visibleThemes = availableThemes();
+assert.equal(visibleThemes.length, 1, 'Only completed themes may be exposed');
+assert.equal(visibleThemes[0].id, 'landscape', 'Landscape must remain the sole active theme');
+assert.equal(Object.keys(themeRegistry).length, 4, 'All four future theme IDs must be reserved');
+for (const item of Object.values(themeRegistry)) {
+  assert(['active','planned'].includes(item.status), 'Invalid theme status');
+  if (item.status === 'planned') assert.equal(item.stylesheet, null, 'Deferred themes must not load CSS');
+}
+assert(registrySrc.includes('stylesheet: null') && themeSource.includes('next.onerror') && themeSource.includes('next.remove()') && themeSource.includes('request !== latestRequest'), 'Theme loader must support load failure and out-of-order response rollback');
+assert(photoUI.includes('AUTO_INTERVAL_MS = 6000') && photoUI.includes('motionQuery.matches') &&
+  photoUI.includes('document.hidden') && photoUI.includes('pointerenter') && photoUI.includes('pointerup'),
+  'Photography carousel must support motion preferences, visibility, pause and touch navigation');
+assert(photoDrawer.includes('openPhotographyTheme') && photoDrawer.includes('photography-drawer-item'), 'Photography needs a second-level drawer');
+assert(photoViewer.includes("current.kind === 'photography'") && photoViewer.includes('stepPhotography') &&
+  photoViewer.includes('pointerup') && photoViewer.includes("ArrowRight"), 'Photography needs a third-level accessible viewer');
+assert(html.includes('class="landscape-intro"') && themeStyle.includes('@keyframes landscape-grid-in') &&
+  themeStyle.includes('@keyframes landscape-lines-draw') && themeStyle.includes('@keyframes landscape-plants-in'),
+  'Opening animation must include grid, building, and plants');
+assert(themeStyle.includes('.55s .75s') && themeStyle.includes('@media (prefers-reduced-motion: reduce)'), 'Opening animation should last ~1.3 seconds and reduce motion');
+assert(photoIntro.includes('sessionStorage') && photoIntro.includes("prefers-reduced-motion"), 'Intro must play once per session with a static fallback');
+for (const key of ['photographyNav', 'photographyEyebrow', 'photographyTitle', 'photographyLead',
+  'photographyThemesLabel', 'photographyPreviewLabel', 'photographyEmptyHeading', 'photographyEmptyText',
+  'photographyOpenPhoto', 'photographyOpenTheme', 'photographyPrev', 'photographyNext',
+  'photographyViewerType', 'photographyDrawerType']) {
+  for (const language of ['zh','en'])
+    assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing photography translation: ' + language + '/' + key);
+}
+// Exercise bilingual photo metadata in memory; do not publish test images or fake gallery items.
+const demo = { id: 'validation-only-photo', src: '/public/images/photography/nature/test-only.webp', title: '示例标题', alt: '虚拟测试描述' };
+photographyThemes[0].photos.push(demo);
+photographyI18n.en.photos[demo.id] = { title: 'Test caption', alt: 'Temporary validation image' };
+try {
+  const localized = getLocalizedPhotographyTheme('nature', 'en');
+  assert.equal(localized.photos.at(-1).title, 'Test caption');
+  assert.equal(localized.photos.at(-1).alt, 'Temporary validation image');
+} finally {
+  photographyThemes[0].photos.pop();
+  delete photographyI18n.en.photos[demo.id];
+}
+// DOM-independent theme manager regression: planned themes must never switch the live palette.
+const themeAPI = await import('../assets/js/theme.js');
+const originalDocument = globalThis.document;
+const originalLocalStorage = globalThis.localStorage;
+try {
+  const baseURL = 'https://example.test/';
+  const fakeLink = { href: baseURL + 'assets/css/themes/landscape.css' };
+  globalThis.document = {
+    baseURI: baseURL,
+    documentElement: { dataset: { theme: 'landscape' } },
+    getElementById: id => id === 'theme-stylesheet' ? fakeLink : null
+  };
+  globalThis.localStorage = { getItem: () => 'cosmic', setItem: () => {} };
+  assert.equal((await themeAPI.setTheme('cosmic')), false, 'An incomplete theme must not activate');
+  assert.equal(globalThis.document.documentElement.dataset.theme, 'landscape');
+  assert.equal((await themeAPI.setTheme('landscape')), true, 'Available theme must remain usable');
+  assert.equal(themeAPI.initTheme().current, 'landscape', 'Stored planned themes must fall back');
+} finally {
+  if (originalDocument === undefined) delete globalThis.document;
+  else globalThis.document = originalDocument;
+  if (originalLocalStorage === undefined) delete globalThis.localStorage;
+  else globalThis.localStorage = originalLocalStorage;
+}
+
+const phaseAudit = await readFile(resolve(root, 'docs/phase-audit.md'), 'utf8');
+const checklist = await readFile(resolve(root, 'docs/implementation-checklist.md'), 'utf8');
+assert(phaseAudit.includes('PR #8') && phaseAudit.includes('已合并') && phaseAudit.includes('主题 Phase 1'), 'The audit baseline must reflect merged PRs and theme phases');
+assert(checklist.includes('M1-01') && checklist.includes('M6-01'), 'Confirmed requirement acceptance matrix is missing');
+
+
+/* V2 visual foundation remediation: enforce intended UI structure and real search behavior. */
+for(const id of ['search-dialog','theme-dialog','search-input','search-results','search-trigger','theme-trigger','menu-toggle','projects-subnav']) {
+ assert(ids.includes(id), 'Missing V2 UI control: '+id);
+}
+assert(html.includes('class="topbar"') && html.indexOf('class="topbar"') < html.indexOf('class="sidebar"'), 'TopBar must exist independently above the content sidebar');
+assert(html.includes('data-action="open-search"') && html.includes('data-action="open-theme"'), 'Search and Theme must have working triggers');
+assert(html.includes('id="projects-subnav"'), 'Projects subsections must be available');
+assert(mainSource.includes("case 'open-search'") && mainSource.includes("case 'open-theme'"), 'Main app must initialize Search and ThemePicker');
+assert(mainSource.includes("initThemePicker") && mainSource.includes("initSearch"), 'V2 functional controllers must be connected');
+for (const language of ['zh','en']) {
+ const all=buildSearchIndex(language);
+ assert(all.length >= 5+7+6+6+4, 'V2 search index misses known content: '+language);
+ assert(all.some(x=>x.kind==='page' && x.pageId==='photography'), 'Photography page must be indexed');
+ assert(all.some(x=>x.kind==='project' && x.recordId==='personal-nebula'), 'Project Nebula must be indexed');
+ assert(searchEntries(all,language==='zh'?'摄影':'Photography').length>0, 'Localized search must match');
+ for (const key of ['topbarNavAria','searchTitle','searchPlaceholder','searchNoResults','themeDialogTitle','themePlanned','themeLoadError'])
+  assert.equal(typeof siteI18n.ui[language][key],'string','Missing V2 UI copy: '+language+'/'+key);
+}
+assert(searchEntries(buildSearchIndex('en'),'NEBULA').some(x=>x.kind==='project'), 'Search should be case-insensitive');
+assert.equal(searchEntries(buildSearchIndex('en'),'unlikely-search-token-123').length,0,'Search must support empty state');
+for(const token of ['--motion-card:','--motion-drawer:','--motion-viewer:','--font-heading-en:'])
+ assert(tokens.includes(token),'Missing V2 foundation token '+token);
+for(const token of ['--card-surface:','--card-shadow-rest:','--card-shadow-hover:','--card-radius:','--button-secondary-bg:','--tag-surface:','--overlay-backdrop:'])
+ assert(themeStyle.includes(token),'Missing landscape semantic token '+token);
+assert(!style.includes('box-shadow: var(--shadow-spatial);'), 'Card hover must not discard the contact shadow');
+assert(themeStyle.includes('drafting corners') && style.includes(':focus-within'), 'Landscape corner decorations and keyboard focus states must exist');
+assert(html.includes('class="topbar-actions"') && html.includes('class="sidebar-subnav"'), 'Navigation needs top utilities and optional local sections');
+const pickerSrc=await readFile(resolve(root,'assets/js/theme-picker.js'),'utf8');
+assert(pickerSrc.includes('theme.status===\'active\'') && pickerSrc.includes('disabled aria-disabled'), 'Planned themes must remain disabled');
+const searchSrc=await readFile(resolve(root,'assets/js/search.js'),'utf8');
+assert(searchSrc.includes("event.key==='ArrowDown'") && searchSrc.includes("event.key==='Enter'"), 'Search must support keyboard selection');
+assert(searchSrc.includes("event.ctrlKey||event.metaKey"), 'Search should provide a keyboard shortcut');
+
+console.log('PASS: V2 foundation, TopBar, bilingual Search, ThemePicker, landscape cards; five pages, photography schemas and viewers, theme registry, landscape intro, bilingual coverage, responsive UI, document/media/PDF and SSE.');
