@@ -14,8 +14,9 @@ function rememberTheme(id) {
 }
 
 function activateTheme(item, persist) {
-  document.documentElement.dataset.theme = item.id;
-  if (persist) rememberTheme(item.id);
+  const themeId = item.id;
+  document.documentElement.dataset.theme = themeId;
+  if (persist) rememberTheme(themeId);
 }
 
 // The stylesheet is loaded before the theme attribute changes to avoid a blank/flickering palette.
