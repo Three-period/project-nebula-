@@ -56,6 +56,7 @@
   --surface-blur:var(--card-blur);
   --motion-card:320ms;
   --motion-control:240ms;
+  --cosmic-gilt-duration:3200ms;
   --motion-curve:cubic-bezier(.22,.68,.25,1);
 }
 
@@ -145,7 +146,7 @@
     .project, .document-card, .article-row, .capability-card,
     .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
   ):hover::before {
-    animation: cosmic-gilt-sweep 950ms ease-in-out 1 both;
+    animation: cosmic-gilt-sweep var(--cosmic-gilt-duration) linear 1 both;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -153,13 +154,13 @@
     .project, .document-card, .article-row, .capability-card,
     .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
   ):focus-within::before {
-    animation: cosmic-gilt-sweep 950ms ease-in-out 1 both;
+    animation: cosmic-gilt-sweep var(--cosmic-gilt-duration) linear 1 both;
   }
 }
 @keyframes cosmic-gilt-sweep {
   0% { opacity: 0; --cosmic-gilt-angle: 0deg; }
-  12% { opacity: 1; }
-  80% { opacity: 1; }
+  5% { opacity: 1; }
+  93% { opacity: 1; }
   100% { opacity: 0; --cosmic-gilt-angle: 360deg; }
 }
 /* Delicate celestial ornaments never intercept input or obscure text. */
