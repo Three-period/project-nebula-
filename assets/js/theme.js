@@ -2,6 +2,7 @@ import { themeRegistry, availableThemes } from './theme-registry.js';
 
 const THEME_STORAGE_KEY = 'project-nebula-theme';
 const DEFAULT_THEME = 'landscape';
+let latestRequest = 0;
 export const themes = themeRegistry;
 
 function usableTheme(id) {
@@ -24,6 +25,7 @@ function activateTheme(item, persist) {
 export async function setTheme(themeId, { persist = true } = {}) {
   const selected = usableTheme(themeId);
   if (!selected) return false;
+  const request = ++latestRequest;
   const current = document.getElementById('theme-stylesheet');
   if (!current) return false;
   const nextUrl = new URL(selected.stylesheet, document.baseURI).href;
@@ -41,7 +43,8 @@ export async function setTheme(themeId, { persist = true } = {}) {
     next.onerror = () => resolve(false);
   });
   current.insertAdjacentElement('afterend', next);
-  if (!(await loaded)) {
+  const success = await loaded;
+  if (!success || request !== latestRequest) {
     next.remove();
     return false;
   }
