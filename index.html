@@ -6,7 +6,7 @@
 <meta name="description" content="何盈的个人简历与 AI 产品作品集，展示项目实践、产品设计、工作经历与独立思考。" data-i18n-meta="pageDescription">
 <title data-i18n-title>何盈 · AI 产品经理 | Project Nebula</title>
 <link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/themes/landscape.css">
+<link rel="stylesheet" id="theme-stylesheet" href="assets/css/themes/landscape.css" data-theme-id="landscape">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/layout.css">
 <link rel="stylesheet" href="assets/css/components.css">
@@ -29,6 +29,7 @@
    <a href="#experience" class="toc-link"><span class="toc-index">02</span><span data-i18n="experienceNav">经历与成长</span></a>
    <a href="#projects" class="toc-link"><span class="toc-index">03</span><span data-i18n="projectsNav">作品与实践</span></a>
    <a href="#insights" class="toc-link"><span class="toc-index">04</span><span data-i18n="insightsNav">思考与方法</span></a>
+   <a href="#photography" class="toc-link"><span class="toc-index">05</span><span data-i18n="photographyNav">摄影作品</span></a>
   </nav>
   <div class="sidebar-footer">
    <button class="button primary" data-action="chat" data-i18n="sidebarAction">数字分身 · 维修中</button>
@@ -42,9 +43,28 @@
 <main id="main" class="main" tabindex="-1">
  
  <section id="about" class="resume-section about-section" aria-labelledby="about-title">
- <header class="section-heading">
-  <p class="eyebrow" data-i18n="aboutEyebrow">OBSERVATION 01 / 个人奇点</p>
-  <h2 id="about-title" data-i18n="aboutHeadline">敢于跨界，乐于深究，把复杂问题理出路径。</h2>
+ <header class="section-heading landscape-hero">
+  <div class="landscape-hero-copy">
+    <p class="eyebrow" data-i18n="aboutEyebrow">OBSERVATION 01 / 个人奇点</p>
+    <h2 id="about-title" data-i18n="aboutHeadline">敢于跨界，乐于深究，把复杂问题理出路径。</h2>
+  </div>
+  <div id="landscape-intro" class="landscape-intro" aria-hidden="true">
+    <svg viewBox="0 0 364 176" xmlns="http://www.w3.org/2000/svg" focusable="false">
+      <g class="landscape-intro-grid">
+        <path d="M20 34H344M20 64H344M20 94H344M20 124H344M20 154H344" />
+        <path d="M42 17V165M80 17V165M118 17V165M156 17V165M194 17V165M232 17V165M270 17V165M308 17V165" />
+      </g>
+      <g class="landscape-intro-building">
+        <path d="M79 146V77L151 39L221 77V146M79 77H221M151 39V146M102 146V94H130V146M171 94H201V121H171Z" />
+        <path d="M221 77L257 60V127L221 146M257 60L188 23L151 39" />
+        <path d="M64 151H276" />
+      </g>
+      <g class="landscape-intro-plants">
+        <path d="M300 151V85M300 111L282 95M300 102L319 81M301 84C278 82 279 68 288 61C288 42 317 42 320 59C337 65 325 86 301 84Z" />
+        <path d="M47 151V120M47 138L37 127M47 135L59 118M47 119C34 117 33 109 40 102C41 91 59 91 63 103C73 110 61 123 47 119Z" />
+      </g>
+    </svg>
+  </div>
  </header>
  <div class="singu-layout">
   <div class="singu-left">
@@ -94,6 +114,24 @@
  <div id="capability-grid" class="capability-grid"></div>
 </section>
 <h3 class="group-heading" data-i18n="workProjectsTitle">工作项目</h3><div id="work-project-list" class="project-list"></div><h3 class="group-heading" data-i18n="personalProjectsTitle">个人项目</h3><div id="personal-project-list" class="project-list"></div><div class="related-docs"><h3 data-i18n="relatedMaterialsTitle">相关作品材料 · Project Nebula</h3><div id="document-list" class="document-list"></div></div></section><section id="insights" class="resume-section" aria-labelledby="insights-title"><header class="section-heading"><p class="eyebrow" data-i18n="insightsEyebrow">OBSERVATION 04 / 思考与方法</p><h2 id="insights-title" data-i18n="insightsTitle">思考与方法</h2><p class="section-lead" data-i18n="insightsLead">持续输入，独立判断。以下保留原创文章及其日期。</p></header><div id="article-list" class="article-list"></div></section>
+<section id="photography" class="resume-section photography-section" aria-labelledby="photography-title">
+  <header class="section-heading">
+    <p class="eyebrow" data-i18n="photographyEyebrow">OBSERVATION 05 / 摄影作品</p>
+    <h2 id="photography-title" data-i18n="photographyTitle">摄影作品</h2>
+    <p class="section-lead" data-i18n="photographyLead">以影像记录空间、自然和生活中的观察。作品将陆续更新。</p>
+  </header>
+  <div class="photography-layout">
+    <div class="photography-themes">
+      <h3 class="photography-subtitle" data-i18n="photographyThemesLabel">摄影主题</h3>
+      <div id="photography-theme-list" class="photography-theme-list" aria-label="摄影主题" data-i18n-aria-label="photographyThemesLabel"></div>
+    </div>
+    <div class="photography-preview" aria-label="作品轮播" data-i18n-aria-label="photographyPreviewLabel">
+      <div id="photography-stage" class="photography-stage">
+        <div class="photography-empty"><p data-i18n="photographyEmptyHeading">作品正在整理中</p><p data-i18n="photographyEmptyText">这里会展示真实的个人摄影作品。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
  <footer id="contact" class="contact-section"><p class="eyebrow" data-i18n="contactEyebrow">LET’S TALK</p><h2 data-i18n="contactTitle">随时开始一段对话。</h2><p data-i18n="contactLead">关于合作、交流或任何 AI 相关话题，欢迎与我联系。</p><div class="contact-links"><a href="mailto:2730006134@qq.com">2730006134@qq.com ↗</a><a href="tel:15384468905">15384468905</a><a href="https://github.com/Three-period" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/public/images/heying-cqu-AI-PM.pdf" download data-i18n="resumeLink">简历 PDF ↓</a></div><p class="footer-note" data-i18n="footerNote">何盈 / Project Nebula</p></footer>
 </main>
 <dialog id="detail-dialog" class="drawer" aria-labelledby="drawer-title">
