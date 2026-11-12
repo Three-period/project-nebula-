@@ -30,6 +30,12 @@
   --card-shadow-rest: var(--shadow-contact), var(--shadow-spatial);
   --card-shadow-hover: 0 4px 9px rgba(33,61,43,.13), 0 22px 40px rgba(33,61,43,.17);
   --card-hover-lift: -3px;
+  --color-sidebar: rgba(255,255,255,.97);
+  --color-topbar: rgba(255,255,255,.93);
+  --shadow-sidebar: 3px 0 18px rgba(33,61,43,.035);
+  --shadow-topbar: 0 2px 14px rgba(33,61,43,.05);
+  --shadow-button-primary: 0 2px 5px rgba(33,61,43,.14);
+  --modal-shadow: 0 22px 70px rgba(20,38,27,.17);
   --button-primary-bg: var(--color-primary);
   --button-secondary-bg: rgba(255,255,255,.88);
   --button-radius: 3px;
@@ -128,4 +134,29 @@
 }
 @media (prefers-reduced-motion: reduce) {
   :root[data-theme="landscape"] .landscape-intro * { animation: none !important; }
+}
+
+/* Landscape-exclusive architectural drafting corners. This layer never covers content. */
+:root[data-theme="landscape"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card) {
+  position:relative; isolation:isolate; overflow:visible;
+}
+:root[data-theme="landscape"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::before,
+:root[data-theme="landscape"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::after {
+  content:""; position:absolute; z-index:0; width:17px; height:17px;
+  pointer-events:none; opacity:.35; transform:scale(.85);
+  transition:transform var(--motion-card) var(--motion-curve),opacity var(--motion-card) var(--motion-curve);
+}
+:root[data-theme="landscape"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::before {
+  top:7px; left:7px; border-top:1px solid var(--color-secondary); border-left:1px solid var(--color-secondary);
+}
+:root[data-theme="landscape"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::after {
+  bottom:7px; right:7px; border-bottom:1px solid var(--color-secondary); border-right:1px solid var(--color-secondary);
+}
+:root[data-theme="landscape"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card):is(:hover,:focus-within)::before,
+:root[data-theme="landscape"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card):is(:hover,:focus-within)::after {
+  opacity:1; transform:scale(1.12);
+}
+@media(prefers-reduced-motion:reduce) {
+  :root[data-theme="landscape"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::before,
+  :root[data-theme="landscape"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card)::after { transition:none; }
 }

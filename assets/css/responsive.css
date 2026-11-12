@@ -240,3 +240,9 @@
 }
 @media (max-width:560px){.topbar{padding-inline:12px;gap:5px}.topbar-brand-copy{display:none}.topbar-actions{gap:2px}.topbar-control{width:36px;padding:5px}.topbar-control>span:not([aria-hidden]){display:none}.topbar .lang-tab{min-width:29px;padding-inline:5px}.topbar .global-language-switch{gap:0;padding:2px}.sidebar{padding-inline:18px}}
 @media print{.topbar{display:none!important}}
+
+/* V2 type and legibility calibration for narrow reading surfaces */
+@media(max-width:760px){
+ .drawer-body p,.drawer-body ul,.drawer-body ol,.drawer-body blockquote{font-size:15px}
+ .fusion-summary,.fusion-detail,.singu-skill-groups p,.learning-notes p{font-size:15px}
+}

@@ -12,13 +12,13 @@
   align-items: start;
   gap: 18px;
   padding: 16px;
-  border: 1px solid rgba(220, 230, 222, .96);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
-  background: rgba(255, 255, 255, .72);
-  box-shadow: var(--shadow-card);
+  background: var(--card-surface);
+  box-shadow: var(--card-shadow-rest);
   -webkit-backdrop-filter: blur(var(--surface-blur)) saturate(115%);
   backdrop-filter: blur(var(--surface-blur)) saturate(115%);
-  transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+  transition: transform var(--motion-card) var(--motion-curve), border-color var(--motion-card) var(--motion-curve), box-shadow var(--motion-card) var(--motion-curve);
 }
 .project-cover {
   width: 92px;
@@ -71,7 +71,7 @@
 .project-description {
   max-width: 760px;
   color: var(--color-muted);
-  font-size: 13px;
+  font-size: 14px;
 }
 .project-stack {
   margin-top: 7px;
@@ -88,10 +88,10 @@
   justify-content: space-between;
   gap: 18px;
   padding: 16px 18px;
-  border: 1px solid rgba(220, 230, 222, .96);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
-  background: rgba(255, 255, 255, .72);
-  box-shadow: var(--shadow-card);
+  background: var(--card-surface);
+  box-shadow: var(--card-shadow-rest);
   -webkit-backdrop-filter: blur(var(--surface-blur)) saturate(115%);
   backdrop-filter: blur(var(--surface-blur)) saturate(115%);
   transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
@@ -107,7 +107,7 @@
 .document-card .document-copy > p {
   margin-bottom: 8px;
   color: var(--color-muted);
-  font-size: 13px;
+  font-size: 14px;
 }
 .document-card .tags { gap: 5px; }
 .document-card .actions {
@@ -198,9 +198,9 @@
 .drawer[open] {
   display: flex;
   flex-direction: column;
-  animation: drawer-in var(--ease);
+  animation: drawer-in var(--motion-drawer) var(--motion-curve);
 }
-.drawer::backdrop { background: rgba(24, 43, 32, .28); }
+.drawer::backdrop { background: var(--overlay-backdrop); }
 .drawer-header, .drawer-footer {
   display: flex;
   flex: none;
@@ -237,7 +237,7 @@
 }
 .drawer-body p, .drawer-body ul, .drawer-body ol, .drawer-body blockquote {
   margin: 0 0 14px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.8;
 }
 .drawer-body ul, .drawer-body ol { padding-left: 22px; }
@@ -355,18 +355,25 @@
 }
 
 /* 09 · Interaction states and motion */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .project:hover, .document-card:hover, .article-row:hover, .capability-card:hover {
-    transform: translateY(-2px);
+/* Elevation and focus semantics are shared; individual skins own shadow values. */
+.project, .document-card, .article-row, .capability-card, .singu-ab-card,
+.photography-theme-card { transition: transform var(--motion-card) var(--motion-curve),
+  border-color var(--motion-card) var(--motion-curve), box-shadow var(--motion-card) var(--motion-curve); }
+.project:focus-within, .document-card:focus-within, .article-row:focus-within,
+.capability-card:focus-within, .singu-ab-card:focus-within,
+.photography-theme-card:focus-visible {
+  border-color: var(--color-line-strong);
+  box-shadow: var(--card-shadow-hover);
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .project:hover, .document-card:hover, .article-row:hover, .capability-card:hover,
+  .singu-ab-card:hover, .photography-theme-card:hover {
+    transform: translateY(var(--card-hover-lift));
     border-color: var(--color-line-strong);
-    box-shadow: var(--shadow-spatial);
-  }
-  .singu-ab-card:hover {
-    transform: translateY(-1px);
-    border-color: var(--color-line-strong);
-    box-shadow: var(--shadow-spatial);
+    box-shadow: var(--card-shadow-hover);
   }
 }
+
 @keyframes drawer-in {
   from { transform: translateX(24px); opacity: .75; }
   to { transform: translateX(0); opacity: 1; }
@@ -518,10 +525,10 @@
 .viewer-dialog[open] {
   display: flex;
   flex-direction: column;
-  animation: viewer-in var(--ease);
+  animation: viewer-in var(--motion-viewer) var(--motion-curve);
 }
 .viewer-dialog::backdrop {
-  background: rgba(18, 33, 25, .48);
+  background: var(--overlay-backdrop-strong);
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
 }
@@ -619,8 +626,8 @@
   padding: 19px;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
-  background: rgba(255, 255, 255, .82);
-  box-shadow: var(--shadow-contact);
+  background: var(--card-surface);
+  box-shadow: var(--card-shadow-rest);
   transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
 }
 .capability-card > header {
@@ -648,7 +655,7 @@
 .capability-description {
   margin: 12px 0 14px;
   color: var(--color-muted);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.85;
 }
 .capability-skills {
@@ -730,7 +737,7 @@
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
   background: var(--color-surface);
-  box-shadow: var(--shadow-contact);
+  box-shadow: var(--card-shadow-rest);
   color: var(--color-text);
   text-align: left;
   transition: border-color var(--ease), background var(--ease), box-shadow var(--ease);
@@ -738,7 +745,7 @@
 .photography-theme-card:hover {
   border-color: var(--color-line-strong);
   background: var(--color-surface-solid);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--card-shadow-rest);
 }
 .photography-theme-card[aria-pressed="true"] {
   border-color: var(--color-primary);
@@ -760,7 +767,7 @@
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
   background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--card-shadow-rest);
 }
 .photography-preview-heading {
   display: flex;
