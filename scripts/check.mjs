@@ -171,7 +171,7 @@ assert(styleFiles[2].includes('width: min(var(--modal-width), calc(100vw - 48px)
 
 
 
-assert(designSystem.includes('METADATA · 10px') && designSystem.includes('13–16px'), 'The active type scale must distinguish micro-metadata from readable supporting copy');
+assert(designSystem.includes('METADATA · 10px') && designSystem.includes('CARD SUMMARY · 13px') && designSystem.includes('BODY · 16px / 1.75'), 'The active type scale must distinguish micro-metadata from readable supporting copy');
 assert(style.includes('.button:disabled:hover') && style.includes('.media-tab:hover:not([aria-selected="true"])'), 'Disabled and inactive component states must be defined');
 
 
