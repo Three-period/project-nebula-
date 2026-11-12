@@ -107,6 +107,13 @@
   text-decoration: none;
   transition: color var(--ease), background var(--ease), border-color var(--ease);
 }
+.toc-icon {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  color: var(--color-secondary);
+}
+.toc-link[aria-current="page"] .toc-icon { color: var(--color-primary); }
 .toc-link:hover {
   background: var(--color-page-soft);
   color: var(--color-primary);
