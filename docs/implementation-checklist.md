@@ -26,9 +26,9 @@
 | M5-03 | 减少动态效果时有静态终态，首页文字始终可读 | `landscape.css`、`responsive.css` | 代码已实现，待浏览器验收 | prefers-reduced-motion |
 | M6-01 | 神秘宇宙、小王子、烟紫均处 planned，不对访客展示 | `theme-registry.js` | 已实现 | 注册表检查 |
 | Q-01 | 保留原有项目、文章、PDF 和 Agent 维修状态 | 原有 data、viewer、agent | 代码保留，待回归 | 项目抽屉/附件 |
-| Q-02 | 完整 `npm run check` | `scripts/check.mjs` | 待执行 | Node 20+ |
+| Q-02 | 完整 `npm run check` | `scripts/check.mjs` / `.github/workflows/verify.yml` | **通过（PR #9 CI / Node 20）** | GitHub Actions `check` |
 | Q-03 | 桌面、平板、手机浏览器真实验证 | 所有页面 | 待人工验收 | 1440 / 820 / 390 |
-| Q-04 | Cloudflare Pages 预览部署成功后用户确认 | PR 预览 | 待发布检查 | 分支预览地址 |
+| Q-04 | Cloudflare Pages 预览部署成功后用户确认 | PR #9 | **预览部署通过，待用户验收** | Cloudflare Pages 分支预览 |
 
 ## 摄影照片上传说明
 
