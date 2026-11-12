@@ -7,6 +7,9 @@ import { projects } from '../assets/data/projects.js';
 import { workProjects } from '../assets/data/work-projects.js';
 import { personalProjects } from '../assets/data/personal-projects.js';
 import { capabilityGroups } from '../assets/data/capabilities.js';
+import { photographyThemes } from '../assets/data/photography.js';
+import { photographyI18n, getLocalizedPhotographyTheme } from '../assets/data/photography-i18n.js';
+import { themeRegistry, availableThemes } from '../assets/js/theme-registry.js';
 import { documents } from '../assets/data/documents.js';
 import { articles } from '../assets/data/articles.js';
 import { documentList } from '../assets/data/document-list.js';
@@ -32,7 +35,7 @@ const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
-for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'work-project-list', 'personal-project-list', 'document-list', 'article-list', 'capability-grid']) assert(ids.includes(id));
+for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'work-project-list', 'personal-project-list', 'document-list', 'article-list', 'capability-grid', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
 for (const match of html.matchAll(/(?:href|src)="(assets\/[^"#]+)"/g)) await readFile(resolve(root, match[1]));
 assert.equal(projects.length, 5);
 assert.equal(workProjects.length, 5);
@@ -172,4 +175,74 @@ assert(style.includes('.button:disabled:hover') && style.includes('.media-tab:ho
 
 assert(!readme.includes('其他板块保留中文'), 'README must not contradict site-wide bilingual implementation');
 
-console.log('PASS: syntax/imports, bilingual coverage, responsive styles, document/media/PDF viewers and SSE integration.');
+
+/* Landscape Phase 1 completion: 5 sections, photography structure, theme scope and opening animation. */
+const photoUI = await readFile(resolve(root, 'assets/js/photography.js'), 'utf8');
+const photoDrawer = await readFile(resolve(root, 'assets/js/drawer.js'), 'utf8');
+const photoViewer = await readFile(resolve(root, 'assets/js/viewer.js'), 'utf8');
+const photoIntro = await readFile(resolve(root, 'assets/js/landscape-intro.js'), 'utf8');
+const registrySrc = await readFile(resolve(root, 'assets/js/theme-registry.js'), 'utf8');
+assert.equal([...html.matchAll(/class="toc-link"/g)].length, 5, 'Exactly five major navigation links');
+for (const page of ['about', 'experience', 'projects', 'insights', 'photography'])
+  assert(html.includes('id="' + page + '"'), 'Missing page: ' + page);
+assert(html.includes('href="#photography"') && html.includes('data-i18n="photographyNav"'), 'Photography page must be navigable and translated');
+assert(mainSource.includes("photography.setVisible(next.id==='photography')"), 'The carousel must pause outside its page');
+assert(mainSource.includes('landscapeIntro.onHomeActivate()'), 'Home activation must trigger opening motion');
+assert(html.includes('id="theme-stylesheet"'), 'An identifiable active theme stylesheet is required');
+assert.equal(photographyThemes.length, 4, 'Four reserved photography themes');
+const names = new Set();
+const photoIds = new Set();
+for (const theme of photographyThemes) {
+  assert(!names.has(theme.id), 'Duplicated photography theme: ' + theme.id);
+  names.add(theme.id);
+  const relative = 'public/images/photography/' + theme.folder + '/README.md';
+  await readFile(resolve(root, relative), 'utf8');
+  for (const language of ['zh', 'en']) {
+    const translated = getLocalizedPhotographyTheme(theme.id, language);
+    assert(translated?.title && translated.description, 'Missing photography category translation: ' + theme.id + '/' + language);
+    assert(photographyI18n[language]?.themes[theme.id], 'Missing photography theme i18n entry');
+  }
+  for (const photo of theme.photos) {
+    assert(photo.id && photo.title && photo.alt && photo.description !== undefined, 'Photography metadata is incomplete: ' + photo.id);
+    assert(!photoIds.has(photo.id), 'Duplicate photo ID: ' + photo.id);
+    photoIds.add(photo.id);
+    assert(photo.src.startsWith('/public/images/photography/' + theme.folder + '/'), 'Photo must reside in its own directory: ' + photo.src);
+    await readFile(resolve(root, photo.src.slice(1)));
+    const translation = photographyI18n.en.photos[photo.id];
+    assert(translation?.title && translation.alt, 'Published photo needs a confirmed English caption: ' + photo.id);
+  }
+}
+await readFile(resolve(root, 'public/images/photography/README.md'));
+const visibleThemes = availableThemes();
+assert.equal(visibleThemes.length, 1, 'Only completed themes may be exposed');
+assert.equal(visibleThemes[0].id, 'landscape', 'Landscape must remain the sole active theme');
+assert.equal(Object.keys(themeRegistry).length, 4, 'All four future theme IDs must be reserved');
+for (const item of Object.values(themeRegistry)) {
+  assert(['active','planned'].includes(item.status), 'Invalid theme status');
+  if (item.status === 'planned') assert.equal(item.stylesheet, null, 'Deferred themes must not load CSS');
+}
+assert(registrySrc.includes('stylesheet: null') && themeSource.includes('next.onerror') && themeSource.includes('next.remove()'), 'Theme loader must support load failure rollback');
+assert(photoUI.includes('AUTO_INTERVAL_MS = 6000') && photoUI.includes('motionQuery.matches') &&
+  photoUI.includes('document.hidden') && photoUI.includes('pointerenter') && photoUI.includes('pointerup'),
+  'Photography carousel must support motion preferences, visibility, pause and touch navigation');
+assert(photoDrawer.includes('openPhotographyTheme') && photoDrawer.includes('photography-drawer-item'), 'Photography needs a second-level drawer');
+assert(photoViewer.includes("current.kind === 'photography'") && photoViewer.includes('stepPhotography') &&
+  photoViewer.includes('pointerup') && photoViewer.includes("ArrowRight"), 'Photography needs a third-level accessible viewer');
+assert(html.includes('class="landscape-intro"') && themeStyle.includes('@keyframes landscape-grid-in') &&
+  themeStyle.includes('@keyframes landscape-lines-draw') && themeStyle.includes('@keyframes landscape-plants-in'),
+  'Opening animation must include grid, building, and plants');
+assert(themeStyle.includes('.55s .75s') && themeStyle.includes('@media (prefers-reduced-motion: reduce)'), 'Opening animation should last ~1.3 seconds and reduce motion');
+assert(photoIntro.includes('sessionStorage') && photoIntro.includes("prefers-reduced-motion"), 'Intro must play once per session with a static fallback');
+for (const key of ['photographyNav', 'photographyEyebrow', 'photographyTitle', 'photographyLead',
+  'photographyThemesLabel', 'photographyPreviewLabel', 'photographyEmptyHeading', 'photographyEmptyText',
+  'photographyOpenPhoto', 'photographyOpenTheme', 'photographyPrev', 'photographyNext',
+  'photographyViewerType', 'photographyDrawerType']) {
+  for (const language of ['zh','en'])
+    assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing photography translation: ' + language + '/' + key);
+}
+const phaseAudit = await readFile(resolve(root, 'docs/phase-audit.md'), 'utf8');
+const checklist = await readFile(resolve(root, 'docs/implementation-checklist.md'), 'utf8');
+assert(phaseAudit.includes('PR #8') && phaseAudit.includes('已合并') && phaseAudit.includes('主题 Phase 1'), 'The audit baseline must reflect merged PRs and theme phases');
+assert(checklist.includes('M1-01') && checklist.includes('M6-01'), 'Confirmed requirement acceptance matrix is missing');
+
+console.log('PASS: five pages, photography schemas and viewers, theme registry, landscape intro, bilingual coverage, responsive UI, document/media/PDF and SSE.');
