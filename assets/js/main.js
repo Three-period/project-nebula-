@@ -4,20 +4,32 @@ import { initViewer } from './viewer.js';
 import { initAgent } from './agent.js';
 import { initGlobalI18n } from './i18n.js';
 import { initTheme } from './theme.js';
+import { initPhotography } from './photography.js';
+import { initLandscapeIntro } from './landscape-intro.js';
 initTheme();
 const viewer=initViewer(),drawer=initDrawer(),agent=initAgent();
-initGlobalI18n(language=>{renderContent(language);drawer.setLanguage(language);viewer.setLanguage(language);});
+const photography=initPhotography({onOpenTheme:id=>drawer.openPhotographyTheme(id)});
+const landscapeIntro=initLandscapeIntro();
+initGlobalI18n(language=>{
+  renderContent(language);
+  drawer.setLanguage(language);
+  viewer.setLanguage(language);
+  photography.setLanguage(language);
+});
 const sidebar=document.querySelector('.sidebar'),menu=document.getElementById('menu-toggle');
 const links=[...document.querySelectorAll('.toc-link')],sections=[...document.querySelectorAll('.resume-section')];
 function collapseMenu(){sidebar.classList.remove('is-expanded');menu.setAttribute('aria-expanded','false');}
 menu.addEventListener('click',()=>{const expanded=sidebar.classList.toggle('is-expanded');menu.setAttribute('aria-expanded',String(expanded));});
-const aliases={singularity:'about',forge:'projects',construct:'projects',design:'projects',fusion:'experience',pulsar:'insights'};
+const aliases={singularity:'about',forge:'projects',construct:'projects',design:'projects',fusion:'experience',pulsar:'insights',gallery:'photography'};
 function activate(raw,reset=true){
  const id=aliases[raw]||raw;
  const next=sections.find(s=>s.id===id)||sections[0];
  sections.forEach(s=>s.hidden=s!==next);
  links.forEach(a=>{if(a.hash==='#'+next.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
- collapseMenu();if(reset)window.scrollTo({top:0,behavior:'instant'});
+ collapseMenu();
+ photography.setVisible(next.id==='photography');
+ if(next.id==='about')landscapeIntro.onHomeActivate();
+ if(reset)window.scrollTo({top:0,behavior:'instant'});
 }
 function go(id){history.pushState(null,'','#'+id);activate(id);}
 document.addEventListener('click',event=>{
@@ -37,6 +49,10 @@ document.addEventListener('click',event=>{
   case 'open-media':viewer.openMedia(target.dataset.projectId,Number(target.dataset.mediaIndex));break;
   case 'preview-pdf':viewer.openPdf(target.dataset.pdfSrc);break;
   case 'close-viewer':viewer.close();break;
+  case 'open-photo-theme':drawer.openPhotographyTheme(target.dataset.photoTheme);break;
+  case 'open-photo':viewer.openPhotography(target.dataset.photoTheme,Number(target.dataset.photoIndex));break;
+  case 'photo-viewer-prev':viewer.stepPhotography(-1);break;
+  case 'photo-viewer-next':viewer.stepPhotography(1);break;
  }
 });
 window.addEventListener('popstate',()=>activate(location.hash.slice(1)||'about'));
