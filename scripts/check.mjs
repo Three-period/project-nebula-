@@ -185,6 +185,7 @@ const photoViewer = await readFile(resolve(root, 'assets/js/viewer.js'), 'utf8')
 const photoIntro = await readFile(resolve(root, 'assets/js/landscape-intro.js'), 'utf8');
 const registrySrc = await readFile(resolve(root, 'assets/js/theme-registry.js'), 'utf8');
 assert.equal([...html.matchAll(/class="toc-link"/g)].length, 5, 'Exactly five major navigation links');
+assert.equal([...html.matchAll(/class="toc-icon"/g)].length, 5, 'Five navigation icons must use a consistent line SVG language');
 for (const page of ['about', 'experience', 'projects', 'insights', 'photography'])
   assert(html.includes('id="' + page + '"'), 'Missing page: ' + page);
 assert(html.includes('href="#photography"') && html.includes('data-i18n="photographyNav"'), 'Photography page must be navigable and translated');
@@ -223,7 +224,7 @@ for (const item of Object.values(themeRegistry)) {
   assert(['active','planned'].includes(item.status), 'Invalid theme status');
   if (item.status === 'planned') assert.equal(item.stylesheet, null, 'Deferred themes must not load CSS');
 }
-assert(registrySrc.includes('stylesheet: null') && themeSource.includes('next.onerror') && themeSource.includes('next.remove()'), 'Theme loader must support load failure rollback');
+assert(registrySrc.includes('stylesheet: null') && themeSource.includes('next.onerror') && themeSource.includes('next.remove()') && themeSource.includes('request !== latestRequest'), 'Theme loader must support load failure and out-of-order response rollback');
 assert(photoUI.includes('AUTO_INTERVAL_MS = 6000') && photoUI.includes('motionQuery.matches') &&
   photoUI.includes('document.hidden') && photoUI.includes('pointerenter') && photoUI.includes('pointerup'),
   'Photography carousel must support motion preferences, visibility, pause and touch navigation');
