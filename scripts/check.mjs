@@ -193,7 +193,11 @@ assert(html.includes('href="#photography"') && html.includes('data-i18n="photogr
 assert(mainSource.includes("photography.setVisible(next.id==='photography')"), 'The carousel must pause outside its page');
 assert(mainSource.includes('landscapeIntro.onHomeActivate()'), 'Home activation must trigger opening motion');
 assert(html.includes('id="theme-stylesheet"'), 'An identifiable active theme stylesheet is required');
-assert.equal(photographyThemes.length, 4, 'Four reserved photography themes');
+assert.equal(photographyThemes.length, 5, 'Five approved color photography series');
+assert.deepEqual(photographyThemes.map(x => [x.id, x.photos.length, x.photos[0]?.id]), [
+  ['verdant', 10, 'p34'], ['azure', 14, 'p14'], ['amber', 9, 'p07'],
+  ['chroma', 6, 'p29'], ['earth', 6, 'p39']
+], 'Photo series and first-image covers must follow the confirmed classification');
 const names = new Set();
 const photoIds = new Set();
 for (const theme of photographyThemes) {
@@ -215,6 +219,15 @@ for (const theme of photographyThemes) {
     const translation = photographyI18n.en.photos[photo.id];
     assert(translation?.title && translation.alt, 'Published photo needs a confirmed English caption: ' + photo.id);
   }
+}
+assert.equal(photoIds.size, 45, 'All 45 approved photographs must appear exactly once');
+assert.equal(Object.keys(photographyI18n.en.photos).length, 45, 'All published photos need English metadata');
+const sourceMap = JSON.parse(await readFile(resolve(root, 'assets/data/photography-source-map.json'), 'utf8'));
+assert.equal(sourceMap.photos.length, 45, 'Keep a complete source-to-WebP audit map');
+for (const theme of photographyThemes) for (const photo of theme.photos) {
+  const raw = await readFile(resolve(root, photo.src.slice(1)));
+  assert.equal(raw.toString('ascii', 0, 4), 'RIFF', 'WebP asset must be a RIFF file: ' + photo.id);
+  assert.equal(raw.toString('ascii', 8, 12), 'WEBP', 'WebP asset must be correctly encoded: ' + photo.id);
 }
 await readFile(resolve(root, 'public/images/photography/README.md'));
 const visibleThemes = availableThemes();
