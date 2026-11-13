@@ -193,7 +193,15 @@ assert(html.includes('href="#photography"') && html.includes('data-i18n="photogr
 assert(mainSource.includes("photography.setVisible(next.id==='photography')"), 'The carousel must pause outside its page');
 assert(mainSource.includes('landscapeIntro.onHomeActivate()'), 'Home activation must trigger opening motion');
 assert(html.includes('id="theme-stylesheet"'), 'An identifiable active theme stylesheet is required');
-assert.equal(photographyThemes.length, 4, 'Four reserved photography themes');
+assert.equal(photographyThemes.length, 5, 'Five published photography color series');
+const expectedColorSeries = [
+  ['verdant',10,'p34'], ['azure',14,'p14'], ['amber',9,'p07'],
+  ['chroma',6,'p29'], ['earth',6,'p39']
+];
+assert.deepEqual(photographyThemes.map(theme => [theme.id,theme.photos.length,theme.photos[0]?.id]),
+  expectedColorSeries, 'Photography category order, counts, and preview-first images must match confirmed 45-photo plan');
+assert.equal(photographyThemes.reduce((total,theme)=>total+theme.photos.length,0),45,
+  'All 45 author-selected photographs must be included exactly once');
 const names = new Set();
 const photoIds = new Set();
 for (const theme of photographyThemes) {
@@ -211,11 +219,17 @@ for (const theme of photographyThemes) {
     assert(!photoIds.has(photo.id), 'Duplicate photo ID: ' + photo.id);
     photoIds.add(photo.id);
     assert(photo.src.startsWith('/public/images/photography/' + theme.folder + '/'), 'Photo must reside in its own directory: ' + photo.src);
-    await readFile(resolve(root, photo.src.slice(1)));
+    const bytes = await readFile(resolve(root, photo.src.slice(1)));
+    assert.equal(bytes.toString('ascii',0,4),'RIFF','Published photo must be a valid WebP RIFF file: '+photo.id);
+    assert.equal(bytes.toString('ascii',8,12),'WEBP','Published photo must be a WebP: '+photo.id);
     const translation = photographyI18n.en.photos[photo.id];
     assert(translation?.title && translation.alt, 'Published photo needs a confirmed English caption: ' + photo.id);
   }
 }
+const photoSourceMap = JSON.parse(await readFile(resolve(root,'assets/data/photography-source-map.json'),'utf8'));
+assert.equal(photoSourceMap.photos.length,45,'Source map must preserve all original photo names and assigned paths');
+assert.equal(new Set(photoSourceMap.photos.map(item=>item.original)).size,45,'Original filename traceability must be one-to-one');
+assert(photoSourceMap.photos.every(item=>photoIds.has(item.id)),'Source map must match the published photo IDs');
 await readFile(resolve(root, 'public/images/photography/README.md'));
 const visibleThemes = availableThemes();
 assert.deepEqual(visibleThemes.map(theme=>theme.id).sort(),['cosmic','landscape'], 'Landscape and completed Cosmic must both be selectable');
@@ -248,7 +262,7 @@ const demo = { id: 'validation-only-photo', src: '/public/images/photography/nat
 photographyThemes[0].photos.push(demo);
 photographyI18n.en.photos[demo.id] = { title: 'Test caption', alt: 'Temporary validation image' };
 try {
-  const localized = getLocalizedPhotographyTheme('nature', 'en');
+  const localized = getLocalizedPhotographyTheme('verdant', 'en');
   assert.equal(localized.photos.at(-1).title, 'Test caption');
   assert.equal(localized.photos.at(-1).alt, 'Temporary validation image');
 } finally {

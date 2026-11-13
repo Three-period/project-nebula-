@@ -1,0 +1,320 @@
+{
+  "version": 1,
+  "photos": [
+    {
+      "id": "p34",
+      "original": "20260921-205025.jpg",
+      "web": "/public/images/photography/verdant/p34.webp",
+      "group": "verdant",
+      "position": 1
+    },
+    {
+      "id": "p01",
+      "original": "20260921-204347.jpg",
+      "web": "/public/images/photography/verdant/p01.webp",
+      "group": "verdant",
+      "position": 2
+    },
+    {
+      "id": "p20",
+      "original": "20260921-204747.jpg",
+      "web": "/public/images/photography/verdant/p20.webp",
+      "group": "verdant",
+      "position": 3
+    },
+    {
+      "id": "p22",
+      "original": "20260921-204812.jpg",
+      "web": "/public/images/photography/verdant/p22.webp",
+      "group": "verdant",
+      "position": 4
+    },
+    {
+      "id": "p32",
+      "original": "20260921-204957.jpg",
+      "web": "/public/images/photography/verdant/p32.webp",
+      "group": "verdant",
+      "position": 5
+    },
+    {
+      "id": "p02",
+      "original": "20260921-204408.jpg",
+      "web": "/public/images/photography/verdant/p02.webp",
+      "group": "verdant",
+      "position": 6
+    },
+    {
+      "id": "p35",
+      "original": "20260921-205033.jpg",
+      "web": "/public/images/photography/verdant/p35.webp",
+      "group": "verdant",
+      "position": 7
+    },
+    {
+      "id": "p24",
+      "original": "20260921-204830.jpg",
+      "web": "/public/images/photography/verdant/p24.webp",
+      "group": "verdant",
+      "position": 8
+    },
+    {
+      "id": "p31",
+      "original": "20260921-204949.jpg",
+      "web": "/public/images/photography/verdant/p31.webp",
+      "group": "verdant",
+      "position": 9
+    },
+    {
+      "id": "p36",
+      "original": "20260921-205050.jpg",
+      "web": "/public/images/photography/verdant/p36.webp",
+      "group": "verdant",
+      "position": 10
+    },
+    {
+      "id": "p14",
+      "original": "20260921-204644.jpg",
+      "web": "/public/images/photography/azure/p14.webp",
+      "group": "azure",
+      "position": 1
+    },
+    {
+      "id": "p33",
+      "original": "20260921-205016.jpg",
+      "web": "/public/images/photography/azure/p33.webp",
+      "group": "azure",
+      "position": 2
+    },
+    {
+      "id": "p06",
+      "original": "20260921-204524.jpg",
+      "web": "/public/images/photography/azure/p06.webp",
+      "group": "azure",
+      "position": 3
+    },
+    {
+      "id": "p08",
+      "original": "20260921-204541.jpg",
+      "web": "/public/images/photography/azure/p08.webp",
+      "group": "azure",
+      "position": 4
+    },
+    {
+      "id": "p13",
+      "original": "20260921-204635.jpg",
+      "web": "/public/images/photography/azure/p13.webp",
+      "group": "azure",
+      "position": 5
+    },
+    {
+      "id": "p15",
+      "original": "20260921-204652.jpg",
+      "web": "/public/images/photography/azure/p15.webp",
+      "group": "azure",
+      "position": 6
+    },
+    {
+      "id": "p16",
+      "original": "20260921-204701.jpg",
+      "web": "/public/images/photography/azure/p16.webp",
+      "group": "azure",
+      "position": 7
+    },
+    {
+      "id": "p17",
+      "original": "20260921-204722.jpg",
+      "web": "/public/images/photography/azure/p17.webp",
+      "group": "azure",
+      "position": 8
+    },
+    {
+      "id": "p19",
+      "original": "20260921-204739.jpg",
+      "web": "/public/images/photography/azure/p19.webp",
+      "group": "azure",
+      "position": 9
+    },
+    {
+      "id": "p21",
+      "original": "20260921-204755.jpg",
+      "web": "/public/images/photography/azure/p21.webp",
+      "group": "azure",
+      "position": 10
+    },
+    {
+      "id": "p23",
+      "original": "20260921-204821.jpg",
+      "web": "/public/images/photography/azure/p23.webp",
+      "group": "azure",
+      "position": 11
+    },
+    {
+      "id": "p41",
+      "original": "20261113-142742.jpg",
+      "web": "/public/images/photography/azure/p41.webp",
+      "group": "azure",
+      "position": 12
+    },
+    {
+      "id": "p42",
+      "original": "20261113-142747.jpg",
+      "web": "/public/images/photography/azure/p42.webp",
+      "group": "azure",
+      "position": 13
+    },
+    {
+      "id": "p43",
+      "original": "20261113-142750.jpg",
+      "web": "/public/images/photography/azure/p43.webp",
+      "group": "azure",
+      "position": 14
+    },
+    {
+      "id": "p07",
+      "original": "20260921-204532.jpg",
+      "web": "/public/images/photography/amber/p07.webp",
+      "group": "amber",
+      "position": 1
+    },
+    {
+      "id": "p05",
+      "original": "20260921-204516.jpg",
+      "web": "/public/images/photography/amber/p05.webp",
+      "group": "amber",
+      "position": 2
+    },
+    {
+      "id": "p03",
+      "original": "20260921-204417.jpg",
+      "web": "/public/images/photography/amber/p03.webp",
+      "group": "amber",
+      "position": 3
+    },
+    {
+      "id": "p09",
+      "original": "20260921-204559.jpg",
+      "web": "/public/images/photography/amber/p09.webp",
+      "group": "amber",
+      "position": 4
+    },
+    {
+      "id": "p10",
+      "original": "20260921-204608.jpg",
+      "web": "/public/images/photography/amber/p10.webp",
+      "group": "amber",
+      "position": 5
+    },
+    {
+      "id": "p04",
+      "original": "20260921-204507.jpg",
+      "web": "/public/images/photography/amber/p04.webp",
+      "group": "amber",
+      "position": 6
+    },
+    {
+      "id": "p11",
+      "original": "20260921-204618.jpg",
+      "web": "/public/images/photography/amber/p11.webp",
+      "group": "amber",
+      "position": 7
+    },
+    {
+      "id": "p12",
+      "original": "20260921-204626.jpg",
+      "web": "/public/images/photography/amber/p12.webp",
+      "group": "amber",
+      "position": 8
+    },
+    {
+      "id": "p18",
+      "original": "20260921-204731.jpg",
+      "web": "/public/images/photography/amber/p18.webp",
+      "group": "amber",
+      "position": 9
+    },
+    {
+      "id": "p29",
+      "original": "20260921-204931.jpg",
+      "web": "/public/images/photography/chroma/p29.webp",
+      "group": "chroma",
+      "position": 1
+    },
+    {
+      "id": "p30",
+      "original": "20260921-204940.jpg",
+      "web": "/public/images/photography/chroma/p30.webp",
+      "group": "chroma",
+      "position": 2
+    },
+    {
+      "id": "p26",
+      "original": "20260921-204855.jpg",
+      "web": "/public/images/photography/chroma/p26.webp",
+      "group": "chroma",
+      "position": 3
+    },
+    {
+      "id": "p25",
+      "original": "20260921-204846.jpg",
+      "web": "/public/images/photography/chroma/p25.webp",
+      "group": "chroma",
+      "position": 4
+    },
+    {
+      "id": "p27",
+      "original": "20260921-204903.jpg",
+      "web": "/public/images/photography/chroma/p27.webp",
+      "group": "chroma",
+      "position": 5
+    },
+    {
+      "id": "p28",
+      "original": "20260921-204923.jpg",
+      "web": "/public/images/photography/chroma/p28.webp",
+      "group": "chroma",
+      "position": 6
+    },
+    {
+      "id": "p39",
+      "original": "20261113-142731.jpg",
+      "web": "/public/images/photography/earth/p39.webp",
+      "group": "earth",
+      "position": 1
+    },
+    {
+      "id": "p38",
+      "original": "20261113-142724.jpg",
+      "web": "/public/images/photography/earth/p38.webp",
+      "group": "earth",
+      "position": 2
+    },
+    {
+      "id": "p37",
+      "original": "20261113-142710.jpg",
+      "web": "/public/images/photography/earth/p37.webp",
+      "group": "earth",
+      "position": 3
+    },
+    {
+      "id": "p40",
+      "original": "20261113-142738.jpg",
+      "web": "/public/images/photography/earth/p40.webp",
+      "group": "earth",
+      "position": 4
+    },
+    {
+      "id": "p44",
+      "original": "20261113-142754.jpg",
+      "web": "/public/images/photography/earth/p44.webp",
+      "group": "earth",
+      "position": 5
+    },
+    {
+      "id": "p45",
+      "original": "20261113-142758.jpg",
+      "web": "/public/images/photography/earth/p45.webp",
+      "group": "earth",
+      "position": 6
+    }
+  ]
+}
