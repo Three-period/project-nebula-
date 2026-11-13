@@ -1,26 +1,7 @@
-# 摄影作品素材目录
+# 摄影作品素材目录（第一阶段）
 
-此处仅预留上传位置，**当前没有摄影原图**，不得用项目截图或生成图作为摄影作品。
+按色彩分为五组，共 45 张：`verdant` 青绿·林间（10）、`azure` 蓝紫·远方（14）、`amber` 暖金·余晖（9）、`chroma` 绯彩·人间（6）、`earth` 大地·雾境（6）。
 
-- `nature/` — 自然与植物
-- `architecture/` — 城市与建筑
-- `travel/` — 旅行与风景
-- `details/` — 光影与细节
+每幅作品采用稳定编号 `pNN.webp`，原始 JPG 已在本地独立保留。WebP 长边不超过 1600px，已重编码去除 EXIF/GPS。显示顺序以 `assets/data/photography.js` 为准，中英文标题在 `assets/data/photography-i18n.js`。
 
-上传推荐 JPG / WebP / AVIF，单张图片优先使用适合 Web 的分辨率，保留原图备份并在上传前处理 EXIF 地理位置和其他隐私信息。文件名建议使用英文小写、数字、连字符，例如 `greenhouse-window-01.webp`。
-
-上传后同步在 `assets/data/photography.js` 对应主题的 `photos` 中登记：
-
-```js
-{
-  id: 'nature-001',
-  src: '/public/images/photography/nature/greenhouse-window-01.webp',
-  title: '你的中文作品标题',
-  alt: '具体描述图片可见内容',
-  description: '可选的中文作品说明'
-}
-```
-
-在 `assets/data/photography-i18n.js` 的 `en.photos['nature-001']` 中补充经过确认的英文 `title`、`alt`、`description`。
-
-仅上传文件**不会自动生成网站内容**：需要增加数据条目并完成部署。尚无图片的主题展示清晰的空状态，不显示损坏图片或虚构作品。
+本阶段系列首图为 P34 / P14 / P07 / P29 / P39；自由排序、独立封面和裁切调整属于第二阶段。本目录的图片文件必须与数据变更同时存在，缺失文件会使自动化回归检查失败。

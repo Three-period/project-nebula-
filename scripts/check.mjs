@@ -193,7 +193,10 @@ assert(html.includes('href="#photography"') && html.includes('data-i18n="photogr
 assert(mainSource.includes("photography.setVisible(next.id==='photography')"), 'The carousel must pause outside its page');
 assert(mainSource.includes('landscapeIntro.onHomeActivate()'), 'Home activation must trigger opening motion');
 assert(html.includes('id="theme-stylesheet"'), 'An identifiable active theme stylesheet is required');
-assert.equal(photographyThemes.length, 4, 'Four reserved photography themes');
+assert.equal(photographyThemes.length, 5, 'Stage 1 publishes five confirmed color series');
+assert.deepEqual(photographyThemes.map(x=>x.photos.length),[10,14,9,6,6],'45 curated photos must match the approved color-series allocation');
+assert.equal(photographyThemes.reduce((total,theme)=>total+theme.photos.length,0),45,'All 45 shortlisted photographs must be present');
+assert.deepEqual(photographyThemes.map(x=>x.photos[0].id),['p34','p14','p07','p29','p39'],'Stage 1 keeps the approved initial cover/preview choices');
 const names = new Set();
 const photoIds = new Set();
 for (const theme of photographyThemes) {
@@ -244,11 +247,11 @@ for (const key of ['photographyNav', 'photographyEyebrow', 'photographyTitle', '
     assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing photography translation: ' + language + '/' + key);
 }
 // Exercise bilingual photo metadata in memory; do not publish test images or fake gallery items.
-const demo = { id: 'validation-only-photo', src: '/public/images/photography/nature/test-only.webp', title: '示例标题', alt: '虚拟测试描述' };
+const demo = { id: 'validation-only-photo', src: '/public/images/photography/verdant/test-only.webp', title: '示例标题', alt: '虚拟测试描述' };
 photographyThemes[0].photos.push(demo);
 photographyI18n.en.photos[demo.id] = { title: 'Test caption', alt: 'Temporary validation image' };
 try {
-  const localized = getLocalizedPhotographyTheme('nature', 'en');
+  const localized = getLocalizedPhotographyTheme(photographyThemes[0].id, 'en');
   assert.equal(localized.photos.at(-1).title, 'Test caption');
   assert.equal(localized.photos.at(-1).alt, 'Temporary validation image');
 } finally {
