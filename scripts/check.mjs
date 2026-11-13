@@ -193,7 +193,11 @@ assert(html.includes('href="#photography"') && html.includes('data-i18n="photogr
 assert(mainSource.includes("photography.setVisible(next.id==='photography')"), 'The carousel must pause outside its page');
 assert(mainSource.includes('landscapeIntro.onHomeActivate()'), 'Home activation must trigger opening motion');
 assert(html.includes('id="theme-stylesheet"'), 'An identifiable active theme stylesheet is required');
-assert.equal(photographyThemes.length, 4, 'Four reserved photography themes');
+assert.equal(photographyThemes.length, 5, 'Five approved color photography series');
+assert.deepEqual(photographyThemes.map(x => [x.id, x.photos.length, x.photos[0]?.id]), [
+  ['verdant', 10, 'p34'], ['azure', 14, 'p14'], ['amber', 9, 'p07'],
+  ['chroma', 6, 'p29'], ['earth', 6, 'p39']
+], 'Photo series and first-image covers must follow the confirmed classification');
 const names = new Set();
 const photoIds = new Set();
 for (const theme of photographyThemes) {
@@ -215,6 +219,15 @@ for (const theme of photographyThemes) {
     const translation = photographyI18n.en.photos[photo.id];
     assert(translation?.title && translation.alt, 'Published photo needs a confirmed English caption: ' + photo.id);
   }
+}
+assert.equal(photoIds.size, 45, 'All 45 approved photographs must appear exactly once');
+assert.equal(Object.keys(photographyI18n.en.photos).length, 45, 'All published photos need English metadata');
+const sourceMap = JSON.parse(await readFile(resolve(root, 'assets/data/photography-source-map.json'), 'utf8'));
+assert.equal(sourceMap.photos.length, 45, 'Keep a complete source-to-WebP audit map');
+for (const theme of photographyThemes) for (const photo of theme.photos) {
+  const raw = await readFile(resolve(root, photo.src.slice(1)));
+  assert.equal(raw.toString('ascii', 0, 4), 'RIFF', 'WebP asset must be a RIFF file: ' + photo.id);
+  assert.equal(raw.toString('ascii', 8, 12), 'WEBP', 'WebP asset must be correctly encoded: ' + photo.id);
 }
 await readFile(resolve(root, 'public/images/photography/README.md'));
 const visibleThemes = availableThemes();
@@ -244,11 +257,11 @@ for (const key of ['photographyNav', 'photographyEyebrow', 'photographyTitle', '
     assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing photography translation: ' + language + '/' + key);
 }
 // Exercise bilingual photo metadata in memory; do not publish test images or fake gallery items.
-const demo = { id: 'validation-only-photo', src: '/public/images/photography/nature/test-only.webp', title: '示例标题', alt: '虚拟测试描述' };
+const demo = { id: 'validation-only-photo', src: '/public/images/photography/verdant/test-only.webp', title: '示例标题', alt: '虚拟测试描述' };
 photographyThemes[0].photos.push(demo);
 photographyI18n.en.photos[demo.id] = { title: 'Test caption', alt: 'Temporary validation image' };
 try {
-  const localized = getLocalizedPhotographyTheme('nature', 'en');
+  const localized = getLocalizedPhotographyTheme(photographyThemes[0].id, 'en');
   assert.equal(localized.photos.at(-1).title, 'Test caption');
   assert.equal(localized.photos.at(-1).alt, 'Temporary validation image');
 } finally {
