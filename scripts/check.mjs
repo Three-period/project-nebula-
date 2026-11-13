@@ -257,11 +257,11 @@ for (const key of ['photographyNav', 'photographyEyebrow', 'photographyTitle', '
     assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing photography translation: ' + language + '/' + key);
 }
 // Exercise bilingual photo metadata in memory; do not publish test images or fake gallery items.
-const demo = { id: 'validation-only-photo', src: '/public/images/photography/nature/test-only.webp', title: '示例标题', alt: '虚拟测试描述' };
+const demo = { id: 'validation-only-photo', src: '/public/images/photography/verdant/test-only.webp', title: '示例标题', alt: '虚拟测试描述' };
 photographyThemes[0].photos.push(demo);
 photographyI18n.en.photos[demo.id] = { title: 'Test caption', alt: 'Temporary validation image' };
 try {
-  const localized = getLocalizedPhotographyTheme('nature', 'en');
+  const localized = getLocalizedPhotographyTheme(photographyThemes[0].id, 'en');
   assert.equal(localized.photos.at(-1).title, 'Test caption');
   assert.equal(localized.photos.at(-1).alt, 'Temporary validation image');
 } finally {
