@@ -251,7 +251,7 @@ const demo = { id: 'validation-only-photo', src: '/public/images/photography/ver
 photographyThemes[0].photos.push(demo);
 photographyI18n.en.photos[demo.id] = { title: 'Test caption', alt: 'Temporary validation image' };
 try {
-  const localized = getLocalizedPhotographyTheme('nature', 'en');
+  const localized = getLocalizedPhotographyTheme(photographyThemes[0].id, 'en');
   assert.equal(localized.photos.at(-1).title, 'Test caption');
   assert.equal(localized.photos.at(-1).alt, 'Temporary validation image');
 } finally {
