@@ -2,6 +2,7 @@
 export const siteI18n = {
   "ui": {
     "zh": {
+      "darkMode": "深色模式",
       "currentDesignSystem": "当前网站设计系统 ↗",
       "relatedNebulaMaterials": "项目与设计材料",
       "relatedArticleProjects": "对应项目案例",
@@ -148,6 +149,7 @@ export const siteI18n = {
       "graduationDate": "2024 年毕业"
     },
     "en": {
+      "darkMode": "Dark mode",
       "currentDesignSystem": "Current site design system ↗",
       "relatedNebulaMaterials": "Project & design materials",
       "relatedArticleProjects": "Related case studies",

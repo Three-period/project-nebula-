@@ -1,0 +1,120 @@
+#color-mode-toggle {
+  width: var(--control-height-compact);
+  padding-inline: 0;
+  flex: none;
+}
+
+#color-mode-toggle .color-mode-sun,
+:root[data-color-mode="dark"] #color-mode-toggle .color-mode-moon {
+  display: none;
+}
+
+:root[data-color-mode="dark"] #color-mode-toggle .color-mode-sun {
+  display: block;
+}
+
+@media screen {
+  :root[data-color-mode="dark"] {
+    color-scheme: dark;
+    --button-secondary-bg: var(--color-surface);
+    --tag-surface: var(--color-primary-soft);
+    --overlay-backdrop: rgba(0, 0, 0, .55);
+    --overlay-backdrop-strong: rgba(0, 0, 0, .72);
+    --shadow-contact: 0 2px 5px rgba(0, 0, 0, .26);
+    --shadow-spatial: 0 16px 36px rgba(0, 0, 0, .25);
+    --shadow-sidebar: 3px 0 18px rgba(0, 0, 0, .2);
+    --shadow-topbar: 0 2px 14px rgba(0, 0, 0, .2);
+    --shadow-button-primary: 0 2px 5px rgba(0, 0, 0, .25);
+    --modal-shadow: 0 22px 70px rgba(0, 0, 0, .45);
+  }
+
+  :root[data-theme="landscape"][data-color-mode="dark"] {
+    --color-page: #101914;
+    --color-page-soft: #18241c;
+    --color-surface: #1a2820;
+    --color-surface-solid: #19251e;
+    --color-text: #e5eee8;
+    --color-muted: #aec0b4;
+    --color-primary: #a2d9b0;
+    --color-primary-hover: #c1edcb;
+    --color-primary-soft: #243b2c;
+    --color-secondary: #89bd99;
+    --color-mist: #688b76;
+    --color-line: #374f40;
+    --color-line-strong: #668673;
+    --color-on-primary: #102218;
+    --color-sidebar: rgba(20, 31, 24, .97);
+    --color-topbar: rgba(20, 31, 24, .94);
+    --card-border: var(--color-line);
+    --card-surface: #203027;
+    --card-shadow-hover: 0 5px 9px rgba(0, 0, 0, .32), 0 28px 52px rgba(0, 0, 0, .3);
+    --decoration-accent: #719780;
+  }
+
+  :root[data-theme="landscape"][data-color-mode="dark"] :is(
+    .project, .document-card, .article-row, .capability-card,
+    .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+  ) {
+    background:
+      repeating-linear-gradient(115deg, rgba(151, 194, 163, .035) 0 1px, transparent 1px 5px),
+      linear-gradient(120deg, #23372b, #1a2a22 55%, #213329);
+  }
+
+  :root[data-theme="cosmic"][data-color-mode="dark"] {
+    --color-page: #1b1714;
+    --color-page-soft: #25201b;
+    --color-surface: #2e261f;
+    --color-surface-solid: #2b231d;
+    --color-text: #f3e9dc;
+    --color-muted: #ccbaa6;
+    --color-primary: #e6bd80;
+    --color-primary-hover: #f2cf99;
+    --color-cosmic-ember: #e4a895;
+    --color-cosmic-ember-soft: #392923;
+    --color-primary-soft: #413220;
+    --color-secondary: #d0a97b;
+    --color-mist: #8f7457;
+    --color-line: #64503b;
+    --color-line-strong: #aa895e;
+    --color-on-primary: #271a0d;
+    --color-sidebar: rgba(34, 28, 23, .97);
+    --color-topbar: rgba(34, 28, 23, .94);
+    --button-primary-bg: var(--color-primary);
+    --card-surface: #2c241d;
+    --card-border: #96744f;
+    --card-shadow-rest: inset 0 0 0 4px #2c241d, inset 0 0 0 5px #765b3d,
+      var(--shadow-contact), var(--shadow-spatial);
+    --decoration-accent: #ab8255;
+  }
+
+  :root[data-theme="cosmic"][data-color-mode="dark"] .button.primary {
+    background: var(--button-primary-bg);
+    border-color: var(--button-primary-bg);
+  }
+
+  :root[data-theme="cosmic"][data-color-mode="dark"] .button.primary:hover {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+  }
+
+  :root[data-theme="cosmic"][data-color-mode="dark"] :is(.tag, .dr-tag, .singu-chip) {
+    border-color: var(--color-line);
+    color: var(--color-primary);
+  }
+
+  :root[data-theme="cosmic"][data-color-mode="dark"] .topbar-brand-mark {
+    box-shadow: inset 0 0 0 3px var(--color-surface);
+  }
+
+  :root[data-color-mode="dark"] :is(.project-cover-placeholder, .photography-empty) {
+    background: linear-gradient(145deg, var(--color-page-soft), var(--color-surface));
+  }
+
+  :root[data-color-mode="dark"] :is(.media-stage, .drawer-body img, .chat-form input) {
+    background: var(--color-page-soft);
+  }
+
+  :root[data-color-mode="dark"] .media-tab[aria-selected="true"] {
+    color: var(--color-on-primary);
+  }
+}
