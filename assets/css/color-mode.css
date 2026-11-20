@@ -29,24 +29,24 @@
   }
 
   :root[data-theme="landscape"][data-color-mode="dark"] {
-    --color-page: #101914;
-    --color-page-soft: #18241c;
-    --color-surface: #1a2820;
-    --color-surface-solid: #19251e;
+    --color-page: #252525;
+    --color-page-soft: #2c2c2c;
+    --color-surface: #323232;
+    --color-surface-solid: #2e2e2e;
     --color-text: #e5eee8;
     --color-muted: #aec0b4;
     --color-primary: #a2d9b0;
     --color-primary-hover: #c1edcb;
-    --color-primary-soft: #243b2c;
+    --color-primary-soft: #393939;
     --color-secondary: #89bd99;
     --color-mist: #688b76;
-    --color-line: #374f40;
-    --color-line-strong: #668673;
+    --color-line: #505050;
+    --color-line-strong: #7c7c7c;
     --color-on-primary: #102218;
-    --color-sidebar: rgba(20, 31, 24, .97);
-    --color-topbar: rgba(20, 31, 24, .94);
+    --color-sidebar: rgba(41, 41, 41, .97);
+    --color-topbar: rgba(41, 41, 41, .94);
     --card-border: var(--color-line);
-    --card-surface: #203027;
+    --card-surface: #343434;
     --card-shadow-hover: 0 5px 9px rgba(0, 0, 0, .32), 0 28px 52px rgba(0, 0, 0, .3);
     --decoration-accent: #719780;
   }
@@ -56,8 +56,8 @@
     .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
   ) {
     background:
-      repeating-linear-gradient(115deg, rgba(151, 194, 163, .035) 0 1px, transparent 1px 5px),
-      linear-gradient(120deg, #23372b, #1a2a22 55%, #213329);
+      repeating-linear-gradient(115deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 5px),
+      linear-gradient(120deg, #383838, #303030 55%, #343434);
   }
 
   :root[data-theme="cosmic"][data-color-mode="dark"] {
