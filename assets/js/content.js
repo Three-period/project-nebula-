@@ -1,6 +1,5 @@
 
-import { workProjects } from '../data/work-projects.js';
-import { personalProjects } from '../data/personal-projects.js';
+import { featuredProjects, projectById } from '../data/portfolio-projects.js';
 import { documentList } from '../data/document-list.js';
 import { articles } from '../data/articles.js';
 import { capabilityGroups } from '../data/capabilities.js';
@@ -12,49 +11,40 @@ export function escapeHTML(value = '') {
 const tags = items => '<div class="tags">' + (items || []).map(tag => '<span class="tag">' + escapeHTML(tag) + '</span>').join('') + '</div>';
 const preview = p => p.cover
   ? '<img class="project-cover" src="' + escapeHTML(p.cover) + '" alt="' + escapeHTML(p.title + ' · ' + t('projectPreviewAlt')) + '" loading="lazy">'
-  : '<div class="project-cover project-cover-placeholder" aria-hidden="true"><span>✧</span><small>PROJECT / ' + escapeHTML(p.type) + '</small></div>';
+  : '';
 
-function projectCard(raw, index) {
+function projectCard(raw) {
   const p = getLocalizedRecord('project', raw.id, raw);
   const video = p.video && !p.media?.some(item => item.type === 'video') ? '<a class="button" href="' + escapeHTML(p.video) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('demoVideo')) + '</a>' : '';
-  return '<article class="project" data-project-id="' + escapeHTML(p.id) + '">' + preview(p) +
-    '<div class="project-content"><div class="item-meta"><span class="item-number">' + String(index + 1).padStart(2, '0') + '</span><span>' + escapeHTML(p.type) + '</span><span>' + escapeHTML(p.year) + '</span></div>' +
+  return '<article class="project' + (p.cover ? ' project--with-cover' : ' project--text') + '" data-project-id="' + escapeHTML(p.id) + '">' + preview(p) +
+    '<div class="project-content"><div class="item-meta"><span>' + escapeHTML(p.type) + '</span><span>' + escapeHTML(p.year) + '</span></div>' +
     '<h3>' + escapeHTML(p.title) + '</h3><p class="project-description">' + escapeHTML(p.description) + '</p>' +
     '<p class="project-stack">' + escapeHTML(p.stage) + '</p>' + tags(p.tags) +
     '<div class="actions"><button class="button" data-project="' + escapeHTML(p.id) + '">' + escapeHTML(t('projectDetails')) + '</button>' + video + '</div></div></article>';
 }
 
-const projectById = new Map([...workProjects, ...personalProjects].map(project => [project.id, project]));
+export function renderProjectLinks(ids, language = getCurrentLanguage()) {
+  return (ids || []).map(id => {
+    const raw = projectById.get(id);
+    if (!raw) return '';
+    const project = getLocalizedRecord('project', id, raw, language);
+    return '<button type="button" class="button" data-project="' + escapeHTML(id) + '">' +
+      escapeHTML(project.title) + ' ↗</button>';
+  }).join('');
+}
 
 function renderCapabilities(language) {
   const target = document.getElementById('capability-grid');
-  if (!target) return;
-  target.innerHTML = capabilityGroups.map(group => {
-    const skills = t(group.skillsKey, language).split('|').map(skill =>
-      '<span class="tag">' + escapeHTML(skill.trim()) + '</span>'
-    ).join('');
-    const evidence = group.evidence.map(id => {
-      const raw = projectById.get(id);
-      if (!raw) return '';
-      const project = getLocalizedRecord('project', id, raw, language);
-      return '<button class="capability-evidence-item" type="button" data-project="' + escapeHTML(id) +
-        '" aria-label="' + escapeHTML(t('capabilityOpenEvidence', language) + project.title) + '">' +
-        '<strong>' + escapeHTML(project.title) + '</strong><small>' + escapeHTML(project.stage) + '</small></button>';
-    }).filter(Boolean).join('');
-    return '<article class="capability-card"><header><span class="capability-index">' +
-      escapeHTML(group.number) + '</span><h4>' + escapeHTML(t(group.titleKey, language)) +
-      '</h4></header><p class="capability-description">' +
-      escapeHTML(t(group.descriptionKey, language)) + '</p><div class="capability-skills">' +
-      skills + '</div><div class="capability-evidence"><p class="eyebrow">' +
-      escapeHTML(t('capabilityEvidenceLabel', language)) + '</p><div class="capability-evidence-list">' +
-      evidence + '</div></div></article>';
-  }).join('');
+  target.innerHTML = capabilityGroups.map(group =>
+    '<article id="capability-' + group.id + '" class="capability-card' + (group.primary ? ' capability-card--primary' : '') +
+    '"><h4>' + escapeHTML(t(group.titleKey, language)) + '</h4><p class="capability-description">' +
+    escapeHTML(t(group.descriptionKey, language)) + '</p></article>'
+  ).join('');
 }
 
 export function renderContent(language = getCurrentLanguage()) {
   renderCapabilities(language);
-  document.getElementById('work-project-list').innerHTML = workProjects.map(projectCard).join('');
-  document.getElementById('personal-project-list').innerHTML = personalProjects.map(projectCard).join('');
+  document.getElementById('featured-project-list').innerHTML = featuredProjects.map(projectCard).join('');
 
   document.getElementById('document-list').innerHTML = documentList.map(raw => {
     const item = getLocalizedRecord('documentCard', raw.key, raw, language);
@@ -63,11 +53,13 @@ export function renderContent(language = getCurrentLanguage()) {
       '<div class="actions"><button class="button" data-document="' + escapeHTML(item.key) + '">' + escapeHTML(t('documentDetails', language)) + '</button></div></article>';
   }).join('');
 
-  const nebula = getLocalizedRecord('project', 'personal-nebula', personalProjects.find(project => project.id === 'personal-nebula'), language);
+  const nebula = getLocalizedRecord('project', 'personal-nebula', projectById.get('personal-nebula'), language);
   const materials = documentList.filter(doc => ['prd', 'design', 'arch', 'proto', 'agent'].includes(doc.key));
   const resources = document.getElementById('independent-project-resources');
   if (nebula && resources) {
     resources.innerHTML = '<button class="button primary" data-project="' + escapeHTML(nebula.id) + '">' + escapeHTML(t('projectDetails', language)) + '</button>' +
+      '<a class="button" href="./design-system.html" target="_blank" rel="noopener noreferrer">' +
+      escapeHTML(t('currentDesignSystem', language)) + '</a>' +
       materials.map(raw => {
         const item = getLocalizedRecord('documentCard', raw.key, raw, language);
         return '<button class="button" data-document="' + escapeHTML(item.key) + '">' + escapeHTML(item.title) + ' ↗</button>';

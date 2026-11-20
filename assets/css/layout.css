@@ -252,87 +252,63 @@
 .about-section { position: relative; }
 .singu-layout {
   display: grid;
-  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
-  align-items: stretch;
-  gap: 20px;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  align-items: start;
+  gap: clamp(24px, 4vw, 62px);
 }
-.singu-left, .singu-right {
-  min-width: 0;
-  padding: 24px;
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-card);
-  background: var(--card-surface);
-  box-shadow: var(--card-shadow-rest);
-  -webkit-backdrop-filter: blur(var(--surface-blur)) saturate(115%);
-  backdrop-filter: blur(var(--surface-blur)) saturate(115%);
-}
-.singu-left {
+#about .landscape-hero {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-.singu-right {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.singu-name {
-  color: var(--color-text);
-  font: 600 28px/1.35 var(--font-heading);
-  white-space: nowrap;
-}
-.singu-name-sub {
-  margin: 8px 0 24px;
-  color: var(--color-muted);
-  font-size: 12px;
-}
-.singu-skill-groups h3, .learning-notes h3 {
-  margin: 12px 0 7px;
-  color: var(--color-text);
-  font: 600 16px/1.5 var(--font-heading);
-}
-.singu-skill-groups p, .learning-notes p {
-  margin: 6px 0;
-  color: var(--color-muted);
-  font-size: 15px;
-  line-height: 1.8;
-}
-.singu-quote {
-  padding-bottom: 8px;
-  color: var(--color-text);
-  font: 500 18px/1.8 var(--font-heading);
-  overflow-wrap: anywhere;
-}
-.singu-quote span { display: block; }
-.singu-quote .quote-inline { display: inline; }
-.singu-quote em {
-  color: var(--color-primary);
-  font-style: normal;
-  overflow-wrap: anywhere;
-}
-.singu-agent-entry {
+  min-width: 0;
   margin: 0;
-  padding: 17px 18px;
-  border: 1px solid var(--color-line);
-  border-left: 3px solid var(--color-secondary);
-  border-radius: var(--radius-card);
-  background: var(--color-page-soft);
+  gap: 18px;
 }
-.sae-title {
-  margin-bottom: 6px;
+.singu-focus {
+  margin: 0 0 14px;
   color: var(--color-primary);
-  font-size: 13px;
-  font-weight: 600;
+  font: 600 13px/1.5 var(--font-body);
 }
-.singu-agent-entry p:not(.sae-title) {
+#about .landscape-hero h2 {
+  margin: 0;
+  font-size: clamp(25px, 2.45vw, 40px);
+  line-height: 1.36;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.singu-intro {
+  margin: 16px 0 0;
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.75;
+}
+.singu-language {
+  margin: 14px 0 0;
   color: var(--color-muted);
   font-size: 13px;
 }
-.singu-agent-entry .button { margin-top: 12px; }
-.singu-ability-grid {
+#about .landscape-intro,
+#about .cosmic-intro {
+  width: min(248px, 75%);
+  max-width: 100%;
+}
+.singu-workflow {
+  margin-top: clamp(34px, 5vw, 68px);
+  padding-top: 20px;
+  border-top: 1px solid var(--color-line);
+}
+.singu-workflow > h3,
+.capability-section > h3 {
+  margin: 0 0 14px;
+  color: var(--color-text);
+  font: 600 var(--text-h3)/1.5 var(--font-heading);
+}
+.singu-workflow-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
+  padding: 0;
+  list-style: none;
 }
 .singu-ab-card {
   min-width: 0;
@@ -344,7 +320,7 @@
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
-.singu-ab-card h3 {
+.singu-ab-card h4 {
   margin-bottom: 7px;
   color: var(--color-primary);
   font: 600 14px/1.5 var(--font-heading);
@@ -354,12 +330,6 @@
   font-size: 13px;
   line-height: 1.75;
 }
-.learning-notes {
-  padding-top: 14px;
-  border-top: 1px solid var(--color-line);
-}
-
-
 
 /* 06 · Experience and insights */
 .fusion-timeline { display: grid; }

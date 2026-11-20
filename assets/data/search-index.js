@@ -1,6 +1,5 @@
 /* Search index is rebuilt from the site's genuine bilingual content. No PDF binary scraping. */
-import { workProjects } from './work-projects.js';
-import { personalProjects } from './personal-projects.js';
+import { featuredProjects, projectById } from './portfolio-projects.js';
 import { articles } from './articles.js';
 import { documentList } from './document-list.js';
 import { capabilityGroups } from './capabilities.js';
@@ -20,9 +19,9 @@ export function buildSearchIndex(lang='zh') {
   const entries = PAGES.map(([pageId,titleKey,summaryKey])=>({
     id:'page:'+pageId,kind:'page',pageId,title:t(titleKey,lang),summary:t(summaryKey,lang)
   }));
-  for (const project of [...workProjects,...personalProjects]) {
+  for (const project of projectById.values()) {
     const p=getLocalizedRecord('project',project.id,project,lang);
-    entries.push({id:'project:'+project.id,kind:'project',pageId:'projects',recordId:project.id,
+    entries.push({id:'project:'+project.id,kind:'project',pageId:featuredProjects.includes(project) ? 'projects' : 'experience',recordId:project.id,
       title:p.title,summary:p.description||'',keywords:(p.tags||[]).join(' ')+' '+(p.type||'')});
   }
   articles.forEach((article,index)=>{
@@ -36,7 +35,7 @@ export function buildSearchIndex(lang='zh') {
       title:d.title,summary:d.description||'',keywords:(d.tags||[]).join(' ')});
   }
   for (const group of capabilityGroups) {
-    entries.push({id:'capability:'+group.id,kind:'capability',pageId:'projects',recordId:group.id,
+    entries.push({id:'capability:'+group.id,kind:'capability',pageId:'about',recordId:group.id,
       title:t(group.titleKey,lang),summary:t(group.descriptionKey,lang),keywords:t(group.skillsKey,lang)});
   }
   for (const theme of photographyThemes) {

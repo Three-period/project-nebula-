@@ -1,14 +1,12 @@
 import { documents } from '../data/documents.js';
 import { documentList } from '../data/document-list.js';
 import { articles } from '../data/articles.js';
-import { workProjects } from '../data/work-projects.js';
-import { personalProjects } from '../data/personal-projects.js';
+import { projectById } from '../data/portfolio-projects.js';
 import { createDialog } from './dialog.js';
 import { getLocalizedPhotographyTheme } from '../data/photography-i18n.js';
-import { escapeHTML } from './content.js';
+import { escapeHTML, renderProjectLinks } from './content.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
 
-const projectMap = new Map([...workProjects, ...personalProjects].map(project => [project.id, project]));
 const mediaLabels = { image: 'mediaImages', video: 'mediaVideo', gif: 'mediaGif' };
 
 function mediaCopy(item, field) {
@@ -97,7 +95,7 @@ export function initDrawer() {
   }
 
   function refreshProjectMedia() {
-    const raw = projectMap.get(currentProject);
+    const raw = projectById.get(currentProject);
     if (!raw) return;
     const project = getLocalizedRecord('project', currentProject, raw);
     const section = body.querySelector('.project-media');
@@ -114,7 +112,7 @@ export function initDrawer() {
     }
     const step = event.target.closest('[data-media-step]');
     if (step) {
-      const raw = projectMap.get(currentProject);
+      const raw = projectById.get(currentProject);
       const count = (raw?.media || []).filter(item => item.type === activeMediaType).length;
       if (!count) return;
       activeMediaIndex = (activeMediaIndex + Number(step.dataset.mediaStep) + count) % count;
@@ -141,16 +139,27 @@ export function initDrawer() {
   });
 
   function openProject(id, preserveScroll = false) {
-    const raw = projectMap.get(id);
+    const raw = projectById.get(id);
     if (!raw) return;
+    if (!preserveScroll || currentProject !== id) {
+      activeMediaType = null;
+      activeMediaIndex = 0;
+    }
     currentProject = id;
-    activeMediaType = null;
-    activeMediaIndex = 0;
     const project = getLocalizedRecord('project', id, raw);
     const hasEmbeddedVideo = project.media?.some(item => item.type === 'video');
-    const links =
-      (project.document ? '<button class="button" type="button" data-document="' + escapeHTML(project.document) + '">' +
-        escapeHTML(t('relatedHistoricalMaterial')) + '</button>' : '') +
+    const projectDocuments = project.documents?.length
+      ? '<a class="button" href="./design-system.html" target="_blank" rel="noopener noreferrer">' +
+        escapeHTML(t('currentDesignSystem')) + '</a>' +
+        project.documents.map(key => {
+          const raw = documentList.find(item => item.key === key);
+          const item = getLocalizedRecord('documentCard', key, raw);
+          return '<button class="button" type="button" data-document="' + escapeHTML(key) + '">' +
+            escapeHTML(item.title) + ' ↗</button>';
+        }).join('')
+      : '';
+    const related = renderProjectLinks(project.relatedProjects);
+    const links = projectDocuments +
       (project.video && !hasEmbeddedVideo ? '<a class="button" href="' + escapeHTML(project.video) +
         '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('demoVideo')) + '</a>' : '') +
       (project.external ? '<a class="button" href="' + escapeHTML(project.external) +
@@ -161,7 +170,10 @@ export function initDrawer() {
       body: '<div class="project-detail-meta">' + escapeHTML(project.year) + ' · ' +
         escapeHTML(project.stage) + '</div><p>' + escapeHTML(project.description) + '</p>' +
         renderProjectMedia(project, activeMediaType, activeMediaIndex) + project.body +
-        '<div class="actions">' + links + '</div>'
+        (links ? '<section class="case-related"><h3>' + escapeHTML(t('relatedNebulaMaterials')) +
+          '</h3><div class="actions">' + links + '</div></section>' : '') +
+        (related ? '<section class="case-related"><h3>' + escapeHTML(t('relatedProjectsTitle')) +
+          '</h3><div class="actions">' + related + '</div></section>' : '')
     }, -1, preserveScroll);
   }
 
@@ -212,7 +224,10 @@ export function initDrawer() {
     const raw = articles[index];
     if (!raw) return;
     const article = getLocalizedRecord('article', String(index), raw);
-    show(article, index, preserveScroll);
+    const related = renderProjectLinks(article.relatedProjects);
+    const relatedSection = related ? '<section class="case-related"><h3>' +
+      escapeHTML(t('relatedArticleProjects')) + '</h3><div class="actions">' + related + '</div></section>' : '';
+    show({ ...article, body: article.body + relatedSection }, index, preserveScroll);
   }
 
   return {
