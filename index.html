@@ -31,7 +31,10 @@
    <a href="#projects" class="toc-link"><span class="toc-index">03</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2-9 5 9 5 9-5-9-5Z"/><path d="M3 7v10l9 5 9-5V7M12 12v10"/></svg><span data-i18n="projectsNav">作品与实践</span></a>
    <a href="#insights" class="toc-link"><span class="toc-index">04</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 6h6a5 5 0 0 1 0 10H9a4 4 0 0 0-4 4"/></svg><span data-i18n="insightsNav">思考与方法</span></a>
    <a href="#photography" class="toc-link"><span class="toc-index">05</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h4l2-3h4l2 3h4v13H4z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="photographyNav">摄影作品</span></a>
-  <div class="sidebar-subnav" id="projects-subnav" hidden aria-label="项目子目录" data-i18n-aria-label="projectsSubnavAria"><button type="button" data-scroll-target="capabilities-title" data-i18n="capabilitiesTitle">能力图谱</button><button type="button" data-scroll-target="work-projects-heading" data-i18n="workProjectsTitle">工作项目</button><button type="button" data-scroll-target="personal-projects-heading" data-i18n="personalProjectsTitle">个人项目</button><button type="button" data-scroll-target="related-materials" data-i18n="relatedMaterialsTitle">相关作品材料</button></div></nav>
+  <div class="sidebar-subnav" id="projects-subnav" hidden aria-label="项目子目录" data-i18n-aria-label="projectsSubnavAria">
+   <button type="button" data-scroll-target="featured-projects-heading" data-i18n="featuredProjectsTitle">精选项目</button>
+   <button type="button" data-scroll-target="related-materials" data-i18n="relatedMaterialsTitle">相关作品材料 · Project Nebula</button>
+  </div></nav>
   <div class="sidebar-footer">
    <button class="button primary" data-action="chat" data-i18n="sidebarAction">数字分身 · 维修中</button>
    <a class="utility-link" href="/public/images/heying-cqu-AI-PM.pdf" download data-i18n="downloadResume">下载简历 PDF ↓</a>
@@ -45,10 +48,13 @@
 <main id="main" class="main" tabindex="-1">
  
  <section id="about" class="resume-section about-section" aria-labelledby="about-title">
+ <div class="singu-layout">
  <header class="section-heading landscape-hero">
   <div class="landscape-hero-copy">
-    <p class="eyebrow" data-i18n="aboutEyebrow">OBSERVATION 01 / 个人奇点</p>
-    <h2 id="about-title" data-i18n="aboutHeadline">敢于跨界，乐于深究，把复杂问题理出路径。</h2>
+    <p class="singu-focus" data-i18n="aboutFocus">AI · 业务 · 产品 · 设计</p>
+    <h2 id="about-title" data-i18n="aboutHeadline">我喜欢把复杂的事想明白，也喜欢亲手把想明白的事做出来。</h2>
+    <p class="singu-intro" data-i18n="aboutIntro">我是 AI 产品经理。最近在做的事，是把 AI 放进研发流程里，让它能接住一部分工作，也让人知道什么时候该接手。</p>
+    <p class="singu-language" data-i18n="aboutLanguages">英语四、六级均通过 · 可进行简单日常交流</p>
   </div>
   <div id="landscape-intro" class="landscape-intro" aria-hidden="true">
     <svg viewBox="0 0 364 176" xmlns="http://www.w3.org/2000/svg" focusable="false">
@@ -97,59 +103,34 @@
     </svg>
   </div>
  </header>
- <div class="singu-layout">
-  <div class="singu-left">
-   <div class="singu-name" data-i18n="name">何盈</div>
-   <div class="singu-name-sub" data-i18n="subtitle">AI 产品经理 · 跨界实践者 · 持续学习者</div>
-   <div class="singu-skill-groups">
-    <h3 data-i18n="skillTitle">能力与工具</h3>
-    <p data-i18n="skillProduct">产品分析与设计 · 业务流程、需求分析、PRD、SOP、Axure、Figma、Notion</p>
-    <p data-i18n="skillAI">AI 应用实践 · Coze 智能体、Prompt、知识库与 RAG</p>
-    <p data-i18n="skillDelivery">AI 辅助交付 · GPT、Claude、Codex、GitHub、Cloudflare Pages</p>
-    <p data-i18n="skillLearning">持续学习 · Agent、Workflow、Skills 与人机协作</p>
-   </div>
-  </div>
-  <div class="singu-right">
-   <div class="singu-quote">
-    <span class="singu-quote-line1" data-i18n="quote1">不太想被定义成一个 AI 工具使用者。</span>
-    <span class="singu-quote-line2"><span class="quote-inline" data-i18n="quotePrefix">更想成为一个</span><em data-i18n="quoteEmphasis">把事情做清楚、把话说明白</em><span class="quote-inline" data-i18n="quoteSuffix">的人。</span></span>
-   </div>
-   <div class="singu-agent-entry">
-    <p class="sae-title" data-i18n="agentTitle">与我的 AI 数字分身聊聊</p>
-    <p data-i18n="agentDescription">数字分身正在维修升级，暂时无法回答问题。欢迎先浏览我的作品与思考。</p>
-    <button class="button" data-action="chat" data-i18n="agentButton">查看维修说明 ↗</button>
-   </div>
-   <div class="singu-ability-grid">
-    <article class="singu-ab-card"><h3 data-i18n="ability1Title">先想清楚，再动手</h3><p data-i18n="ability1Body">先明确目标、约束与关键问题，把准备工作做在前面。沟通时带着问题，也带着自己的初步判断与方案。</p></article>
-    <article class="singu-ab-card"><h3 data-i18n="ability2Title">把复杂理出结构</h3><p data-i18n="ability2Body">愿意深入理解业务，从分散信息与复杂逻辑中找到主线，再拆成清晰的流程、任务与交付物。</p></article>
-    <article class="singu-ab-card"><h3 data-i18n="ability3Title">直接沟通，沉淀方法</h3><p data-i18n="ability3Body">偏好直接、高效的表达，把话说明白，把事情推进去。习惯将可复用的方法写成 SOP，也为自己的工作建立流程。</p></article>
-   </div>
-   <div class="learning-notes">
-    <h3 data-i18n="learningTitle">我如何保持学习</h3><p data-i18n="learningBody">补基础：吴恩达机器学习与深度学习课程 · 跟实践：YouTube、B 站、技术社区 · 看变化：Datawhale、机器之心、OpenBuild 等 · 拓边界：Hugging Face</p>
-    <h3 data-i18n="exploringTitle">最近在探索</h3><p data-i18n="exploringBody">个人工作的 AI 化 · 团队工作的 AI 化 · Agent 的组织方式</p>
-   </div>
-  </div>
- </div>
-</section><section id="experience" class="resume-section" aria-labelledby="experience-title"><header class="section-heading"><p class="eyebrow" data-i18n="experienceEyebrow">OBSERVATION 02 / 经历与成长</p><h2 id="experience-title" data-i18n="experienceTitle">经历与成长</h2><p class="section-lead" data-i18n="experienceLead">跨界经历中的业务理解、产品思考与落地实践。</p></header><div class="fusion-timeline">
-<article class="fusion-item"><div class="fusion-left"><div class="fusion-time" data-i18n="invDate">2026.04 — 至今</div><div class="fusion-role" data-i18n="invRole">AI 产品</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="invCompany">英维克软件信息有限公司</h3><p class="fusion-summary" data-i18n="invSummary">参与企业研发数字化与 AI 产品建设，负责业务需求分析、产品方案设计、AI 应用场景探索及跨部门协同，推动复杂研发流程向结构化、产品化方案转化。</p><div class="actions"><button class="button" data-jump-project="work-rd-platform" data-i18n="jumpRd">研发数字化平台 ↗</button><button class="button" data-jump-project="work-skillhub" data-i18n="jumpSkillHub">SkillHub ↗</button><button class="button" data-jump-project="work-code-review" data-i18n="jumpCodeReview">AI 代码检视 ↗</button></div></div></article>
-<article class="fusion-item fusion-independent"><div class="fusion-left"><div class="fusion-time" data-i18n="nebulaDate">2026.01 — 至今</div><div class="fusion-role" data-i18n="nebulaRole">AI 全栈产品 · 独立项目实践</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="nebulaCompany">Project Nebula · 个人 AI 产品实践</h3><p class="fusion-summary" data-i18n="nebulaSummary">围绕招聘场景下的个人信息展示与 AI 交互需求，独立推进产品定义、PRD、信息架构、前端实现与 Cloudflare Pages 部署；探索 Coze Agent、知识库与 RAG，并持续优化阅读体验。数字分身目前处于维修模式。</p><p class="fusion-detail" data-i18n="nebulaMaterials">代表项目与材料（共用作品与实践中的项目数据）：</p><div id="independent-project-resources" class="experience-resources" aria-label="Project Nebula 项目资料" data-i18n-aria-label="nebulaResourcesAria"></div></div></article>
-<article class="fusion-item"><div class="fusion-left"><div class="fusion-time">2024.07 — 2025.07</div><div class="fusion-role" data-i18n="yijingRole">产品经理 · 文旅 IP / 政企方案</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="yijingCompany">广州怡境规划设计有限公司</h3><p class="fusion-summary" data-i18n="yijingSummary">面向文旅与政企客户，承担需求分析、竞品研究、产品策划、方案设计及项目汇报，并探索 AIGC 工作流在产品设计中的实际应用。</p><div class="actions"><button class="button" data-jump-project="work-huizhou-ip" data-i18n="jumpHuizhou">惠州体育公园 ↗</button><button class="button" data-jump-project="work-luoburen" data-i18n="jumpLuoburen">罗布人村寨 ↗</button></div></div></article>
-<article class="fusion-item"><div class="fusion-left"><div class="fusion-time" data-i18n="graduationDate">2024 年毕业</div><div class="fusion-role" data-i18n="educationRole">风景园林 · 本科</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="educationCompany">重庆大学</h3><p class="fusion-summary" data-i18n="educationSummary">工科底座培养了扎实的调研能力、汇报表达与设计审美，跨界复合是差异化优势而非劣势。</p><p class="fusion-detail" data-i18n="educationDetail">工科底座建立了严密的系统思维与逻辑推导能力；专业训练强化了一线调研、用户感知与可视化汇报表达能力。</p></div></article>
-</div></section><section id="projects" class="resume-section" aria-labelledby="projects-title"><header class="section-heading"><p class="eyebrow" data-i18n="projectsEyebrow">OBSERVATION 03 / 作品与实践</p><h2 id="projects-title" data-i18n="projectsTitle">作品与实践</h2><p class="section-lead" data-i18n="projectsLead">从产品定义到工程交付，让想法成为可使用的产品。</p></header>
-<section class="capability-section" aria-labelledby="capabilities-title">
- <header class="capability-section-heading">
-  <p class="eyebrow" data-i18n="capabilitiesEyebrow">CAPABILITY MAP / 能力结构</p>
+ <section class="capability-section" aria-labelledby="capabilities-title">
   <h3 id="capabilities-title" data-i18n="capabilitiesTitle">能力图谱</h3>
-  <p data-i18n="capabilitiesLead">从业务理解到产品定义、AI 能力工程化与端到端交付，展示能力如何在真实项目中形成闭环。</p>
- </header>
- <div id="capability-grid" class="capability-grid"></div>
-</section>
-<h3 id="work-projects-heading" class="group-heading" data-i18n="workProjectsTitle">工作项目</h3><div id="work-project-list" class="project-list"></div><h3 id="personal-projects-heading" class="group-heading" data-i18n="personalProjectsTitle">个人项目</h3><div id="personal-project-list" class="project-list"></div><div class="related-docs" id="related-materials"><h3 data-i18n="relatedMaterialsTitle">相关作品材料 · Project Nebula</h3><div id="document-list" class="document-list"></div></div></section><section id="insights" class="resume-section" aria-labelledby="insights-title"><header class="section-heading"><p class="eyebrow" data-i18n="insightsEyebrow">OBSERVATION 04 / 思考与方法</p><h2 id="insights-title" data-i18n="insightsTitle">思考与方法</h2><p class="section-lead" data-i18n="insightsLead">持续输入，独立判断。以下保留原创文章及其日期。</p></header><div id="article-list" class="article-list"></div></section>
+  <div id="capability-grid" class="capability-grid"></div>
+ </section>
+ </div>
+ <section class="singu-workflow" aria-labelledby="workflow-title">
+  <h3 id="workflow-title" data-i18n="workflowTitle">我怎么工作</h3>
+  <ol class="singu-workflow-list">
+   <li class="singu-ab-card"><h4 data-i18n="workflowAlign">先对齐</h4><p data-i18n="workflowAlignBody">开工前，把要解决什么、做到哪、怎么验收说清楚。</p></li>
+   <li class="singu-ab-card"><h4 data-i18n="workflowBuild">再开动</h4><p data-i18n="workflowBuildBody">先把最难讲清的流程做成图或原型，拿着它对齐。</p></li>
+   <li class="singu-ab-card"><h4 data-i18n="workflowDeliver">保交付</h4><p data-i18n="workflowDeliverBody">先跑通主流程，把会卡住交付的问题提前解决。</p></li>
+   <li class="singu-ab-card"><h4 data-i18n="workflowValidate">后验收</h4><p data-i18n="workflowValidateBody">按真实场景走一遍，把发现的问题带回下一版。</p></li>
+  </ol>
+ </section>
+</section><section id="experience" class="resume-section" aria-labelledby="experience-title"><header class="section-heading"><p class="eyebrow" data-i18n="experienceEyebrow">OBSERVATION 02 / 经历与成长</p><h2 id="experience-title" data-i18n="experienceTitle">经历与成长</h2><p class="section-lead" data-i18n="experienceLead">跨界经历中的业务理解、产品思考与落地实践。</p></header><div class="fusion-timeline">
+<article class="fusion-item"><div class="fusion-left"><div class="fusion-time" data-i18n="invDate">2026.04 — 至今</div><div class="fusion-role" data-i18n="invRole">AI 赋能产品经理</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="invCompany">英维克软件信息有限公司</h3><p class="fusion-summary" data-i18n="invSummary">从独立交付 SkillHub、推动企业 AI 能力复用，到担任一体化数字研发平台的产品负责人。我主导多 Agent 产品架构与一期规划，并把 AI 代码检视嵌入研发流程，明确开发、AI 与检视工程师的分工。</p><div class="actions"><button class="button" data-jump-project="work-rd-platform" data-i18n="jumpRd">一体化数字研发平台 ↗</button><button class="button" data-jump-project="work-code-review" data-i18n="jumpCodeReview">AI Code Review ↗</button><button class="button" data-jump-project="work-skillhub" data-i18n="jumpSkillHub">SkillHub ↗</button></div></div></article>
+<article class="fusion-item fusion-independent"><div class="fusion-left"><div class="fusion-time" data-i18n="nebulaDate">2026.02 — 至今</div><div class="fusion-role" data-i18n="nebulaRole">AI 全栈产品 · 独立项目实践</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="nebulaCompany">Project Nebula · 个人 AI 产品实践</h3><p class="fusion-summary" data-i18n="nebulaSummary">从招聘方的阅读场景出发，独立完成产品定义、视觉方案、组件规范、前端开发和部署。2026 年 3 月上线 V1，随后重构阅读路径和项目详情。V1 的 Coze 数字分身现已暂停。</p><p class="fusion-detail" data-i18n="nebulaMaterials">项目与设计材料</p><div id="independent-project-resources" class="experience-resources" aria-label="Project Nebula 项目资料" data-i18n-aria-label="nebulaResourcesAria"></div></div></article>
+<article class="fusion-item"><div class="fusion-left"><div class="fusion-time">2024.07 — 2025.07</div><div class="fusion-role" data-i18n="yijingRole">方案策划师 · 文旅与政企方案</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="yijingCompany">广州怡境规划设计有限公司</h3><p class="fusion-summary" data-i18n="yijingSummary">将文旅与公共空间的模糊诉求拆成可讨论的方案。惠州体育公园侧重 IP 方向与视觉表达，新疆罗布人村寨侧重文化、体验、业态、运营的四维策划。</p><div class="actions"><button class="button" data-project="work-huizhou-ip" data-i18n="jumpHuizhou">惠州体育公园 ↗</button><button class="button" data-project="work-luoburen" data-i18n="jumpLuoburen">罗布人村寨 ↗</button></div></div></article>
+<article class="fusion-item"><div class="fusion-left"><div class="fusion-time" data-i18n="graduationDate">2024 年毕业</div><div class="fusion-role" data-i18n="educationRole">风景园林 · 本科</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="educationCompany">重庆大学</h3><p class="fusion-summary" data-i18n="educationSummary">工科底座培养了扎实的调研能力、汇报表达与设计审美，跨界复合是差异化优势而非劣势。</p><p class="fusion-detail" data-i18n="educationDetail">工科底座建立了严密的系统思维与逻辑推导能力；专业训练强化了一线调研、用户感知与可视化汇报表达能力。</p></div></article>
+</div></section><section id="projects" class="resume-section" aria-labelledby="projects-title"><header class="section-heading"><p class="eyebrow" data-i18n="projectsEyebrow">OBSERVATION 03 / 作品与实践</p><h2 id="projects-title" data-i18n="projectsTitle">作品与实践</h2><p class="section-lead" data-i18n="projectsLead">个人产品与企业 AI 实践，涵盖独立交付、平台规划、研发检视和能力复用。</p></header>
+<h3 id="featured-projects-heading" class="group-heading" data-i18n="featuredProjectsTitle">精选项目</h3>
+<div id="featured-project-list" class="project-list"></div>
+<div class="related-docs" id="related-materials"><h3 data-i18n="relatedMaterialsTitle">相关作品材料 · Project Nebula</h3><div id="document-list" class="document-list"></div></div></section><section id="insights" class="resume-section" aria-labelledby="insights-title"><header class="section-heading"><p class="eyebrow" data-i18n="insightsEyebrow">OBSERVATION 04 / 思考与方法</p><h2 id="insights-title" data-i18n="insightsTitle">思考与方法</h2><p class="section-lead" data-i18n="insightsLead">持续输入，独立判断。以下保留原创文章及其日期。</p></header><div id="article-list" class="article-list"></div></section>
 <section id="photography" class="resume-section photography-section" aria-labelledby="photography-title">
   <header class="section-heading">
     <p class="eyebrow" data-i18n="photographyEyebrow">OBSERVATION 05 / 摄影作品</p>
     <h2 id="photography-title" data-i18n="photographyTitle">摄影作品</h2>
-    <p class="section-lead" data-i18n="photographyLead">以影像记录空间、自然和生活中的观察。作品将陆续更新。</p>
+    <p class="section-lead" data-i18n="photographyLead">用五组色系记录自然、空间与日常。</p>
   </header>
   <div class="photography-layout">
     <div class="photography-themes">

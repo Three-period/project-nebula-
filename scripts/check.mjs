@@ -6,6 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { projects } from '../assets/data/projects.js';
 import { workProjects } from '../assets/data/work-projects.js';
 import { personalProjects } from '../assets/data/personal-projects.js';
+import { featuredProjects } from '../assets/data/portfolio-projects.js';
 import { capabilityGroups } from '../assets/data/capabilities.js';
 import { photographyThemes } from '../assets/data/photography.js';
 import { photographyI18n, getLocalizedPhotographyTheme } from '../assets/data/photography-i18n.js';
@@ -38,11 +39,20 @@ const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
-for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'work-project-list', 'personal-project-list', 'document-list', 'article-list', 'capability-grid', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
+for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'featured-project-list', 'workflow-title', 'document-list', 'article-list', 'capability-grid', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
 for (const match of html.matchAll(/(?:href|src)="(assets\/[^"#]+)"/g)) await readFile(resolve(root, match[1]));
 assert.equal(projects.length, 5);
 assert.equal(workProjects.length, 5);
-assert.equal(personalProjects.length, 2);
+assert.equal(personalProjects.length, 1);
+assert.deepEqual(featuredProjects.map(project => project.id), [
+  'personal-nebula', 'work-rd-platform', 'work-code-review', 'work-skillhub'
+]);
+const experience = html.slice(html.indexOf('<section id="experience"'), html.indexOf('<section id="projects"'));
+assert.deepEqual([...experience.matchAll(/data-jump-project="([^"]+)"/g)].map(match => match[1]),
+  ['work-rd-platform', 'work-code-review', 'work-skillhub']);
+for (const id of ['work-huizhou-ip', 'work-luoburen']) assert(experience.includes('data-project="' + id + '"'));
+assert(documentList.some(doc => doc.key === 'agent'), 'Nebula digital twin documentation remains available');
+
 assert.equal(projects.filter(p => p.visibility === 'draft').length, 3);
 assert(!html.includes('id="sae-input"'));
 assert(!html.includes('id="design"'));
@@ -77,8 +87,8 @@ assert(!html.includes('heying-photo.jpg') && !html.includes('about-language-swit
 assert(!html.includes('class="cosmic-orbits"'), 'Obsolete cosmic illustration markup must be removed');
 assert(html.includes('global-language-switch'), 'Global language switch must be in the navigation');
 assert(html.includes('independent-project-resources'), 'Independent Nebula resources must be linked');
-assert(html.indexOf('2026.04 — 至今') < html.indexOf('2026.01 — 至今') && html.indexOf('2026.01 — 至今') < html.indexOf('2024.07'), 'Experience order');
-assert.equal(personalProjects.find(project => project.id === 'personal-nebula').year, '2026.01—至今');
+assert(html.indexOf('2026.04 — 至今') < html.indexOf('2026.02 — 至今') && html.indexOf('2026.02 — 至今') < html.indexOf('2024.07'), 'Experience order');
+assert.equal(personalProjects.find(project => project.id === 'personal-nebula').year, '2026.02—至今');
 assert(articles.every(article => !article.sample && !article.body.includes('这是示范性内容')), 'Insights are original articles');
 assert.equal(Object.keys(projectI18n).length, workProjects.length + personalProjects.length, 'Every project needs stored English copy');
 for (const project of [...workProjects, ...personalProjects]) {
@@ -96,7 +106,7 @@ const styleFiles = await Promise.all([
 const style = styleFiles.join('\n');
 const themeStyle = await readFile(resolve(root, 'assets/css/themes/landscape.css'), 'utf8');
 const tokens = await readFile(resolve(root, 'assets/css/tokens.css'), 'utf8');
-assert(style.includes('grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr)'), 'Profile columns must use a balanced responsive grid');
+assert(style.includes('grid-template-columns: minmax(0, 2fr) minmax(0, 3fr)'), 'Profile columns must use the confirmed 40/60 split');
 assert(style.includes('backdrop-filter: blur(var(--surface-blur))') && style.includes('box-shadow: var(--card-shadow-rest)') && themeStyle.includes('--card-shadow-hover:'), 'Landscape cards need frosted glass and layered architectural shadows');
 assert(style.includes('@media (max-width: 1100px)') && style.includes('@media (max-width: 960px)') && style.includes('@media (max-width: 760px)') && style.includes('@media (max-width: 560px)'), 'Desktop, tablet and mobile breakpoints must be explicit');
 assert(style.includes('global-language-switch') && style.includes('prefers-reduced-motion') && style.includes('100dvh'), 'Global language, reduced motion and dynamic viewport support');
@@ -140,23 +150,23 @@ for (const key of ['previewResume', 'documentOverview', 'readFullDocument', 'med
 const capabilitySource = await readFile(resolve(root, 'assets/js/content.js'), 'utf8');
 const designSystem = await readFile(resolve(root, 'design-system.html'), 'utf8');
 const readme = await readFile(resolve(root, 'README.md'), 'utf8');
-const projectIds = new Set([...workProjects, ...personalProjects].map(project => project.id));
-assert.equal(capabilityGroups.length, 4, 'The capability map must contain four domains');
+assert.deepEqual(capabilityGroups.map(group => group.id), ['ai', 'business', 'product', 'design']);
+assert.deepEqual(capabilityGroups.filter(group => group.primary).map(group => group.id), ['ai', 'product']);
 for (const group of capabilityGroups) {
-  assert(group.id && group.number && group.titleKey && group.descriptionKey && group.skillsKey, 'Capability domain metadata is required');
-  assert(group.evidence.length > 0, 'Every capability domain needs project evidence: ' + group.id);
-  for (const id of group.evidence) assert(projectIds.has(id), 'Unknown capability evidence project: ' + id);
+  assert(group.id && group.titleKey && group.descriptionKey && group.skillsKey, 'Capability domain metadata is required');
   for (const language of ['zh', 'en']) {
     for (const key of [group.titleKey, group.descriptionKey, group.skillsKey]) {
       assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing capability copy: ' + language + '/' + key);
     }
   }
 }
-for (const key of ['capabilitiesEyebrow', 'capabilitiesTitle', 'capabilitiesLead', 'capabilityEvidenceLabel', 'capabilityOpenEvidence']) {
-  for (const language of ['zh', 'en']) assert.equal(typeof siteI18n.ui[language][key], 'string', 'Missing capability interface copy: ' + language + '/' + key);
+const about = html.slice(html.indexOf('<section id="about"'), html.indexOf('<section id="experience"'));
+assert(about.includes('id="capability-grid"') && capabilitySource.includes('renderCapabilities(language)'), 'Show the capability map on Personal Singularity');
+assert(!about.includes('data-project=') && !about.includes('data-jump-project='), 'Personal Singularity has no project shortcuts');
+for (const language of ['zh', 'en']) {
+  const { aboutHeadline, aboutIntro } = siteI18n.ui[language];
+  assert(!/何盈|He Ying|Ying He/i.test(aboutHeadline + aboutIntro), 'Keep the welcome copy anonymous');
 }
-assert(html.includes('<section class="capability-section"') && capabilitySource.includes('renderCapabilities(language)'), 'The evidence-linked capability map must render inside Projects');
-assert(capabilitySource.includes('data-project="') && capabilitySource.includes('project.stage'), 'Capability evidence must open existing project records and show their actual status');
 assert.equal((styleFiles[3].match(/\.viewer-dialog \{/g) || []).length, 1, 'Viewer mobile rules must not be duplicated');
 assert(drawerSource.includes("event.key === 'ArrowRight'") && drawerSource.includes("event.key === 'ArrowLeft'") && drawerSource.includes("event.key === 'Home'") && drawerSource.includes("event.key === 'End'"), 'Media tabs must support keyboard navigation');
 assert(drawerSource.includes('tabindex="') && drawerSource.includes('role="tabpanel"'), 'Media tabs need roving focus and an associated panel');
@@ -321,7 +331,12 @@ assert(mainSource.includes("case 'open-search'") && mainSource.includes("case 'o
 assert(mainSource.includes("initThemePicker") && mainSource.includes("initSearch"), 'V2 functional controllers must be connected');
 for (const language of ['zh','en']) {
  const all=buildSearchIndex(language);
- assert(all.length >= 5+7+6+6+4, 'V2 search index misses known content: '+language);
+ assert.equal(all.filter(item => item.kind === 'project').length, 6);
+ assert.equal(all.find(item => item.recordId === 'work-huizhou-ip')?.pageId, 'experience');
+ assert.equal(all.find(item => item.recordId === 'work-luoburen')?.pageId, 'experience');
+ assert(all.filter(item => item.kind === 'capability').every(item => item.pageId === 'about'));
+ assert(!all.some(item => item.kind === 'project' && item.recordId === 'personal-agent'));
+
  assert(all.some(x=>x.kind==='page' && x.pageId==='photography'), 'Photography page must be indexed');
  assert(all.some(x=>x.kind==='project' && x.recordId==='personal-nebula'), 'Project Nebula must be indexed');
  assert(searchEntries(all,language==='zh'?'摄影':'Photography').length>0, 'Localized search must match');

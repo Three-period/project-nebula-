@@ -36,6 +36,7 @@ export const articles = [
   {
     "en": "AI Insight · 2026.03",
     "title": "Agent vs Workflow：AI 产品落地的两种核心范式",
+    "relatedProjects": ["work-code-review"],
     "tags": [
       "Agent",
       "Workflow",
@@ -62,6 +63,7 @@ export const articles = [
   {
     "en": "PM Insight · 2026.03",
     "title": "AI PM 如何识别业务中的 AI 切入点：MAIR 模型",
+    "relatedProjects": ["work-rd-platform", "work-skillhub"],
     "tags": [
       "MAIR 模型",
       "AI PM",
@@ -151,6 +153,7 @@ export const articles = [
   {
     "en": "Industry Signal · 2026.01",
     "title": "商业思考：AI 产品的壁垒在数据还是工作流？",
+    "relatedProjects": ["work-skillhub"],
     "tags": [
       "商业化路径",
       "B 端产品",
