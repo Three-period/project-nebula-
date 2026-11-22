@@ -76,7 +76,7 @@ export const projectI18n = {
       "Version Iteration"
     ],
     "body": "<div class=\"project-story\">\n      <p><strong>Product Definition & Requirements Analysis:</strong> Reframed how personal information is presented and explored for recruiting scenarios. Redesigned the resume's information architecture and interactions to bring project showcases, capability profiles, and intelligent Q&amp;A together in one AI product.</p>\n      <p><strong>End-to-End Independent Delivery:</strong> Delivered the PRD, information architecture, front-end implementation, visual system, and deployment. Combined GPT, Claude, Codex, Coze, GitHub, and Cloudflare Pages to launch the initial version with no platform hosting fees.</p>\n      <p><strong>Agent & RAG Practice:</strong> Built an AI digital twin with Coze, designed its knowledge-base structure and System Prompt constraints, and enabled Q&amp;A about personal experience. Reviewed conversation logs to improve response quality.</p>\n      <p><strong>Product Experience & Iteration:</strong> Addressed V1 issues including nested information, lengthy reading paths, and inconsistent AI responses. Restructured V2 into a flatter information architecture and improved content discovery and interaction.</p>\n    </div>",
-    "year": "2026.01–Present"
+    "year": "2025.11–Present"
   },
   "personal-agent": {
     "type": "Personal Project",

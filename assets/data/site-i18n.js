@@ -157,7 +157,7 @@ export const siteI18n = {
       "downloadPdf": "下载 PDF ↓",
       "noScriptNotice": "项目与文章详情、数字分身需要开启 JavaScript。你仍可查看介绍、履历，或下载 PDF 简历。",
       "invDate": "2026.04 — 至今",
-      "nebulaDate": "2026.01 — 至今",
+      "nebulaDate": "2025.11 — 至今",
       "graduationDate": "2024 年毕业"
     },
     "en": {
@@ -316,7 +316,7 @@ export const siteI18n = {
       "downloadPdf": "Download PDF ↓",
       "noScriptNotice": "Project and article details and the digital twin require JavaScript. You can still read the profile and experience or download the PDF resume.",
       "invDate": "2026.04 — Present",
-      "nebulaDate": "2026.01 — Present",
+      "nebulaDate": "2025.11 — Present",
       "graduationDate": "Graduated 2024"
     }
   }
