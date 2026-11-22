@@ -1,5 +1,5 @@
 /* Search index is rebuilt from the site's genuine bilingual content. No PDF binary scraping. */
-import { featuredProjects, projectById } from './portfolio-projects.js';
+import { projectById } from './portfolio-projects.js';
 import { articles } from './articles.js';
 import { documentList } from './document-list.js';
 import { capabilityGroups } from './capabilities.js';
@@ -21,7 +21,7 @@ export function buildSearchIndex(lang='zh') {
   }));
   for (const project of projectById.values()) {
     const p=getLocalizedRecord('project',project.id,project,lang);
-    entries.push({id:'project:'+project.id,kind:'project',pageId:featuredProjects.includes(project) ? 'projects' : 'experience',recordId:project.id,
+    entries.push({id:'project:'+project.id,kind:'project',pageId:'projects',recordId:project.id,
       title:p.title,summary:p.description||'',keywords:(p.tags||[]).join(' ')+' '+(p.type||'')});
   }
   articles.forEach((article,index)=>{

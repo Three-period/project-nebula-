@@ -39,7 +39,7 @@ const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
-for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'featured-project-list', 'workflow-title', 'document-list', 'article-list', 'capability-grid', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
+for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'featured-project-list', 'workflow-title', 'document-list', 'article-list', 'profile-tools', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
 for (const match of html.matchAll(/(?:href|src)="(assets\/[^"#]+)"/g)) await readFile(resolve(root, match[1]));
 assert.equal(projects.length, 5);
 assert.equal(workProjects.length, 5);
@@ -49,8 +49,7 @@ assert.deepEqual(featuredProjects.map(project => project.id), [
 ]);
 const experience = html.slice(html.indexOf('<section id="experience"'), html.indexOf('<section id="projects"'));
 assert.deepEqual([...experience.matchAll(/data-jump-project="([^"]+)"/g)].map(match => match[1]),
-  ['work-rd-platform', 'work-code-review', 'work-skillhub']);
-for (const id of ['work-huizhou-ip', 'work-luoburen']) assert(experience.includes('data-project="' + id + '"'));
+  ['work-rd-platform', 'work-code-review', 'work-skillhub', 'personal-nebula', 'work-huizhou-ip', 'work-luoburen']);
 assert(documentList.some(doc => doc.key === 'agent'), 'Nebula digital twin documentation remains available');
 
 assert.equal(projects.filter(p => p.visibility === 'draft').length, 3);
@@ -86,9 +85,8 @@ assert(html.includes('data-language="zh"') && html.includes('data-language="en"'
 assert(!html.includes('heying-photo.jpg') && !html.includes('about-language-switch'), 'Profile photo and About-only language switch must be removed');
 assert(!html.includes('class="cosmic-orbits"'), 'Obsolete cosmic illustration markup must be removed');
 assert(html.includes('global-language-switch'), 'Global language switch must be in the navigation');
-assert(html.includes('independent-project-resources'), 'Independent Nebula resources must be linked');
-assert(html.indexOf('2026.04 — 至今') < html.indexOf('2026.02 — 至今') && html.indexOf('2026.02 — 至今') < html.indexOf('2024.07'), 'Experience order');
-assert.equal(personalProjects.find(project => project.id === 'personal-nebula').year, '2026.02—至今');
+assert(html.indexOf('2026.04 — 至今') < html.indexOf('2025.11 — 至今') && html.indexOf('2025.11 — 至今') < html.indexOf('2024.07'), 'Experience order');
+assert.equal(personalProjects.find(project => project.id === 'personal-nebula').year, '2025.11—至今');
 assert(articles.every(article => !article.sample && !article.body.includes('这是示范性内容')), 'Insights are original articles');
 assert.equal(Object.keys(projectI18n).length, workProjects.length + personalProjects.length, 'Every project needs stored English copy');
 for (const project of [...workProjects, ...personalProjects]) {
@@ -147,7 +145,6 @@ for (const key of ['previewResume', 'documentOverview', 'readFullDocument', 'med
 }
 
 
-const capabilitySource = await readFile(resolve(root, 'assets/js/content.js'), 'utf8');
 const designSystem = await readFile(resolve(root, 'design-system.html'), 'utf8');
 const readme = await readFile(resolve(root, 'README.md'), 'utf8');
 assert.deepEqual(capabilityGroups.map(group => group.id), ['ai', 'business', 'product', 'design']);
@@ -161,11 +158,11 @@ for (const group of capabilityGroups) {
   }
 }
 const about = html.slice(html.indexOf('<section id="about"'), html.indexOf('<section id="experience"'));
-assert(about.includes('id="capability-grid"') && capabilitySource.includes('renderCapabilities(language)'), 'Show the capability map on Personal Singularity');
+assert(about.indexOf('landscape-hero') < about.indexOf('profile-tools') && about.indexOf('profile-tools') < about.indexOf('workflow-title'), 'Profile order: hero, skills and workflow');
 assert(!about.includes('data-project=') && !about.includes('data-jump-project='), 'Personal Singularity has no project shortcuts');
 for (const language of ['zh', 'en']) {
-  const { aboutHeadline, aboutIntro } = siteI18n.ui[language];
-  assert(!/何盈|He Ying|Ying He/i.test(aboutHeadline + aboutIntro), 'Keep the welcome copy anonymous');
+  const { aboutHeadline } = siteI18n.ui[language];
+  assert(!/何盈|He Ying|Ying He/i.test(aboutHeadline), 'Keep the headline anonymous');
 }
 assert.equal((styleFiles[3].match(/\.viewer-dialog \{/g) || []).length, 1, 'Viewer mobile rules must not be duplicated');
 assert(drawerSource.includes("event.key === 'ArrowRight'") && drawerSource.includes("event.key === 'ArrowLeft'") && drawerSource.includes("event.key === 'Home'") && drawerSource.includes("event.key === 'End'"), 'Media tabs must support keyboard navigation');
@@ -332,8 +329,8 @@ assert(mainSource.includes("initThemePicker") && mainSource.includes("initSearch
 for (const language of ['zh','en']) {
  const all=buildSearchIndex(language);
  assert.equal(all.filter(item => item.kind === 'project').length, 6);
- assert.equal(all.find(item => item.recordId === 'work-huizhou-ip')?.pageId, 'experience');
- assert.equal(all.find(item => item.recordId === 'work-luoburen')?.pageId, 'experience');
+ assert.equal(all.find(item => item.recordId === 'work-huizhou-ip')?.pageId, 'projects');
+ assert.equal(all.find(item => item.recordId === 'work-luoburen')?.pageId, 'projects');
  assert(all.filter(item => item.kind === 'capability').every(item => item.pageId === 'about'));
  assert(!all.some(item => item.kind === 'project' && item.recordId === 'personal-agent'));
 

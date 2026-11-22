@@ -11,3 +11,8 @@ export const featuredProjects = [
   'work-code-review',
   'work-skillhub'
 ].map(id => projectById.get(id));
+
+export const yijingProjects = [
+  'work-huizhou-ip',
+  'work-luoburen'
+].map(id => projectById.get(id));

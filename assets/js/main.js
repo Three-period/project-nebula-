@@ -22,7 +22,7 @@ const search=initSearch({onNavigate:item=>{
   if(item.kind==='article')drawer.openArticle(Number(item.recordId));
   if(item.kind==='photoTheme')drawer.openPhotographyTheme(item.recordId);
   if(item.kind==='photo'){drawer.openPhotographyTheme(item.recordId);viewer.openPhotography(item.recordId,item.photoIndex);}
-  if(item.kind==='capability')document.getElementById('capability-'+item.recordId)?.scrollIntoView({block:'center'});
+  if(item.kind==='capability')document.getElementById('profile-tools')?.scrollIntoView({block:'center'});
   if(item.kind==='page')document.getElementById('main')?.focus({preventScroll:true});
 }});
 initGlobalI18n(language=>{

@@ -1,8 +1,7 @@
 
-import { featuredProjects, projectById } from '../data/portfolio-projects.js';
+import { featuredProjects, projectById, yijingProjects } from '../data/portfolio-projects.js';
 import { documentList } from '../data/document-list.js';
 import { articles } from '../data/articles.js';
-import { capabilityGroups } from '../data/capabilities.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
 
 export function escapeHTML(value = '') {
@@ -33,18 +32,9 @@ export function renderProjectLinks(ids, language = getCurrentLanguage()) {
   }).join('');
 }
 
-function renderCapabilities(language) {
-  const target = document.getElementById('capability-grid');
-  target.innerHTML = capabilityGroups.map(group =>
-    '<article id="capability-' + group.id + '" class="capability-card' + (group.primary ? ' capability-card--primary' : '') +
-    '"><h4>' + escapeHTML(t(group.titleKey, language)) + '</h4><p class="capability-description">' +
-    escapeHTML(t(group.descriptionKey, language)) + '</p></article>'
-  ).join('');
-}
-
 export function renderContent(language = getCurrentLanguage()) {
-  renderCapabilities(language);
   document.getElementById('featured-project-list').innerHTML = featuredProjects.map(projectCard).join('');
+  document.getElementById('yijing-project-list').innerHTML = yijingProjects.map(projectCard).join('');
 
   document.getElementById('document-list').innerHTML = documentList.map(raw => {
     const item = getLocalizedRecord('documentCard', raw.key, raw, language);
@@ -53,25 +43,10 @@ export function renderContent(language = getCurrentLanguage()) {
       '<div class="actions"><button class="button" data-document="' + escapeHTML(item.key) + '">' + escapeHTML(t('documentDetails', language)) + '</button></div></article>';
   }).join('');
 
-  const nebula = getLocalizedRecord('project', 'personal-nebula', projectById.get('personal-nebula'), language);
-  const materials = documentList.filter(doc => ['prd', 'design', 'arch', 'proto', 'agent'].includes(doc.key));
-  const resources = document.getElementById('independent-project-resources');
-  if (nebula && resources) {
-    resources.innerHTML = '<button class="button primary" data-project="' + escapeHTML(nebula.id) + '">' + escapeHTML(t('projectDetails', language)) + '</button>' +
-      '<a class="button" href="./design-system.html" target="_blank" rel="noopener noreferrer">' +
-      escapeHTML(t('currentDesignSystem', language)) + '</a>' +
-      materials.map(raw => {
-        const item = getLocalizedRecord('documentCard', raw.key, raw, language);
-        return '<button class="button" data-document="' + escapeHTML(item.key) + '">' + escapeHTML(item.title) + ' ↗</button>';
-      }).join('') +
-      (nebula.video ? '<a class="button" href="' + escapeHTML(nebula.video) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('demoVideo', language)) + '</a>' : '') +
-      (nebula.external ? '<a class="button" href="' + escapeHTML(nebula.external) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('onlineSite', language)) + '</a>' : '');
-  }
-
   document.getElementById('article-list').innerHTML = articles.map((raw, index) => {
     const article = getLocalizedRecord('article', String(index), raw, language);
     return '<article class="article-row"><div class="article-meta"><span>' + escapeHTML(article.en) + '</span></div>' +
-      '<button class="article-open" data-article="' + index + '"><h3>' + escapeHTML(article.title) + ' ↗</h3></button>' +
+      '<h3><button type="button" class="article-open" data-article="' + index + '">' + escapeHTML(article.title) + ' ↗</button></h3>' +
       '<p class="summary">' + escapeHTML(article.summary) + '</p><div class="article-bottom">' + tags(article.tags) +
       (article.url ? '<a class="text-link" href="' + escapeHTML(article.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('originalSource', language)) + '</a>' : '') +
       '</div></article>';
