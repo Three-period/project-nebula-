@@ -81,7 +81,7 @@
   content:"";display:block;width:56px;height:1px;position:relative;top:19px;
   background:linear-gradient(90deg,var(--color-primary),transparent);
 }
-:root[data-theme="cosmic"] :is(.topbar-brand-mark,.capability-index) {
+:root[data-theme="cosmic"] .capability-index {
   border-color:var(--color-line-strong);border-radius:50%;
   background:var(--color-primary-soft);color:var(--color-primary);
   box-shadow:inset 0 0 0 3px rgba(251,250,247,.88);
@@ -89,7 +89,7 @@
 :root[data-theme="cosmic"] .toc-link[aria-current="page"] {
   border-left-color:var(--color-primary);background:var(--color-primary-soft);
 }
-:root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card,.singu-left,.singu-right) {
+:root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card,.singu-bio,.singu-left,.singu-right) {
   position:relative;
   border-color:var(--card-border);
   background:var(--card-surface);
@@ -151,7 +151,7 @@
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   :root[data-theme="cosmic"] :is(
     .project, .document-card, .article-row, .capability-card,
-    .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+    .photography-theme-card, .singu-ab-card, .singu-bio, .singu-left, .singu-right
   ):hover > .cosmic-gilt-outline rect {
     animation: cosmic-outline-trace var(--cosmic-gilt-duration) linear 1 both;
   }
@@ -159,7 +159,7 @@
 @media (prefers-reduced-motion: no-preference) {
   :root[data-theme="cosmic"] :is(
     .project, .document-card, .article-row, .capability-card,
-    .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+    .photography-theme-card, .singu-ab-card, .singu-bio, .singu-left, .singu-right
   ):focus-within > .cosmic-gilt-outline rect {
     animation: cosmic-outline-trace var(--cosmic-gilt-duration) linear 1 both;
   }
