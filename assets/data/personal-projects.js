@@ -79,8 +79,8 @@ export const personalProjects = [
         "altEn": "Project Nebula product demo video"
       }
     ],
-    "body": "<div class=\"project-story\"><section><h3>产品机会</h3><p>单页简历适合快速筛选，项目中的判断、交付与复盘需要更大的阅读空间。我把展示站设计成两条路径：先快速理解定位，再按兴趣展开案例。</p></section><section><h3>视觉与组件</h3><p>独立编写视觉方案、组件规范和交互设计。将主题色、字级与空间层次落实到卡片、按钮、抽屉和媒体查看器，再用共享组件支撑景观白绿和神秘宇宙两套主题。</p></section><section><h3>独立交付</h3><p>从 PRD、信息架构、UI/UX 到 AI 辅助开发、测试与部署均独立完成。2026 年 2 月启动，3 月上线 V1。</p></section><section><h3>V1 到 V2</h3><p>V1 将 Coze、知识库与 RAG 接入数字分身，用于回答项目与经历问题。V2 根据实际阅读问题缩短浏览路径，重组项目详情。当前网站继续迭代，数字分身已暂停。</p></section><section><h3>复盘</h3><p>首屏要让人快速知道可以从哪里读起。主题表达、项目深度和问答都可以建立在明确的浏览路径上。</p></section></div>",
-    "documents": ["prd", "design", "agent"],
+    "body": "<div class=\"project-story\"><section><h3>产品机会</h3><p>单页简历适合快速筛选，项目中的判断、交付与复盘需要更大的阅读空间。我把展示站设计成两条路径：先快速理解定位，再按兴趣展开案例。</p></section><section><h3>视觉与组件</h3><p>独立编写视觉方案、组件规范和交互设计。将主题色、字级与空间层次落实到卡片、按钮、抽屉和媒体查看器，再用共享组件支撑景观白绿和神秘宇宙两套主题。</p></section><section><h3>独立交付</h3><p>从 PRD、信息架构、UI/UX 到 AI 辅助开发、测试与部署均独立完成。2026 年 3 月上线 V1。</p></section><section><h3>V1 到 V2</h3><p>V1 将 Coze、知识库与 RAG 接入数字分身，用于回答项目与经历问题。V2 根据实际阅读问题缩短浏览路径，重组项目详情。当前网站继续迭代，数字分身已暂停。</p></section><section><h3>复盘</h3><p>首屏要让人快速知道可以从哪里读起。主题表达、项目深度和问答都可以建立在明确的浏览路径上。</p></section></div>",
+    "documents": ["paper", "prd", "design", "arch", "proto", "agent"],
     "video": "https://www.bilibili.com/video/BV11TXPBUEtK/"
   }
 ];

@@ -16,7 +16,7 @@ function projectCard(raw) {
   const p = getLocalizedRecord('project', raw.id, raw);
   const video = p.video && !p.media?.some(item => item.type === 'video') ? '<a class="button" href="' + escapeHTML(p.video) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('demoVideo')) + '</a>' : '';
   const language = getCurrentLanguage();
-  const materials = p.id === 'personal-nebula' ? renderNebulaMaterials(language) : '';
+  const materials = renderProjectMaterials(p.documents, language);
   return '<article class="project' + (p.cover ? ' project--with-cover' : ' project--text') + '" data-project-id="' + escapeHTML(p.id) + '">' + preview(p) +
     '<div class="project-content"><div class="item-meta"><span>' + escapeHTML(p.type) + '</span><span>' + escapeHTML(p.year) + '</span></div>' +
     '<h3>' + escapeHTML(p.title) + '</h3><p class="project-description">' + escapeHTML(p.description) + '</p>' +
@@ -24,8 +24,8 @@ function projectCard(raw) {
     '<div class="actions"><button class="button" data-project="' + escapeHTML(p.id) + '">' + escapeHTML(t('projectDetails')) + '</button>' + materials + video + '</div></div></article>';
 }
 
-function renderNebulaMaterials(language) {
-  return documentList.map(doc =>
+function renderProjectMaterials(keys = [], language) {
+  return keys.map(key => documentList.find(doc => doc.key === key)).filter(Boolean).map(doc =>
     '<button type="button" class="button" data-document="' + escapeHTML(doc.key) + '">' +
     escapeHTML(language === 'en' ? doc.labelEn : doc.label) + '</button>'
   ).join('');
