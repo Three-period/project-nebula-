@@ -2,7 +2,7 @@ export const personalProjects = [
   {
     "id": "personal-nebula",
     "title": "Project Nebula｜个人 AI 展示站",
-    "year": "2026.02—至今",
+    "year": "2025.11—至今",
     "type": "个人项目",
     "stage": "V1 已上线 · V2 持续迭代",
     "tags": [

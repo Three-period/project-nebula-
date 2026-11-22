@@ -69,6 +69,6 @@ export const projectI18n = {
       "Independent delivery"
     ],
     "body": "<div class=\"project-story\"><section><h3>Product opportunity</h3><p>A one-page resume works for screening. Product decisions, outcomes, and lessons need more room. I designed two paths: get oriented quickly, then open individual cases for depth.</p></section><section><h3>Visual system and components</h3><p>I wrote the visual and component specifications and designed the interactions. Color, type, and spacing carry through cards, buttons, drawers, and media viewers. Shared components support both Landscape and Cosmic themes.</p></section><section><h3>Independent delivery</h3><p>I handled the PRD, information architecture, UI/UX, AI-assisted development, testing, and deployment. Work started in February 2026 and V1 shipped in March.</p></section><section><h3>From V1 to V2</h3><p>V1 used Coze, a knowledge base, and RAG for a digital twin that could answer questions about my work. V2 shortened the reading path and reorganized the case studies. The site continues to evolve and the digital twin is paused.</p></section><section><h3>What I learned</h3><p>Help readers find a starting point quickly. Theme, case depth, and conversational features can all build on a clear reading path.</p></section></div>",
-    "year": "Feb 2026—Present"
+    "year": "Nov 2025—Present"
   }
 };
