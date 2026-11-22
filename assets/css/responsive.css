@@ -243,7 +243,6 @@
   }
   #about .landscape-intro,
   #about .cosmic-intro { width: 100%; }
-  .singu-workflow-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 560px) {
   #about .landscape-hero { display: block; }

@@ -253,55 +253,66 @@
 .singu-layout {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  align-items: start;
-  gap: clamp(24px, 4vw, 62px);
+  align-items: stretch;
+  gap: clamp(16px, 2.4vw, 32px);
 }
-.singu-bio, .singu-skill-groups { min-width: 0; }
-.singu-bio h3, .singu-skill-groups h3 {
+.singu-bio {
+  min-width: 0;
+  padding: clamp(16px, 2.5vw, 28px);
+}
+.singu-bio h3, .singu-side h3 {
   margin: 0 0 12px;
   font: 600 var(--text-h3)/1.5 var(--font-heading);
 }
-.singu-bio p, .singu-skill-groups p {
+.singu-bio p {
   margin: 0 0 12px;
   line-height: 1.75;
 }
-.singu-skill-groups {
-  padding: clamp(16px, 2.5vw, 28px);
+.singu-bio p:last-child { margin-bottom: 0; }
+
+.singu-side {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 20px;
+}
+.singu-side > section, .singu-card-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.singu-card-list {
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.singu-card-list > li { flex: 1; }
+.singu-bio, .singu-ab-card {
   border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
   background: var(--card-surface);
   box-shadow: var(--card-shadow-rest);
-}
-.singu-skill-groups p { color: var(--color-muted); }
-.singu-bio p:last-child, .singu-skill-groups p:last-child { margin-bottom: 0; }
-.singu-workflow {
-  margin-top: clamp(34px, 5vw, 68px);
-  padding-top: 20px;
-  border-top: 1px solid var(--color-line);
-}
-.singu-workflow > h3,
-.capability-section > h3 {
-  margin: 0 0 14px;
-  color: var(--color-text);
-  font: 600 var(--text-h3)/1.5 var(--font-heading);
-}
-.singu-workflow-list {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  padding: 0;
-  list-style: none;
+  -webkit-backdrop-filter: blur(var(--surface-blur)) saturate(115%);
+  backdrop-filter: blur(var(--surface-blur)) saturate(115%);
 }
 .singu-ab-card {
   min-width: 0;
-  padding: 15px;
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-card);
-  background: var(--card-surface);
-  box-shadow: var(--shadow-contact);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  padding: 12px 15px;
 }
+.singu-skill-tags.tags { margin: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .singu-skill-tags .tag {
+    animation: skill-tag-in 240ms ease-out both;
+    transition: transform 160ms ease;
+  }
+  .singu-skill-tags .tag:hover { transform: translateY(-2px); }
+  @keyframes skill-tag-in {
+    from { opacity: 0; transform: translateY(3px); }
+  }
+}
+
 .singu-ab-card h4 {
   margin-bottom: 7px;
   color: var(--color-primary);
@@ -454,9 +465,6 @@
 .topbar .menu-toggle{display:none}
 .sidebar{top:var(--topbar-height)}
 .main{padding-top:calc(var(--topbar-height) + 24px)}
-.sidebar-subnav{display:grid;gap:3px;margin:8px 0 14px 32px;padding-left:12px;border-left:1px solid var(--color-line)}
-.sidebar-subnav button{display:block;width:100%;border:0;border-radius:var(--button-radius);background:transparent;padding:7px;color:var(--color-muted);font-size:12px;text-align:left}
-.sidebar-subnav button:hover,.sidebar-subnav button:focus-visible{color:var(--color-primary);background:var(--color-primary-soft)}
 
 /* Consistent 24px line drawings replace glyph-based utility icons. */
 .topbar-brand-mark svg {width:22px;height:22px;display:block}

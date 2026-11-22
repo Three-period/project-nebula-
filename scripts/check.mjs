@@ -39,7 +39,7 @@ const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
-for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'featured-project-list', 'workflow-title', 'document-list', 'article-list', 'profile-tools', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
+for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'featured-project-list', 'workflow-title', 'article-list', 'profile-tools', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
 for (const match of html.matchAll(/(?:href|src)="(assets\/[^"#]+)"/g)) await readFile(resolve(root, match[1]));
 assert.equal(projects.length, 5);
 assert.equal(workProjects.length, 5);
@@ -318,12 +318,12 @@ assert(checklist.includes('M1-01') && checklist.includes('M6-01'), 'Confirmed re
 
 
 /* V2 visual foundation remediation: enforce intended UI structure and real search behavior. */
-for(const id of ['search-dialog','theme-dialog','search-input','search-results','search-trigger','theme-trigger','menu-toggle','projects-subnav']) {
+for(const id of ['search-dialog','theme-dialog','search-input','search-results','search-trigger','theme-trigger','menu-toggle']) {
  assert(ids.includes(id), 'Missing V2 UI control: '+id);
 }
 assert(html.includes('class="topbar"') && html.indexOf('class="topbar"') < html.indexOf('class="sidebar"'), 'TopBar must exist independently above the content sidebar');
 assert(html.includes('data-action="open-search"') && html.includes('data-action="open-theme"'), 'Search and Theme must have working triggers');
-assert(html.includes('id="projects-subnav"'), 'Projects subsections must be available');
+assert(!html.includes('id="projects-subnav"'), 'Projects sidebar has one level');
 assert(mainSource.includes("case 'open-search'") && mainSource.includes("case 'open-theme'"), 'Main app must initialize Search and ThemePicker');
 assert(mainSource.includes("initThemePicker") && mainSource.includes("initSearch"), 'V2 functional controllers must be connected');
 for (const language of ['zh','en']) {
@@ -348,7 +348,7 @@ for(const token of ['--card-surface:','--card-shadow-rest:','--card-shadow-hover
  assert(themeStyle.includes(token),'Missing landscape semantic token '+token);
 assert(!style.includes('box-shadow: var(--shadow-spatial);'), 'Card hover must not discard the contact shadow');
 assert(themeStyle.includes('drafting corners') && style.includes(':focus-within'), 'Landscape corner decorations and keyboard focus states must exist');
-assert(html.includes('class="topbar-actions"') && html.includes('class="sidebar-subnav"'), 'Navigation needs top utilities and optional local sections');
+assert(html.includes('class="topbar-actions"'), 'Navigation needs top utilities');
 const pickerSrc=await readFile(resolve(root,'assets/js/theme-picker.js'),'utf8');
 assert(pickerSrc.includes('theme.status===\'active\'') && pickerSrc.includes('disabled aria-disabled'), 'Planned themes must remain disabled');
 const searchSrc=await readFile(resolve(root,'assets/js/search.js'),'utf8');

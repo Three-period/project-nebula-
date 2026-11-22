@@ -35,11 +35,6 @@
    <a href="#about" class="toc-link"><span class="toc-index">01</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg><span data-i18n="aboutNav">个人奇点</span></a>
    <a href="#experience" class="toc-link"><span class="toc-index">02</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21v-9"/><path d="M12 13C7 13 5 10 5 6c4 0 7 2 7 7Z"/><path d="M12 11c0-4 3-6 7-6 0 4-2 7-7 7Z"/></svg><span data-i18n="experienceNav">经历与成长</span></a>
    <a href="#projects" class="toc-link"><span class="toc-index">03</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2-9 5 9 5 9-5-9-5Z"/><path d="M3 7v10l9 5 9-5V7M12 12v10"/></svg><span data-i18n="projectsNav">作品与实践</span></a>
-  <div class="sidebar-subnav" id="projects-subnav" hidden aria-label="项目子目录" data-i18n-aria-label="projectsSubnavAria">
-   <button type="button" data-scroll-target="featured-projects-heading" data-i18n="featuredProjectsTitle">精选项目</button>
-   <button type="button" data-scroll-target="yijing-projects-heading" data-i18n="yijingProjectsTitle">文旅项目</button>
-   <button type="button" data-scroll-target="related-materials" data-i18n="relatedMaterialsTitle">相关作品材料 · Project Nebula</button>
-  </div>
    <a href="#insights" class="toc-link"><span class="toc-index">04</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 6h6a5 5 0 0 1 0 10H9a4 4 0 0 0-4 4"/></svg><span data-i18n="insightsNav">思考与方法</span></a>
    <a href="#photography" class="toc-link"><span class="toc-index">05</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h4l2-3h4l2 3h4v13H4z"/><circle cx="12" cy="13" r="4"/></svg><span data-i18n="photographyNav">摄影作品</span></a>
 </nav>
@@ -119,23 +114,27 @@
     <p data-i18n="aboutBio5">来到英维克后，她从推进 AI 能力标准化，走到设计研发工作流的多 Agent 架构，也更具体地理解了 AI 会如何改变工作与生活。</p>
     <p data-i18n="aboutBio6">她相信 AI 会改变世界，也想参与这个进程。Project Nebula 记录着她在这条路上的实践。</p>
   </section>
+  <div class="singu-side">
   <section class="singu-skill-groups" id="profile-tools" aria-labelledby="profile-tools-title">
    <h3 id="profile-tools-title" data-i18n="skillTitle">能力与工具</h3>
-    <p data-i18n="skillProduct">产品分析与设计 · 业务流程、需求分析、PRD、SOP、Axure、Figma、Notion</p>
-    <p data-i18n="skillAI">AI 应用实践 · Coze 智能体、Prompt、知识库与 RAG</p>
-    <p data-i18n="skillDelivery">AI 辅助交付 · GPT、Claude、Codex、GitHub、Cloudflare Pages</p>
-    <p data-i18n="skillLearning">持续学习 · Agent、Workflow、Skills 与人机协作</p>
+   <ul class="singu-card-list">
+    <li class="singu-ab-card"><h4 data-i18n="skillProduct">产品分析与设计</h4><div class="tags singu-skill-tags" data-skill-tags="skillProductTags"><span class="tag">业务流程</span><span class="tag">需求分析</span><span class="tag">PRD</span><span class="tag">SOP</span><span class="tag">Axure</span><span class="tag">Figma</span><span class="tag">Notion</span></div></li>
+    <li class="singu-ab-card"><h4 data-i18n="skillAI">AI 应用实践</h4><div class="tags singu-skill-tags" data-skill-tags="skillAITags"><span class="tag">Coze 智能体</span><span class="tag">Prompt</span><span class="tag">知识库与 RAG</span></div></li>
+    <li class="singu-ab-card"><h4 data-i18n="skillDelivery">AI 辅助交付</h4><div class="tags singu-skill-tags" data-skill-tags="skillDeliveryTags"><span class="tag">GPT</span><span class="tag">Claude</span><span class="tag">Codex</span><span class="tag">GitHub</span><span class="tag">Cloudflare Pages</span></div></li>
+    <li class="singu-ab-card"><h4 data-i18n="skillLearning">持续学习</h4><div class="tags singu-skill-tags" data-skill-tags="skillLearningTags"><span class="tag">Agent</span><span class="tag">Workflow</span><span class="tag">Skills 与人机协作</span></div></li>
+   </ul>
   </section>
+  <section class="singu-workflow" aria-labelledby="workflow-title">
+   <h3 id="workflow-title" data-i18n="workflowTitle">我怎么工作</h3>
+   <ol class="singu-card-list">
+    <li class="singu-ab-card"><h4 data-i18n="workflowAlign">先对齐</h4><p data-i18n="workflowAlignBody">开工前，把要解决什么、做到哪、怎么验收说清楚。</p></li>
+    <li class="singu-ab-card"><h4 data-i18n="workflowBuild">再开动</h4><p data-i18n="workflowBuildBody">先把最难讲清的流程做成图或原型，拿着它对齐。</p></li>
+    <li class="singu-ab-card"><h4 data-i18n="workflowDeliver">保交付</h4><p data-i18n="workflowDeliverBody">先跑通主流程，把会卡住交付的问题提前解决。</p></li>
+    <li class="singu-ab-card"><h4 data-i18n="workflowValidate">后验收</h4><p data-i18n="workflowValidateBody">按真实场景走一遍，把发现的问题带回下一版。</p></li>
+   </ol>
+  </section>
+  </div>
  </div>
- <section class="singu-workflow" aria-labelledby="workflow-title">
-  <h3 id="workflow-title" data-i18n="workflowTitle">我怎么工作</h3>
-  <ol class="singu-workflow-list">
-   <li class="singu-ab-card"><h4 data-i18n="workflowAlign">先对齐</h4><p data-i18n="workflowAlignBody">开工前，把要解决什么、做到哪、怎么验收说清楚。</p></li>
-   <li class="singu-ab-card"><h4 data-i18n="workflowBuild">再开动</h4><p data-i18n="workflowBuildBody">先把最难讲清的流程做成图或原型，拿着它对齐。</p></li>
-   <li class="singu-ab-card"><h4 data-i18n="workflowDeliver">保交付</h4><p data-i18n="workflowDeliverBody">先跑通主流程，把会卡住交付的问题提前解决。</p></li>
-   <li class="singu-ab-card"><h4 data-i18n="workflowValidate">后验收</h4><p data-i18n="workflowValidateBody">按真实场景走一遍，把发现的问题带回下一版。</p></li>
-  </ol>
- </section>
 </section><section id="experience" class="resume-section" aria-labelledby="experience-title"><header class="section-heading"><p class="eyebrow" data-i18n="experienceEyebrow">OBSERVATION 02 / 经历与成长</p><h2 id="experience-title" data-i18n="experienceTitle">经历与成长</h2><p class="section-lead" data-i18n="experienceLead">跨界经历中的业务理解、产品思考与落地实践。</p></header><div class="fusion-timeline">
 <article class="fusion-item"><div class="fusion-left"><div class="fusion-time" data-i18n="invDate">2026.04 — 至今</div><div class="fusion-role" data-i18n="invRole">AI 产品经理</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="invCompany">英维克软件技术有限公司</h3><p class="fusion-summary" data-i18n="invSummary">从独立交付 SkillHub、推动企业 AI 能力复用，到担任一体化数字研发平台的产品负责人。我主导多 Agent 产品架构与一期规划，并把 AI 代码检视嵌入研发流程，明确开发、AI 与检视工程师的分工。</p><div class="actions"><button class="button" data-jump-project="work-rd-platform" data-i18n="jumpRd">一体化数字研发平台 ↗</button><button class="button" data-jump-project="work-code-review" data-i18n="jumpCodeReview">AI Code Review ↗</button><button class="button" data-jump-project="work-skillhub" data-i18n="jumpSkillHub">SkillHub ↗</button></div></div></article>
 <article class="fusion-item fusion-independent"><div class="fusion-left"><div class="fusion-time" data-i18n="nebulaDate">2025.11 — 至今</div><div class="fusion-role" data-i18n="nebulaRole">AI 全栈产品 · 独立项目实践</div></div><div class="fusion-right"><h3 class="fusion-company" data-i18n="nebulaCompany">Project Nebula · 个人 AI 产品实践</h3><p class="fusion-summary" data-i18n="nebulaSummary">从招聘方的阅读场景出发，独立完成产品定义、视觉方案、组件规范、前端开发和部署。2026 年 3 月上线 V1，随后重构阅读路径和项目详情。V1 的 Coze 数字分身现已暂停。</p><div class="actions"><button class="button" type="button" data-jump-project="personal-nebula">Project Nebula ↗</button></div></div></article>
@@ -146,7 +145,7 @@
 <div id="featured-project-list" class="project-list"></div>
 <h3 id="yijing-projects-heading" class="group-heading" data-i18n="yijingProjectsTitle">文旅项目</h3>
 <div id="yijing-project-list" class="project-list"></div>
-<div class="related-docs" id="related-materials"><h3 data-i18n="relatedMaterialsTitle">相关作品材料 · Project Nebula</h3><div id="document-list" class="document-list"></div></div></section><section id="insights" class="resume-section" aria-labelledby="insights-title"><header class="section-heading"><p class="eyebrow" data-i18n="insightsEyebrow">OBSERVATION 04 / 思考与方法</p><h2 id="insights-title" data-i18n="insightsTitle">思考与方法</h2><p class="section-lead" data-i18n="insightsLead">持续输入，独立判断。以下保留原创文章及其日期。</p></header><div id="article-list" class="article-list"></div></section>
+</section><section id="insights" class="resume-section" aria-labelledby="insights-title"><header class="section-heading"><p class="eyebrow" data-i18n="insightsEyebrow">OBSERVATION 04 / 思考与方法</p><h2 id="insights-title" data-i18n="insightsTitle">思考与方法</h2><p class="section-lead" data-i18n="insightsLead">持续输入，独立判断。以下保留原创文章及其日期。</p></header><div id="article-list" class="article-list"></div></section>
 <section id="photography" class="resume-section photography-section" aria-labelledby="photography-title">
   <header class="section-heading">
     <p class="eyebrow" data-i18n="photographyEyebrow">OBSERVATION 05 / 摄影作品</p>

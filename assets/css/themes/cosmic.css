@@ -89,7 +89,7 @@
 :root[data-theme="cosmic"] .toc-link[aria-current="page"] {
   border-left-color:var(--color-primary);background:var(--color-primary-soft);
 }
-:root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card,.singu-left,.singu-right) {
+:root[data-theme="cosmic"] :is(.project,.document-card,.article-row,.capability-card,.photography-theme-card,.singu-ab-card,.singu-bio,.singu-left,.singu-right) {
   position:relative;
   border-color:var(--card-border);
   background:var(--card-surface);

@@ -53,7 +53,7 @@
 
   :root[data-theme="landscape"][data-color-mode="dark"] :is(
     .project, .document-card, .article-row, .capability-card,
-    .photography-theme-card, .singu-ab-card, .singu-left, .singu-right
+    .photography-theme-card, .singu-ab-card, .singu-bio, .singu-left, .singu-right
   ) {
     background:
       repeating-linear-gradient(115deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 5px),
