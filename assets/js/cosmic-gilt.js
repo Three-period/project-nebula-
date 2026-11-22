@@ -3,7 +3,7 @@
  * cards recreated by bilingual content/photography rendering. */
 const CARD_SELECTOR = [
   '.project', '.document-card', '.article-row', '.capability-card',
-  '.photography-theme-card', '.singu-ab-card', '.singu-left', '.singu-right'
+  '.photography-theme-card', '.singu-ab-card', '.singu-bio', '.singu-left', '.singu-right'
 ].join(', ');
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
