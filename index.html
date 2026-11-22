@@ -17,7 +17,7 @@
 </head>
 <body>
 <a class="skip-link" href="#main" data-i18n="skipToContent">跳至正文</a>
-<header class="topbar"><a class="topbar-brand" href="#about" data-i18n-aria-label="topbarBrandAria"><span class="topbar-brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7v10H3zM9 20v-7h6v7"/></svg></span><span class="topbar-brand-copy" data-i18n="name">何盈</span></a><nav class="topbar-actions" data-i18n-aria-label="topbarNavAria" aria-label="网站功能">
+<header class="topbar"><nav class="topbar-actions" data-i18n-aria-label="topbarNavAria" aria-label="网站功能">
 <a href="#about" class="topbar-control" data-i18n-aria-label="topbarHomeAria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7v10H3zM9 20v-7h6v7"/></svg><span data-i18n="topbarHome">Home</span></a>
 <button type="button" id="search-trigger" class="topbar-control" data-action="open-search" aria-haspopup="dialog" aria-controls="search-dialog" data-i18n-aria-label="searchOpenAria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><span data-i18n="topbarSearch">Search</span></button>
 <div class="global-language-switch" role="group" data-i18n-aria-label="languageSwitchAria"><button type="button" class="lang-tab" data-language="zh" aria-pressed="true">中</button><button type="button" class="lang-tab" data-language="en" aria-pressed="false">EN</button></div>
@@ -30,7 +30,11 @@
 </nav></header>
 <aside class="sidebar" aria-label="个人简历目录" data-i18n-aria-label="sidebarAria">
  <div id="sidebar-content" class="sidebar-content">
-  <p class="sidebar-label" data-i18n="sidebarLabel">RESUME & SELECTED WORK</p>
+  <div class="sidebar-intro">
+   <p class="sidebar-identity"><strong>何盈</strong><span lang="en">HE YING</span></p>
+   <p class="sidebar-project-name" lang="en">PROJECT NEBULA</p>
+   <p class="sidebar-tagline" data-i18n="sidebarTagline">产品 · 技术 · 真实场景</p>
+  </div>
   <nav class="toc" aria-label="章节目录" data-i18n-aria-label="navAria">
    <a href="#about" class="toc-link"><span class="toc-index">01</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg><span data-i18n="aboutNav">个人奇点</span></a>
    <a href="#experience" class="toc-link"><span class="toc-index">02</span><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21v-9"/><path d="M12 13C7 13 5 10 5 6c4 0 7 2 7 7Z"/><path d="M12 11c0-4 3-6 7-6 0 4-2 7-7 7Z"/></svg><span data-i18n="experienceNav">经历与成长</span></a>
@@ -43,7 +47,6 @@
    <a class="utility-link" href="/public/images/heying-cqu-AI-PM.pdf" download data-i18n="downloadResume">下载简历 PDF ↓</a>
    <button class="utility-link utility-button" type="button" data-action="preview-pdf" data-pdf-src="/public/images/heying-cqu-AI-PM.pdf" data-i18n="previewResume">在线预览 PDF ↗</button>
    <a class="utility-link" href="#contact" data-i18n="contactMe">联系我 ↗</a>
-   <small>PROJECT NEBULA<br><span data-i18n="sidebarTagline">产品 · 技术 · 真实场景</span></small>
   </div>
  </div>
  <button type="button" id="sidebar-collapse-toggle" class="sidebar-collapse-control" aria-controls="sidebar-content" aria-expanded="true" data-i18n-aria-label="sidebarCollapseAria" aria-label="收起内容导航" title="收起内容导航"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m14 6-6 6 6 6"/></svg></button>
