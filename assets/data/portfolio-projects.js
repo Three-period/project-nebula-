@@ -5,8 +5,9 @@ export const projectById = new Map(
   [...personalProjects, ...workProjects].map(project => [project.id, project])
 );
 
-export const featuredProjects = [
-  'personal-nebula',
+export const featuredProjects = [projectById.get('personal-nebula')];
+
+export const enterpriseProjects = [
   'work-rd-platform',
   'work-code-review',
   'work-skillhub'

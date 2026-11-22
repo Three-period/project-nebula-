@@ -1,5 +1,5 @@
 
-import { featuredProjects, projectById, yijingProjects } from '../data/portfolio-projects.js';
+import { enterpriseProjects, featuredProjects, projectById, yijingProjects } from '../data/portfolio-projects.js';
 import { documentList } from '../data/document-list.js';
 import { articles } from '../data/articles.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
@@ -21,15 +21,14 @@ function projectCard(raw) {
     '<div class="project-content"><div class="item-meta"><span>' + escapeHTML(p.type) + '</span><span>' + escapeHTML(p.year) + '</span></div>' +
     '<h3>' + escapeHTML(p.title) + '</h3><p class="project-description">' + escapeHTML(p.description) + '</p>' +
     '<p class="project-stack">' + escapeHTML(p.stage) + '</p>' + tags(p.tags) +
-    '<div class="actions"><button class="button" data-project="' + escapeHTML(p.id) + '">' + escapeHTML(t('projectDetails')) + '</button>' + video + '</div>' + materials + '</div></article>';
+    '<div class="actions"><button class="button" data-project="' + escapeHTML(p.id) + '">' + escapeHTML(t('projectDetails')) + '</button>' + materials + video + '</div></div></article>';
 }
 
 function renderNebulaMaterials(language) {
-  return '<div class="project-materials"><h4>' + escapeHTML(t('relatedNebulaMaterials', language)) +
-    '</h4><div class="tags">' + documentList.map(doc =>
-      '<button type="button" class="tag project-material-tag" data-document="' + escapeHTML(doc.key) + '">' +
-      escapeHTML(language === 'en' ? doc.labelEn : doc.label) + '</button>'
-    ).join('') + '</div></div>';
+  return documentList.map(doc =>
+    '<button type="button" class="button" data-document="' + escapeHTML(doc.key) + '">' +
+    escapeHTML(language === 'en' ? doc.labelEn : doc.label) + '</button>'
+  ).join('');
 }
 
 export function renderProjectLinks(ids, language = getCurrentLanguage()) {
@@ -50,6 +49,7 @@ export function renderContent(language = getCurrentLanguage()) {
   }
 
   document.getElementById('featured-project-list').innerHTML = featuredProjects.map(projectCard).join('');
+  document.getElementById('enterprise-project-list').innerHTML = enterpriseProjects.map(projectCard).join('');
   document.getElementById('yijing-project-list').innerHTML = yijingProjects.map(projectCard).join('');
 
   document.getElementById('article-list').innerHTML = articles.map((raw, index) => {

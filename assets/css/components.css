@@ -81,20 +81,6 @@
 .project .tags { margin-top: 8px; }
 .project .actions { margin-top: 11px; }
 
-.project-materials {
-  margin-top: 16px;
-  padding-top: 12px;
-  border-top: 1px solid var(--color-line);
-}
-.project-materials h4 {
-  margin: 0 0 8px;
-  font-size: 13px;
-}
-.project-materials .tags { margin: 0; }
-.project-material-tag:hover, .project-material-tag:focus-visible {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
 
 .document-card {
   display: flex;

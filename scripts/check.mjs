@@ -6,7 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { projects } from '../assets/data/projects.js';
 import { workProjects } from '../assets/data/work-projects.js';
 import { personalProjects } from '../assets/data/personal-projects.js';
-import { featuredProjects } from '../assets/data/portfolio-projects.js';
+import { enterpriseProjects, featuredProjects, yijingProjects } from '../assets/data/portfolio-projects.js';
 import { capabilityGroups } from '../assets/data/capabilities.js';
 import { photographyThemes } from '../assets/data/photography.js';
 import { photographyI18n, getLocalizedPhotographyTheme } from '../assets/data/photography-i18n.js';
@@ -39,14 +39,14 @@ const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
-for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'featured-project-list', 'workflow-title', 'article-list', 'profile-tools', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
+for (const id of ['about', 'projects', 'experience', 'insights', 'contact', 'featured-project-list', 'enterprise-project-list', 'yijing-project-list', 'workflow-title', 'article-list', 'profile-tools', 'photography', 'photography-theme-list', 'photography-stage', 'landscape-intro']) assert(ids.includes(id));
 for (const match of html.matchAll(/(?:href|src)="(assets\/[^"#]+)"/g)) await readFile(resolve(root, match[1]));
 assert.equal(projects.length, 5);
 assert.equal(workProjects.length, 5);
 assert.equal(personalProjects.length, 1);
-assert.deepEqual(featuredProjects.map(project => project.id), [
-  'personal-nebula', 'work-rd-platform', 'work-code-review', 'work-skillhub'
-]);
+assert.deepEqual(featuredProjects.map(project => project.id), ['personal-nebula']);
+assert.deepEqual(enterpriseProjects.map(project => project.id), ['work-rd-platform', 'work-code-review', 'work-skillhub']);
+assert.deepEqual(yijingProjects.map(project => project.id), ['work-huizhou-ip', 'work-luoburen']);
 const experience = html.slice(html.indexOf('<section id="experience"'), html.indexOf('<section id="projects"'));
 assert.deepEqual([...experience.matchAll(/data-jump-project="([^"]+)"/g)].map(match => match[1]),
   ['work-rd-platform', 'work-code-review', 'work-skillhub', 'personal-nebula', 'work-huizhou-ip', 'work-luoburen']);
