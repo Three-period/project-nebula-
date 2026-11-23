@@ -45,12 +45,46 @@ assert.equal(projects.length, 5);
 assert.equal(workProjects.length, 5);
 assert.equal(personalProjects.length, 1);
 assert.deepEqual(featuredProjects.map(project => project.id), ['personal-nebula']);
+const nebulaProject = featuredProjects[0];
+assert.equal(nebulaProject.defaultVersion, 'v2', 'Project Nebula must open on the current V2 release');
+assert.deepEqual(nebulaProject.versions.map(version => version.id), ['v2', 'v1'],
+  'Project Nebula must keep current V2 and historical V1 as separate views');
+const nebulaV2 = nebulaProject.versions.find(version => version.id === 'v2');
+const nebulaV1 = nebulaProject.versions.find(version => version.id === 'v1');
+assert(nebulaV2.showCurrentDesignSystem && !nebulaV2.useLegacyMedia && nebulaV2.documents.length === 0,
+  'V2 must show only its current design-system material and no V1 media');
+assert(nebulaV1.useLegacyMedia && !nebulaV1.showCurrentDesignSystem,
+  'V1 must retain the historical prototype and demo media');
+assert.deepEqual(nebulaV1.documents, ['prd', 'design', 'arch', 'proto', 'agent'],
+  'V1 materials must remain grouped inside the historical release');
+
 assert.deepEqual(enterpriseProjects.map(project => project.id), ['work-rd-platform', 'work-code-review', 'work-skillhub']);
 assert.deepEqual(yijingProjects.map(project => project.id), ['work-huizhou-ip', 'work-luoburen']);
 const experience = html.slice(html.indexOf('<section id="experience"'), html.indexOf('<section id="projects"'));
 assert.deepEqual([...experience.matchAll(/data-jump-project="([^"]+)"/g)].map(match => match[1]),
   ['work-rd-platform', 'work-code-review', 'work-skillhub', 'personal-nebula', 'work-huizhou-ip', 'work-luoburen']);
 assert(documentList.some(doc => doc.key === 'agent'), 'Nebula digital twin documentation remains available');
+const versionDrawerSource = await readFile(resolve(root, 'assets/js/drawer.js'), 'utf8');
+assert(versionDrawerSource.includes('projectVersionView') && versionDrawerSource.includes('data-project-version') &&
+  versionDrawerSource.includes('showCurrentDesignSystem'),
+  'Project detail must switch version copy, media, and materials together');
+assert(mainSource.includes('projectVersionOpen'), 'Project card version entries must route to the requested release');
+const explanatoryCopy = [
+  JSON.stringify(articles), JSON.stringify(articleI18n),
+  JSON.stringify(documents), JSON.stringify(documentI18n)
+].join('\n');
+assert(!versionDrawerSource.includes('drawer-notice') &&
+  !explanatoryCopy.includes('fd-placeholder-note') &&
+  !explanatoryCopy.includes('📎'),
+  'Explanatory notice cards and repeated source guidance must stay removed');
+for (const language of ['zh', 'en'])
+  assert(!Object.hasOwn(siteI18n.ui[language], 'historicalNotice'),
+    'Historical notice copy must not return: ' + language);
+const componentSource = await readFile(resolve(root, 'assets/css/components.css'), 'utf8');
+assert(!componentSource.includes('.drawer-notice') && !componentSource.includes('.fd-placeholder-note'),
+  'Obsolete explanatory note styles must stay removed');
+
+
 
 assert.equal(projects.filter(p => p.visibility === 'draft').length, 3);
 assert(!html.includes('id="sae-input"'));
@@ -91,7 +125,16 @@ assert(articles.every(article => !article.sample && !article.body.includes('这�
 assert.equal(Object.keys(projectI18n).length, workProjects.length + personalProjects.length, 'Every project needs stored English copy');
 for (const project of [...workProjects, ...personalProjects]) {
   const translated = projectI18n[project.id];
-  assert(translated && translated.title && translated.description && translated.stage && translated.body && translated.tags?.length, 'Incomplete project translation: ' + project.id);
+  assert(translated?.title && translated.description && translated.stage && translated.tags?.length, 'Incomplete project translation: ' + project.id);
+  const records = project.versions ?? [project];
+  const translations = translated.versions ?? [translated];
+  assert.deepEqual(records.map(record => record.id), translations.map((record, index) => record.id ?? records[index]?.id));
+  for (const record of [...records, ...translations]) {
+    assert(record.detail?.highlights.length >= 2, 'Missing case highlights: ' + project.id);
+    assert.equal(record.detail.sections.length, 6, 'Incomplete case structure: ' + project.id);
+    for (const pair of [...record.detail.highlights, ...record.detail.sections])
+      assert(pair.length === 2 && pair.every(text => typeof text === 'string' && text.trim()), 'Invalid case content: ' + project.id);
+  }
 }
 assert.equal(Object.keys(documentI18n.cards).length, documentList.length, 'Every document card needs English copy');
 assert.equal(Object.keys(documentI18n.details).length, Object.keys(documents).length, 'Every document detail needs English copy');

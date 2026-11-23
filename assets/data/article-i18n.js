@@ -22,8 +22,7 @@ export const articleI18n = [
         <li><strong>Specialized reasoning, mathematics, and coding:</strong> Consider DeepSeek-R1 for its reasoning quality and low cost.</li>
       </ul>
       <h3>Product Judgment</h3>
-      <p>These models serve different scenarios; the question is fit, not a universal ranking. The key lesson for an AI product manager is: <em>define the scenario first, match the model second, and calculate the cost third.</em></p>
-      <div class="fd-placeholder-note">🔎 See the complete comparison in the original Notion notes.</div>`
+      <p>These models serve different scenarios; the question is fit, not a universal ranking. The key lesson for an AI product manager is: <em>define the scenario first, match the model second, and calculate the cost third.</em></p>`
   },
   {
     title: "Agent vs. Workflow: Two Core Paradigms for AI Product Delivery",
@@ -40,8 +39,7 @@ export const articleI18n = [
         <li><strong>Workflow invoked by an Agent:</strong> Keep the high-level direction flexible while locking sensitive operations into fixed procedures. Suitable for personal assistants—for example, a travel assistant that plans freely but uses a fixed, secure process for payment.</li>
       </ul>
       <h3>Implications for AI Product Managers</h3>
-      <p>The key question is: <em>How much uncertainty can the output of this step tolerate?</em> The more open-ended the scenario, the more it favors an Agent; the more standardized the scenario, the more it favors a Workflow. Most enterprise applications benefit from an Agentic Workflow.</p>
-      <div class="fd-placeholder-note">🔎 See the full article in the original Notion document.</div>`
+      <p>The key question is: <em>How much uncertainty can the output of this step tolerate?</em> The more open-ended the scenario, the more it favors an Agent; the more standardized the scenario, the more it favors a Workflow. Most enterprise applications benefit from an Agentic Workflow.</p>`
   },
   {
     title: "Finding AI Opportunities in Business: The MAIR Model",
@@ -64,8 +62,7 @@ export const articleI18n = [
       <ul>
         <li><strong>Blind review:</strong> Send AI output to the next stage of the process. If it receives no negative feedback, the substitution passes this check.</li>
         <li><strong>Metric-based validation:</strong> Once integrated into the real workflow, key metrics must remain within an acceptable range.</li>
-      </ul>
-      <div class="fd-placeholder-note">🔎 See the full article in the original Notion document.</div>`
+      </ul>`
   },
   {
     title: "Product Teardown: Perplexity's Three Experience Barriers",

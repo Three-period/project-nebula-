@@ -27,7 +27,6 @@ export const articles = [
         </ul>
         <h3>核心判断</h3>
         <p>四款模型各有定位，并非强弱之分而是场景适配之分。对 AI PM 的核心启示：<em>先锁定场景，再匹配模型，再算成本。</em></p>
-        <div class="fd-placeholder-note">🔎 完整对比分析见 Notion 原文记录</div>
       `,
     "summary": "从 PM 选型视角对比四款主流大模型的能力边界、擅长方向与成本结构，给出场景化选型判断框架。",
     "url": "https://www.notion.so/GPT-Claude-DeepSeek-330f9432042e817ea2e5c4fb473b021e",
@@ -54,7 +53,6 @@ export const articles = [
         </ul>
         <h3>对 AI PM 的启示</h3>
         <p>核心判断标准：<em>这个节点的输出，能接受多大程度的不确定性？</em> 场景越开放偏 Agent，场景越标准偏 Workflow，大多数企业级应用走 Agentic Workflow。</p>
-        <div class="fd-placeholder-note">🔎 完整内容见 Notion 原文</div>
       `,
     "summary": "从 AI PM 视角拆解 Agent 与 Workflow 的本质差异、嵌套玩法与选型判断标准。",
     "url": "https://www.notion.so/Agent-vs-Workflow-AI-bc97445e7ad7441c881722e928ab97dc",
@@ -87,7 +85,6 @@ export const articles = [
           <li><strong>双盲法</strong>：AI 输出给下一工序，若无负向反馈则验证通过</li>
           <li><strong>数据法</strong>：进入实际流程后关键指标波动在可接受范围内则验证通过</li>
         </ul>
-        <div class="fd-placeholder-note">🔎 完整内容见 Notion 原文</div>
       `,
     "summary": "MAIR 四步法拆解业务中的 AI 机会点，结合 AI PM 核心能力认知与验证方法论。",
     "url": "https://www.notion.so/AI-PM-AI-MAIR-5dc84e875e9c4421b3817291162c318a",

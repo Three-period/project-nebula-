@@ -1,12 +1,12 @@
 // Stored English copy for Project Nebula document cards and full detail views.
 export const documentI18n = {
   cards: {
-    paper: { type: "HISTORICAL DESIGN", title: "Rice-Paper Reading Interface & Design Guidelines", description: "Notes from the previous rice-paper long-page redesign, retained as historical reference. The current visual standard is defined by the latest PRD.", tags: ["Flat Information Layout", "Unified Components", "Responsive Design"] },
+    paper: { type: "DESIGN SYSTEM", title: "Rice-Paper Reading Interface & Design Guidelines", description: "A rice-paper long-page reading interface with unified components and responsive behavior.", tags: ["Flat Information Layout", "Unified Components", "Responsive Design"] },
     prd: { type: "PRD", title: "Product Requirements Document", description: "An end-to-end PRD from 0 to 1, covering product positioning, information architecture, interaction logic, and acceptance criteria. The site's PRD V7 is a representative work.", tags: ["Requirements Framing", "Scope Definition", "Product Closure"] },
     design: { type: "Design System", title: "Retro Cosmic UI/UX Design Guide", description: "The core visual specification for this site, defining the color system, typography, component styles, and interaction states to keep the experience visually consistent.", tags: ["Color System", "Component Standards", "Visual Consistency"] },
     arch: { type: "Architecture", title: "Business Architecture & System Design", description: "Maps business workflows, data flows, and system boundaries, translating complex business scenarios into a clear product model.", tags: ["Workflow Mapping", "Scope Definition", "Interaction Logic"] },
     proto: { type: "Prototype", title: "High-Fidelity Interactive Prototype · Full-Site Coverage", description: "High-fidelity screens, design standards, and interaction specifications, with an emphasis on implementation feasibility and clear communication.", tags: ["Specification Delivery", "Interaction Logic", "Product Closure"] },
-    agent: { type: "AGENT DESIGN · HISTORICAL", title: "Personal Digital Twin Agent · Architecture & Implementation Guide", description: "Historical materials covering Coze, knowledge bases, Prompt design, and integration. The live Q&A service is currently under maintenance.", tags: ["Agent", "RAG", "Historical Technical Reference"] }
+    agent: { type: "AGENT DESIGN", title: "Personal Digital Twin Agent · Architecture & Implementation Guide", description: "Architecture materials covering Coze, knowledge bases, Prompt design, and integration.", tags: ["Agent", "RAG", "Technical Architecture"] }
   },
   details: {
     prd: {
@@ -80,7 +80,6 @@ export const documentI18n = {
           <li><strong>V3:</strong> A complete digital-twin experience with RAG integration and linked content.</li>
         </ul>
         <div class="dr-tag-row"><span class="dr-tag">Toolchain</span><span class="dr-tag">Version Roadmap</span><span class="dr-tag">Engineering Standards</span></div>
-        <p>📎 See the full PRD in the original Notion document ↗</p>
       </div>`
     },
     design: {
@@ -135,7 +134,6 @@ export const documentI18n = {
           <li><strong>Pulsar:</strong> Deep amber #B09430.</li>
         </ul>
         <div class="dr-tag-row"><span class="dr-tag">Component Standards</span><span class="dr-tag">Interaction States</span><span class="dr-tag">Page Color System</span></div>
-        <p>📎 Open the interactive design guide in the online preview (link to be added).</p>
       </div>`
     },
     arch: {
@@ -219,7 +217,6 @@ export const documentI18n = {
           <li><strong>Retrieval Threshold Tuning:</strong> Limited RAG retrieval to the top 3–5 chunks, balancing context richness and reasoning latency.</li>
         </ul>
         <div class="dr-tag-row"><span class="dr-tag">Web SDK Integration</span><span class="dr-tag">Streaming Output</span><span class="dr-tag">Performance Tuning</span></div>
-        <p>📎 See the full guide in the original Notion document ↗</p>
       </div>`
     },
     paper: {
