@@ -20,7 +20,7 @@ export const projectI18n = {
         ["Project overview", "R&D work, documents and approvals lived in separate systems. Interviews and a survey surfaced a recurring gap: delivery could move ahead while approvals remained stuck. I scoped the first release around the actual sequence of work."],
         ["My role and scope", "As product lead, I owned discovery, workflow redesign, business specifications, the PRD, acceptance and pilot operations. I independently built the HTML prototype. A project manager coordinated delivery, and an engineer implemented the production system."],
         ["What should the first release connect?", "I reviewed each handoff to decide what to keep, simplify or change. The first release prioritized online documents, AI-assisted development and AI review. Standalone project, requirements, code and asset management were phased in the roadmap."],
-        ["From specifications to a working flow", "I used the prototype to align role views, handoffs and states. The live flow connects online development, GitLab push, automatic AI review and report delivery. Development and review agents are in use. The broader multi-agent architecture still needs validation."],
+        ["From specifications to a working flow", "I used the prototype to align role views, handoffs and states. The live flow connects online development, GitLab push, automatic AI review and report delivery. The first release uses development and review agents. I also completed the design for the broader multi-agent architecture."],
         ["Results", "The first release went live within its defined scope and reached 10–15 trial users. Project observations put the related workflow at 4–5 days, down from about 1.5 weeks. I built the prototype in about a week."],
         ["Product judgment", "The first release succeeds when roles, deliverables and workflow states agree across handoffs. An interactive prototype lets business, product and engineering teams verify those handoffs together."]
       ]
@@ -30,7 +30,7 @@ export const projectI18n = {
     "type": "Work Project",
     "title": "SkillHub | Enterprise AI Capability Platform",
     "description": "Independently built a Skills distribution platform to improve discovery, update notifications, and access, and helped teams adopt Spec + Skill.",
-    "stage": "Two internal pilot releases · Paused",
+    "stage": "Two releases completed · Internal pilot",
     "tags": [
       "Independent delivery",
       "Skills standardization",
@@ -47,7 +47,7 @@ export const projectI18n = {
         ["My role and scope", "I independently owned discovery, design, development, release, adoption and iteration. A limited internal rollout supplied usage feedback."],
         ["From downloads to usable Skills", "V1 gave teams a single place to browse and download. V2 added descriptions, department categories, version information, update reminders and role-based access so people could find Skills suited to their work."],
         ["Helping teams put Skills to work", "I documented the Spec + Skill approach, wrote a usage guide and a Skill creation SOP, and ran hands-on training for frontend, backend, IDC and testing colleagues."],
-        ["Results", "Both releases saw limited internal use. About 5–6 training sessions reached 20+ colleagues. The IDC group familiar with the standardized approach for embedded development grew from 1 to about 9–11 people. The platform paused after the related AI development initiative stalled."],
+        ["Results", "Both releases saw limited internal use. About 5–6 training sessions reached 20+ colleagues. The IDC group familiar with the standardized approach for embedded development grew from 1 to about 9–11 people."],
         ["Product judgment", "A shared entry point makes Skills available. Clear descriptions, update reminders and training help people apply them. I would include permission checks in the next release checklist."]
       ]
     }
@@ -73,7 +73,7 @@ export const projectI18n = {
         ["My role and scope", "I owned the business specification and designed both workspaces, dispute handling and sign-off. I helped the team organize the rule set. Engineers implemented the agent and workflow."],
         ["Who signs off after AI screening?", "Link the code revision to its design and smoke and self-test evidence. AI screens design alignment, file consistency, completeness and correctness. Developers resolve findings or raise disputes. Reviewers adjudicate disputes, cover high-risk and unscreened areas, and sample independently."],
         ["How the workspaces connect", "The developer workspace connects evidence, submission, reports and fixes. The reviewer workspace handles the queue, disputes, manual checks and sign-off. The gate checks issue closure and matches the decision to the revision going into testing."],
-        ["Results", "Users reported that comparable reviews took 2–3 days instead of about a week and that weekly reviews per engineer rose from about 2–3 to 7–8 projects. AI review accuracy still has room to improve, and reviewers retain final sign-off."],
+        ["Results", "Users reported that comparable reviews took 2–3 days instead of about a week and that weekly reviews per engineer rose from about 2–3 to 7–8 projects. Reviewers retain final sign-off."],
         ["Product judgment", "A review system can support quality control when it defines what AI screens, when people must intervene and which code revision the decision covers."]
       ]
     }
@@ -146,7 +146,7 @@ export const projectI18n = {
           ],
           "sections": [
             ["Project overview", "V1 exposed a reading problem: some details sat too deep. V2 serves two hiring tasks: understand my role and experience quickly, then open the cases and evidence that matter."],
-            ["My role and scope", "I independently reorganized the information architecture and handled interface design, frontend changes, testing and deployment. The digital twin is paused after changes to its external service."],
+            ["My role and scope", "I independently reorganized the information architecture and handled interface design, frontend changes, testing and deployment."],
             ["Make cases easier to find", "I organized content into five sections and used navigation, search and layered details to connect summaries, cases and materials with fewer steps."],
             ["Shared components across two themes", "The Landscape and Cosmic themes share cards, buttons, drawers and responsive rules. The site also supports Chinese and English, online résumé access and media viewing."],
             ["Results", "V2 is live with five content sections, two themes, a language switch, site search and online résumé access."],
