@@ -63,6 +63,29 @@ export const projectI18n = {
     "title": "Project Nebula | Personal AI Portfolio",
     "description": "Independently built an interactive portfolio around how recruiters read, from product definition to the visual system, component guidelines, and deployment.",
     "stage": "V1 shipped · V2 in development",
+    "versionGroupLabel": "Project versions",
+    "versions": [
+      {
+        "id": "v2",
+        "label": "V2 · Current rebuild",
+        "stage": "In active iteration",
+        "description": "Rebuilt the content hierarchy and reading path from real usage feedback, adding two themes, bilingual content, search, layered case details, and media viewing.",
+        "body": "<div class=\"project-story\"><section><h3>Why rebuild</h3><p>V1's planet-based narrative was distinctive, but recruiters needed a faster route to experience, projects, and methods. V2 replaces non-linear exploration with five clear chapters.</p></section><section><h3>Content and experience</h3><p>Reorganized the site into Personal Singularity, Experience, Projects, Insights, and Photography. Layered project details now work with site search, bilingual content, online resume access, and media viewing.</p></section><section><h3>Visual system</h3><p>Shared components support the Landscape and Cosmic themes while keeping typography, color, cards, buttons, drawers, and responsive behavior consistent. Each theme retains its own visual language.</p></section><section><h3>Independent delivery</h3><p>I continue to handle content modeling, interaction design, AI-assisted development, code review, testing, and Cloudflare Pages deployment. The digital twin is paused while V2 focuses on reading efficiency and stronger project evidence.</p></section></div>",
+        "documents": [],
+        "showCurrentDesignSystem": true,
+        "useLegacyMedia": false
+      },
+      {
+        "id": "v1",
+        "label": "V1 · Digital twin release",
+        "stage": "Shipped March 2026 · Historical release",
+        "description": "An explorable personal AI product built around capability planets, combining experience, project materials, and a Coze digital twin.",
+        "body": "<div class=\"project-story\"><section><h3>Product opportunity</h3><p>A traditional resume could not fully show product decisions, delivery work, or AI product capability, so I reorganized my experience into an explorable digital product.</p></section><section><h3>Capability planet architecture</h3><p>AI Singularity, Forge, Construct, Fusion, and Pulsar formed a non-linear information architecture for positioning, projects, product artifacts, experience, and original thinking.</p></section><section><h3>Digital twin</h3><p>I built a personal digital twin with Coze, a knowledge base, and RAG. Prompt guardrails constrained identity, information boundaries, and response structure.</p></section><section><h3>Independent delivery</h3><p>I completed the PRD, business architecture, interactive prototype, visual guidelines, Agent design, front-end implementation, and deployment. V1 shipped in March 2026 and is now retained as historical product evidence.</p></section></div>",
+        "documents": ["prd", "design", "arch", "proto", "agent"],
+        "showCurrentDesignSystem": false,
+        "useLegacyMedia": true
+      }
+    ],
     "tags": [
       "Zero-to-one product",
       "Visual & component system",
