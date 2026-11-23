@@ -17,11 +17,17 @@ function projectCard(raw) {
   const video = p.video && !p.media?.some(item => item.type === 'video') ? '<a class="button" href="' + escapeHTML(p.video) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('demoVideo')) + '</a>' : '';
   const language = getCurrentLanguage();
   const materials = renderProjectMaterials(p.documents, language);
+  const projectActions = p.versions?.length
+    ? p.versions.map(version => '<button class="button" data-project="' + escapeHTML(p.id) +
+      '" data-project-version-open="' + escapeHTML(version.id) + '">' +
+      escapeHTML(version.label) + '</button>').join('')
+    : '<button class="button" data-project="' + escapeHTML(p.id) + '">' +
+      escapeHTML(t('projectDetails')) + '</button>' + materials + video;
   return '<article class="project' + (p.cover ? ' project--with-cover' : ' project--text') + '" data-project-id="' + escapeHTML(p.id) + '">' + preview(p) +
     '<div class="project-content"><div class="item-meta"><span>' + escapeHTML(p.type) + '</span><span>' + escapeHTML(p.year) + '</span></div>' +
     '<h3>' + escapeHTML(p.title) + '</h3><p class="project-description">' + escapeHTML(p.description) + '</p>' +
     '<p class="project-stack">' + escapeHTML(p.stage) + '</p>' + tags(p.tags) +
-    '<div class="actions"><button class="button" data-project="' + escapeHTML(p.id) + '">' + escapeHTML(t('projectDetails')) + '</button>' + materials + video + '</div></div></article>';
+    '<div class="actions">' + projectActions + '</div></div></article>';
 }
 
 function renderProjectMaterials(keys = [], language) {
