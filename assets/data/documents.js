@@ -91,7 +91,6 @@ export const documents = {
             <span class="dr-tag">版本规划</span>
             <span class="dr-tag">工程规范</span>
           </div>
-          <p>📎 完整版 PRD 见 Notion 原文 ↗</p>
         </div>
       `,
     "historical": true
@@ -161,7 +160,6 @@ export const documents = {
             <span class="dr-tag">交互状态</span>
             <span class="dr-tag">分页色彩</span>
           </div>
-          <p>📎 完整可交互版设计指南见在线预览（链接待填写）</p>
         </div>
       `,
     "historical": true
@@ -326,7 +324,6 @@ export const documents = {
             <span class="dr-tag">流式输出</span>
             <span class="dr-tag">性能调优</span>
           </div>
-          <p>📎 完整版文档见 Notion 原文 ↗</p>
         </div>
       `,
     "historical": false
