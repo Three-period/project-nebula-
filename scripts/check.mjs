@@ -64,9 +64,9 @@ const experience = html.slice(html.indexOf('<section id="experience"'), html.ind
 assert.deepEqual([...experience.matchAll(/data-jump-project="([^"]+)"/g)].map(match => match[1]),
   ['work-rd-platform', 'work-code-review', 'work-skillhub', 'personal-nebula', 'work-huizhou-ip', 'work-luoburen']);
 assert(documentList.some(doc => doc.key === 'agent'), 'Nebula digital twin documentation remains available');
-const drawerSource = await readFile(resolve(root, 'assets/js/drawer.js'), 'utf8');
-assert(drawerSource.includes('projectVersionView') && drawerSource.includes('data-project-version') &&
-  drawerSource.includes('showCurrentDesignSystem'),
+const versionDrawerSource = await readFile(resolve(root, 'assets/js/drawer.js'), 'utf8');
+assert(versionDrawerSource.includes('projectVersionView') && versionDrawerSource.includes('data-project-version') &&
+  versionDrawerSource.includes('showCurrentDesignSystem'),
   'Project detail must switch version copy, media, and materials together');
 assert(mainSource.includes('projectVersionOpen'), 'Project card version entries must route to the requested release');
 
