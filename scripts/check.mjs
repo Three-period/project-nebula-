@@ -45,12 +45,31 @@ assert.equal(projects.length, 5);
 assert.equal(workProjects.length, 5);
 assert.equal(personalProjects.length, 1);
 assert.deepEqual(featuredProjects.map(project => project.id), ['personal-nebula']);
+const nebulaProject = featuredProjects[0];
+assert.equal(nebulaProject.defaultVersion, 'v2', 'Project Nebula must open on the current V2 release');
+assert.deepEqual(nebulaProject.versions.map(version => version.id), ['v2', 'v1'],
+  'Project Nebula must keep current V2 and historical V1 as separate views');
+const nebulaV2 = nebulaProject.versions.find(version => version.id === 'v2');
+const nebulaV1 = nebulaProject.versions.find(version => version.id === 'v1');
+assert(nebulaV2.showCurrentDesignSystem && !nebulaV2.useLegacyMedia && nebulaV2.documents.length === 0,
+  'V2 must show only its current design-system material and no V1 media');
+assert(nebulaV1.useLegacyMedia && !nebulaV1.showCurrentDesignSystem,
+  'V1 must retain the historical prototype and demo media');
+assert.deepEqual(nebulaV1.documents, ['prd', 'design', 'arch', 'proto', 'agent'],
+  'V1 materials must remain grouped inside the historical release');
+
 assert.deepEqual(enterpriseProjects.map(project => project.id), ['work-rd-platform', 'work-code-review', 'work-skillhub']);
 assert.deepEqual(yijingProjects.map(project => project.id), ['work-huizhou-ip', 'work-luoburen']);
 const experience = html.slice(html.indexOf('<section id="experience"'), html.indexOf('<section id="projects"'));
 assert.deepEqual([...experience.matchAll(/data-jump-project="([^"]+)"/g)].map(match => match[1]),
   ['work-rd-platform', 'work-code-review', 'work-skillhub', 'personal-nebula', 'work-huizhou-ip', 'work-luoburen']);
 assert(documentList.some(doc => doc.key === 'agent'), 'Nebula digital twin documentation remains available');
+const drawerSource = await readFile(resolve(root, 'assets/js/drawer.js'), 'utf8');
+assert(drawerSource.includes('projectVersionView') && drawerSource.includes('data-project-version') &&
+  drawerSource.includes('showCurrentDesignSystem'),
+  'Project detail must switch version copy, media, and materials together');
+assert(mainSource.includes('projectVersionOpen'), 'Project card version entries must route to the requested release');
+
 
 assert.equal(projects.filter(p => p.visibility === 'draft').length, 3);
 assert(!html.includes('id="sae-input"'));
