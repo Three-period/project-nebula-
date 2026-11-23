@@ -69,6 +69,21 @@ assert(versionDrawerSource.includes('projectVersionView') && versionDrawerSource
   versionDrawerSource.includes('showCurrentDesignSystem'),
   'Project detail must switch version copy, media, and materials together');
 assert(mainSource.includes('projectVersionOpen'), 'Project card version entries must route to the requested release');
+const explanatoryCopy = [
+  JSON.stringify(articles), JSON.stringify(articleI18n),
+  JSON.stringify(documents), JSON.stringify(documentI18n)
+].join('\n');
+assert(!versionDrawerSource.includes('drawer-notice') &&
+  !explanatoryCopy.includes('fd-placeholder-note') &&
+  !explanatoryCopy.includes('📎'),
+  'Explanatory notice cards and repeated source guidance must stay removed');
+for (const language of ['zh', 'en'])
+  assert(!Object.hasOwn(siteI18n.ui[language], 'historicalNotice'),
+    'Historical notice copy must not return: ' + language);
+const componentSource = await readFile(resolve(root, 'assets/css/components.css'), 'utf8');
+assert(!componentSource.includes('.drawer-notice') && !componentSource.includes('.fd-placeholder-note'),
+  'Obsolete explanatory note styles must stay removed');
+
 
 
 assert.equal(projects.filter(p => p.visibility === 'draft').length, 3);
