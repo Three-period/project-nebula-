@@ -47,6 +47,22 @@ function renderProjectVersionSwitch(project, activeId) {
     escapeHTML(project.versionGroupLabel || 'Project versions') + '">' + buttons + '</div>';
 }
 
+function renderProjectIntroduction(project) {
+  const tags = (project.tags || []).map(tag => '<span class="tag">' + escapeHTML(tag) + '</span>').join('');
+  const overview = '<div class="project-overview"><p>' + escapeHTML(project.description) + '</p></div>';
+  const highlights = project.detail.highlights.map(([value, label]) =>
+    '<div class="project-highlight"><dt>' + escapeHTML(label) + '</dt><dd>' + escapeHTML(value) + '</dd></div>'
+  ).join('');
+  return (tags ? '<div class="tags project-detail-tags">' + tags + '</div>' : '') +
+    overview + (highlights ? '<dl class="project-highlights">' + highlights + '</dl>' : '');
+}
+
+function renderProjectStory(detail) {
+  return '<div class="project-story">' + detail.sections.map(([title, paragraph]) =>
+    '<section><h3>' + escapeHTML(title) + '</h3><p>' + escapeHTML(paragraph) + '</p></section>'
+  ).join('') + '</div>';
+}
+
 function renderProjectMedia(project, activeType, activeIndex) {
   const media = project.media || [];
   if (!media.length) return '';
@@ -203,7 +219,9 @@ export function initDrawer() {
     const view = projectVersionView(raw, localized, activeProjectVersion);
     const project = view.project;
     activeProjectVersion = view.versionId;
-    const hasEmbeddedVideo = project.media?.some(item => item.type === 'video');
+    const mediaTypes = ['image', 'video', 'gif'].filter(type => project.media?.some(item => item.type === type));
+    if (!mediaTypes.includes(activeMediaType)) activeMediaType = mediaTypes[0] ?? null;
+    const hasEmbeddedVideo = mediaTypes.includes('video');
     const projectDocuments =
       (project.showCurrentDesignSystem
         ? '<a class="button" href="./design-system.html" target="_blank" rel="noopener noreferrer">' +
@@ -226,9 +244,9 @@ export function initDrawer() {
       title: project.title,
       body: renderProjectVersionSwitch(project, activeProjectVersion) +
         '<div class="project-detail-meta">' + escapeHTML(project.year) + ' · ' +
-        escapeHTML(project.stage) + '</div><p class="project-version-description">' +
-        escapeHTML(project.description) + '</p>' +
-        renderProjectMedia(project, activeMediaType, activeMediaIndex) + project.body +
+        escapeHTML(project.stage) + '</div>' +
+        renderProjectIntroduction(project) +
+        renderProjectMedia(project, activeMediaType, activeMediaIndex) + renderProjectStory(project.detail) +
         (links ? '<section class="case-related"><h3>' + escapeHTML(t('relatedNebulaMaterials')) +
           '</h3><div class="actions">' + links + '</div></section>' : '') +
         (related ? '<section class="case-related"><h3>' + escapeHTML(t('relatedProjectsTitle')) +

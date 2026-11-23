@@ -125,7 +125,16 @@ assert(articles.every(article => !article.sample && !article.body.includes('è¿™æ
 assert.equal(Object.keys(projectI18n).length, workProjects.length + personalProjects.length, 'Every project needs stored English copy');
 for (const project of [...workProjects, ...personalProjects]) {
   const translated = projectI18n[project.id];
-  assert(translated && translated.title && translated.description && translated.stage && translated.body && translated.tags?.length, 'Incomplete project translation: ' + project.id);
+  assert(translated?.title && translated.description && translated.stage && translated.tags?.length, 'Incomplete project translation: ' + project.id);
+  const records = project.versions ?? [project];
+  const translations = translated.versions ?? [translated];
+  assert.deepEqual(records.map(record => record.id), translations.map((record, index) => record.id ?? records[index]?.id));
+  for (const record of [...records, ...translations]) {
+    assert(record.detail?.highlights.length >= 2, 'Missing case highlights: ' + project.id);
+    assert.equal(record.detail.sections.length, 6, 'Incomplete case structure: ' + project.id);
+    for (const pair of [...record.detail.highlights, ...record.detail.sections])
+      assert(pair.length === 2 && pair.every(text => typeof text === 'string' && text.trim()), 'Invalid case content: ' + project.id);
+  }
 }
 assert.equal(Object.keys(documentI18n.cards).length, documentList.length, 'Every document card needs English copy');
 assert.equal(Object.keys(documentI18n.details).length, Object.keys(documents).length, 'Every document detail needs English copy');

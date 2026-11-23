@@ -10,7 +10,21 @@ export const projectI18n = {
       "R&D process design",
       "Release scoping"
     ],
-    "body": "<div class=\"project-story\"><section><h3>Challenge and scope</h3><p>R&amp;D activity, documents, and workflow state lived in separate tools. I mapped roles and handoffs, then prioritized online development, code submission, and AI review. Standalone management modules were scheduled for later releases.</p></section><section><h3>Multi-agent product architecture</h3><p>I led product definition and the target architecture, defining how orchestration, domain agents, execution agents, and Skills would support the R&amp;D workflow.</p></section><section><h3>My contribution</h3><p>I independently wrote the business specifications and PRD, designed the UI/UX, and built the interactive HTML prototype. I coordinated engineering alignment, acceptance, and the pilot. Engineering implemented the production system.</p></section><section><h3>Delivery and evidence</h3><p>Ten to fifteen people tried the first release. Pilot experience put the relevant workflow at four to five days, down from about a week and a half. Development and review capabilities are in use; the broader multi-agent architecture awaits validation.</p></section><section><h3>What I learned</h3><p>A shared prototype makes it easier for business and engineering to spot gaps in roles, rules, and state transitions together.</p></section></div>"
+    "detail": {
+      "highlights": [
+        ["10–15 people", "Early release trial"],
+        ["~1.5 weeks → 4–5 days", "Related workflow time · project observation"],
+        ["~1 week", "Independently built the prototype"]
+      ],
+      "sections": [
+        ["Project overview", "R&D work, documents and approvals lived in separate systems. Interviews and a survey surfaced a recurring gap: delivery could move ahead while approvals remained stuck. I scoped the first release around the actual sequence of work."],
+        ["My role and scope", "As product lead, I owned discovery, workflow redesign, business specifications, the PRD, acceptance and pilot operations. I independently built the HTML prototype. A project manager coordinated delivery, and an engineer implemented the production system."],
+        ["What should the first release connect?", "I reviewed each handoff to decide what to keep, simplify or change. The first release prioritized online documents, AI-assisted development and AI review. Standalone project, requirements, code and asset management were phased in the roadmap."],
+        ["From specifications to a working flow", "I used the prototype to align role views, handoffs and states. The live flow connects online development, GitLab push, automatic AI review and report delivery. Development and review agents are in use. The broader multi-agent architecture still needs validation."],
+        ["Results", "The first release went live within its defined scope and reached 10–15 trial users. Project observations put the related workflow at 4–5 days, down from about 1.5 weeks. I built the prototype in about a week."],
+        ["Product judgment", "The first release succeeds when roles, deliverables and workflow states agree across handoffs. An interactive prototype lets business, product and engineering teams verify those handoffs together."]
+      ]
+    }
   },
   "work-skillhub": {
     "type": "Work Project",
@@ -22,7 +36,21 @@ export const projectI18n = {
       "Skills standardization",
       "Team adoption"
     ],
-    "body": "<div class=\"project-story\"><section><h3>Problem discovery</h3><p>People shared Skills in chats and forwarded files. It was hard to tell whether a Skill was current or suited to a team’s work.</p></section><section><h3>Two releases</h3><p>V1 created a central place to browse and download Skills. V2 added descriptions, update notifications, department categories, and role-based access, while improving the download flow.</p></section><section><h3>My contribution</h3><p>I independently ran discovery, designed the product and UI/UX, built and released it, and led iteration. I also wrote usage guides and a Skill creation SOP and ran about five to six sessions for more than 20 colleagues across engineering and testing teams.</p></section><section><h3>Delivery and evidence</h3><p>The number of IDC team members who learned the standardized Spec + Skill approach for embedded development grew from one to about nine to eleven. Both releases saw limited internal use before the related initiative was paused.</p></section><section><h3>What I learned</h3><p>A shared entry point makes Skills easier to get. Descriptions, updates, and hands-on training help teams put them to work.</p></section></div>"
+    "detail": {
+      "highlights": [
+        ["2 releases", "Limited internal use"],
+        ["1 → ~9–11 people", "IDC team members who learned Spec + Skill"],
+        ["20+ colleagues", "Reached through 5–6 training sessions"]
+      ],
+      "sections": [
+        ["Project overview", "Teams shared Skills through chats and forwarded files. It was hard to tell which version was current or fit a task. Interviews and a survey surfaced gaps in discovery, updates and adoption."],
+        ["My role and scope", "I independently owned discovery, design, development, release, adoption and iteration. A limited internal rollout supplied usage feedback."],
+        ["From downloads to usable Skills", "V1 gave teams a single place to browse and download. V2 added descriptions, department categories, version information, update reminders and role-based access so people could find Skills suited to their work."],
+        ["Helping teams put Skills to work", "I documented the Spec + Skill approach, wrote a usage guide and a Skill creation SOP, and ran hands-on training for frontend, backend, IDC and testing colleagues."],
+        ["Results", "Both releases saw limited internal use. About 5–6 training sessions reached 20+ colleagues. The IDC group familiar with the standardized approach for embedded development grew from 1 to about 9–11 people. The platform paused after the related AI development initiative stalled."],
+        ["Product judgment", "A shared entry point makes Skills available. Clear descriptions, update reminders and training help people apply them. I would include permission checks in the next release checklist."]
+      ]
+    }
   },
   "work-code-review": {
     "type": "Work Project",
@@ -34,7 +62,21 @@ export const projectI18n = {
       "Role-based workspaces",
       "Version consistency"
     ],
-    "body": "<div class=\"project-story\"><section><h3>Workflow challenge</h3><p>Peer review relied heavily on experienced engineers, and review evidence was spread across tools and forms. This case focuses on the development-stage quality gate inside the R&amp;D platform.</p></section><section><h3>Review and sign-off</h3><p>Link the code revision, smoke and self-test results, reviewed specifications, and findings. AI screens against applicable rules and sends findings to developers. Reviewers resolve disputes, examine high-risk and uncovered areas, sample independently, and sign off on the matching revision.</p></section><section><h3>My contribution</h3><p>I owned the business specifications, helped organize review rules, and designed both workspaces and the dispute process. Engineering implemented the agent and workflow.</p></section><section><h3>Delivery and evidence</h3><p>Users reported that comparable reviews closed in two to three days versus about a week. They also reported seven to eight projects reviewed per engineer per week versus two to three previously. Both figures reflect user reports.</p></section><section><h3>What I learned</h3><p>The gate needs to check both issue closure and revision consistency. AI review accuracy still has room to improve, and people retain final accountability.</p></section></div>"
+    "detail": {
+      "highlights": [
+        ["~1 week → 2–3 days", "Comparable review cycles · user feedback"],
+        ["~2–3 → 7–8", "Projects reviewed per engineer per week · user feedback"],
+        ["2 workspaces", "Developer and reviewer"]
+      ],
+      "sections": [
+        ["Project overview", "Peer review relied on senior engineers while design documents, code revisions, test evidence and conclusions lived in separate tools. I defined a continuous flow from submission through issue resolution to approval for testing."],
+        ["My role and scope", "I owned the business specification and designed both workspaces, dispute handling and sign-off. I helped the team organize the rule set. Engineers implemented the agent and workflow."],
+        ["Who signs off after AI screening?", "Link the code revision to its design and smoke and self-test evidence. AI screens design alignment, file consistency, completeness and correctness. Developers resolve findings or raise disputes. Reviewers adjudicate disputes, cover high-risk and unscreened areas, and sample independently."],
+        ["How the workspaces connect", "The developer workspace connects evidence, submission, reports and fixes. The reviewer workspace handles the queue, disputes, manual checks and sign-off. The gate checks issue closure and matches the decision to the revision going into testing."],
+        ["Results", "Users reported that comparable reviews took 2–3 days instead of about a week and that weekly reviews per engineer rose from about 2–3 to 7–8 projects. AI review accuracy still has room to improve, and reviewers retain final sign-off."],
+        ["Product judgment", "A review system can support quality control when it defines what AI screens, when people must intervene and which code revision the decision covers."]
+      ]
+    }
   },
   "work-huizhou-ip": {
     "type": "Work Project",
@@ -45,7 +87,20 @@ export const projectI18n = {
       "Problem framing",
       "IP visual exploration"
     ],
-    "body": "<div class=\"project-story\"><section><h3>Product decision</h3><p>We connected the physical space with activities, branding, and visitor experience. Local culture and sports helped narrow the IP direction.</p></section><section><h3>My contribution</h3><p>I supported the park proposal, IP direction, and client conversations. I used generative tools to explore visuals and contributed to scene imagery and 3D presentation.</p></section><section><h3>Delivery and evidence</h3><p>The team delivered the concept and visuals. Project experience put visual development at about one to two weeks, versus three to four weeks previously.</p></section></div>"
+    "detail": {
+      "highlights": [
+        ["~3–4 weeks → 1–2 weeks", "Visual development time · project observation"],
+        ["Concept and visuals", "Team deliverables"]
+      ],
+      "sections": [
+        ["Project overview", "The park wanted a character identity with both sporting energy and a sense of local history. The team needed to turn that broad brief into a visual direction the client could discuss."],
+        ["My role and scope", "I contributed to the park proposal, character direction and client discussions, and helped produce scene imagery and 3D presentations. The wider landscape and character projects were team efforts."],
+        ["Turn local identity into design criteria", "I organized the brief around settings, city identity and how the character would be used and shared. This connected local culture and sporting contexts to concrete design choices."],
+        ["Use generated visuals to advance discussion", "I used Midjourney and ERNIE Bot to explore directions, then worked with imagery and 3D presentation to help the client understand and compare them."],
+        ["Results", "The team delivered the concept and character visuals. Project observations put visual development at about 1–2 weeks, down from 3–4 weeks."],
+        ["Product judgment", "Define which settings and local characteristics each direction must address before generating visuals. That gives the team a basis for comparing concepts."]
+      ]
+    }
   },
   "work-luoburen": {
     "type": "Work Project",
@@ -56,7 +111,20 @@ export const projectI18n = {
       "Four-part planning framework",
       "Visual communication"
     ],
-    "body": "<div class=\"project-story\"><section><h3>My contribution</h3><p>I independently built the framework and connected cultural resources, visitor experience, commercial programming, and operations. I developed the wider proposal with my lead.</p></section><section><h3>Delivery</h3><p>I helped structure the client presentation and communicate the concept through visual proofs of concept. The deliverable covered early-stage planning and communication.</p></section><section><h3>What I learned</h3><p>The framework helped clients see how cultural content shapes experiences, how experiences support commercial programming, and how operations tie them together.</p></section></div>"
+    "detail": {
+      "highlights": [
+        ["4-part planning framework", "Culture · experience · commercial mix · operations"],
+        ["Scene visualization PoC", "Used in concept communication"]
+      ],
+      "sections": [
+        ["Project overview", "Cultural, spatial and operating inputs were scattered, making it hard for the client to assess the concept. I organized early planning around four connected dimensions so discussions could focus on concrete visitor and business decisions."],
+        ["My role and scope", "I independently built the planning framework, co-developed the wider concept with my lead, and contributed to client communication and scene presentation. Other team members designed the image prompts."],
+        ["Connect culture, experience, commercial mix and operations", "I selected cultural resources relevant to the concept, mapped them to visitor touchpoints, linked experiences to commercial uses, and brought operating considerations into early planning."],
+        ["Make the concept visible", "I translated the framework into a client presentation and helped communicate scenes through a visual proof of concept made with tools including Midjourney."],
+        ["Results", "The team delivered the planning framework, early concept presentation and scene visualization proof of concept."],
+        ["Product judgment", "Early planning should show how cultural resources shape experiences, how experiences support commercial uses, and how operations sustain them. Visual scenes give the client something concrete to assess."]
+      ]
+    }
   },
   "personal-nebula": {
     "type": "Personal Project",
@@ -70,7 +138,21 @@ export const projectI18n = {
         "label": "V2 · Current rebuild",
         "stage": "In active iteration",
         "description": "Rebuilt the content hierarchy and reading path from real usage feedback, adding two themes, bilingual content, search, layered case details, and media viewing.",
-        "body": "<div class=\"project-story\"><section><h3>Why rebuild</h3><p>V1's planet-based narrative was distinctive, but recruiters needed a faster route to experience, projects, and methods. V2 replaces non-linear exploration with five clear chapters.</p></section><section><h3>Content and experience</h3><p>Reorganized the site into Personal Singularity, Experience, Projects, Insights, and Photography. Layered project details now work with site search, bilingual content, online resume access, and media viewing.</p></section><section><h3>Visual system</h3><p>Shared components support the Landscape and Cosmic themes while keeping typography, color, cards, buttons, drawers, and responsive behavior consistent. Each theme retains its own visual language.</p></section><section><h3>Independent delivery</h3><p>I continue to handle content modeling, interaction design, AI-assisted development, code review, testing, and Cloudflare Pages deployment. The digital twin is paused while V2 focuses on reading efficiency and stronger project evidence.</p></section></div>",
+        "detail": {
+          "highlights": [
+            ["Five sections", "Reorganized content and navigation"],
+            ["Two themes", "Landscape and Cosmic"],
+            ["Chinese and English", "Core content and navigation"]
+          ],
+          "sections": [
+            ["Project overview", "V1 exposed a reading problem: some details sat too deep. V2 serves two hiring tasks: understand my role and experience quickly, then open the cases and evidence that matter."],
+            ["My role and scope", "I independently reorganized the information architecture and handled interface design, frontend changes, testing and deployment. The digital twin is paused after changes to its external service."],
+            ["Make cases easier to find", "I organized content into five sections and used navigation, search and layered details to connect summaries, cases and materials with fewer steps."],
+            ["Shared components across two themes", "The Landscape and Cosmic themes share cards, buttons, drawers and responsive rules. The site also supports Chinese and English, online résumé access and media viewing."],
+            ["Results", "V2 is live with five content sections, two themes, a language switch, site search and online résumé access."],
+            ["Product judgment", "Put roles, outcomes and evidence where readers can find them. Let the actual reading task shape the path through the site."]
+          ]
+        },
         "documents": [],
         "showCurrentDesignSystem": true,
         "useLegacyMedia": false
@@ -80,7 +162,21 @@ export const projectI18n = {
         "label": "V1 · Digital twin release",
         "stage": "Shipped March 2026 · Historical release",
         "description": "An explorable personal AI product built around capability planets, combining experience, project materials, and a Coze digital twin.",
-        "body": "<div class=\"project-story\"><section><h3>Product opportunity</h3><p>A traditional resume could not fully show product decisions, delivery work, or AI product capability, so I reorganized my experience into an explorable digital product.</p></section><section><h3>Capability planet architecture</h3><p>AI Singularity, Forge, Construct, Fusion, and Pulsar formed a non-linear information architecture for positioning, projects, product artifacts, experience, and original thinking.</p></section><section><h3>Digital twin</h3><p>I built a personal digital twin with Coze, a knowledge base, and RAG. Prompt guardrails constrained identity, information boundaries, and response structure.</p></section><section><h3>Independent delivery</h3><p>I completed the PRD, business architecture, interactive prototype, visual guidelines, Agent design, front-end implementation, and deployment. V1 shipped in March 2026 and is now retained as historical product evidence.</p></section></div>",
+        "detail": {
+          "highlights": [
+            ["March 2026", "V1 went live"],
+            ["Independent delivery", "Product, design, development and deployment"],
+            ["Coze + RAG", "V1 digital twin"]
+          ],
+          "sections": [
+            ["Project overview", "A PDF works for initial screening but has little room for project decisions, evidence or lessons. I built an explorable portfolio with conversational access to my work for real hiring conversations."],
+            ["My role and scope", "I independently handled positioning, the PRD, information architecture, interaction design, AI-assisted development and deployment. The digital twin relied on Coze and external model services."],
+            ["From capability planets to a digital twin", "Planet navigation linked experience, cases, artifacts and writing. Coze, a knowledge base and RAG supported Q&A, with prompts defining identity, scope and answer structure."],
+            ["Using V1 in real applications", "I used the site in applications and project conversations and examined how recruiters reached relevant information. The planet interface was distinctive, but individual cases took several steps to reach."],
+            ["Results", "V1 went live in March 2026 and was used during the job search. Its prototypes, architecture and demo remain available here."],
+            ["Product judgment", "An exploratory interface gives the portfolio a distinctive identity. Hiring readers also need a quick route to evidence, which became the starting point for V2."]
+          ]
+        },
         "documents": ["prd", "design", "arch", "proto", "agent"],
         "showCurrentDesignSystem": false,
         "useLegacyMedia": true
@@ -91,7 +187,6 @@ export const projectI18n = {
       "Visual & component system",
       "Independent delivery"
     ],
-    "body": "<div class=\"project-story\"><section><h3>Product opportunity</h3><p>A one-page resume works for screening. Product decisions, outcomes, and lessons need more room. I designed two paths: get oriented quickly, then open individual cases for depth.</p></section><section><h3>Visual system and components</h3><p>I wrote the visual and component specifications and designed the interactions. Color, type, and spacing carry through cards, buttons, drawers, and media viewers. Shared components support both Landscape and Cosmic themes.</p></section><section><h3>Independent delivery</h3><p>I handled the PRD, information architecture, UI/UX, AI-assisted development, testing, and deployment. V1 shipped in March 2026.</p></section><section><h3>From V1 to V2</h3><p>V1 used Coze, a knowledge base, and RAG for a digital twin that could answer questions about my work. V2 shortened the reading path and reorganized the case studies. The site continues to evolve and the digital twin is paused.</p></section><section><h3>What I learned</h3><p>Help readers find a starting point quickly. Theme, case depth, and conversational features can all build on a clear reading path.</p></section></div>",
     "year": "Nov 2025—Present"
   }
 };
