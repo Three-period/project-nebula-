@@ -1,9 +1,9 @@
 export const documentList = [
   {
     "key": "paper", "label": "宣纸风设计", "labelEn": "Paper Theme Design",
-    "type": "HISTORICAL DESIGN",
+    "type": "DESIGN SYSTEM",
     "title": "宣纸风阅读界面与设计规范",
-    "description": "上一轮宣纸风长页改版说明，作为历史资料保留；本次视觉规范以新 PRD 为准。",
+    "description": "宣纸风长页阅读界面，包含统一组件与响应式规则。",
     "tags": [
       "信息平铺",
       "统一组件",
@@ -54,5 +54,5 @@ export const documentList = [
       "产品闭环"
     ]
   },
-  {"key":"agent", "label": "数字分身架构", "labelEn": "Digital Twin Architecture","type":"AGENT DESIGN · HISTORICAL","title":"个人数字分身 Agent 架构设计与落地指南","description":"保留 Coze、知识库、Prompt 与接入方案历史材料；当前实时问答维护中。","tags":["Agent","RAG","历史技术材料"]}
+  {"key":"agent", "label": "数字分身架构", "labelEn": "Digital Twin Architecture","type":"AGENT DESIGN","title":"个人数字分身 Agent 架构设计与落地指南","description":"Coze、知识库、Prompt 与接入方案的架构材料。","tags":["Agent","RAG","技术架构"]}
 ];
