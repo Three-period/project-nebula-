@@ -226,13 +226,3 @@
   #about .cosmic-intro { width: min(170px, 52%); margin: 12px 0 0 auto; }
   .project-list .project--with-cover { grid-template-columns: minmax(0, 1fr); }
 }
-
-/* Fit the Chinese headline to its column beside the illustration. */
-:lang(zh) #about .landscape-hero-copy {
-  container-type: inline-size;
-}
-
-:lang(zh) #about-title {
-  font-size: min(2.5rem, 4.8cqi);
-  white-space: nowrap;
-}
