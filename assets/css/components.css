@@ -277,15 +277,6 @@
 }
 .dr-img-wrap { margin: 20px 0 26px; }
 .dr-img-wrap img { width: 100%; margin: 0; }
-.drawer-notice, .fd-placeholder-note {
-  margin-bottom: 22px;
-  padding: 14px 17px;
-  border-left: 3px solid var(--color-secondary);
-  background: var(--color-page-soft);
-  color: var(--color-muted);
-  font-size: 12px;
-  line-height: 1.75;
-}
 .drawer-footer {
   align-items: center;
   flex-wrap: wrap;
