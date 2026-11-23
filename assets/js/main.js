@@ -78,7 +78,7 @@ document.addEventListener('click',event=>{
  const target=event.target.closest('button,a');if(!target)return;
  if(target.matches('a[href^="#"]')){const id=target.hash.slice(1);if(sections.some(s=>s.id===id)||aliases[id]){event.preventDefault();go(id);return;}collapseMenu();}
  if(target.dataset.jumpProject){go('projects');const card=document.querySelector('[data-project-id="'+target.dataset.jumpProject+'"]');card?.scrollIntoView({block:'center'});card?.querySelector('[data-project]')?.focus({preventScroll:true});return;}
- if(target.dataset.project){drawer.openProject(target.dataset.project);}
+ if(target.dataset.project){drawer.openProject(target.dataset.project,target.dataset.projectVersionOpen||null);}
  else if(target.dataset.document){drawer.openDocument(target.dataset.document);}
  else if(target.dataset.article!==undefined){drawer.openArticle(Number(target.dataset.article));}
  switch(target.dataset.action){
