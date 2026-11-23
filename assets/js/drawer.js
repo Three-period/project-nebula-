@@ -49,7 +49,7 @@ function renderProjectVersionSwitch(project, activeId) {
 
 function renderProjectIntroduction(project) {
   const tags = (project.tags || []).map(tag => '<span class="tag">' + escapeHTML(tag) + '</span>').join('');
-  const overview = '<div class="project-overview"><p>' + escapeHTML(project.description) + '</p></div>';
+  const overview = '<div class="project-overview"><p>' + escapeHTML(project.detail.description ?? project.description) + '</p></div>';
   const highlights = project.detail.highlights.map(([value, label]) =>
     '<div class="project-highlight"><dt>' + escapeHTML(label) + '</dt><dd>' + escapeHTML(value) + '</dd></div>'
   ).join('');

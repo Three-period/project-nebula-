@@ -11,18 +11,19 @@ export const projectI18n = {
       "Release scoping"
     ],
     "detail": {
+      "description": "A unified platform for enterprise hardware and software R&D that connects work across approvals, documentation, development and project management throughout the lifecycle. Its planned multi-agent architecture defines how AI capabilities coordinate across stages, starting with an end-to-end workflow for online AI-assisted development and code review.",
       "highlights": [
         ["10–15 people", "Early release trial"],
         ["~1.5 weeks → 4–5 days", "Related workflow time · project observation"],
         ["~1 week", "Independently built the prototype"]
       ],
       "sections": [
-        ["Project overview", "R&D work, documents and approvals lived in separate systems. Interviews and a survey surfaced a recurring gap: delivery could move ahead while approvals remained stuck. I scoped the first release around the actual sequence of work."],
-        ["My role and scope", "As product lead, I owned discovery, workflow redesign, business specifications, the PRD, acceptance and pilot operations. I independently built the HTML prototype. A project manager coordinated delivery, and an engineer implemented the production system."],
-        ["What should the first release connect?", "I reviewed each handoff to decide what to keep, simplify or change. The first release prioritized online documents, AI-assisted development and AI review. Standalone project, requirements, code and asset management were phased in the roadmap."],
-        ["From specifications to a working flow", "I used the prototype to align role views, handoffs and states. The live flow connects online development, GitLab push, automatic AI review and report delivery. The first release uses development and review agents. I also completed the design for the broader multi-agent architecture."],
-        ["Results", "The first release went live within its defined scope and reached 10–15 trial users. Project observations put the related workflow at 4–5 days, down from about 1.5 weeks. I built the prototype in about a week."],
-        ["Product judgment", "The first release succeeds when roles, deliverables and workflow states agree across handoffs. An interactive prototype lets business, product and engineering teams verify those handoffs together."]
+        ["Project background | Fragmented systems made handoffs hard to verify","An R&D project moves across multiple systems from requirements and design through development, testing and release. Approvals live in workflow tools, design and test materials in document systems, and code and execution results in development tools. Teams switch tools and move files by hand, while project leads struggle to verify progress and delivery status in one place. Development can move ahead while approvals lag. At handoff, testers may have to check whether the design, code and review results refer to the same revision. After discovery, I defined a unified platform where each stage receives upstream deliverables, records its own results and establishes what must be true before work moves forward."],
+        ["My role and scope","As product lead, I owned discovery, workflow redesign, business specifications, the PRD, acceptance and pilot operations. I independently built the HTML prototype. A project manager coordinated delivery, and an engineer implemented the production system."],
+        ["Platform architecture | One R&D workflow with agents coordinated at each stage","The business layer connects requirements, design, development, testing, release and closure, defining owners, deliverables, status transitions and entry and exit criteria. The platform layer links documents, tasks, commits, review results and approvals by project and stage, giving each role a shared entry point. The AI layer is designed around central orchestration, domain agents, execution agents and skills. The platform supplies the task, related materials and workflow state. Agents act at their assigned stage and write results back so the responsible roles can handle exceptions and confirm decisions."],
+        ["First release | Start with a working development loop","I led product planning, the target multi-agent architecture design and first-release scoping. The first release connects online AI-assisted development, GitLab submissions, automated AI review, report delivery and human review. Development and review agents have been used in this workflow. Full project, requirements and business asset management are planned for later stages."],
+        ["Results","The first release went live within its defined scope and reached 10–15 trial users. Project observations put the related workflow at 4–5 days, down from about 1.5 weeks. I built the prototype in about a week."],
+        ["Product judgment","The first release succeeds when roles, deliverables and workflow states agree across handoffs. An interactive prototype lets business, product and engineering teams verify those handoffs together."]
       ]
     }
   },
