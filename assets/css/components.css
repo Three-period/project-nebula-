@@ -649,6 +649,22 @@
   object-fit: cover;
   object-position: top;
 }
+.project-version-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-line);
+}
+.project-version-tab[aria-pressed="true"] {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+.project-version-description {
+  margin-top: 10px;
+}
 .project-story > section,
 .case-related {
   margin-top: 20px;
