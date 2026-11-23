@@ -29,6 +29,7 @@ function projectVersionView(raw, localized, activeId) {
       versions,
       versionGroupLabel: localized.versionGroupLabel || raw.versionGroupLabel,
       media: rawVersion.useLegacyMedia ? (localized.media || raw.media || []) : (rawVersion.media || []),
+      video: rawVersion.useLegacyMedia ? localized.video : null,
       documents: rawVersion.documents || [],
       showCurrentDesignSystem: Boolean(rawVersion.showCurrentDesignSystem)
     }
