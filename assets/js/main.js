@@ -11,7 +11,9 @@ import { initLandscapeIntro } from './landscape-intro.js';
 import { initCosmicGilt } from './cosmic-gilt.js';
 const themeManager=initTheme();
 const themePicker=initThemePicker(themeManager);
-const viewer=initViewer(),drawer=initDrawer(),agent=initAgent();
+const viewer=initViewer();
+const drawer=initDrawer({onOpenMedia:viewer.openMedia});
+const agent=initAgent();
 const photography=initPhotography({onOpenTheme:id=>drawer.openPhotographyTheme(id)});
 const landscapeIntro=initLandscapeIntro();
 initCosmicGilt();
@@ -90,7 +92,6 @@ document.addEventListener('click',event=>{
   case 'prev-article':drawer.previous();break;
   case 'next-article':drawer.next();break;
   case 'open-document-full':viewer.openDocument(target.dataset.documentFull);break;
-  case 'open-media':viewer.openMedia(target.dataset.projectId,Number(target.dataset.mediaIndex));break;
   case 'preview-pdf':viewer.openPdf(target.dataset.pdfSrc);break;
   case 'close-viewer':viewer.close();break;
   case 'open-photo-theme':drawer.openPhotographyTheme(target.dataset.photoTheme);break;
