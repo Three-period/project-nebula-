@@ -5,7 +5,7 @@ import { initAgent } from './agent.js';
 import { initGlobalI18n } from './i18n.js';
 import { initNavigation } from './navigation.js';
 import { initTheme } from './theme.js';
-import { initSearch } from './search.js';
+import { initSearch } from './search/search.js';
 import { initThemePicker } from './theme-picker.js';
 import { initPhotography } from './photography.js';
 import { initLandscapeIntro } from './landscape-intro.js';

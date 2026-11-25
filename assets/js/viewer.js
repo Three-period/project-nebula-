@@ -1,7 +1,7 @@
 import { documents } from '../data/documents.js';
 import { createDialog } from './dialog.js';
 import { getLocalizedPhotographyTheme } from '../data/photography-i18n.js';
-import { escapeHTML } from './content.js';
+import { escapeHTML } from './html.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
 
 function mediaCopy(item, field) {

@@ -16,10 +16,13 @@ Node.js 20+ 环境下运行 `npm run check` 进行模块语法、数据引用、
 | 原有 Nebula / Agent 历史材料完整正文 | `assets/data/documents.js` |
 | 材料入口与版本说明 | `assets/data/document-list.js` |
 | 思考与方法六篇文章 | `assets/data/articles.js` |
-| 内容卡片生成及 HTML 编码 | `assets/js/content.js` |
-| 五页面目录、卡片反馈、交互委托 | `assets/js/main.js` |
-| 全站中文 / English 文案和切换 | `assets/data/about-i18n.js`、`assets/js/i18n.js` |
-| 项目 / 文档 / 文章阅读抽屉 | `assets/js/drawer.js` |
+| 内容卡片与列表渲染 | `assets/js/content.js` |
+| 共用 HTML 转义 | `assets/js/html.js` |
+| 启动与跨功能交互 | `assets/js/main.js` |
+| 栏目、历史记录与侧栏 | `assets/js/navigation.js` |
+| 站内搜索界面、索引与排序 | `assets/js/search/search.js`、`assets/js/search/search-index.js` |
+| 全站中文 / English 文案和切换 | `assets/data/site-i18n.js`、`assets/js/i18n.js` |
+| 项目版本、媒体选择与阅读抽屉 | `assets/js/drawer.js` |
 | 全文、图片、GIF、视频与 PDF 第三级查看器 | `assets/js/viewer.js` |
 | 原生弹窗与抽屉堆叠、焦点恢复 | `assets/js/dialog.js` |
 | 数字分身静态维修状态 | `assets/js/agent.js` |

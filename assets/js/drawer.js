@@ -4,7 +4,8 @@ import { articles } from '../data/articles.js';
 import { projectById } from '../data/portfolio-projects.js';
 import { createDialog } from './dialog.js';
 import { getLocalizedPhotographyTheme } from '../data/photography-i18n.js';
-import { escapeHTML, renderProjectLinks } from './content.js';
+import { escapeHTML } from './html.js';
+import { renderProjectLinks } from './content.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
 
 const mediaLabels = { image: 'mediaImages', video: 'mediaVideo', gif: 'mediaGif' };

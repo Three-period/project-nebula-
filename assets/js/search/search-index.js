@@ -1,11 +1,11 @@
 /* Search index is rebuilt from the site's genuine bilingual content. No PDF binary scraping. */
-import { projectById } from './portfolio-projects.js';
-import { articles } from './articles.js';
-import { documentList } from './document-list.js';
-import { capabilityGroups } from './capabilities.js';
-import { photographyThemes } from './photography.js';
-import { getLocalizedPhotographyTheme } from './photography-i18n.js';
-import { getLocalizedRecord, t } from '../js/i18n.js';
+import { projectById } from '../../data/portfolio-projects.js';
+import { articles } from '../../data/articles.js';
+import { documentList } from '../../data/document-list.js';
+import { capabilityGroups } from '../../data/capabilities.js';
+import { photographyThemes } from '../../data/photography.js';
+import { getLocalizedPhotographyTheme } from '../../data/photography-i18n.js';
+import { getLocalizedRecord, t } from '../i18n.js';
 
 const PAGES = [
   ['about','aboutNav','aboutHeadline'],

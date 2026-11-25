@@ -19,7 +19,7 @@ import { projectI18n } from '../assets/data/project-i18n.js';
 import { documentI18n } from '../assets/data/document-i18n.js';
 import { articleI18n } from '../assets/data/article-i18n.js';
 import { readCozeStream } from '../assets/js/agent.js';
-import { buildSearchIndex, searchEntries } from '../assets/data/search-index.js';
+import { buildSearchIndex, searchEntries } from '../assets/js/search/search-index.js';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const files = [];
 async function walk(dir) { for (const entry of await readdir(dir, { withFileTypes: true })) { const path = resolve(dir, entry.name); if (entry.isDirectory()) await walk(path); else files.push(path); } }
@@ -395,7 +395,7 @@ assert(themeStyle.includes('drafting corners') && style.includes(':focus-within'
 assert(html.includes('class="topbar-actions"'), 'Navigation needs top utilities');
 const pickerSrc=await readFile(resolve(root,'assets/js/theme-picker.js'),'utf8');
 assert(pickerSrc.includes('theme.status===\'active\'') && pickerSrc.includes('disabled aria-disabled'), 'Planned themes must remain disabled');
-const searchSrc=await readFile(resolve(root,'assets/js/search.js'),'utf8');
+const searchSrc=await readFile(resolve(root,'assets/js/search/search.js'),'utf8');
 assert(searchSrc.includes("event.key==='ArrowDown'") && searchSrc.includes("event.key==='Enter'"), 'Search must support keyboard selection');
 assert(searchSrc.includes("event.ctrlKey||event.metaKey"), 'Search should provide a keyboard shortcut');
 
