@@ -1,12 +1,8 @@
 import { documents } from '../data/documents.js';
-import { workProjects } from '../data/work-projects.js';
-import { personalProjects } from '../data/personal-projects.js';
 import { createDialog } from './dialog.js';
 import { getLocalizedPhotographyTheme } from '../data/photography-i18n.js';
-import { escapeHTML } from './content.js';
+import { escapeHTML } from './html.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
-
-const projectMap = new Map([...workProjects, ...personalProjects].map(project => [project.id, project]));
 
 function mediaCopy(item, field) {
   const language = getCurrentLanguage();
@@ -35,11 +31,8 @@ export function initViewer() {
     }
 
     if (current.kind === 'media') {
-      const raw = projectMap.get(current.projectId);
-      const project = getLocalizedRecord('project', current.projectId, raw);
-      const item = raw?.media?.[current.mediaIndex];
-      if (!item) return;
-      const mediaTitle = mediaCopy(item, 'title') || project.title;
+      const item = current.item;
+      const mediaTitle = mediaCopy(item, 'title') || current.getProjectTitle();
       const alt = mediaCopy(item, 'alt') || mediaTitle;
       type.textContent = t('mediaViewerType');
       title.textContent = mediaTitle;
@@ -142,10 +135,8 @@ export function initViewer() {
       if (!documents[key]) return;
       open({ kind: 'document', key });
     },
-    openMedia(projectId, mediaIndex) {
-      const project = projectMap.get(projectId);
-      if (!project?.media?.[mediaIndex]) return;
-      open({ kind: 'media', projectId, mediaIndex });
+    openMedia(item, getProjectTitle) {
+      open({ kind: 'media', item, getProjectTitle });
     },
     openPhotography(themeId, index = 0) {
       const theme = getLocalizedPhotographyTheme(themeId, getCurrentLanguage());
@@ -165,15 +156,14 @@ export function initViewer() {
         body.querySelector('.viewer-fallback a')?.replaceChildren(document.createTextNode(t('downloadPdf')));
         return;
       }
-      if (current.kind === 'media') {
-        const item = projectMap.get(current.projectId)?.media?.[current.mediaIndex];
-        if (item?.type === 'video') {
-          type.textContent = t('mediaViewerType');
-          title.textContent = mediaCopy(item, 'title') || title.textContent;
-          const link = body.querySelector('.viewer-fallback a');
-          if (link) link.textContent = t('demoVideo');
-          return;
-        }
+      if (current.kind === 'media' && current.item.type === 'video') {
+        type.textContent = t('mediaViewerType');
+        const mediaTitle = mediaCopy(current.item, 'title') || current.getProjectTitle();
+        title.textContent = mediaTitle;
+        body.querySelector('iframe')?.setAttribute('title', mediaTitle);
+        const link = body.querySelector('.viewer-fallback a');
+        if (link) link.textContent = t('demoVideo');
+        return;
       }
       const scrollTop = body.scrollTop;
       render();

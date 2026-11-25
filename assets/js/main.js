@@ -2,21 +2,30 @@ import { renderContent } from './content.js';
 import { initDrawer } from './drawer.js';
 import { initViewer } from './viewer.js';
 import { initAgent } from './agent.js';
-import { initGlobalI18n,t } from './i18n.js';
+import { initGlobalI18n } from './i18n.js';
+import { initNavigation } from './navigation.js';
 import { initTheme } from './theme.js';
-import { initSearch } from './search.js';
+import { initSearch } from './search/search.js';
 import { initThemePicker } from './theme-picker.js';
 import { initPhotography } from './photography.js';
 import { initLandscapeIntro } from './landscape-intro.js';
 import { initCosmicGilt } from './cosmic-gilt.js';
 const themeManager=initTheme();
 const themePicker=initThemePicker(themeManager);
-const viewer=initViewer(),drawer=initDrawer(),agent=initAgent();
+const viewer=initViewer();
+const drawer=initDrawer({onOpenMedia:viewer.openMedia});
+const agent=initAgent();
 const photography=initPhotography({onOpenTheme:id=>drawer.openPhotographyTheme(id)});
 const landscapeIntro=initLandscapeIntro();
 initCosmicGilt();
+const navigation = initNavigation({
+  onSectionChange(id) {
+    photography.setVisible(id === 'photography');
+    if (id === 'about') landscapeIntro.onHomeActivate();
+  }
+});
 const search=initSearch({onNavigate:item=>{
-  go(item.pageId);
+  navigation.go(item.pageId);
   if(item.kind==='project')drawer.openProject(item.recordId);
   if(item.kind==='document')drawer.openDocument(item.recordId);
   if(item.kind==='article')drawer.openArticle(Number(item.recordId));
@@ -32,65 +41,24 @@ initGlobalI18n(language=>{
   photography.setLanguage(language);
   search.setLanguage();
   themePicker.setLanguage();
-  updateSidebarCollapseLabel();
+  navigation.refreshLabels();
 });
-const sidebar=document.querySelector('.sidebar'),menu=document.getElementById('menu-toggle');
-const sidebarCollapseToggle=document.getElementById('sidebar-collapse-toggle');
-const SIDEBAR_COLLAPSE_KEY='project-nebula-sidebar-collapsed';
-function updateSidebarCollapseLabel(){
- const button=document.getElementById('sidebar-collapse-toggle');
- if(!button)return;
- const collapsed=document.documentElement.classList.contains('sidebar-is-collapsed');
- const copy=t(collapsed?'sidebarExpandAria':'sidebarCollapseAria');
- button.setAttribute('aria-label',copy);
- button.title=copy;
- button.setAttribute('aria-expanded',String(!collapsed));
-}
-function setSidebarCollapsed(collapsed,{persist=true}={}){
- document.documentElement.classList.toggle('sidebar-is-collapsed',collapsed);
- updateSidebarCollapseLabel();
- if(persist){try{localStorage.setItem(SIDEBAR_COLLAPSE_KEY,collapsed?'1':'0');}catch{/* Storage may be disabled. */}}
-}
-let initiallyCollapsed=false;
-try{initiallyCollapsed=localStorage.getItem(SIDEBAR_COLLAPSE_KEY)==='1';}catch{/* Default: expanded. */}
-setSidebarCollapsed(initiallyCollapsed,{persist:false});
-sidebarCollapseToggle.addEventListener('click',()=>{
- setSidebarCollapsed(!document.documentElement.classList.contains('sidebar-is-collapsed'));
-});
-const links=[...document.querySelectorAll('.toc-link')],sections=[...document.querySelectorAll('.resume-section')];
-function collapseMenu(){sidebar.classList.remove('is-expanded');menu.setAttribute('aria-expanded','false');}
-menu.addEventListener('click',()=>{const expanded=sidebar.classList.toggle('is-expanded');menu.setAttribute('aria-expanded',String(expanded));});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sidebar.classList.contains('is-expanded')){collapseMenu();menu.focus();}});
-document.addEventListener('pointerdown',e=>{if(sidebar.classList.contains('is-expanded')&&!sidebar.contains(e.target)&&!menu.contains(e.target))collapseMenu();});
-const aliases={singularity:'about',forge:'projects',construct:'projects',design:'projects',fusion:'experience',pulsar:'insights',gallery:'photography'};
-function activate(raw,reset=true){
- const id=aliases[raw]||raw;
- const next=sections.find(s=>s.id===id)||sections[0];
- sections.forEach(s=>s.hidden=s!==next);
- links.forEach(a=>{if(a.hash==='#'+next.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
- collapseMenu();
- photography.setVisible(next.id==='photography');
- if(next.id==='about')landscapeIntro.onHomeActivate();
- if(reset)window.scrollTo({top:0,behavior:'instant'});
-}
-function go(id){history.pushState(null,'','#'+id);activate(id);}
 document.addEventListener('click',event=>{
+ if(event.defaultPrevented)return;
  const target=event.target.closest('button,a');if(!target)return;
- if(target.matches('a[href^="#"]')){const id=target.hash.slice(1);if(sections.some(s=>s.id===id)||aliases[id]){event.preventDefault();go(id);return;}collapseMenu();}
- if(target.dataset.jumpProject){go('projects');const card=document.querySelector('[data-project-id="'+target.dataset.jumpProject+'"]');card?.scrollIntoView({block:'center'});card?.querySelector('[data-project]')?.focus({preventScroll:true});return;}
+ if(target.dataset.jumpProject){navigation.go('projects');const card=document.querySelector('[data-project-id="'+target.dataset.jumpProject+'"]');card?.scrollIntoView({block:'center'});card?.querySelector('[data-project]')?.focus({preventScroll:true});return;}
  if(target.dataset.project){drawer.openProject(target.dataset.project,target.dataset.projectVersionOpen||null);}
  else if(target.dataset.document){drawer.openDocument(target.dataset.document);}
  else if(target.dataset.article!==undefined){drawer.openArticle(Number(target.dataset.article));}
  switch(target.dataset.action){
-  case 'chat':collapseMenu();agent.open();break;
-  case 'open-search':collapseMenu();search.open();break;
-  case 'open-theme':collapseMenu();themePicker.open();break;
+  case 'chat':navigation.collapseMenu();agent.open();break;
+  case 'open-search':navigation.collapseMenu();search.open();break;
+  case 'open-theme':navigation.collapseMenu();themePicker.open();break;
   case 'close-chat':agent.close();break;
   case 'close-drawer':drawer.close();break;
   case 'prev-article':drawer.previous();break;
   case 'next-article':drawer.next();break;
   case 'open-document-full':viewer.openDocument(target.dataset.documentFull);break;
-  case 'open-media':viewer.openMedia(target.dataset.projectId,Number(target.dataset.mediaIndex));break;
   case 'preview-pdf':viewer.openPdf(target.dataset.pdfSrc);break;
   case 'close-viewer':viewer.close();break;
   case 'open-photo-theme':drawer.openPhotographyTheme(target.dataset.photoTheme);break;
@@ -99,5 +67,4 @@ document.addEventListener('click',event=>{
   case 'photo-viewer-next':viewer.stepPhotography(1);break;
  }
 });
-window.addEventListener('popstate',()=>activate(location.hash.slice(1)||'about'));
-activate(location.hash.replace(/^#(?:view-)?/,'')||'about',false);
+navigation.start();

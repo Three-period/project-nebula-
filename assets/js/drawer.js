@@ -4,7 +4,8 @@ import { articles } from '../data/articles.js';
 import { projectById } from '../data/portfolio-projects.js';
 import { createDialog } from './dialog.js';
 import { getLocalizedPhotographyTheme } from '../data/photography-i18n.js';
-import { escapeHTML, renderProjectLinks } from './content.js';
+import { escapeHTML } from './html.js';
+import { renderProjectLinks } from './content.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
 
 const mediaLabels = { image: 'mediaImages', video: 'mediaVideo', gif: 'mediaGif' };
@@ -34,6 +35,12 @@ function projectVersionView(raw, localized, activeId) {
       showCurrentDesignSystem: Boolean(rawVersion.showCurrentDesignSystem)
     }
   };
+}
+
+function getProjectView(raw, versionId) {
+  if (!raw) return null;
+  const localized = getLocalizedRecord('project', raw.id, raw);
+  return projectVersionView(raw, localized, versionId);
 }
 
 function renderProjectVersionSwitch(project, activeId) {
@@ -78,16 +85,14 @@ function renderProjectMedia(project, activeType, activeIndex) {
 
   let stage = '';
   if (type === 'image' || type === 'gif') {
-    stage = '<button class="media-image-button" type="button" data-action="open-media" data-project-id="' +
-      escapeHTML(project.id) + '" data-media-index="' + item.index + '" aria-label="' +
+    stage = '<button class="media-image-button" type="button" data-action="open-media" data-media-index="' + item.index + '" aria-label="' +
       escapeHTML(t('viewMediaFull')) + '"><img src="' + escapeHTML(item.src) + '" alt="' +
       escapeHTML(alt) + '" loading="lazy"></button>';
   } else if (type === 'video' && item.embedUrl) {
     stage = '<div class="media-video-frame"><iframe src="' + escapeHTML(item.embedUrl) +
       '" title="' + escapeHTML(title) +
       '" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>' +
-      '<div class="media-stage-actions"><button class="button" type="button" data-action="open-media" data-project-id="' +
-      escapeHTML(project.id) + '" data-media-index="' + item.index + '">' +
+      '<div class="media-stage-actions"><button class="button" type="button" data-action="open-media" data-media-index="' + item.index + '">' +
       escapeHTML(t('viewMediaFull')) + '</button><a class="text-link" href="' + escapeHTML(item.src) +
       '" target="_blank" rel="noopener noreferrer">' + escapeHTML(t('demoVideo')) + '</a></div>';
   } else if (type === 'video' && item.src) {
@@ -108,7 +113,7 @@ function renderProjectMedia(project, activeType, activeIndex) {
     '<p class="media-caption">' + escapeHTML(title) + '</p>' + controls + '</section>';
 }
 
-export function initDrawer() {
+export function initDrawer({ onOpenMedia } = {}) {
   const element = document.getElementById('detail-dialog');
   const controller = createDialog(element, element.querySelector('[data-action="close-drawer"]'));
   const body = document.getElementById('drawer-body');
@@ -145,15 +150,25 @@ export function initDrawer() {
   }
 
   function refreshProjectMedia() {
-    const raw = projectById.get(currentProject);
-    if (!raw) return;
-    const localized = getLocalizedRecord('project', currentProject, raw);
-    const { project } = projectVersionView(raw, localized, activeProjectVersion);
+    const view = getProjectView(projectById.get(currentProject), activeProjectVersion);
+    if (!view) return;
+    const { project } = view;
     const section = body.querySelector('.project-media');
     if (section) section.outerHTML = renderProjectMedia(project, activeMediaType, activeMediaIndex);
   }
 
   body.addEventListener('click', event => {
+    const mediaButton = event.target.closest('[data-action="open-media"]');
+    if (mediaButton) {
+      const raw = projectById.get(currentProject);
+      const view = getProjectView(raw, activeProjectVersion);
+      const media = view?.project.media?.[Number(mediaButton.dataset.mediaIndex)];
+      if (media) {
+        const { versionId } = view;
+        onOpenMedia?.(media, () => getProjectView(raw, versionId).project.title);
+      }
+      return;
+    }
     const version = event.target.closest('[data-project-version]');
     if (version && currentProject) {
       activeProjectVersion = version.dataset.projectVersion;
@@ -172,10 +187,8 @@ export function initDrawer() {
     }
     const step = event.target.closest('[data-media-step]');
     if (step) {
-      const raw = projectById.get(currentProject);
-      const localized = raw ? getLocalizedRecord('project', currentProject, raw) : null;
-      const activeProject = raw ? projectVersionView(raw, localized, activeProjectVersion).project : null;
-      const count = (activeProject?.media || []).filter(item => item.type === activeMediaType).length;
+      const view = getProjectView(projectById.get(currentProject), activeProjectVersion);
+      const count = (view?.project.media || []).filter(item => item.type === activeMediaType).length;
       if (!count) return;
       activeMediaIndex = (activeMediaIndex + Number(step.dataset.mediaStep) + count) % count;
       refreshProjectMedia();
@@ -215,8 +228,7 @@ export function initDrawer() {
         activeProjectVersion = raw.defaultVersion || raw.versions[0].id;
     } else activeProjectVersion = null;
     currentProject = id;
-    const localized = getLocalizedRecord('project', id, raw);
-    const view = projectVersionView(raw, localized, activeProjectVersion);
+    const view = getProjectView(raw, activeProjectVersion);
     const project = view.project;
     activeProjectVersion = view.versionId;
     const mediaTypes = ['image', 'video', 'gif'].filter(type => project.media?.some(item => item.type === type));

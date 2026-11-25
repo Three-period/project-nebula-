@@ -1,7 +1,7 @@
 import { photographyThemes } from '../data/photography.js';
 import { getLocalizedPhotographyTheme } from '../data/photography-i18n.js';
 import { getCurrentLanguage, t } from './i18n.js';
-import { escapeHTML } from './content.js';
+import { escapeHTML } from './html.js';
 
 const AUTO_INTERVAL_MS = 6000;
 const SWIPE_MIN_PX = 48;

@@ -1,6 +1,6 @@
 import { themes } from './theme.js';
 import { getCurrentLanguage,t } from './i18n.js';
-import { escapeHTML } from './content.js';
+import { escapeHTML } from './html.js';
 
 export function initThemePicker(themeManager) {
  const dialog=document.getElementById('theme-dialog');

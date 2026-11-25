@@ -1,6 +1,6 @@
-import { buildSearchIndex,searchEntries } from '../data/search-index.js';
-import { getCurrentLanguage,t } from './i18n.js';
-import { escapeHTML } from './content.js';
+import { buildSearchIndex, searchEntries } from './search-index.js';
+import { getCurrentLanguage,t } from '../i18n.js';
+import { escapeHTML } from '../html.js';
 
 export function initSearch({onNavigate=()=>{}}={}){
   const dialog=document.getElementById('search-dialog');

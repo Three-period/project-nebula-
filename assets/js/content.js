@@ -4,9 +4,8 @@ import { documentList } from '../data/document-list.js';
 import { articles } from '../data/articles.js';
 import { getLocalizedRecord, getCurrentLanguage, t } from './i18n.js';
 
-export function escapeHTML(value = '') {
-  return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
+import { escapeHTML } from './html.js';
+
 const tags = items => '<div class="tags">' + (items || []).map(tag => '<span class="tag">' + escapeHTML(tag) + '</span>').join('') + '</div>';
 const preview = p => p.cover
   ? '<img class="project-cover" src="' + escapeHTML(p.cover) + '" alt="' + escapeHTML(p.title + ' · ' + t('projectPreviewAlt')) + '" loading="lazy">'
