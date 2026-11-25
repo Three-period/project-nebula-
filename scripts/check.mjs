@@ -36,6 +36,7 @@ for (const file of files.filter(f => /\.(js|mjs)$/.test(f))) {
 }
 const html = await readFile(resolve(root, 'index.html'), 'utf8');
 const mainSource = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
+const navigationSource = await readFile(resolve(root, 'assets/js/navigation.js'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
 assert(!/\son\w+=/i.test(html), 'No inline handlers');
@@ -240,7 +241,7 @@ assert.equal([...html.matchAll(/class="toc-icon"/g)].length, 5, 'Five navigation
 for (const page of ['about', 'experience', 'projects', 'insights', 'photography'])
   assert(html.includes('id="' + page + '"'), 'Missing page: ' + page);
 assert(html.includes('href="#photography"') && html.includes('data-i18n="photographyNav"'), 'Photography page must be navigable and translated');
-assert(mainSource.includes("photography.setVisible(next.id==='photography')"), 'The carousel must pause outside its page');
+assert(mainSource.includes("photography.setVisible(id === 'photography')"), 'The carousel must pause outside its page');
 assert(mainSource.includes('landscapeIntro.onHomeActivate()'), 'Home activation must trigger opening motion');
 assert(html.includes('id="theme-stylesheet"'), 'An identifiable active theme stylesheet is required');
 assert.equal(photographyThemes.length, 5, 'Five approved color photography series');
@@ -406,7 +407,7 @@ for(const key of ['--color-page:#F3F1EE','--color-cosmic-ember:#874B42','--card-
 assert(!cosmicStyle.includes('background-color:#000') && cosmicStyle.includes('light-grey astronomy'),'Cosmic must remain a light-grey, gold theme');
 assert(html.includes('class="cosmic-intro"') && html.includes('id="landscape-intro"'),'Both theme art directions must retain a separate hero');
 assert(html.includes('id="sidebar-collapse-toggle"') && html.includes('aria-controls="sidebar-content"'),'A real sidebar collapse button must be present');
-assert(mainSource.includes('setSidebarCollapsed') && mainSource.includes('sidebar-is-collapsed') && mainSource.includes('SIDEBAR_COLLAPSE_KEY'),'Sidebar collapse must persist and be reversible');
+assert(navigationSource.includes('localStorage.setItem(SIDEBAR_COLLAPSE_KEY') && navigationSource.includes('sidebar-is-collapsed'),'Sidebar collapse must persist and be reversible');
 assert(style.includes('.contact-section h2') && style.includes('font-size:clamp(16px,1.35vw,19px)'), 'All pages require a compact contact footer');
 assert(style.includes(':root.sidebar-is-collapsed .sidebar') && style.includes(':root.sidebar-is-collapsed .main'), 'Collapsed sidebar must free desktop content width');
 for(const language of ['zh','en'])for(const key of ['sidebarCollapseAria','sidebarExpandAria'])
